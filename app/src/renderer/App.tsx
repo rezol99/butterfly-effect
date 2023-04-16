@@ -1,10 +1,15 @@
 import { MemoryRouter as Router, Routes, Route } from 'react-router-dom';
 import icon from '../../assets/icon.svg';
 import './App.css';
+import { getPythonScriptDir, joinPath } from './util/path';
 
 const testPython = async () => {
+  const scriptsDir = await getPythonScriptDir();
+  const fileName = 'hello.py';
+  const helloScriptPath = joinPath([scriptsDir, fileName]);
   const stdio: string = await window.electron.ipcRenderer.invoke(
-    'python-hello-world'
+    'python-hello-world',
+    helloScriptPath
   );
   return stdio;
 };

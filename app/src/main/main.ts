@@ -13,7 +13,7 @@ import { app, BrowserWindow, shell, ipcMain } from 'electron';
 import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
 import MenuBuilder from './menu';
-import { callPython, resolveHtmlPath } from './util';
+import { callPython, getPythonScriptDir, resolveHtmlPath } from './util';
 
 class AppUpdater {
   constructor() {
@@ -25,8 +25,12 @@ class AppUpdater {
 
 let mainWindow: BrowserWindow | null = null;
 
-ipcMain.handle('python-hello-world', () => {
-  return callPython('');
+ipcMain.handle('python-hello-world', (event, scriptPath: string) => {
+  return callPython(scriptPath);
+});
+
+ipcMain.handle('get-python-dir', () => {
+  return getPythonScriptDir();
 });
 
 ipcMain.on('ipc-example', async (event, arg) => {

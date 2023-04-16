@@ -52,9 +52,9 @@ export const getPythonScriptDir = () => {
   return pythonScriptDir;
 };
 
-export const callPython =  (scriptPath: string) => {
+export const callPython = (scriptPath: string) => {
   const arch = getArchitecture();
   const pythonPath = isMac ? resolveBinPath(`./darwin/${arch}/python.exe`) : '';
   const options: Options = { pythonPath };
-  return PythonShell.runString('import sys;print(sys.executable)', options);
+  return PythonShell.run(scriptPath, options);
 };
