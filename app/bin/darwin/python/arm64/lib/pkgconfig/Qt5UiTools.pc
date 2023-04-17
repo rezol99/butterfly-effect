@@ -1,0 +1,14 @@
+prefix=/Users/ezryow/Git/butterfly-effect/app/bin/darwin/python/arm64
+exec_prefix=${prefix}
+libdir=${prefix}/lib
+includedir=${prefix}/include/qt
+
+
+Name: Qt5 UiTools
+Description: Qt UiTools module
+Version: 5.15.2
+Libs: -L${libdir} -lQt5UiTools 
+Libs.private: -L/Users/ezryow/Git/butterfly-effect/app/bin/darwin/python/arm64/lib /Users/ezryow/Git/butterfly-effect/app/bin/darwin/python/arm64/lib/libQt5Widgets.dylib /Users/ezryow/Git/butterfly-effect/app/bin/darwin/python/arm64/lib/libQt5Gui.dylib /Users/ezryow/Git/butterfly-effect/app/bin/darwin/python/arm64/lib/libQt5Core.dylib /Users/ezryow/Git/butterfly-effect/app/bin/darwin/python/arm64/lib/libQt5Widgets.dylib /Users/ezryow/Git/butterfly-effect/app/bin/darwin/python/arm64/lib/libQt5Gui.dylib /Users/ezryow/Git/butterfly-effect/app/bin/darwin/python/arm64/lib/libQt5Core.dylib -framework OpenGL -framework AGL   
+Cflags: -DQT_UITOOLS_LIB -I${includedir}/QtUiTools -I${includedir}
+Requires: Qt5Core Qt5Gui Qt5Widgets
+

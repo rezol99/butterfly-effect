@@ -1,0 +1,14 @@
+prefix=/Users/ezryow/Git/butterfly-effect/app/bin/darwin/python/arm64
+exec_prefix=${prefix}
+libdir=/Users/ezryow/Git/butterfly-effect/app/bin/darwin/python/arm64/lib
+includedir=/Users/ezryow/Git/butterfly-effect/app/bin/darwin/python/arm64/include
+
+Name: libavresample
+Description: Libav audio resampling library
+Version: 4.0.0
+Requires: 
+Requires.private: libavutil >= 56.31.100
+Conflicts:
+Libs: -L${libdir}  -lavresample 
+Libs.private: -lm
+Cflags: -I${includedir}

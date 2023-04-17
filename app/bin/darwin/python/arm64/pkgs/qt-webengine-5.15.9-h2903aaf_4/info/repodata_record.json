@@ -1,0 +1,28 @@
+{
+  "arch": "arm64",
+  "build": "h2903aaf_4",
+  "build_number": 4,
+  "channel": "https://repo.anaconda.com/pkgs/main/osx-arm64",
+  "constrains": [
+    "qt 5.15.9"
+  ],
+  "depends": [
+    "libcxx >=12.0.0",
+    "qt-main >=5.15,<6.0a0",
+    "qt-main >=5.15.2,<5.16.0a0"
+  ],
+  "features": "",
+  "fn": "qt-webengine-5.15.9-h2903aaf_4.conda",
+  "legacy_bz2_md5": "3e55f52e08c970dd73c07479cbf66dee",
+  "license": "LGPL-3.0-only",
+  "md5": "343710cd7cfc7429b8c31189981deacb",
+  "name": "qt-webengine",
+  "platform": "darwin",
+  "sha256": "0b888a18903c20d3c7a9b1d7bd352a2b85a42dae71d244ed7cfe478b6431ae69",
+  "size": 44023137,
+  "subdir": "osx-arm64",
+  "timestamp": 1658923267219,
+  "track_features": "",
+  "url": "https://repo.anaconda.com/pkgs/main/osx-arm64/qt-webengine-5.15.9-h2903aaf_4.conda",
+  "version": "5.15.9"
+}

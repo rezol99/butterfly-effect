@@ -1,0 +1,18 @@
+{
+  "qtwebkit": "true",
+  "icu": "68",
+  "sqlite": "3",
+  "zlib": "1.2",
+  "libpng": "1.6",
+  "c_compiler": "clang",
+  "target_platform": "osx-arm64",
+  "CONDA_BUILD_SYSROOT": "/Library/Developer/CommandLineTools/SDKs/MacOSX11.1.sdk",
+  "cxx_compiler_version": "12",
+  "cxx_compiler": "clangxx",
+  "channel_targets": "defaults",
+  "c_compiler_version": "12",
+  "jpeg": "9",
+  "libwebp": "1.2.0",
+  "libxslt": "1.1",
+  "libxml2": "2.9"
+}

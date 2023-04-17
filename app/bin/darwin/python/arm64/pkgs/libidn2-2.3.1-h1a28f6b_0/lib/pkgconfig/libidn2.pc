@@ -1,0 +1,11 @@
+prefix=/Users/ktietz/demo/mc3/conda-bld/libidn2_1628878712931/_h_env_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_pla
+exec_prefix=${prefix}
+includedir=${prefix}/include
+libdir=${exec_prefix}/lib
+
+Name: libidn2
+Description: Library implementing IDNA2008 and TR46
+Version: 2.3.1
+Cflags: -I${includedir}
+Libs: -L${libdir} -lidn2
+Libs.private: -liconv -L/Users/ktietz/demo/mc3/conda-bld/libidn2_1628878712931/_h_env_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_pla/lib -lunistring -R/Users/ktietz/demo/mc3/conda-bld/libidn2_1628878712931/_h_env_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_pla/lib

@@ -1,0 +1,77 @@
+{% set version = "3.74" %}
+{% set version_us = version.replace(".", "_") %}
+
+package:
+  name: nss
+  version: {{ version }}
+
+source:
+  fn: nss-{{ version }}.tgz
+  url: https://ftp.mozilla.org/pub/security/nss/releases/NSS_{{ version_us }}_RTM/src/nss-{{ version }}.tar.gz
+  sha256: 88928811f9f40f87d42e2eaccdf6e454562e51486067f2ddbe90aa47ea6cd056
+  patches:
+    # Adds auto-generated nss.pc and nss-config script, and allows building without nspr in the source tree 
+    - nss-3.55-standalone-1.patch
+    # Remove simd acceleration on osx-arm64
+    - remove_hw_accel_osxarm64.patch  # [osx and arm64]
+    # To fix an error when ar is not found
+    - 0002-Use-AR-in-makefiles.patch
+
+
+build:
+  number: 0
+  # nss and its dependency nspr aren't currently available on s390x
+  skip: true  # [win or s390x]
+  run_exports:
+    - {{ pin_subpackage('nss', max_pin='x') }}
+  ignore_run_exports:
+    - zlib
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+    - autoconf
+    - cmake
+    - make  # [unix]
+    - pkg-config
+    - patch
+  host:
+    - nspr
+    - sqlite
+    - zlib
+  run:
+    # remove nspr when run exports is added
+    - nspr >=4.33,<5
+
+test:
+  commands:
+    - test -f ${PREFIX}/lib/libnspr4${SHLIB_EXT}         # [unix]
+    - test -f ${PREFIX}/lib/libplds4${SHLIB_EXT}         # [unix]
+    - test -f ${PREFIX}/lib/libplc4${SHLIB_EXT}          # [unix]
+    - test -f ${PREFIX}/lib/libsoftokn3${SHLIB_EXT}      # [unix]
+    - test -f ${PREFIX}/lib/libsoftokn3.chk              # [unix]
+    - test -f ${PREFIX}/lib/libnss3${SHLIB_EXT}          # [unix]
+    - test -f ${PREFIX}/lib/libsmime3${SHLIB_EXT}        # [unix]
+    - test -f ${PREFIX}/lib/libssl3${SHLIB_EXT}          # [unix]
+    - test -f ${PREFIX}/lib/libnssckbi${SHLIB_EXT}       # [unix]
+
+about:
+  home: https://developer.mozilla.org/en-US/docs/Mozilla/Projects/NSS
+  license: MPL-2.0
+  license_family: OTHER
+  license_file: nss/COPYING
+  summary: A set of libraries designed to support cross-platform development of security-enabled client and server applications.
+  description: |
+    Network Security Services (NSS) is a set of libraries designed to support
+    cross-platform development of security-enabled client and server
+    applications. Applications built with NSS can support SSL v3, TLS,
+    PKCS #5, PKCS #7, PKCS #11, PKCS #12, S/MIME, X.509 v3 certificates,
+    and other security standards.
+  doc_url: https://developer.mozilla.org/en-US/docs/Mozilla/Projects/NSS
+  dev_url: https://hg.mozilla.org/projects/nss
+
+extra:
+  recipe-maintainers:
+    - marcelotrevisani
+    - jakirkham

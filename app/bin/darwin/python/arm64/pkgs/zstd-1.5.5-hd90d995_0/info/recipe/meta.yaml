@@ -1,0 +1,102 @@
+# This file created by conda-build 3.23.3
+# meta.yaml template originally from:
+# /var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_6d2g8luhmu/clone/recipe, last modified Wed Apr 12 08:01:53 2023
+# ------------------------------------------------
+
+package:
+  name: zstd
+  version: 1.5.5
+source:
+  sha256: 98e9c3d949d1b924e28e01eccb7deed865eefebf25c2f21c702e5cd5b63b85e1
+  url: https://github.com/facebook/zstd/archive/v1.5.5.tar.gz
+build:
+  number: '0'
+  run_exports:
+    - zstd >=1.5.5,<1.6.0a0
+  string: hd90d995_0
+requirements:
+  build:
+    - bzip2 1.0.8 h620ffc9_4
+    - ca-certificates 2023.01.10 hca03da5_0
+    - cctools_osx-arm64 949.0.1 h332cad3_25
+    - clang 14.0.6 hca03da5_1
+    - clang-14 14.0.6 default_h1b80db6_1
+    - clang_osx-arm64 14.0.6 h9ff6fda_0
+    - clangxx 14.0.6 default_h1b80db6_1
+    - clangxx_osx-arm64 14.0.6 h72866fe_0
+    - cmake-no-system 3.25.3 h313beb8_0
+    - compiler-rt 14.0.6 h4ccfd99_0
+    - compiler-rt_osx-arm64 14.0.6 h4fb70ea_0
+    - ld64_osx-arm64 530 h001ce53_25
+    - ldid 2.1.2 h64d1936_2
+    - libclang-cpp14 14.0.6 default_h1b80db6_1
+    - libcxx 14.0.6 h848a8c0_0
+    - libffi 3.4.2 hca03da5_6
+    - libllvm14 14.0.6 h7ec7a93_2
+    - llvm-tools 14.0.6 hfd8c8a6_2
+    - make 4.3 h620ffc9_1
+    - ncurses 6.4 h313beb8_0
+    - ninja 1.10.2 hca03da5_5
+    - ninja-base 1.10.2 h525c30c_5
+    - openssl 1.1.1t h1a28f6b_0
+    - python 3.11.2 hc0d8a6c_0
+    - readline 8.2 h1a28f6b_0
+    - sqlite 3.41.1 h80987f9_0
+    - tapi 1100.0.11 h8754e6a_1
+    - tk 8.6.12 hb8d0fd4_0
+    - tzdata 2023c h04d1e81_0
+    - xz 5.2.10 h80987f9_1
+    - zlib 1.2.13 h5a0b063_0
+  host:
+    - libcxx 14.0.6 h848a8c0_0
+    - lz4-c 1.9.4 h313beb8_0
+    - xz 5.2.10 h80987f9_1
+    - zlib 1.2.13 h5a0b063_0
+  run:
+    - libcxx >=14.0.6
+    - lz4-c >=1.9.4,<1.10.0a0
+    - xz >=5.2.10,<6.0a0
+    - zlib >=1.2.13,<1.3.0a0
+test:
+  commands:
+    - zstd -be -i5
+    - test -f ${PREFIX}/include/zstd.h
+    - test -f ${PREFIX}/lib/libzstd.a
+    - test -f ${PREFIX}/lib/libzstd.dylib
+    - export PKG_CONFIG_PATH=$PREFIX/lib/pkgconfig
+    - test -f ${PREFIX}/lib/pkgconfig/libzstd.pc
+    - pkg-config --cflags libzstd
+  requires:
+    - pkg-config
+about:
+  description: 'Zstandard is a real-time compression algorithm, providing high compression
+
+    ratios. It offers a very wide range of compression / speed trade-off, while
+
+    being backed by a very fast decoder. It also offers a special mode for
+
+    small data, called dictionary compression, and can create dictionaries from
+
+    any sample set. Zstandard library is provided as open source software using
+
+    a BSD license.
+
+    '
+  dev_url: https://github.com/facebook/zstd
+  doc_url: https://facebook.github.io/zstd/zstd_manual.html
+  home: https://facebook.github.io/zstd/
+  license: BSD-3-Clause AND GPL-2.0-or-later
+  license_family: BSD
+  license_file: LICENSE
+  summary: Zstandard - Fast real-time compression algorithm
+extra:
+  copy_test_source_files: true
+  final: true
+  flow_run_id: 6dd5bba6-27da-466d-99c9-d69014d69e00
+  recipe-maintainers:
+    - chenghlee
+    - msarahan
+    - rmax
+    - xhochy
+  remote_url: git@github.com:AnacondaRecipes/zstd-feedstock.git
+  sha: c98aad1b99d9c69517f099a4fc51e6d38d7b35ee

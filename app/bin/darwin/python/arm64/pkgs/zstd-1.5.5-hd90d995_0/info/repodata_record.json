@@ -1,0 +1,28 @@
+{
+  "arch": "arm64",
+  "build": "hd90d995_0",
+  "build_number": 0,
+  "channel": "https://repo.anaconda.com/pkgs/main/osx-arm64",
+  "constrains": [],
+  "depends": [
+    "libcxx >=14.0.6",
+    "lz4-c >=1.9.4,<1.10.0a0",
+    "xz >=5.2.10,<6.0a0",
+    "zlib >=1.2.13,<1.3.0a0"
+  ],
+  "features": "",
+  "fn": "zstd-1.5.5-hd90d995_0.conda",
+  "legacy_bz2_md5": "7cfbed15f1feee1422810f7830075f53",
+  "license": "BSD-3-Clause AND GPL-2.0-or-later",
+  "license_family": "BSD",
+  "md5": "59f3fb046afe70ddf9ddbeabe8c83f03",
+  "name": "zstd",
+  "platform": "darwin",
+  "sha256": "3164cc85ee1f9d7d1db962d128f917750bb89b53398296ae05c30c6696f791c3",
+  "size": 512834,
+  "subdir": "osx-arm64",
+  "timestamp": 1681304594848,
+  "track_features": "",
+  "url": "https://repo.anaconda.com/pkgs/main/osx-arm64/zstd-1.5.5-hd90d995_0.conda",
+  "version": "1.5.5"
+}

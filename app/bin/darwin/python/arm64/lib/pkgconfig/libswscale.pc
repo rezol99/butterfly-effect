@@ -1,0 +1,14 @@
+prefix=/Users/ezryow/Git/butterfly-effect/app/bin/darwin/python/arm64
+exec_prefix=${prefix}
+libdir=/Users/ezryow/Git/butterfly-effect/app/bin/darwin/python/arm64/lib
+includedir=/Users/ezryow/Git/butterfly-effect/app/bin/darwin/python/arm64/include
+
+Name: libswscale
+Description: FFmpeg image rescaling library
+Version: 5.5.100
+Requires: 
+Requires.private: libavutil >= 56.31.100
+Conflicts:
+Libs: -L${libdir}  -lswscale 
+Libs.private: -lm
+Cflags: -I${includedir}

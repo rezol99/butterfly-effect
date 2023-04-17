@@ -1,0 +1,10 @@
+prefix=/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_656gvxdfl3/croot/jpeg_1677849133246/_h_env_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+
+Name: libjpeg
+Description: Reads and writes JPEG files
+Version: 9.5.0
+Libs: -L${libdir} -ljpeg
+Cflags: -I${includedir}

@@ -1,0 +1,89 @@
+{
+  "paths": [
+    {
+      "_path": "include/gmp.h",
+      "file_mode": "text",
+      "path_type": "hardlink",
+      "prefix_placeholder": "/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_e42b7415-5d8a-45db-9aa7-05f3e4e45d89k6qfsvlv/croots/recipe/gmp_1653996263903/_h_env_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehol",
+      "sha256": "71e62ef9b7157f53097d7ec753efe3bf82baa91d8121e540483d825d54e840c3",
+      "size_in_bytes": 84755
+    },
+    {
+      "_path": "include/gmpxx.h",
+      "path_type": "hardlink",
+      "sha256": "0011ae411a0bc1030e07d968b32fdc1343f5ac2a17b7d28f493e7976dde2ac82",
+      "size_in_bytes": 129113
+    },
+    {
+      "_path": "lib/libgmp.10.dylib",
+      "path_type": "hardlink",
+      "sha256": "523ff55f9390dd596eb451ec13d33837812765a195c42405588bcc47f1c76912",
+      "size_in_bytes": 469264
+    },
+    {
+      "_path": "lib/libgmp.a",
+      "path_type": "hardlink",
+      "sha256": "3e92baed7dca2f7fd4ea4157aa7591e8fb015348a4958f2ba60377dd2399f999",
+      "size_in_bytes": 843496
+    },
+    {
+      "_path": "lib/libgmp.dylib",
+      "path_type": "softlink",
+      "sha256": "523ff55f9390dd596eb451ec13d33837812765a195c42405588bcc47f1c76912",
+      "size_in_bytes": 469264
+    },
+    {
+      "_path": "lib/libgmpxx.4.dylib",
+      "path_type": "hardlink",
+      "sha256": "e3c8cf968392167b62ad86692a8b2e8411214a6b8af5272903b207a44d103187",
+      "size_in_bytes": 80256
+    },
+    {
+      "_path": "lib/libgmpxx.a",
+      "path_type": "hardlink",
+      "sha256": "a378081457e076d77616ac6b6f1142a5143be5e7a632a91f7e4b5bd3f9db1cad",
+      "size_in_bytes": 33960
+    },
+    {
+      "_path": "lib/libgmpxx.dylib",
+      "path_type": "softlink",
+      "sha256": "e3c8cf968392167b62ad86692a8b2e8411214a6b8af5272903b207a44d103187",
+      "size_in_bytes": 80256
+    },
+    {
+      "_path": "lib/pkgconfig/gmp.pc",
+      "file_mode": "text",
+      "path_type": "hardlink",
+      "prefix_placeholder": "/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_e42b7415-5d8a-45db-9aa7-05f3e4e45d89k6qfsvlv/croots/recipe/gmp_1653996263903/_h_env_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehol",
+      "sha256": "d25894a324a33864d48999162153c95917e06f3fdabd77ce4fe0347b93a80ea3",
+      "size_in_bytes": 496
+    },
+    {
+      "_path": "lib/pkgconfig/gmpxx.pc",
+      "file_mode": "text",
+      "path_type": "hardlink",
+      "prefix_placeholder": "/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_e42b7415-5d8a-45db-9aa7-05f3e4e45d89k6qfsvlv/croots/recipe/gmp_1653996263903/_h_env_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehol",
+      "sha256": "a2df0f7ec4f68ca9f29be45fb76fc8ce0281e60abce2a469ff2ba2541248cd92",
+      "size_in_bytes": 531
+    },
+    {
+      "_path": "share/info/gmp.info",
+      "path_type": "hardlink",
+      "sha256": "b5e40cce79506dd1478d0cffd4a7d541df492783094c8d1c01893e6315ea22fb",
+      "size_in_bytes": 5931
+    },
+    {
+      "_path": "share/info/gmp.info-1",
+      "path_type": "hardlink",
+      "sha256": "efa500fb0ae8b4ae2632a238a4d7def02777ae1963646a716b7dda427cfd85a1",
+      "size_in_bytes": 302874
+    },
+    {
+      "_path": "share/info/gmp.info-2",
+      "path_type": "hardlink",
+      "sha256": "5e7c2f97937488b57b47e896feb2a60a2f9d6654257f5856f4d2ce83700b7f7f",
+      "size_in_bytes": 216314
+    }
+  ],
+  "paths_version": 1
+}

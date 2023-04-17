@@ -1,0 +1,72 @@
+# This file created by conda-build 3.23.3
+# meta.yaml template originally from:
+# /var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_656gvxdfl3/clone/recipe, last modified Fri Mar  3 07:12:05 2023
+# ------------------------------------------------
+
+package:
+  name: jpeg
+  version: 9e
+source:
+  sha256: 4077d6a6a75aeb01884f708919d25934c93305e49f7e3f36db9129320e6f4f3d
+  url: https://www.ijg.org/files/jpegsrc.v9e.tar.gz
+build:
+  number: '1'
+  run_exports:
+    - jpeg >=9e,<10a
+  string: h80987f9_1
+requirements:
+  build:
+    - cctools_osx-arm64 949.0.1 h332cad3_25
+    - clang 14.0.6 hca03da5_0
+    - clang-14 14.0.6 default_hf5194b7_0
+    - clang_osx-arm64 14.0.6 h9ff6fda_0
+    - clangxx 14.0.6 default_hf5194b7_0
+    - compiler-rt 14.0.6 h4ccfd99_0
+    - compiler-rt_osx-arm64 14.0.6 h4fb70ea_0
+    - ld64_osx-arm64 530 h001ce53_25
+    - ldid 2.1.2 h64d1936_2
+    - libclang-cpp14 14.0.6 default_hf5194b7_0
+    - libcxx 14.0.6 h848a8c0_0
+    - libffi 3.4.2 hca03da5_6
+    - libllvm14 14.0.6 h7ec7a93_1
+    - libtool 2.4.6 h313beb8_1009
+    - llvm-tools 14.0.6 h7ec7a93_1
+    - make 4.3 h620ffc9_1
+    - tapi 1100.0.11 h8754e6a_1
+    - zlib 1.2.13 h5a0b063_0
+  run: []
+test:
+  commands:
+    - djpeg -dct int -ppm -outfile testout.ppm testorig.jpg
+    - test -f ${PREFIX}/lib/pkgconfig/libjpeg.pc
+  files:
+    - testorig.jpg
+about:
+  description: 'This software library is the basis for the processing of images in
+    the
+
+    ubiquitous JPEG format and is used worldwide in a countless number of
+
+    applications of software vendors and in the photographic industry under
+
+    a fee-free license with open source code.
+
+    '
+  dev_url: https://www.ijg.org/files/
+  doc_url: https://www.ijg.org/files/
+  home: https://www.ijg.org/
+  license: IJG
+  license_family: Other
+  license_file: README
+  summary: read/write jpeg COM, EXIF, IPTC medata
+extra:
+  copy_test_source_files: true
+  final: true
+  flow_run_id: 65f2f505-cc60-4d1d-90a2-524eda663b5a
+  recipe-maintainers:
+    - gillins
+    - jakirkham
+    - katietz
+    - msarahan
+  remote_url: git@github.com:AnacondaRecipes/jpeg-feedstock.git
+  sha: 839f64da35a7f71e9da8349d847254b2b7c7e6ac

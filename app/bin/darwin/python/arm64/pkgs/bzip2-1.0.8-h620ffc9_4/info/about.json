@@ -1,0 +1,33 @@
+{
+  "channels": [
+    "https://conda.anaconda.org/conda-forge"
+  ],
+  "conda_build_version": "3.21.4",
+  "conda_private": false,
+  "conda_version": "4.9.2",
+  "description": "Bzip2 is a freely available high-quality data compressor. It typically\ncompresses files to within 10% to 15% of the best available techniques,\nwhilst being around twice as fast at compression and six times faster\nat decompression.\n",
+  "doc_url": "http://www.bzip.org/docs.html",
+  "env_vars": {
+    "CIO_TEST": "<not set>"
+  },
+  "extra": {
+    "copy_test_source_files": true,
+    "final": true,
+    "recipe-maintainers": [
+      "jakirkham",
+      "pelson",
+      "jlanga",
+      "mingwandroid",
+      "msarahan"
+    ]
+  },
+  "home": "http://www.bzip.org/",
+  "identifiers": [],
+  "keywords": [],
+  "license": "bzip2-1.0.6",
+  "license_family": "BSD",
+  "license_file": "LICENSE",
+  "root_pkgs": [],
+  "summary": "high-quality data compressor",
+  "tags": []
+}

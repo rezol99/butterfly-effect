@@ -1,0 +1,133 @@
+{% set version = "12.9" %}
+{% set sha256 = "89fda2de33ed04a98548e43f3ee5f15b882be17505d631fe0dd1a540a2b56dce" %}
+{% set libpqver = '.'.join(("5", version.split('.')[0])) %}
+
+package:
+  name: postgresql-split
+  version: {{ version }}
+
+source:
+  url: https://ftp.postgresql.org/pub/source/v{{ version }}/postgresql-{{ version }}.tar.bz2
+  sha256: {{ sha256 }}
+  patches:
+    - 0001-fix-win-zlib-name.patch
+    - 0002-disable-new-dtags.patch
+    - 0003-update-location-of-krb5-files.patch
+    - 0004-fix-windows-openssl-links-for-openssl-1.1.1.patch  # [win]
+    - 0005-change-setenv-on-windows.patch                     # [win]
+
+build:
+  number: 3
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - m2-bison         # [win]
+    - m2-diffutils     # [win]
+    - m2-flex          # [win]
+    - m2-patch         # [win]
+    - perl             # [win]
+    - posix            # [win]
+    - make             # [unix]
+    - libtool          # [unix]
+    - patch            # [unix]
+  host:
+    - krb5
+    - openssl
+    - readline         # [not win]
+    - zlib
+    - msinttypes       # [win and vc<14]
+
+outputs:
+  - name: postgresql
+    build:
+      run_exports:
+        - {{ pin_subpackage('libpq') }}
+    requirements:
+      build:
+        # solely for sake of lining up vc versions and other runtimes
+        - {{ compiler('c') }}
+        - perl             # [win]
+        - make             # [unix]
+      host:
+        # these are here for sake of run_exports taking effect
+        - krb5
+        - openssl
+        - readline         # [not win]
+        - zlib
+        - msinttypes       # [win and vc<14]
+        - {{ pin_subpackage('libpq', exact=True) }}
+      run:
+        - {{ pin_subpackage('libpq', exact=True) }}
+    test:
+      requires:
+        - conda-build
+      commands:
+        - postgres --help
+        - conda inspect linkages postgresql  # [not win]
+        - conda inspect objects postgresql  # [osx]
+    script: install_db.sh   # [unix
+    script: install_db.bat  # [win]
+    about:
+      summary: PostgreSQL is a powerful, open source object-relational database system.
+
+  - name: libpq
+    build:
+      run_exports:
+        - {{ pin_subpackage('libpq') }}
+      ignore_run_exports:
+        - krb5                        # [win]
+        - openssl                     # [win]
+      missing_dso_whitelist:          # [win]
+        - "*/postgres.exe"            # [win]
+        - "*/libssl-1_1*.dll"         # [win]
+        - "*/libcrypto-1_1*.dll"      # [win]
+        - "$RPATH/gssapi32.dll"       # [win]
+        - "$RPATH/gssapi64.dll"       # [win]
+        - "$RPATH/zlib.dll"           # [win]
+        - "$RPATH/LIBPGTYPES.dll"     # [win]
+        - "$RPATH/LIBECPG.dll"        # [win]
+        - "Library\\bin\\LIBPQ.dll"   # [win]
+    requirements:
+      build:
+        # solely for sake of lining up vc versions and other runtimes
+        - {{ compiler('c') }}
+        - perl                   # [win]
+        - make                   # [unix]
+      host:
+        # these are here for sake of run_exports taking effect
+        - krb5
+        - openssl
+        - readline               # [not win]
+        - zlib
+        - msinttypes             # [win and vc<14]
+    script: install_runtime.sh   # [unix]
+    script: install_runtime.bat  # [win]
+    test:
+      commands:
+        - pg_config
+        - test -f $PREFIX/lib/libpq.so.{{ libpqver }}      # [linux]
+        - test -f $PREFIX/lib/libpq.so.5                   # [linux]
+        - test -f $PREFIX/lib/libpq.so                     # [linux]
+        - test -f $PREFIX/lib/libpq.{{ libpqver }}.dylib   # [osx]
+        - test -f $PREFIX/lib/libpq.5.dylib                # [osx]
+        - test -f $PREFIX/lib/libpq.dylib                  # [osx]
+        - IF NOT EXIST %LIBRARY_BIN%\libpq.dll EXIT 1      # [win]
+        - IF NOT EXIST %LIBRARY_BIN%\pg_config.exe EXIT 1  # [win]
+    about:
+      summary: The postgres runtime libraries and utilities (not the server itself)
+
+about:
+  home: https://postgresql.org
+  license: PostgreSQL
+  license_family: Other
+  license_file: COPYRIGHT
+  doc_url: https://www.postgresql.org/docs/
+  dev_url: https://git.postgresql.org/gitweb/?p=postgresql.git;a=summary
+
+extra:
+  recipe-maintainers:
+    - gillins
+    - msarahan
+    - ocefpaf
+    - mariusvniekerk

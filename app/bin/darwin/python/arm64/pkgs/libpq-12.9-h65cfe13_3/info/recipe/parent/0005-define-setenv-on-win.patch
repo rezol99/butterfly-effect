@@ -1,0 +1,37 @@
+From 676f4af06231725d4e39ffe931d1421f47aa6de4 Mon Sep 17 00:00:00 2001
+From: Michael Sarahan <msarahan@gmail.com>
+Date: Wed, 19 Feb 2020 14:46:44 -0600
+Subject: [PATCH] define setenv on win
+
+---
+ src/backend/libpq/be-secure-gssapi.c | 14 ++++++++++++++
+ 1 file changed, 14 insertions(+)
+
+diff --git a/src/backend/libpq/be-secure-gssapi.c b/src/backend/libpq/be-secure-gssapi.c
+index d248d11..0be014d 100644
+--- a/src/backend/libpq/be-secure-gssapi.c
++++ b/src/backend/libpq/be-secure-gssapi.c
+@@ -445,6 +445,20 @@ read_or_wait(Port *port, ssize_t len)
+ 	return len;
+ }
+ 
++#if _MSC_VER && !__INTEL_COMPILER
++// https://stackoverflow.com/a/23616164/1170370
++int setenv(const char *name, const char *value, int overwrite)
++{
++    int errcode = 0;
++    if(!overwrite) {
++        size_t envsize = 0;
++        errcode = getenv_s(&envsize, NULL, 0, name);
++        if(errcode || envsize) return errcode;
++    }
++    return _putenv_s(name, value);
++}
++#endif
++
+ /*
+  * Start up a GSSAPI-encrypted connection.  This performs GSSAPI
+  * authentication; after this function completes, it is safe to call
+-- 
+2.20.1
+

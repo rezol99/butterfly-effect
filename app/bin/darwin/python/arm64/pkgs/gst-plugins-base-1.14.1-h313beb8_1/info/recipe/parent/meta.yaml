@@ -1,0 +1,143 @@
+{% set version = "1.14.1" %}
+{% set sha256 = "28d82b0d261544a9bf85b429399929e4986eb00efcf1ce16cc71d269a4c3186c" %}
+{% set plugin_base_sha256 = "1026c7c3082d825d9b5d034c1a6dd8a4ebab60eb3738b0a0afde4ad2dc0b0db5" %}
+
+package:
+  name: gstreamer_and_plugins
+  version: {{ version }}
+
+source:
+  - url: https://gstreamer.freedesktop.org/src/gstreamer/gstreamer-{{ version }}.tar.xz
+    sha256: {{ sha256 }}
+  - url: https://gstreamer.freedesktop.org/src/gst-plugins-base/gst-plugins-base-{{ version }}.tar.xz
+    sha256: {{ plugin_base_sha256 }}
+    folder: plugins_base
+
+build:
+  skip: true  # [win]
+  number: 1
+
+outputs:
+  - name: gstreamer
+    script: install_gstreamer.sh
+    build:
+      activate_in_script: True
+      run_exports:
+        # remove symbols at .90 patch releases just before minor versions?
+        #    https://abi-laboratory.pro/tracker/timeline/gstreamer/
+        - {{ pin_subpackage('gstreamer', max_pin='x.x') }}
+
+    requirements:
+      build:
+        - {{ compiler('c') }}
+        - pkg-config
+        - bison
+        - flex
+        - meson
+        - ninja
+        - gobject-introspection
+      host:
+        - gettext 0.21.0                  # [osx]
+        - glib 2.69.1
+    test:
+      commands:
+        - gst-inspect-1.0 --version
+        - gst-launch-1.0  --version
+        - gst-stats-1.0 --version
+        - gst-typefind-1.0 --version
+    about:
+      summary: "Library for constructing graphs of media-handling components"
+      description:
+      doc_source_url: https://cgit.freedesktop.org/gstreamer/gstreamer/tree/docs
+
+  - name: gst-plugins-base
+    script: install_base_plugins.sh
+    build:
+      activate_in_script: True
+      run_exports:
+        # remove symbols at .90 patch releases just before minor versions?
+        #    https://abi-laboratory.pro/tracker/timeline/gstreamer/
+        - {{ pin_subpackage('gst-plugins-base', max_pin='x.x') }}
+
+    requirements:
+      build:
+        - {{ compiler('c') }}
+        - {{ compiler('cxx') }}
+        - {{ cdt('libxau-devel') }}          # [linux]
+        - {{ cdt('libxext-devel') }}         # [linux]
+        - {{ cdt('libx11-devel') }}          # [linux]
+        - {{ cdt('libxrender-devel') }}      # [linux]
+        - {{ cdt('xorg-x11-proto-devel') }}  # [linux]
+        - {{ cdt('mesa-libgl-devel') }}      # [linux and not s390x]
+        - {{ cdt('mesa-libegl-devel') }}     # [linux and not ppc64le]
+        - {{ cdt('libdrm-devel') }}          # [linux and not s390x]
+        - {{ cdt('libxdamage-devel') }}      # [linux]
+        - {{ cdt('libxfixes-devel') }}       # [linux]
+        - {{ cdt('libxxf86vm-devel') }}      # [linux]
+        - {{ cdt('mesa-dri-drivers') }}      # [linux]
+        # These dependencies are only for cos7 platforms
+        - {{ cdt('libglvnd-glx') }}          # [linux & (ppc64le | aarch64)]
+        - {{ cdt('libglvnd') }}              # [linux & (ppc64le | aarch64)]
+        - {{ cdt('libxshmfence-devel') }}    # [linux and ppc64le]
+        - {{ cdt('mesa-khr-devel') }}        # [linux & (ppc64le | aarch64)]
+        # expat here is _only_ required for mesa-dri-drivers
+        - {{ cdt('expat') }}                 # [linux and not s390x]
+        - {{ cdt('libselinux-devel') }}      # [linux]
+        - {{ cdt('mesa-libgbm') }}           # [linux and x86_64]
+        - pkg-config
+        - meson
+        - ninja
+        - gobject-introspection
+      host:
+        - {{ pin_subpackage('gstreamer') }}
+        - glib 2.69.1
+        - zlib 1.2.11
+        - libxcb 1.14                          # [linux]
+        - pthread-stubs 0.3                    # [linux]
+        # - xz 
+      run:
+        - {{ pin_compatible('gstreamer') }}
+
+    test:
+      commands:
+        {% set SOEXT = 'dylib' if osx else 'so' %}
+        - test -f $PREFIX/lib/libgstallocators-1.0.{{ SOEXT }}
+        - test -f $PREFIX/lib/libgstapp-1.0.{{ SOEXT }}
+        - test -f $PREFIX/lib/libgstaudio-1.0.{{ SOEXT }}
+        - test -f $PREFIX/lib/libgstfft-1.0.{{ SOEXT }}
+        - test -f $PREFIX/lib/libgstpbutils-1.0.{{ SOEXT }}
+        - test -f $PREFIX/lib/libgstriff-1.0.{{ SOEXT }}
+        - test -f $PREFIX/lib/libgstrtp-1.0.{{ SOEXT }}
+        - test -f $PREFIX/lib/libgstrtsp-1.0.{{ SOEXT }}
+        - test -f $PREFIX/lib/libgstsdp-1.0.{{ SOEXT }}
+        - test -f $PREFIX/lib/libgsttag-1.0.{{ SOEXT }}
+        - test -f $PREFIX/lib/libgstvideo-1.0.{{ SOEXT }}
+
+    about:
+        summary: "GStreamer Base Plug-ins"
+        description: |
+          GStreamer Base Plug-ins is a well-groomed and well-maintained collection of
+          GStreamer plug-ins and elements, spanning the range of possible types of
+          elements one would want to write for GStreamer.
+        doc_source_url: https://github.com/GStreamer/gst-plugins-base/tree/master/docs
+
+
+
+about:
+  home: https://gstreamer.freedesktop.org/
+  license: LGPL-2.1-or-later
+  license_family: LGPL
+  license_file: COPYING
+  summary: GStreamer is a framework for streaming media.
+  description: |
+    GStreamer is a library for constructing graphs of media-handling components. 
+    The applications it supports range from simple Ogg/Vorbis playback, audio/video 
+    streaming to complex audio (mixing) and video (non-linear editing) processing.
+  doc_url: https://gstreamer.freedesktop.org/documentation/
+  dev_url: https://cgit.freedesktop.org/gstreamer/gstreamer/tree/
+
+extra:
+  recipe-maintainers:
+    - ccordoba12
+    - mingwandroid
+    - msarahan

@@ -1,0 +1,69 @@
+{% set version = "2.9.14" %}
+
+package:
+  name: libxml2
+  version: {{ version }}
+
+source:
+  url: https://gitlab.gnome.org/GNOME/libxml2/-/archive/v{{ version }}/libxml2-v{{ version }}.tar.gz
+  sha256: 80efe9e6b48f8aa7b9b0c47be427e2ef2dbfb2999124220ffbc0f43ca6adb98c
+  patches:
+    - 0002-Make-and-install-a-pkg-config-file-on-Windows.patch
+
+build:
+  number: 0
+  run_exports:
+    # remove symbols at minor versions.
+    #    https://abi-laboratory.pro/tracker/timeline/libxml2/
+    - {{ pin_subpackage('libxml2', max_pin='x.x') }}
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - autoconf    # [not win]
+    - automake    # [not win]
+    - libtool     # [not win]
+    - pkg-config  # [not win]
+    - make        # [not win]
+    - m2-patch    # [win]
+    - patch       # [not win]
+  host:
+    - icu         # [not win]
+    - libiconv    # [not linux]
+    - xz          # [not win]
+    - zlib
+  run:
+    - libiconv    # [not linux]
+
+test:
+  files:
+    - test.xml
+  requires:
+    - conda-build
+  commands:
+    - xmllint test.xml
+    - conda inspect linkages -p $PREFIX libxml2  # [not win]
+    - conda inspect objects -p $PREFIX libxml2  # [osx]
+
+about:
+  home: https://gitlab.gnome.org/GNOME/libxml2/
+  license: MIT
+  license_family: MIT
+  license_file: Copyright
+  summary: The XML C parser and toolkit of Gnome
+  description: |
+     Though libxml2 is written in C a variety of language
+     bindings make it available in other environments.
+  doc_url: https://gitlab.gnome.org/GNOME/libxml2/-/wikis/home
+  dev_url: https://gitlab.gnome.org/GNOME/libxml2/
+
+extra:
+  recipe-maintainers:
+    - ocefpaf
+    - jakirkham
+    - mingwandroid
+    - gillins
+    - jschueller
+    - msarahan
+    - scopatz
+    - chenghlee

@@ -1,0 +1,76 @@
+{% set version = "2.14.1" %}
+
+package:
+  name: fontconfig
+  version: {{ version }}
+
+source:
+  url: https://www.freedesktop.org/software/fontconfig/release/fontconfig-{{ version }}.tar.gz
+  sha256: ae480e9ca34382790312ff062c625ec70df94d6d9a9366e2b2b3d525f7f90387
+  patches:                  # [linux or win]
+    - fcf.patch             # [linux]
+    - windows-compat.patch  # [win]
+
+build:
+  number: 1
+  binary_has_prefix_files:        # [unix]
+    - lib/libfontconfig.so.1.*    # [linux]
+    - lib/libfontconfig.*.dylib*  # [osx]
+  run_exports:
+    # remove symbols basically never (once, in 2006).
+    #    https://abi-laboratory.pro/tracker/timeline/fontconfig/
+    - {{ pin_subpackage('fontconfig') }}
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - make   # [not win]
+    - pkg-config
+    - gperf  # [not win]
+    - m2-gperf  # [win]
+    - expat
+    - gettext   # [not win]
+    - libtool   # [not win]
+    - automake  # [not win]
+    - autoconf  # [not win]
+    - patch     # [not win]
+    - m2-patch  # [win]
+    - python  # [win]
+    - meson   # [win]
+    - ninja   # [win]
+
+  host:
+    - freetype
+    - libxml2
+    - coreutils  # [osx]
+    # Required for MT-safe global config test
+    - unzip      # [not win]
+    - expat
+    - libiconv   # [win]
+    - libuuid    # [linux]
+    - zlib
+
+test:
+  requires:
+    - pkg-config
+
+about:
+  home: https://www.freedesktop.org/wiki/Software/fontconfig/
+  license: MIT
+  license_file: COPYING
+  license_family: MIT
+  summary: 'A library for configuring and customizing font access.'
+  description: |
+    Fontconfig is a library designed to provide system-wide font configuration,
+    customization and application access.
+  doc_url: https://www.freedesktop.org/software/fontconfig/fontconfig-user.html
+  dev_url: https://gitlab.freedesktop.org/fontconfig/fontconfig
+
+extra:
+  recipe-maintainers:
+    - ccordoba12
+    - jakirkham
+    - katietz
+    - mingwandroid
+    - ocefpaf
+    - pkgw

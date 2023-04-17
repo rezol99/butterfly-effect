@@ -1,0 +1,91 @@
+# This file created by conda-build 3.21.4
+# meta.yaml template originally from:
+# /Users/ktietz/demo/src/aggregate/pcre-feedstock/recipe, last modified Sat Aug  7 09:29:51 2021
+# ------------------------------------------------
+
+package:
+  name: pcre
+  version: '8.45'
+source:
+  patches:
+    - 0001-Define-snprintf-for-old-VS.patch
+    - 0002-Workaround-CMake-FIND_PACKAGE-looking-on-PATH-misfeature.patch
+  sha256: 4e6ce03e0336e8b4a3d6c2b70b1c5e18590a5673a98186da90d4f33c23defc09
+  url: https://ftp.pcre.org/pub/pcre/pcre-8.45.tar.gz
+build:
+  number: '0'
+  run_exports:
+    - pcre >=8.45,<9.0a0
+  string: hc377ac9_0
+requirements:
+  build:
+    - cctools_osx-arm64 949.0.1 h332cad3_24
+    - clang 12.0.0 hca03da5_4
+    - clang-12 12.0.0 default_he099f3d_4
+    - clang_osx-arm64 12.0.0 hcb56dc5_3
+    - clangxx 12.0.0 default_he099f3d_4
+    - clangxx_osx-arm64 12.0.0 h39b79ac_3
+    - compiler-rt 12.0.0 h4ccfd99_3
+    - compiler-rt_osx-arm64 12.0.0 h4fb70ea_3
+    - ld64_osx-arm64 530 h001ce53_24
+    - ldid 2.1.2 h7dde238_2
+    - libclang-cpp12 12.0.0 default_he099f3d_4
+    - libcxx 12.0.0 hf6beb65_1
+    - libiconv 1.16 h1230e6a_0
+    - libllvm12 12.0.0 h12f7ac0_4
+    - libtool 2.4.6 h1230e6a_0
+    - llvm-tools 12.0.0 h12f7ac0_4
+    - make 4.3 h620ffc9_1
+    - patch 2.7.6 hca03da5_1001
+    - pkg-config 0.29.2 h1230e6a_0
+    - tapi 1100.0.11 ha21211d_0
+    - zlib 1.2.11 hca03da5_3
+  host:
+    - libcxx 12.0.0 hf6beb65_1
+  run:
+    - libcxx >=12.0.0
+test:
+  commands:
+    - pcre-config --version
+    - pcregrep --help
+    - pcretest --help
+    - test -f "${PREFIX}/include/pcre.h"
+    - test -f "${PREFIX}/include/pcre_scanner.h"
+    - test -f "${PREFIX}/include/pcre_stringpiece.h"
+    - test -f "${PREFIX}/include/pcrecpp.h"
+    - test -f "${PREFIX}/include/pcrecpparg.h"
+    - test -f "${PREFIX}/include/pcreposix.h"
+    - test -f "${PREFIX}/lib/libpcre.a"
+    - test -f "${PREFIX}/lib/libpcre${SHLIB_EXT}"
+    - test -f "${PREFIX}/lib/libpcrecpp.a"
+    - test -f "${PREFIX}/lib/libpcrecpp${SHLIB_EXT}"
+    - test -f "${PREFIX}/lib/libpcreposix.a"
+    - test -f "${PREFIX}/lib/libpcreposix${SHLIB_EXT}"
+about:
+  description: 'PCRE implement regular expression pattern matching using the same
+    syntax and
+
+    semantics as Perl 5. PCRE has its own native API, as well as a set of wrapper
+
+    functions that correspond to the POSIX regular expression API.
+
+    '
+  dev_url: http://vcs.pcre.org/pcre2/
+  doc_source_url: https://vcs.pcre.org/pcre2/code/trunk/doc/?sortdir=down
+  doc_url: http://www.pcre.org/original/doc/html/
+  home: http://www.pcre.org/
+  license: BSD 3-Clause
+  license_family: BSD
+  license_file: LICENCE
+  summary: Regular expression pattern matching using the same syntax and semantics
+    as Perl 5.
+extra:
+  copy_test_source_files: true
+  final: true
+  recipe-maintainers:
+    - chenghlee
+    - jakirkham
+    - ocefpaf
+    - saraedum
+    - scopatz
+    - sebastian-luna-valero

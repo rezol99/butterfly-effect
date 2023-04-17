@@ -1,0 +1,15 @@
+{
+  "arch": "arm64",
+  "build": "hc377ac9_0",
+  "build_number": 0,
+  "depends": [
+    "libcxx >=12.0.0"
+  ],
+  "license": "BSD 3-Clause",
+  "license_family": "BSD",
+  "name": "pcre",
+  "platform": "osx",
+  "subdir": "osx-arm64",
+  "timestamp": 1629474194684,
+  "version": "8.45"
+}

@@ -1,0 +1,236 @@
+# This file created by conda-build 3.23.3
+# ------------------------------------------------
+
+package:
+  name: opencv
+  version: 4.6.0
+source:
+  - fn: opencv-4.6.0.zip
+    sha256: 158db5813a891c7eda8644259fc1dbd76b21bd1ffb9854a8b4b8115a4ceec359
+    url: https://github.com/opencv/opencv/archive/4.6.0.zip
+  - fn: opencv_contrib-4.6.0.tar.gz
+    folder: opencv_contrib-4.6.0
+    sha256: 1777d5fd2b59029cf537e5fd6f8aa68d707075822f90bde683fcde086f85f7a7
+    url: https://github.com/opencv/opencv_contrib/archive/4.6.0.tar.gz
+build:
+  missing_dso_whitelist:
+    - '*'
+  number: 3
+  string: py39h78102c4_3
+requirements:
+  build:
+    - bzip2 1.0.8 h620ffc9_4
+    - c-ares 1.18.1 h1a28f6b_0
+    - ca-certificates 2023.01.10 hca03da5_0
+    - cctools_osx-arm64 949.0.1 h332cad3_25
+    - clang 14.0.6 hca03da5_0
+    - clang-14 14.0.6 default_hf5194b7_0
+    - clang_osx-arm64 14.0.6 h9ff6fda_0
+    - clangxx 14.0.6 default_hf5194b7_0
+    - clangxx_osx-arm64 14.0.6 h72866fe_0
+    - cmake 3.22.1 hae769c0_0
+    - compiler-rt 14.0.6 h4ccfd99_0
+    - compiler-rt_osx-arm64 14.0.6 h4fb70ea_0
+    - expat 2.4.9 hc377ac9_0
+    - krb5 1.19.4 h8380606_0
+    - ld64_osx-arm64 530 h001ce53_25
+    - ldid 2.1.2 h64d1936_2
+    - libclang-cpp14 14.0.6 default_hf5194b7_0
+    - libcurl 7.87.0 h0f1d93c_0
+    - libcxx 14.0.6 h848a8c0_0
+    - libedit 3.1.20221030 h80987f9_0
+    - libev 4.33 h1a28f6b_1
+    - libffi 3.4.2 hca03da5_6
+    - libiconv 1.16 h1a28f6b_2
+    - libllvm14 14.0.6 h7ec7a93_1
+    - libnghttp2 1.46.0 h95c9599_0
+    - libssh2 1.10.0 hf27765b_0
+    - libuv 1.39.0 h1a28f6b_0
+    - llvm-tools 14.0.6 h7ec7a93_1
+    - lz4-c 1.9.4 h313beb8_0
+    - ncurses 6.4 h313beb8_0
+    - ninja 1.10.2 hca03da5_5
+    - ninja-base 1.10.2 h525c30c_5
+    - openssl 1.1.1t h1a28f6b_0
+    - pkg-config 0.29.2 h1a28f6b_0
+    - python 3.11.0 hc0d8a6c_2
+    - readline 8.2 h1a28f6b_0
+    - rhash 1.4.1 hf27765b_1
+    - sqlite 3.40.1 h7a7dc30_0
+    - tapi 1100.0.11 h8754e6a_1
+    - tk 8.6.12 hb8d0fd4_0
+    - tzdata 2022g h04d1e81_0
+    - xz 5.2.10 h80987f9_1
+    - zlib 1.2.13 h5a0b063_0
+    - zstd 1.5.2 h8574219_0
+  host:
+    - blas 1.0 openblas
+    - bzip2 1.0.8 h620ffc9_4
+    - c-ares 1.18.1 h1a28f6b_0
+    - ca-certificates 2023.01.10 hca03da5_0
+    - cairo 1.16.0 h302bd0f_3
+    - cmake 3.22.1 hae769c0_0
+    - eigen 3.3.7 h525c30c_1
+    - expat 2.4.9 hc377ac9_0
+    - ffmpeg 4.2.2 h04105a8_0
+    - fontconfig 2.14.1 h6b8db82_1
+    - freetype 2.10.4 h1192e45_0
+    - gettext 0.21.0 h826f4ad_0
+    - giflib 5.2.1 h80987f9_1
+    - glib 2.69.1 h514c7bf_2
+    - gmp 6.2.1 hc377ac9_3
+    - gnutls 3.6.15 h887c41c_0
+    - graphite2 1.3.14 hc377ac9_1
+    - gst-plugins-base 1.14.1 hf0a386a_0
+    - gstreamer 1.14.1 he09cfb7_0
+    - harfbuzz 4.3.0 hb1b0ec1_0
+    - hdf5 1.12.1 h160e8cb_2
+    - icu 68.1 hc377ac9_0
+    - jpeg 9e h1a28f6b_0
+    - krb5 1.19.4 h8380606_0
+    - lame 3.100 h1a28f6b_0
+    - libclang 12.0.0 default_hc321e17_4
+    - libcurl 7.87.0 h0f1d93c_0
+    - libcxx 14.0.6 h848a8c0_0
+    - libedit 3.1.20221030 h80987f9_0
+    - libev 4.33 h1a28f6b_1
+    - libffi 3.4.2 hca03da5_6
+    - libgfortran 5.0.0 11_3_0_hca03da5_28
+    - libgfortran5 11.3.0 h009349e_28
+    - libiconv 1.16 h1a28f6b_2
+    - libidn2 2.3.1 h1a28f6b_0
+    - libllvm12 12.0.0 h12f7ac0_4
+    - libnghttp2 1.46.0 h95c9599_0
+    - libopenblas 0.3.21 h269037a_0
+    - libopus 1.3 h1a28f6b_1
+    - libpng 1.6.37 hb8d0fd4_0
+    - libpq 12.9 h65cfe13_3
+    - libssh2 1.10.0 hf27765b_0
+    - libtasn1 4.16.0 h1a28f6b_0
+    - libtiff 4.2.0 had003b8_2
+    - libunistring 0.9.10 h1a28f6b_0
+    - libuv 1.39.0 h1a28f6b_0
+    - libvpx 1.10.0 hc377ac9_0
+    - libwebp 1.2.4 h68602c7_0
+    - libwebp-base 1.2.4 h1a28f6b_0
+    - libxml2 2.9.14 h8c5e841_0
+    - libxslt 1.1.35 h9833966_0
+    - llvm-openmp 14.0.6 hc6e5704_0
+    - lz4-c 1.9.4 h313beb8_0
+    - ncurses 6.4 h313beb8_0
+    - nettle 3.7.3 h84b5d62_1
+    - nspr 4.33 hc377ac9_0
+    - nss 3.74 h142855e_0
+    - numpy 1.19.5 py39habd9f23_3
+    - openh264 1.8.0 h98b2900_0
+    - openssl 1.1.1t h1a28f6b_0
+    - pcre 8.45 hc377ac9_0
+    - pixman 0.40.0 h1a28f6b_0
+    - python 3.9.16 hc0d8a6c_0
+    - qt-main 5.15.2 ha2d02b5_7
+    - qt-webengine 5.15.9 h2903aaf_4
+    - qtwebkit 5.212 h0f11f3c_4
+    - readline 8.2 h1a28f6b_0
+    - rhash 1.4.1 hf27765b_1
+    - sqlite 3.40.1 h7a7dc30_0
+    - tk 8.6.12 hb8d0fd4_0
+    - tzdata 2022g h04d1e81_0
+    - x264 1!152.20180806 h1a28f6b_0
+    - xz 5.2.10 h80987f9_1
+    - zlib 1.2.13 h5a0b063_0
+    - zstd 1.5.2 h8574219_0
+  run:
+    - eigen >=3.3.7
+    - ffmpeg >=4.2.2,<4.3.0a0
+    - freetype >=2.10.4,<3.0a0
+    - glib >=2.69,<3.0a0
+    - glib >=2.69.1,<3.0a0
+    - gst-plugins-base >=1.14.0,<1.15.0a0
+    - gst-plugins-base >=1.14.1,<1.15.0a0
+    - gstreamer >=1.14.0,<1.15.0a
+    - gstreamer >=1.14.1,<1.15.0a0
+    - harfbuzz >=4.3.0,<5.0a0
+    - hdf5 >=1.12.1,<1.12.2.0a0
+    - jpeg >=9e,<10a
+    - libcxx >=14.0.6
+    - libpng >=1.6.37,<1.7.0a0
+    - libtiff >=4.2.0,<5.0a0
+    - numpy >=1.19,<2
+    - python >=3.9,<3.10.0a0
+    - qt-main >=5.15,<6
+    - qt-main >=5.15.2,<5.16.0a0
+    - qt-webengine >=5.15.7,<6
+    - qt-webengine >=5.15.9,<5.16.0a0
+    - qtwebkit =5
+    - zlib >=1.2.13,<1.3.0a0
+test:
+  commands:
+    - pushd test-cmake
+    - cmake . -GNinja -DCMAKE_BUILD_TYPE=Release
+    - cmake --build . --verbose
+    - popd
+    - test -f ${CONDA_PREFIX}/lib/libopencv_aruco.dylib
+    - test -f ${CONDA_PREFIX}/lib/libopencv_bgsegm.dylib
+    - test -f ${CONDA_PREFIX}/lib/libopencv_calib3d.dylib
+    - test -f ${CONDA_PREFIX}/lib/libopencv_ccalib.dylib
+    - test -f ${CONDA_PREFIX}/lib/libopencv_core.dylib
+    - test -f ${CONDA_PREFIX}/lib/libopencv_datasets.dylib
+    - test -f ${CONDA_PREFIX}/lib/libopencv_features2d.dylib
+    - test -f ${CONDA_PREFIX}/lib/libopencv_flann.dylib
+    - test -f ${CONDA_PREFIX}/lib/libopencv_fuzzy.dylib
+    - test -f ${CONDA_PREFIX}/lib/libopencv_highgui.dylib
+    - test -f ${CONDA_PREFIX}/lib/libopencv_imgcodecs.dylib
+    - test -f ${CONDA_PREFIX}/lib/libopencv_imgproc.dylib
+    - test -f ${CONDA_PREFIX}/lib/libopencv_line_descriptor.dylib
+    - test -f ${CONDA_PREFIX}/lib/libopencv_ml.dylib
+    - test -f ${CONDA_PREFIX}/lib/libopencv_optflow.dylib
+    - test -f ${CONDA_PREFIX}/lib/libopencv_phase_unwrapping.dylib
+    - test -f ${CONDA_PREFIX}/lib/libopencv_photo.dylib
+    - test -f ${CONDA_PREFIX}/lib/libopencv_plot.dylib
+    - test -f ${CONDA_PREFIX}/lib/libopencv_reg.dylib
+    - test -f ${CONDA_PREFIX}/lib/libopencv_rgbd.dylib
+    - test -f ${CONDA_PREFIX}/lib/libopencv_saliency.dylib
+    - test -f ${CONDA_PREFIX}/lib/libopencv_shape.dylib
+    - test -f ${CONDA_PREFIX}/lib/libopencv_stereo.dylib
+    - test -f ${CONDA_PREFIX}/lib/libopencv_stitching.dylib
+    - test -f ${CONDA_PREFIX}/lib/libopencv_structured_light.dylib
+    - test -f ${CONDA_PREFIX}/lib/libopencv_superres.dylib
+    - test -f ${CONDA_PREFIX}/lib/libopencv_surface_matching.dylib
+    - test -f ${CONDA_PREFIX}/lib/libopencv_tracking.dylib
+    - test -f ${CONDA_PREFIX}/lib/libopencv_video.dylib
+    - test -f ${CONDA_PREFIX}/lib/libopencv_videoio.dylib
+    - test -f ${CONDA_PREFIX}/lib/libopencv_videostab.dylib
+    - test -f ${CONDA_PREFIX}/lib/libopencv_xfeatures2d.dylib
+    - test -f ${CONDA_PREFIX}/lib/libopencv_ximgproc.dylib
+    - test -f ${CONDA_PREFIX}/lib/libopencv_xphoto.dylib
+  files:
+    - test-cmake/CMakeLists.txt
+    - test-cmake/DisplayImage.cpp
+    - test.cpp
+  requires:
+    - clangxx_osx-arm64 14.*
+    - cmake
+    - ninja
+    - numpy
+    - python >=3.9,<3.10.0a0
+about:
+  description: 'OpenCV (Open Source Computer Vision Library) includes several hundreds
+    of computer vision algorithms.
+
+    It has a modular structure,which means that the package includes several shared
+    or static libraries.
+
+    '
+  dev_url: https://github.com/opencv/opencv/
+  doc_url: https://docs.opencv.org/
+  home: https://opencv.org/
+  license: Apache-2.0
+  license_family: Apache
+  license_file: LICENSE
+  summary: Computer vision and machine learning software library.
+extra:
+  copy_test_source_files: true
+  final: true
+  flow_run_id: d911e663-7a2b-4e10-ac3f-27c4dbbe3673
+  remote_url: git@github.com:AnacondaRecipes/opencv-feedstock.git
+  sha: 75c2b2de00b6dd2d170c9bd6a365228d1dca703a

@@ -1,0 +1,69 @@
+{
+  "paths": [
+    {
+      "_path": "bin/libdeflate-gunzip",
+      "path_type": "hardlink",
+      "sha256": "45e601057cf62c8467cb7ef46716373d67ceff2a5f45594442793302d2e27908",
+      "size_in_bytes": 70560
+    },
+    {
+      "_path": "bin/libdeflate-gzip",
+      "path_type": "hardlink",
+      "sha256": "ede7cf9314125b0da1eecf195c8fc88dcb6a383b6541a3abbdbcee6a75308dc7",
+      "size_in_bytes": 70544
+    },
+    {
+      "_path": "include/libdeflate.h",
+      "path_type": "hardlink",
+      "sha256": "92f77df7c091f2ce5ddbf4ce5dcb000dcc7df63ffdf5109106c6fd60f8b18534",
+      "size_in_bytes": 15748
+    },
+    {
+      "_path": "lib/cmake/libdeflate/libdeflate-config-version.cmake",
+      "path_type": "hardlink",
+      "sha256": "43931c786af94e5b1adfffe66d0f26cd2ed7e7d44f386a0906e6bcb44e9248ed",
+      "size_in_bytes": 1976
+    },
+    {
+      "_path": "lib/cmake/libdeflate/libdeflate-config.cmake",
+      "path_type": "hardlink",
+      "sha256": "89d776266a833dc238b2b5455f2d4774dff1cf792e3d479bd4c2b2122ff8797f",
+      "size_in_bytes": 947
+    },
+    {
+      "_path": "lib/cmake/libdeflate/libdeflate-targets-release.cmake",
+      "path_type": "hardlink",
+      "sha256": "53992d3230f5d2df91a0d18612f7028e7565a77774506ef1beaf489a312d6969",
+      "size_in_bytes": 924
+    },
+    {
+      "_path": "lib/cmake/libdeflate/libdeflate-targets.cmake",
+      "file_mode": "text",
+      "path_type": "hardlink",
+      "prefix_placeholder": "/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_28kpg0z8cu/croot/libdeflate_1677486547049/_h_env_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_pla",
+      "sha256": "b79d9c5af27ddd951d234ad38641c17ad0194034269ead0650d9ef733cc82826",
+      "size_in_bytes": 3610
+    },
+    {
+      "_path": "lib/libdeflate.0.dylib",
+      "path_type": "hardlink",
+      "sha256": "cbafd05567231b62508e27686de73b27d418c8e22b27e0fbd5cce4b3a7710677",
+      "size_in_bytes": 103840
+    },
+    {
+      "_path": "lib/libdeflate.dylib",
+      "path_type": "softlink",
+      "sha256": "cbafd05567231b62508e27686de73b27d418c8e22b27e0fbd5cce4b3a7710677",
+      "size_in_bytes": 103840
+    },
+    {
+      "_path": "lib/pkgconfig/libdeflate.pc",
+      "file_mode": "text",
+      "path_type": "hardlink",
+      "prefix_placeholder": "/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_28kpg0z8cu/croot/libdeflate_1677486547049/_h_env_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_pla",
+      "sha256": "f16236a517e107a56e45e96d3825d42457d2851525d28ad2b4972c2c002df076",
+      "size_in_bytes": 1011
+    }
+  ],
+  "paths_version": 1
+}

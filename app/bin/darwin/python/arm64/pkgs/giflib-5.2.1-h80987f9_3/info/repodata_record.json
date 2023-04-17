@@ -1,0 +1,23 @@
+{
+  "arch": "arm64",
+  "build": "h80987f9_3",
+  "build_number": 3,
+  "channel": "https://repo.anaconda.com/pkgs/main/osx-arm64",
+  "constrains": [],
+  "depends": [],
+  "features": "",
+  "fn": "giflib-5.2.1-h80987f9_3.conda",
+  "legacy_bz2_md5": "1d0bd7e576c64c059ef781dd319ad82a",
+  "license": "MIT",
+  "license_family": "MIT",
+  "md5": "369bd15de5973ada95596efd9f4209f7",
+  "name": "giflib",
+  "platform": "darwin",
+  "sha256": "ed66fd4d0c245e39994395746a23606476524aef6c85c5478f9ef8e8f83bf9bb",
+  "size": 79643,
+  "subdir": "osx-arm64",
+  "timestamp": 1676983230102,
+  "track_features": "",
+  "url": "https://repo.anaconda.com/pkgs/main/osx-arm64/giflib-5.2.1-h80987f9_3.conda",
+  "version": "5.2.1"
+}

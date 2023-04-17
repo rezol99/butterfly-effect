@@ -1,0 +1,9 @@
+Name: libecpg_compat
+Description: PostgreSQL libecpg_compat library
+Url: http://www.postgresql.org/
+Version: 12.9
+Requires: 
+Requires.private: libecpg libpgtypes
+Cflags: -I/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_33f633be-33d0-4edb-b33a-e75cc5aef75bnctw04j5/croots/recipe/postgresql-split_1656062813048/_h_env_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_place/include
+Libs: -L/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_33f633be-33d0-4edb-b33a-e75cc5aef75bnctw04j5/croots/recipe/postgresql-split_1656062813048/_h_env_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_place/lib -lecpg_compat
+Libs.private: -L/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_33f633be-33d0-4edb-b33a-e75cc5aef75bnctw04j5/croots/recipe/postgresql-split_1656062813048/_h_env_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_place/lib -lpgcommon -lpgport -lpq -lm

@@ -1,0 +1,24 @@
+{
+  "arch": "arm64",
+  "build": "h9833966_0",
+  "build_number": 0,
+  "channel": "https://repo.anaconda.com/pkgs/main/osx-arm64",
+  "constrains": [],
+  "depends": [
+    "libxml2 >=2.9.14,<2.10.0a0"
+  ],
+  "features": "",
+  "fn": "libxslt-1.1.35-h9833966_0.conda",
+  "legacy_bz2_md5": "b26a1d59404095f188dddfada92520c5",
+  "license": "MIT",
+  "md5": "9ba71cb16e2ca0e0ca3d703d7a09d99a",
+  "name": "libxslt",
+  "platform": "darwin",
+  "sha256": "109316487767255cc6ea264d87952b34fa9b5115558979c44a7397fafca313f7",
+  "size": 447832,
+  "subdir": "osx-arm64",
+  "timestamp": 1654075884219,
+  "track_features": "",
+  "url": "https://repo.anaconda.com/pkgs/main/osx-arm64/libxslt-1.1.35-h9833966_0.conda",
+  "version": "1.1.35"
+}

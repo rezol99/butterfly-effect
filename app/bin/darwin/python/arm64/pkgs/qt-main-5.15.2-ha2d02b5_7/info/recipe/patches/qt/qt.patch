@@ -1,0 +1,36 @@
+Index: qt-everywhere-src-5.15.2/qtbase/src/corelib/global/qfloat16.h
+===================================================================
+--- qt-everywhere-src-5.15.2.orig/qtbase/src/corelib/global/qfloat16.h
++++ qt-everywhere-src-5.15.2/qtbase/src/corelib/global/qfloat16.h
+@@ -41,6 +41,7 @@
+ #ifndef QFLOAT16_H
+ #define QFLOAT16_H
+ 
++#include <limits>
+ #include <QtCore/qglobal.h>
+ #include <QtCore/qmetatype.h>
+ #include <string.h>
+Index: qt-everywhere-src-5.15.2/qtbase/src/corelib/text/qbytearraymatcher.h
+===================================================================
+--- qt-everywhere-src-5.15.2.orig/qtbase/src/corelib/text/qbytearraymatcher.h
++++ qt-everywhere-src-5.15.2/qtbase/src/corelib/text/qbytearraymatcher.h
+@@ -40,6 +40,7 @@
+ #ifndef QBYTEARRAYMATCHER_H
+ #define QBYTEARRAYMATCHER_H
+ 
++#include <limits>
+ #include <QtCore/qbytearray.h>
+ 
+ QT_BEGIN_NAMESPACE
+Index: qt-everywhere-src-5.15.2/qtdeclarative/src/qmldebug/qqmlprofilerevent_p.h
+===================================================================
+--- qt-everywhere-src-5.15.2.orig/qtdeclarative/src/qmldebug/qqmlprofilerevent_p.h
++++ qt-everywhere-src-5.15.2/qtdeclarative/src/qmldebug/qqmlprofilerevent_p.h
+@@ -49,6 +49,7 @@
+ 
+ #include <initializer_list>
+ #include <type_traits>
++#include <limits>
+ 
+ //
+ //  W A R N I N G

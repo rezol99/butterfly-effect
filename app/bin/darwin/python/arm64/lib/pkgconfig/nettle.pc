@@ -1,0 +1,11 @@
+prefix=/Users/ezryow/Git/butterfly-effect/app/bin/darwin/python/arm64
+exec_prefix=${prefix}
+libdir=/Users/ezryow/Git/butterfly-effect/app/bin/darwin/python/arm64/lib
+includedir=${prefix}/include
+
+Name: Nettle
+Description: Nettle low-level cryptographic library (symmetric algorithms)
+URL: http://www.lysator.liu.se/~nisse/nettle
+Version: 3.7.3
+Libs: -L${libdir} -lnettle
+Cflags: -I${includedir}

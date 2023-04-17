@@ -1,0 +1,28 @@
+{
+  "arch": "arm64",
+  "build": "h142855e_0",
+  "build_number": 0,
+  "channel": "https://repo.anaconda.com/pkgs/main/osx-arm64",
+  "constrains": [],
+  "depends": [
+    "libcxx >=12.0.0",
+    "nspr >=4.33,<5",
+    "nspr >=4.33,<5.0a0",
+    "sqlite >=3.37.0,<4.0a0"
+  ],
+  "features": "",
+  "fn": "nss-3.74-h142855e_0.conda",
+  "legacy_bz2_md5": "f08b30f21cb76556227a77b418f40364",
+  "license": "MPL-2.0",
+  "license_family": "OTHER",
+  "md5": "5e0c29b21e98f5592188fe0ea7793b3f",
+  "name": "nss",
+  "platform": "darwin",
+  "sha256": "4247ca2f8f096fa683c318f9dbd57c16622e18155e3a1e6e28dc8e78743bda3d",
+  "size": 1757701,
+  "subdir": "osx-arm64",
+  "timestamp": 1644222199337,
+  "track_features": "",
+  "url": "https://repo.anaconda.com/pkgs/main/osx-arm64/nss-3.74-h142855e_0.conda",
+  "version": "3.74"
+}

@@ -1,0 +1,22 @@
+--- qt3d/src/3rdparty/assimp/contrib/zip/src/miniz.h	2022-04-18 14:40:08.000000000 -0500
++++ qt3d/src/3rdparty/assimp/contrib/zip/src/miniz.h	2022-04-18 14:40:56.000000000 -0500
+@@ -2922,14 +2922,14 @@
+       #include <utime.h>
+     #endif
+     #define MZ_FILE FILE
+-    #define MZ_FOPEN(f, m) fopen64(f, m)
++    #define MZ_FOPEN(f, m) fopen(f, m)
+     #define MZ_FCLOSE fclose
+     #define MZ_FREAD fread
+     #define MZ_FWRITE fwrite
+-    #define MZ_FTELL64 ftello64
+-    #define MZ_FSEEK64 fseeko64
+-    #define MZ_FILE_STAT_STRUCT stat64
+-    #define MZ_FILE_STAT stat64
++    #define MZ_FTELL64 ftello
++    #define MZ_FSEEK64 fseeko
++    #define MZ_FILE_STAT_STRUCT stat
++    #define MZ_FILE_STAT stat
+     #define MZ_FFLUSH fflush
+     #define MZ_FREOPEN(p, m, s) freopen64(p, m, s)
+     #define MZ_DELETE_FILE remove

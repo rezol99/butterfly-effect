@@ -1,0 +1,151 @@
+{
+  "paths": [
+    {
+      "_path": "include/webp/decode.h",
+      "path_type": "hardlink",
+      "sha256": "8bfc41523c5beb70c1c34c8f538132426062826801b4dca4ff6f9d788bd3360f",
+      "size_in_bytes": 23710
+    },
+    {
+      "_path": "include/webp/demux.h",
+      "path_type": "hardlink",
+      "sha256": "c37bd27299d984b7d9ee564bf25873f6620a0a6a0975e44adf0abeed628999af",
+      "size_in_bytes": 15603
+    },
+    {
+      "_path": "include/webp/encode.h",
+      "path_type": "hardlink",
+      "sha256": "f5c2b687b7be49635afb07ddc3fb69402eb9ab990449c6a5400537537bacf9c4",
+      "size_in_bytes": 28010
+    },
+    {
+      "_path": "include/webp/mux.h",
+      "path_type": "hardlink",
+      "sha256": "3c1db467a27b7bc26f1848f493af1a36366cbc488535b7d84779cc78e60c9f95",
+      "size_in_bytes": 22833
+    },
+    {
+      "_path": "include/webp/mux_types.h",
+      "path_type": "hardlink",
+      "sha256": "624d40af94f4b842ccdd8dcc14a198b40703e167e4323719d2d16320c941f81b",
+      "size_in_bytes": 3193
+    },
+    {
+      "_path": "include/webp/types.h",
+      "path_type": "hardlink",
+      "sha256": "4024d5cf933f270cd8f58aebc4c08c4a1480281a166fb7633b5785f2acc2944a",
+      "size_in_bytes": 2106
+    },
+    {
+      "_path": "lib/libwebp.7.dylib",
+      "path_type": "hardlink",
+      "sha256": "4f20dd6f449648c98be08f2979efb0762a4448619f2d3a61cacef888b57b2762",
+      "size_in_bytes": 468960
+    },
+    {
+      "_path": "lib/libwebp.dylib",
+      "path_type": "softlink",
+      "sha256": "4f20dd6f449648c98be08f2979efb0762a4448619f2d3a61cacef888b57b2762",
+      "size_in_bytes": 468960
+    },
+    {
+      "_path": "lib/libwebpdecoder.3.dylib",
+      "path_type": "hardlink",
+      "sha256": "143d9eed606b193300ebe97936e5d4ead9344cd99b87d5a92d664aaee054e53d",
+      "size_in_bytes": 253296
+    },
+    {
+      "_path": "lib/libwebpdecoder.dylib",
+      "path_type": "softlink",
+      "sha256": "143d9eed606b193300ebe97936e5d4ead9344cd99b87d5a92d664aaee054e53d",
+      "size_in_bytes": 253296
+    },
+    {
+      "_path": "lib/libwebpdemux.2.dylib",
+      "path_type": "hardlink",
+      "sha256": "e4edb7038522a56d214ed3bacc7fdab21200e7668b6fa12121e8d8b193156997",
+      "size_in_bytes": 69152
+    },
+    {
+      "_path": "lib/libwebpdemux.dylib",
+      "path_type": "softlink",
+      "sha256": "e4edb7038522a56d214ed3bacc7fdab21200e7668b6fa12121e8d8b193156997",
+      "size_in_bytes": 69152
+    },
+    {
+      "_path": "lib/libwebpmux.3.dylib",
+      "path_type": "hardlink",
+      "sha256": "69c5381cb3cf0f45b8e7ecff95e1adad78891900959c0a48a9bc421e44fffeb1",
+      "size_in_bytes": 88864
+    },
+    {
+      "_path": "lib/libwebpmux.dylib",
+      "path_type": "softlink",
+      "sha256": "69c5381cb3cf0f45b8e7ecff95e1adad78891900959c0a48a9bc421e44fffeb1",
+      "size_in_bytes": 88864
+    },
+    {
+      "_path": "lib/pkgconfig/libwebp.pc",
+      "file_mode": "text",
+      "path_type": "hardlink",
+      "prefix_placeholder": "/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_c9872xen4u/croot/libwebp-base_1677057885018/_h_env_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_p",
+      "sha256": "1eadab6aefe5f145e4de81d2aa4b8a230231edd0f1b993b33cf488c185dd5538",
+      "size_in_bytes": 512
+    },
+    {
+      "_path": "lib/pkgconfig/libwebpdecoder.pc",
+      "file_mode": "text",
+      "path_type": "hardlink",
+      "prefix_placeholder": "/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_c9872xen4u/croot/libwebp-base_1677057885018/_h_env_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_p",
+      "sha256": "2429d8efa28f672d985aec03977d126d18cf012e70ce3645e46fa114d1e93630",
+      "size_in_bytes": 540
+    },
+    {
+      "_path": "lib/pkgconfig/libwebpdemux.pc",
+      "file_mode": "text",
+      "path_type": "hardlink",
+      "prefix_placeholder": "/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_c9872xen4u/croot/libwebp-base_1677057885018/_h_env_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_p",
+      "sha256": "ba53bfdfca111e417b3ac9b8d96305dce341c63ef459be5a8a3f76452b5385d1",
+      "size_in_bytes": 524
+    },
+    {
+      "_path": "lib/pkgconfig/libwebpmux.pc",
+      "file_mode": "text",
+      "path_type": "hardlink",
+      "prefix_placeholder": "/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_c9872xen4u/croot/libwebp-base_1677057885018/_h_env_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_p",
+      "sha256": "12a21a2617b57e0aba489fd2da8697d49f5a7444bd4ea2eae06ee586a95dab39",
+      "size_in_bytes": 543
+    },
+    {
+      "_path": "share/man/man1/cwebp.1",
+      "path_type": "hardlink",
+      "sha256": "b0b4389200aa68d1f49762c90c197d66dac985bb5470f3cdb247bf5f86c149e5",
+      "size_in_bytes": 13215
+    },
+    {
+      "_path": "share/man/man1/dwebp.1",
+      "path_type": "hardlink",
+      "sha256": "b0951bc475a04eca23df4586f5ef8468d50b368bbfd139b4f251a7ee794b8887",
+      "size_in_bytes": 4824
+    },
+    {
+      "_path": "share/man/man1/img2webp.1",
+      "path_type": "hardlink",
+      "sha256": "ccc475f73c52e7b4f43917f9e65c7cb0d3cd4376bb057d8d9a812d2383bcde82",
+      "size_in_bytes": 3385
+    },
+    {
+      "_path": "share/man/man1/webpinfo.1",
+      "path_type": "hardlink",
+      "sha256": "853501b8ecd65e25e4408c5e9011aa154968ac7fda9fcf44ed7e7967d171177b",
+      "size_in_bytes": 1825
+    },
+    {
+      "_path": "share/man/man1/webpmux.1",
+      "path_type": "hardlink",
+      "sha256": "928d14c35f09854a5fa9f62beb7b0069eebb5b40538e1370c530bfc8e8b7c91f",
+      "size_in_bytes": 6599
+    }
+  ],
+  "paths_version": 1
+}

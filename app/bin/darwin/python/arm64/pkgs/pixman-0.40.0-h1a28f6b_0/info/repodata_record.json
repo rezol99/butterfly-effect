@@ -1,0 +1,22 @@
+{
+  "arch": "arm64",
+  "build": "h1a28f6b_0",
+  "build_number": 0,
+  "channel": "https://repo.anaconda.com/pkgs/main/osx-arm64",
+  "constrains": [],
+  "depends": [],
+  "features": "",
+  "fn": "pixman-0.40.0-h1a28f6b_0.conda",
+  "legacy_bz2_md5": "a3abe939bd01b7f6fb4e4f3b6da91f7b",
+  "license": "MIT",
+  "md5": "d668dc2c6f6203b5d201e72903588034",
+  "name": "pixman",
+  "platform": "darwin",
+  "sha256": "6e9e6c02b65ee01a7211dd7bcd6dac53cd2d84c7c82d225390e62bdcb1686637",
+  "size": 200997,
+  "subdir": "osx-arm64",
+  "timestamp": 1628926728556,
+  "track_features": "",
+  "url": "https://repo.anaconda.com/pkgs/main/osx-arm64/pixman-0.40.0-h1a28f6b_0.conda",
+  "version": "0.40.0"
+}

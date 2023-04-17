@@ -1,0 +1,22 @@
+{
+  "arch": "arm64",
+  "build": "h1a28f6b_0",
+  "build_number": 0,
+  "channel": "https://repo.anaconda.com/pkgs/main/osx-arm64",
+  "constrains": [],
+  "depends": [],
+  "features": "",
+  "fn": "x264-1!152.20180806-h1a28f6b_0.conda",
+  "legacy_bz2_md5": "b1041600ddaa9ef30bb4a3a420f07127",
+  "license": "GPL-2.0",
+  "md5": "e6f21489b92a1697546e86309994d2e5",
+  "name": "x264",
+  "platform": "darwin",
+  "sha256": "09699eb8cdff311bf36e07939691a5d3c3af0217a3000a49bb55ee0aae305a44",
+  "size": 528836,
+  "subdir": "osx-arm64",
+  "timestamp": 1628875797252,
+  "track_features": "",
+  "url": "https://repo.anaconda.com/pkgs/main/osx-arm64/x264-1!152.20180806-h1a28f6b_0.conda",
+  "version": "1!152.20180806"
+}

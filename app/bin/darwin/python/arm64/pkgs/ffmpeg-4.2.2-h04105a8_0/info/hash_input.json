@@ -1,0 +1,14 @@
+{
+  "cxx_compiler_version": "12",
+  "zlib": "1.2",
+  "c_compiler": "clang",
+  "freetype": "2.10",
+  "openssl": "1.1.1",
+  "CONDA_BUILD_SYSROOT": "/Library/Developer/CommandLineTools/SDKs/MacOSX11.1.sdk",
+  "target_platform": "osx-arm64",
+  "bzip2": "1.0",
+  "channel_targets": "defaults",
+  "gmp": "6.2",
+  "cxx_compiler": "clangxx",
+  "c_compiler_version": "12"
+}

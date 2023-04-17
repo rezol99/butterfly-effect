@@ -1,0 +1,18 @@
+{
+  "arch": "arm64",
+  "build": "h142855e_0",
+  "build_number": 0,
+  "depends": [
+    "libcxx >=12.0.0",
+    "nspr >=4.33,<5",
+    "nspr >=4.33,<5.0a0",
+    "sqlite >=3.37.0,<4.0a0"
+  ],
+  "license": "MPL-2.0",
+  "license_family": "OTHER",
+  "name": "nss",
+  "platform": "osx",
+  "subdir": "osx-arm64",
+  "timestamp": 1644222199337,
+  "version": "3.74"
+}

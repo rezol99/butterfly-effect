@@ -1,0 +1,86 @@
+# This file created by conda-build 3.21.8
+# meta.yaml template originally from:
+# /var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_bc9e5f16-41d9-4c34-a02f-8138fb7ad5cbcsr_idjj/clone/recipe, last modified Wed Jun  1 04:29:44 2022
+# ------------------------------------------------
+
+package:
+  name: libxslt
+  version: 1.1.35
+source:
+  fn: libxslt-1.1.35.tar.xz
+  patches:
+    - 0002-win-profiler-config.patch
+  sha256: 8247f33e9a872c6ac859aa45018bc4c4d00b97e2feac9eebc10c93ce1f34dd79
+  url: https://download.gnome.org/sources/libxslt/1.1/libxslt-1.1.35.tar.xz
+build:
+  ignore_run_exports:
+    - icu
+  number: '0'
+  run_exports:
+    - libxslt >=1.1.35,<2.0a0
+  string: h9833966_0
+requirements:
+  build:
+    - cctools_osx-arm64 949.0.1 h332cad3_24
+    - clang 12.0.0 hca03da5_4
+    - clang-12 12.0.0 default_he099f3d_4
+    - clang_osx-arm64 12.0.0 hcb56dc5_3
+    - clangxx 12.0.0 default_he099f3d_4
+    - compiler-rt 12.0.0 h4ccfd99_3
+    - compiler-rt_osx-arm64 12.0.0 h4fb70ea_3
+    - gnuconfig 2021.05.24 hd3eb1b0_0
+    - ld64_osx-arm64 530 h001ce53_24
+    - ldid 2.1.2 h64d1936_2
+    - libclang-cpp12 12.0.0 default_he099f3d_4
+    - libcxx 12.0.0 hf6beb65_1
+    - libllvm12 12.0.0 h12f7ac0_4
+    - llvm-tools 12.0.0 h12f7ac0_4
+    - make 4.3 h620ffc9_1
+    - patch 2.7.6 h1a28f6b_1001
+    - tapi 1100.0.11 ha21211d_0
+    - zlib 1.2.12 h5a0b063_2
+  host:
+    - icu 68.1 hc377ac9_0
+    - libcxx 12.0.0 hf6beb65_1
+    - libiconv 1.16 h1a28f6b_2
+    - libxml2 2.9.14 h8c5e841_0
+    - xz 5.2.5 h1a28f6b_1
+    - zlib 1.2.12 h5a0b063_2
+  run:
+    - libxml2 >=2.9.14,<2.10.0a0
+test:
+  commands:
+    - xsltproc --version
+    - conda inspect linkages -p $PREFIX libxslt
+    - conda inspect objects -p $PREFIX libxslt
+  requires:
+    - conda-build
+about:
+  description: '"Libxslt is the XSLT C library developed for the GNOME project.
+
+    XSLT itself is a an XML language to define transformation for XML.
+
+    Libxslt is based on libxml2 the XML C library developed for the GNOME project.
+
+    It also implements most of the EXSLT set of processor-portable extensions functions
+
+    and some of Saxon''s evaluate and expressions extensions."
+
+    '
+  dev_url: https://gitlab.gnome.org/GNOME/libxslt
+  doc_source_url: https://github.com/GNOME/libxslt/tree/master/doc
+  doc_url: https://gitlab.gnome.org/GNOME/libxslt/-/wikis
+  home: https://gitlab.gnome.org/GNOME/libxslt
+  licence_family: MIT
+  license: MIT
+  license_file: COPYING
+  summary: The XSLT C library developed for the GNOME project
+extra:
+  copy_test_source_files: true
+  final: true
+  flow_run_id: bc9e5f16-41d9-4c34-a02f-8138fb7ad5cb
+  recipe-maintainers:
+    - chenghlee
+    - ocefpaf
+  remote_url: git@github.com:AnacondaRecipes/libxslt-feedstock.git
+  sha: 5a3cfe2cee7f84256e6bf76d6c4c668e92aad9b7

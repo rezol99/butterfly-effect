@@ -1,0 +1,18 @@
+prefix=/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_f0x4iml_tn/croot/fontconfig_1671001448495/_h_env_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_pla
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+sysconfdir=${prefix}/etc
+localstatedir=${prefix}/var
+PACKAGE=fontconfig
+confdir=${sysconfdir}/fonts
+cachedir=${localstatedir}/cache/${PACKAGE}
+
+Name: Fontconfig
+Description: Font configuration and customization library
+Version: 2.14.1
+Requires:  freetype2 >= 21.0.15
+Requires.private:  libxml-2.0 >= 2.6
+Libs: -L${libdir} -lfontconfig
+Libs.private:  
+Cflags: -I${includedir}  

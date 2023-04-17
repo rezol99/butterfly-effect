@@ -1,0 +1,8 @@
+prefix=/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_92c84b_bge/croot/glib_1669364357796/_h_env_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold
+includedir=${prefix}/include
+
+Name: GIO unix specific APIs
+Description: unix specific headers for glib I/O library
+Version: 2.69.1
+Requires: gobject-2.0, gio-2.0
+Cflags: -I${includedir}/gio-unix-2.0

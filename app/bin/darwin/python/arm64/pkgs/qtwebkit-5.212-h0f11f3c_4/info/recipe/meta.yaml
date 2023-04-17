@@ -1,0 +1,154 @@
+# This file created by conda-build 3.21.8
+# meta.yaml template originally from:
+# /var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_97bx7whf85/clone/recipe, last modified Thu Jul 28 04:08:18 2022
+# ------------------------------------------------
+
+package:
+  name: qtwebkit
+  version: '5.212'
+source:
+  patches: null
+  sha256: 10cbdaba60aac79d27016aa05bae9ab3ec7b0aed4df163debfbf8fddd66adc14
+  url: http://download.qt.io/snapshots/ci/qtwebkit/5.212/1600955993/src/submodules/qtwebkit-opensource-src-5.212.tar.xz
+build:
+  number: '4'
+  run_exports:
+    - qtwebkit
+  string: h0f11f3c_4
+requirements:
+  build:
+    - bison 3.7.5 hc377ac9_1
+    - bzip2 1.0.8 h620ffc9_4
+    - c-ares 1.18.1 h1a28f6b_0
+    - ca-certificates 2022.07.19 hca03da5_0
+    - cctools_osx-arm64 949.0.1 h332cad3_24
+    - clang 12.0.0 hca03da5_4
+    - clang-12 12.0.0 default_he099f3d_4
+    - clang_osx-arm64 12.0.0 hcb56dc5_3
+    - clangxx 12.0.0 default_he099f3d_4
+    - clangxx_osx-arm64 12.0.0 h39b79ac_3
+    - cmake 3.22.1 hae769c0_0
+    - compiler-rt 12.0.0 h4ccfd99_3
+    - compiler-rt_osx-arm64 12.0.0 h4fb70ea_3
+    - expat 2.4.4 hc377ac9_0
+    - flex 2.6.4 hc4ed4cf_1
+    - gettext 0.21.0 h826f4ad_0
+    - gmp 6.2.1 hc377ac9_3
+    - gperf 3.1 hc377ac9_0
+    - icu 68.1 hc377ac9_0
+    - krb5 1.19.2 h3b8d789_0
+    - ld64_osx-arm64 530 h001ce53_24
+    - ldid 2.1.2 h64d1936_2
+    - libclang-cpp12 12.0.0 default_he099f3d_4
+    - libcurl 7.82.0 hc6d1d07_0
+    - libcxx 12.0.0 hf6beb65_1
+    - libedit 3.1.20210910 h1a28f6b_0
+    - libev 4.33 h1a28f6b_1
+    - libffi 3.4.2 hc377ac9_4
+    - libiconv 1.16 h1a28f6b_2
+    - libllvm12 12.0.0 h12f7ac0_4
+    - libnghttp2 1.46.0 h95c9599_0
+    - libssh2 1.10.0 hf27765b_0
+    - libuv 1.39.0 h1a28f6b_0
+    - libxml2 2.9.14 h8c5e841_0
+    - llvm-openmp 12.0.0 haf9daa7_1
+    - llvm-tools 12.0.0 h12f7ac0_4
+    - lz4-c 1.9.3 hc377ac9_0
+    - m4 1.4.18 h1230e6a_1
+    - ncurses 6.3 h1a28f6b_3
+    - ninja 1.10.2 hca03da5_5
+    - ninja-base 1.10.2 h525c30c_5
+    - openssl 1.1.1q h1a28f6b_0
+    - patch 2.7.6 h1a28f6b_1001
+    - perl 5.34.0 h1230e6a_0
+    - python 3.8.13 hbdb9e5c_0
+    - readline 8.1.2 h1a28f6b_1
+    - rhash 1.4.1 hf27765b_1
+    - ruby 3.1.2 hc19afb0_0
+    - sqlite 3.38.5 h1058600_0
+    - tapi 1100.0.11 ha21211d_0
+    - tk 8.6.12 hb8d0fd4_0
+    - xz 5.2.5 h1a28f6b_1
+    - yaml 0.2.5 h1a28f6b_0
+    - zlib 1.2.12 h5a0b063_2
+    - zstd 1.5.2 h8574219_0
+  host:
+    - ca-certificates 2022.07.19 hca03da5_0
+    - gettext 0.21.0 h826f4ad_0
+    - giflib 5.2.1 h1a28f6b_0
+    - glib 2.69.1 h98b2900_1
+    - gst-plugins-base 1.14.1 hf0a386a_0
+    - gstreamer 1.14.1 he09cfb7_0
+    - icu 68.1 hc377ac9_0
+    - jpeg 9e h1a28f6b_0
+    - krb5 1.19.2 h3b8d789_0
+    - libclang 12.0.0 default_hc321e17_4
+    - libcxx 12.0.0 hf6beb65_1
+    - libedit 3.1.20210910 h1a28f6b_0
+    - libffi 3.4.2 hc377ac9_4
+    - libiconv 1.16 h1a28f6b_2
+    - libllvm12 12.0.0 h12f7ac0_4
+    - libpng 1.6.37 hb8d0fd4_0
+    - libpq 12.9 h65cfe13_3
+    - libtiff 4.2.0 h01837e1_1
+    - libwebp 1.2.0 h68602c7_0
+    - libwebp-base 1.2.0 h1a28f6b_0
+    - libxml2 2.9.14 h8c5e841_0
+    - libxslt 1.1.35 h9833966_0
+    - llvm-openmp 12.0.0 haf9daa7_1
+    - lz4-c 1.9.3 hc377ac9_0
+    - ncurses 6.3 h1a28f6b_3
+    - nspr 4.33 hc377ac9_0
+    - nss 3.74 h142855e_0
+    - openssl 1.1.1q h1a28f6b_0
+    - pcre 8.45 hc377ac9_0
+    - qt-main 5.15.2 ha2d02b5_4
+    - qt-webengine 5.15.9 h2903aaf_4
+    - readline 8.1.2 h1a28f6b_1
+    - sqlite 3.38.5 h1058600_0
+    - xz 5.2.5 h1a28f6b_1
+    - zlib 1.2.12 h5a0b063_2
+    - zstd 1.5.2 h8574219_0
+  run:
+    - glib
+    - icu >=68.1,<69.0a0
+    - jpeg >=9e,<10a
+    - libcxx >=12.0.0
+    - libpng >=1.6.37,<1.7.0a0
+    - libwebp >=1.2.0,<1.3.0a0
+    - libxml2 >=2.9.14,<2.10.0a0
+    - libxslt >=1.1.35,<2.0a0
+    - qt-main >=5.15.2,<5.16.0a0
+    - qt-webengine >=5.15.9,<5.16.0a0
+    - sqlite >=3.38.5,<4.0a0
+    - zlib >=1.2.12,<1.3.0a0
+  run_constrained:
+    - __osx >=11.1
+test:
+  commands:
+    - test -f $PREFIX/lib/libQt5WebKit${SHLIB_EXT}
+    - test -f $PREFIX/lib/libQt5WebKitWidgets${SHLIB_EXT}
+about:
+  description: 'Qt WebKit is the port of WebKit on top of Qt. QtWebKit relies on the
+    public APIs of Qt
+
+    and can theoretically be used on any platform supported by Qt
+
+    (theoretically because WebKit also requires a recent/good compiler).
+
+    '
+  home: https://wiki.qt.io/Qt_WebKit
+  license: LGPL-2.1-only
+  license_file: LICENSE.LGPLv21
+  summary: WebKit is one of the major engine to render webpages and execute JavaScript
+    code
+extra:
+  copy_test_source_files: true
+  final: true
+  flow_run_id: 973ad492-5b94-457f-b2fc-4df08ba3ce3b
+  recipe-maintainers:
+    - ceholden
+    - gillins
+    - ocefpaf
+  remote_url: git@github.com:AnacondaRecipes/qtwebkit-feedstock.git
+  sha: f37501e6cab49b3ced1183f28231dbec2309eda9

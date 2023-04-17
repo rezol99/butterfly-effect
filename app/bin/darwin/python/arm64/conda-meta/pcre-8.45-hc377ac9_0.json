@@ -1,0 +1,210 @@
+{
+  "build": "hc377ac9_0",
+  "build_number": 0,
+  "channel": "https://repo.anaconda.com/pkgs/main/osx-arm64",
+  "constrains": [],
+  "depends": [
+    "libcxx >=12.0.0"
+  ],
+  "extracted_package_dir": "/Users/ezryow/Git/butterfly-effect/app/bin/darwin/python/arm64/pkgs/pcre-8.45-hc377ac9_0",
+  "features": "",
+  "files": [
+    "bin/pcre-config",
+    "bin/pcregrep",
+    "bin/pcretest",
+    "include/pcre.h",
+    "include/pcre_scanner.h",
+    "include/pcre_stringpiece.h",
+    "include/pcrecpp.h",
+    "include/pcrecpparg.h",
+    "include/pcreposix.h",
+    "lib/libpcre.1.dylib",
+    "lib/libpcre.a",
+    "lib/libpcre.dylib",
+    "lib/libpcrecpp.0.dylib",
+    "lib/libpcrecpp.a",
+    "lib/libpcrecpp.dylib",
+    "lib/libpcreposix.0.dylib",
+    "lib/libpcreposix.a",
+    "lib/libpcreposix.dylib",
+    "lib/pkgconfig/libpcre.pc",
+    "lib/pkgconfig/libpcrecpp.pc",
+    "lib/pkgconfig/libpcreposix.pc"
+  ],
+  "fn": "pcre-8.45-hc377ac9_0.conda",
+  "legacy_bz2_md5": "92b1f6d5d3e70ce8adf51d1bcf0531a8",
+  "license": "BSD 3-Clause",
+  "license_family": "BSD",
+  "link": {
+    "source": "/Users/ezryow/Git/butterfly-effect/app/bin/darwin/python/arm64/pkgs/pcre-8.45-hc377ac9_0",
+    "type": 1
+  },
+  "md5": "31668a162a176c27ed2b89a9fac761d7",
+  "name": "pcre",
+  "package_tarball_full_path": "/Users/ezryow/Git/butterfly-effect/app/bin/darwin/python/arm64/pkgs/pcre-8.45-hc377ac9_0.conda",
+  "paths_data": {
+    "paths": [
+      {
+        "_path": "bin/pcre-config",
+        "file_mode": "text",
+        "path_type": "hardlink",
+        "prefix_placeholder": "/Users/ktietz/demo/mc3/conda-bld/pcre_1629474160625/_h_env_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placeh",
+        "sha256": "f80f29da8e2a7cb33d1ee19f096c9e2096d7ab0a4af02ccb1daa9889bcc74a37",
+        "sha256_in_prefix": "e7efbd89f6f8988fd51c1b9469adf0add2726702c41ccd7f905f9e200d2ac419",
+        "size_in_bytes": 2608
+      },
+      {
+        "_path": "bin/pcregrep",
+        "path_type": "hardlink",
+        "sha256": "6f4a23e2c85a56ae46603043b0cd95912d06ae05385f704b5aa596513c2c125e",
+        "sha256_in_prefix": "6f4a23e2c85a56ae46603043b0cd95912d06ae05385f704b5aa596513c2c125e",
+        "size_in_bytes": 89136
+      },
+      {
+        "_path": "bin/pcretest",
+        "path_type": "hardlink",
+        "sha256": "3e5abf340f361acf7c27292b043cf2fb15b86323ca35d283e1d5e6506100b9b8",
+        "sha256_in_prefix": "3e5abf340f361acf7c27292b043cf2fb15b86323ca35d283e1d5e6506100b9b8",
+        "size_in_bytes": 122624
+      },
+      {
+        "_path": "include/pcre.h",
+        "path_type": "hardlink",
+        "sha256": "1a960e5f4752eec93bb81da47901e1a00f546820777fb0fbbfcfa1dac6c8eafd",
+        "sha256_in_prefix": "1a960e5f4752eec93bb81da47901e1a00f546820777fb0fbbfcfa1dac6c8eafd",
+        "size_in_bytes": 31718
+      },
+      {
+        "_path": "include/pcre_scanner.h",
+        "path_type": "hardlink",
+        "sha256": "7442638d75522e87497d442425dc51a6d69ef6bed73c8ab266dbb73343039fb6",
+        "sha256_in_prefix": "7442638d75522e87497d442425dc51a6d69ef6bed73c8ab266dbb73343039fb6",
+        "size_in_bytes": 6600
+      },
+      {
+        "_path": "include/pcre_stringpiece.h",
+        "path_type": "hardlink",
+        "sha256": "3510f9eb6e848a586c6313c9641de7434e0dcdabd1532118935f2adce58b4d07",
+        "sha256_in_prefix": "3510f9eb6e848a586c6313c9641de7434e0dcdabd1532118935f2adce58b4d07",
+        "size_in_bytes": 6312
+      },
+      {
+        "_path": "include/pcrecpp.h",
+        "path_type": "hardlink",
+        "sha256": "165767e52e03797cbbce3e6147e2436459f8b468ffecefedfd8477c157aecfe7",
+        "sha256_in_prefix": "165767e52e03797cbbce3e6147e2436459f8b468ffecefedfd8477c157aecfe7",
+        "size_in_bytes": 26529
+      },
+      {
+        "_path": "include/pcrecpparg.h",
+        "path_type": "hardlink",
+        "sha256": "89912f03f8da84f71c4645385d45e7d6af6e286601285e432249da3b5420b98b",
+        "sha256_in_prefix": "89912f03f8da84f71c4645385d45e7d6af6e286601285e432249da3b5420b98b",
+        "size_in_bytes": 6783
+      },
+      {
+        "_path": "include/pcreposix.h",
+        "path_type": "hardlink",
+        "sha256": "1770f2b30c0af2f24543428173cf6e6479e921045efdbd009fd07817b84e04ad",
+        "sha256_in_prefix": "1770f2b30c0af2f24543428173cf6e6479e921045efdbd009fd07817b84e04ad",
+        "size_in_bytes": 5452
+      },
+      {
+        "_path": "lib/libpcre.1.dylib",
+        "path_type": "hardlink",
+        "sha256": "4a0d2e21747f56ad30c005b263db10048cced4d4eb4ecc5dbbea22c5e5ca265f",
+        "sha256_in_prefix": "4a0d2e21747f56ad30c005b263db10048cced4d4eb4ecc5dbbea22c5e5ca265f",
+        "size_in_bytes": 304608
+      },
+      {
+        "_path": "lib/libpcre.a",
+        "path_type": "hardlink",
+        "sha256": "a570e4c3cb0d1b9d2fa87a9d88f3a5a88ae1b4c1b14168b2a8927c7762831ea7",
+        "sha256_in_prefix": "a570e4c3cb0d1b9d2fa87a9d88f3a5a88ae1b4c1b14168b2a8927c7762831ea7",
+        "size_in_bytes": 280544
+      },
+      {
+        "_path": "lib/libpcre.dylib",
+        "path_type": "softlink",
+        "sha256": "4a0d2e21747f56ad30c005b263db10048cced4d4eb4ecc5dbbea22c5e5ca265f",
+        "size_in_bytes": 304608
+      },
+      {
+        "_path": "lib/libpcrecpp.0.dylib",
+        "path_type": "hardlink",
+        "sha256": "05c0a156a53ca7521bc35b2fdd9faeab401e39695feead5f069622e3d7b998fc",
+        "sha256_in_prefix": "05c0a156a53ca7521bc35b2fdd9faeab401e39695feead5f069622e3d7b998fc",
+        "size_in_bytes": 99520
+      },
+      {
+        "_path": "lib/libpcrecpp.a",
+        "path_type": "hardlink",
+        "sha256": "db4590ae956c146d15120c04c0bdcb80fdcf298606220c7e6a31a926f1e2a012",
+        "sha256_in_prefix": "db4590ae956c146d15120c04c0bdcb80fdcf298606220c7e6a31a926f1e2a012",
+        "size_in_bytes": 48680
+      },
+      {
+        "_path": "lib/libpcrecpp.dylib",
+        "path_type": "softlink",
+        "sha256": "05c0a156a53ca7521bc35b2fdd9faeab401e39695feead5f069622e3d7b998fc",
+        "size_in_bytes": 99520
+      },
+      {
+        "_path": "lib/libpcreposix.0.dylib",
+        "path_type": "hardlink",
+        "sha256": "cdaa44e6de9a315194913dfb90c9aa4ae1f7c4482da3b9b4e182c60133bad59b",
+        "sha256_in_prefix": "cdaa44e6de9a315194913dfb90c9aa4ae1f7c4482da3b9b4e182c60133bad59b",
+        "size_in_bytes": 67840
+      },
+      {
+        "_path": "lib/libpcreposix.a",
+        "path_type": "hardlink",
+        "sha256": "23b65268104a6815f43d35955445c0c1ef6a4c218205066f337ad4bf2db4344f",
+        "sha256_in_prefix": "23b65268104a6815f43d35955445c0c1ef6a4c218205066f337ad4bf2db4344f",
+        "size_in_bytes": 4656
+      },
+      {
+        "_path": "lib/libpcreposix.dylib",
+        "path_type": "softlink",
+        "sha256": "cdaa44e6de9a315194913dfb90c9aa4ae1f7c4482da3b9b4e182c60133bad59b",
+        "size_in_bytes": 67840
+      },
+      {
+        "_path": "lib/pkgconfig/libpcre.pc",
+        "file_mode": "text",
+        "path_type": "hardlink",
+        "prefix_placeholder": "/Users/ktietz/demo/mc3/conda-bld/pcre_1629474160625/_h_env_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placeh",
+        "sha256": "6487d378b90228b627256f91acdca4736835e63e12d35f0e1080b3ea060d7aa0",
+        "sha256_in_prefix": "054cd69544fd985c878d4c8d0722ce1fb4a3ebaedced66c5412c980223f3443d",
+        "size_in_bytes": 568
+      },
+      {
+        "_path": "lib/pkgconfig/libpcrecpp.pc",
+        "file_mode": "text",
+        "path_type": "hardlink",
+        "prefix_placeholder": "/Users/ktietz/demo/mc3/conda-bld/pcre_1629474160625/_h_env_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placeh",
+        "sha256": "5a9e329f72733af3ce88e23c856a733b6aa831dbdc6b675ee5002985e3cc01d9",
+        "sha256_in_prefix": "9ada95f9298580f812d43d35a979271fc88caf87858bbcc7f6d7a252ce286d6d",
+        "size_in_bytes": 514
+      },
+      {
+        "_path": "lib/pkgconfig/libpcreposix.pc",
+        "file_mode": "text",
+        "path_type": "hardlink",
+        "prefix_placeholder": "/Users/ktietz/demo/mc3/conda-bld/pcre_1629474160625/_h_env_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placeh",
+        "sha256": "d4fd6bbcd3674cfab13860ab2e65c4c1d9c2515be1301c6c2814e755f0ec1647",
+        "sha256_in_prefix": "dfb7e52b41b457793a127909b855f095a063ac8a12eb41e791d1441c1ad5b8bb",
+        "size_in_bytes": 556
+      }
+    ],
+    "paths_version": 1
+  },
+  "requested_spec": "None",
+  "sha256": "4421d110a79e2be2d37958100cd2d1e14a2719ae977c78937596bfb8019223aa",
+  "size": 189903,
+  "subdir": "osx-arm64",
+  "timestamp": 1629474194684,
+  "track_features": "",
+  "url": "https://repo.anaconda.com/pkgs/main/osx-arm64/pcre-8.45-hc377ac9_0.conda",
+  "version": "8.45"
+}

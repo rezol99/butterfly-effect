@@ -1,0 +1,71 @@
+# This file created by conda-build 3.21.8
+# meta.yaml template originally from:
+# /var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_e42b7415-5d8a-45db-9aa7-05f3e4e45d89k6qfsvlv/clone/recipe, last modified Tue May 31 06:24:18 2022
+# ------------------------------------------------
+
+package:
+  name: gmp
+  version: 6.2.1
+source:
+  patches:
+    - 0000-Avoid-the-x18-register.patch
+  sha256: eae9326beb4158c386e39a356818031bd28f3124cf915f8c5b1dc4c7a36b4d7c
+  url: https://gmplib.org/download/gmp/gmp-6.2.1.tar.bz2
+build:
+  number: '3'
+  run_exports:
+    - gmp >=6.2.1,<7.0a0
+  string: hc377ac9_3
+requirements:
+  build:
+    - cctools_osx-arm64 949.0.1 h332cad3_24
+    - clang 12.0.0 hca03da5_4
+    - clang-12 12.0.0 default_he099f3d_4
+    - clang_osx-arm64 12.0.0 hcb56dc5_3
+    - clangxx 12.0.0 default_he099f3d_4
+    - clangxx_osx-arm64 12.0.0 h39b79ac_3
+    - compiler-rt 12.0.0 h4ccfd99_3
+    - compiler-rt_osx-arm64 12.0.0 h4fb70ea_3
+    - gnuconfig 2021.05.24 hd3eb1b0_0
+    - ld64_osx-arm64 530 h001ce53_24
+    - ldid 2.1.2 h64d1936_2
+    - libclang-cpp12 12.0.0 default_he099f3d_4
+    - libcxx 12.0.0 hf6beb65_1
+    - libllvm12 12.0.0 h12f7ac0_4
+    - llvm-tools 12.0.0 h12f7ac0_4
+    - m4 1.4.18 h1230e6a_1
+    - make 4.3 h620ffc9_1
+    - patch 2.7.6 h1a28f6b_1001
+    - tapi 1100.0.11 ha21211d_0
+    - zlib 1.2.12 h5a0b063_2
+  host:
+    - libcxx 12.0.0 hf6beb65_1
+  run:
+    - libcxx >=12.0.0
+test:
+  commands:
+    - test -f ${PREFIX}/lib/libgmp.a
+    - test -f ${PREFIX}/lib/libgmp.dylib
+    - test -f ${PREFIX}/lib/libgmpxx.a
+    - test -f ${PREFIX}/lib/libgmpxx.dylib
+  files:
+    - test.c
+  requires:
+    - clang_osx-arm64 12.*
+about:
+  dev_url: https://gmplib.org/repo/
+  doc_url: https://gmplib.org/manual/
+  home: https://gmplib.org/
+  license: GPL-2.0-or-later AND LGPL-3.0-or-later
+  license_file: COPYING.LESSERv3
+  summary: The GNU multiprecision library.
+extra:
+  copy_test_source_files: true
+  final: true
+  flow_run_id: e42b7415-5d8a-45db-9aa7-05f3e4e45d89
+  recipe-maintainers:
+    - asmeurer
+    - isuruf
+    - jakirkham
+  remote_url: git@github.com:AnacondaRecipes/gmp-feedstock.git
+  sha: 63ab58db0e06c67eb0ed0853ba4544bdd5f0c1d9

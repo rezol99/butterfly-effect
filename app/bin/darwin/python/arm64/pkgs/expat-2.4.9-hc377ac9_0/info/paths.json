@@ -1,0 +1,97 @@
+{
+  "paths": [
+    {
+      "_path": "bin/xmlwf",
+      "path_type": "hardlink",
+      "sha256": "407cc25a30f455596af629557fe75667bc7d9f3aaa50b79a2e52b1ff7320439c",
+      "size_in_bytes": 73648
+    },
+    {
+      "_path": "include/expat.h",
+      "path_type": "hardlink",
+      "sha256": "02e0df98d3ab514e0a25f28cfa6f1bee46a4a3b86773dd609774939534bef278",
+      "size_in_bytes": 43535
+    },
+    {
+      "_path": "include/expat_config.h",
+      "path_type": "hardlink",
+      "sha256": "db490b7275c2f8c0d227465c2fd6266c22e32bd278ba9495118d52abb7a815e9",
+      "size_in_bytes": 3978
+    },
+    {
+      "_path": "include/expat_external.h",
+      "path_type": "hardlink",
+      "sha256": "7ca9ed28dd5e08eac425931894fabd4c876db8f4be26f9b9a33c2e4f70a0d6c3",
+      "size_in_bytes": 6029
+    },
+    {
+      "_path": "lib/cmake/expat-2.4.9/expat-config-version.cmake",
+      "path_type": "hardlink",
+      "sha256": "a9642d7e0dc1010a931327a1390075684aefa18cff1c007005ea64cf7ea54848",
+      "size_in_bytes": 2878
+    },
+    {
+      "_path": "lib/cmake/expat-2.4.9/expat-config.cmake",
+      "path_type": "hardlink",
+      "sha256": "33708544410c5b5fc7d1a25d1700804719deb4e4cb57358d4d9d2e7328418bcb",
+      "size_in_bytes": 3637
+    },
+    {
+      "_path": "lib/cmake/expat-2.4.9/expat-noconfig.cmake",
+      "path_type": "hardlink",
+      "sha256": "35f7e94d530e21ac5596348de3779c86cf85e82267dba5f59edaccf5a2762fa0",
+      "size_in_bytes": 858
+    },
+    {
+      "_path": "lib/cmake/expat-2.4.9/expat.cmake",
+      "path_type": "hardlink",
+      "sha256": "21a9435ed0326bfd8d58ea95108b186bcb5fb4512044ecf28e132083cf165c89",
+      "size_in_bytes": 4046
+    },
+    {
+      "_path": "lib/libexpat.1.8.9.dylib",
+      "path_type": "hardlink",
+      "sha256": "764508e0b7da5f424332e004990b3b63b2db55a4a3401ddf624ab4eea949392c",
+      "size_in_bytes": 198128
+    },
+    {
+      "_path": "lib/libexpat.1.dylib",
+      "path_type": "softlink",
+      "sha256": "764508e0b7da5f424332e004990b3b63b2db55a4a3401ddf624ab4eea949392c",
+      "size_in_bytes": 198128
+    },
+    {
+      "_path": "lib/libexpat.a",
+      "path_type": "hardlink",
+      "sha256": "29b8d0ba22635fa92e8f64d678bef04e7d30e0a6f03f1e1558eda55738ffe137",
+      "size_in_bytes": 192344
+    },
+    {
+      "_path": "lib/libexpat.dylib",
+      "path_type": "softlink",
+      "sha256": "764508e0b7da5f424332e004990b3b63b2db55a4a3401ddf624ab4eea949392c",
+      "size_in_bytes": 198128
+    },
+    {
+      "_path": "lib/pkgconfig/expat.pc",
+      "file_mode": "text",
+      "path_type": "hardlink",
+      "prefix_placeholder": "/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_96rlxvtuab/croots/recipe/expat_1664286699586/_h_env_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_",
+      "sha256": "95647c330a7f28f3a14c6ea75d2d2d7d874a34e204d6c1f9daf2e0e5db1a34e4",
+      "size_in_bytes": 496
+    },
+    {
+      "_path": "share/doc/expat/AUTHORS",
+      "path_type": "hardlink",
+      "sha256": "59f14371c6b75912cfebb46e6247ee5146766e803a0365b124e5d3011e7d0877",
+      "size_in_bytes": 142
+    },
+    {
+      "_path": "share/doc/expat/changelog",
+      "path_type": "hardlink",
+      "sha256": "c5cbca68cad70b2b3b84831755251c755cf83bf8980e18aec82784de74e5e0d9",
+      "size_in_bytes": 63363
+    }
+  ],
+  "paths_version": 1
+}

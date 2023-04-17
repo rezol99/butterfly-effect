@@ -1,0 +1,23 @@
+{
+  "arch": "arm64",
+  "build": "h80987f9_0",
+  "build_number": 0,
+  "channel": "https://repo.anaconda.com/pkgs/main/osx-arm64",
+  "constrains": [],
+  "depends": [],
+  "features": "",
+  "fn": "libdeflate-1.17-h80987f9_0.conda",
+  "legacy_bz2_md5": "7b5ff4de8423927a7d8271921771ae28",
+  "license": "MIT",
+  "license_family": "MIT",
+  "md5": "117cc5aa426783d26df9c8ae44fbdbd6",
+  "name": "libdeflate",
+  "platform": "darwin",
+  "sha256": "95c41ba83842684d89b649c89946aa6840d8bd827f4d42eaea94b077df66e7c3",
+  "size": 55258,
+  "subdir": "osx-arm64",
+  "timestamp": 1677486584062,
+  "track_features": "",
+  "url": "https://repo.anaconda.com/pkgs/main/osx-arm64/libdeflate-1.17-h80987f9_0.conda",
+  "version": "1.17"
+}

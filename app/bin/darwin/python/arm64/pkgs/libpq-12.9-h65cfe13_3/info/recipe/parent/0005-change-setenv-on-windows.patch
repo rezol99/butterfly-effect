@@ -1,0 +1,26 @@
+diff --git a/src/backend/libpq/auth.c b/src/backend/libpq/auth.c
+index 4cb106c..e6cce93 100644
+--- a/src/backend/libpq/auth.c
++++ b/src/backend/libpq/auth.c
+@@ -1063,7 +1063,7 @@ pg_GSS_recvauth(Port *port)
+ 	 */
+ 	if (pg_krb_server_keyfile != NULL && pg_krb_server_keyfile[0] != '\0')
+ 	{
+-		if (setenv("KRB5_KTNAME", pg_krb_server_keyfile, 1) != 0)
++		if (_putenv_s("KRB5_KTNAME", pg_krb_server_keyfile) != 0)
+ 		{
+ 			/* The only likely failure cause is OOM, so use that errcode */
+ 			ereport(FATAL,
+diff --git a/src/backend/libpq/be-secure-gssapi.c b/src/backend/libpq/be-secure-gssapi.c
+index 211634f..a45437f 100644
+--- a/src/backend/libpq/be-secure-gssapi.c
++++ b/src/backend/libpq/be-secure-gssapi.c
+@@ -527,7 +527,7 @@ secure_open_gssapi(Port *port)
+ 	 */
+ 	if (pg_krb_server_keyfile != NULL && pg_krb_server_keyfile[0] != '\0')
+ 	{
+-		if (setenv("KRB5_KTNAME", pg_krb_server_keyfile, 1) != 0)
++		if (_putenv_s("KRB5_KTNAME", pg_krb_server_keyfile) != 0)
+ 		{
+ 			/* The only likely failure cause is OOM, so use that errcode */
+ 			ereport(FATAL,

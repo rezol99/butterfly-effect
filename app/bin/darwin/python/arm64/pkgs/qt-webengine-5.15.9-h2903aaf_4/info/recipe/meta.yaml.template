@@ -1,0 +1,217 @@
+{% set version = "5.15.9" %}
+{% set webengine_version = "5.15.9" %}
+
+package:
+  name: qt-webengine
+  version: {{ version }}
+
+source:
+  - url: http://download.qt.io/development_releases/prebuilt/llvmpipe/windows/opengl32sw-64-mesa_12_0_rc2.7z      # [win64]
+    sha256: 2a0d2f92c60e0962ef5f6039d3793424c6f39e49ba27ac04a5b21ca4ae012e15                                      # [win64]
+    folder: opengl32sw                                                                                            # [win64]
+
+  - url: https://anduin.linuxfromscratch.org/BLFS/qtwebengine/qtwebengine-{{ webengine_version }}.tar.xz
+  # - git_url: https://code.qt.io/cgit/qt/qtwebengine.git
+  #  git_rev: {{ webengine_version }}  # [not win]
+    folder: qtwebengine
+    patches:
+      - patches/webengine/qt_webengine-3.15.9.patch  # [not win]
+      - patches/webengine/0003-win.patch             # [win]
+      - patches/webengine/0004-win8.patch            # [win]
+
+  - git_url: https://code.qt.io/cgit/qt/qtwebengine-chromium.git  # [not win]
+    git_rev: 87-based             # [not win]
+    folder: qtwebengine-chromium  # [not win]
+    patches:                      # [not win]
+      - patches/webengine/0001-aarch64-sys-state-structs.patch  # [aarch64]
+      - patches/webengine/qt_3rdparty.patch     # [not win]
+      - patches/webengine/qtweb_chromium.patch  # [not win]
+
+  - url: https://download.qt.io/development_releases/gnuwin32/gnuwin32.zip  # [win]
+    folder: gnuwin32  # [win]
+    sha256: 4a9dc893cc0a1695a16102a42ef47ef2e228652891f4afea67fadd452b63656b  # [win]
+
+build:
+  number: 4
+  detect_binary_files_with_prefix: true
+  skip: true   # [ppc64le or s390x]
+  run_exports:
+    - {{ pin_subpackage('qt-webengine', max_pin='x.x') }}
+  missing_dso_whitelist:  # [osx]
+    - /usr/lib/libbsm.0.dylib  # [osx]
+    - /usr/lib/libcups.2.dylib  # [osx]
+    - /usr/lib/libresolv.9.dylib  # [osx]
+    - /usr/lib/libsandbox.1.dylib  # [osx]
+    - '/System/Library/Frameworks/CoreLocation.framework/**'  # [osx]
+
+requirements:
+  build:
+    - patch  # [unix]
+    - m2-patch  # [win]
+    - git    # [not win]
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+    - sysroot_linux-64 2.17              # [linux]
+    - {{ cdt('mesa-libgl-devel') }}      # [linux]
+    - {{ cdt('mesa-dri-drivers') }}      # [linux]
+    - {{ cdt('libselinux') }}            # [linux]
+    - {{ cdt('libxdamage') }}            # [linux]
+    - {{ cdt('libxxf86vm') }}            # [linux]
+    - {{ cdt('libxext') }}               # [linux]
+    - {{ cdt('alsa-lib-devel') }}        # [linux]
+    - {{ cdt('cups-devel') }}            # [linux]
+    - {{ cdt('xorg-x11-proto-devel') }}  # [linux]
+    - {{ cdt('libx11-devel') }}          # [linux]
+    - {{ cdt('libxext-devel') }}         # [linux]
+    - {{ cdt('libxrender-devel') }}      # [linux]
+    - {{ cdt('mesa-libgl-devel') }}      # [linux]
+    - {{ cdt('mesa-libegl-devel') }}     # [linux]
+    - {{ cdt('mesa-libgbm') }}           # [linux]
+    - {{ cdt('mesa-dri-drivers') }}      # [linux]
+    - {{ cdt('libxau-devel') }}          # [linux]
+    - {{ cdt('alsa-lib-devel') }}        # [linux]
+    - {{ cdt('gtk2-devel') }}            # [linux]
+    - {{ cdt('gtkmm24-devel') }}         # [linux]
+    - {{ cdt('libdrm-devel') }}          # [linux]
+    - {{ cdt('libxcomposite-devel') }}   # [linux]
+    - {{ cdt('libxcursor-devel') }}      # [linux]
+    - {{ cdt('libxi-devel') }}           # [linux]
+    - {{ cdt('libxrandr-devel') }}       # [linux]
+    - {{ cdt('pciutils-devel') }}        # [linux]
+    - {{ cdt('libxscrnsaver-devel') }}   # [linux]
+    - {{ cdt('libxtst-devel') }}         # [linux]
+    - {{ cdt('libselinux-devel') }}      # [linux]
+    - {{ cdt('libxdamage') }}            # [linux]
+    - {{ cdt('libxdamage-devel') }}      # [linux]
+    - {{ cdt('libxfixes') }}             # [linux]
+    - {{ cdt('libxfixes-devel') }}       # [linux]
+    - {{ cdt('libxxf86vm') }}            # [linux]
+    - {{ cdt('libxxf86vm-devel') }}      # [linux]
+    - {{ cdt('cups-devel') }}            # [linux]
+    - {{ cdt('libxcb') }}                # [linux]
+    - {{ cdt('expat-devel') }}           # [linux and not aarch64]
+    - pkg-config                         # [unix]
+    - make                               # [unix]
+    - cmake
+    - ninja
+    - ruby >=2.5                         # [linux]
+    - bison                              # [linux]
+    - flex                               # [linux]
+    - gperf                              # [linux]
+    - perl 5.*
+    - readline                           # [linux]
+    - jom                                # [win]
+    - nodejs >=16
+    - libtool  # [unix]
+    - sed   # [unix]
+    - gawk  # [unix]
+    - llvm-tools  # [osx]
+    - binutils    # [linux]
+    - ldid  # [osx]
+  host:
+    - binutils    # [linux]
+    - llvmdev     # [osx]
+    - clangdev    # [osx]
+    - llvm-tools  # [osx]
+    # Chromium expects libjpeg-turbo as their main libjpeg reference and therefore
+    # it will use an statically-linked version to it whilst
+    # https://github.com/conda-forge/conda-forge.github.io/issues/673 is fixed.
+    # Most internal dependencies such as SKIA use turbo-jpeg specific functions
+    # and constants, and therefore trying to patch them would cause unexpected
+    # errors or would be impossible.
+    # - jpeg
+    - pulseaudio                         # [linux and not (aarch64 or x86_64)]
+    # - gstreamer
+    - pthread-stubs                      # [linux]
+    - dbus                               # [linux]
+    - fontconfig                         # [linux]
+    - freetype                           # [linux]
+    # - gst-plugins-base
+    # - gstreamer
+    - libglib                            # [linux and not (aarch64 or x86_64)]
+    - glib                               # [linux and (aarch64 or x86_64)]
+    - libxml2                            # [linux]
+    - libxkbcommon                       # [linux]
+    - expat                              # [linux]
+    - libevent                           # [linux]
+    # - icu
+    # - libpng
+    # - libiconv
+    # - nspr                               # [unix]
+    # - nss                                # [unix]
+    # - sqlite
+    # - zlib
+    - libxcb                             # [linux]
+    - qt-main
+    # - libwebp
+    - openssl                            # [win]
+  run:
+    - {{ pin_compatible("qt-main", min_pin="x.x", max_pin="x") }}
+  run_constrained:
+    - __osx >={{ MACOSX_DEPLOYMENT_TARGET|default("10.14") }}  # [osx and x86_64]
+    - qt {{ version }}
+test:
+  requires:
+    - {{ compiler('cxx') }}
+    - {{ cdt('xorg-x11-proto-devel') }}  # [linux]
+    - {{ cdt('libx11-devel') }}          # [linux]
+    - {{ cdt('libxext-devel') }}         # [linux]
+    - {{ cdt('libxrender-devel') }}      # [linux]
+    - {{ cdt('mesa-libgl-devel') }}      # [linux]
+    - {{ cdt('mesa-libegl-devel') }}     # [linux]
+    - {{ cdt('mesa-libgbm') }}           # [linux]
+    - {{ cdt('mesa-dri-drivers') }}      # [linux]
+    - {{ cdt('libxau-devel') }}          # [linux]
+    - {{ cdt('alsa-lib-devel') }}        # [linux]
+    - {{ cdt('gtk2-devel') }}            # [linux]
+    - {{ cdt('gtkmm24-devel') }}         # [linux]
+    - {{ cdt('libdrm-devel') }}          # [linux]
+    - {{ cdt('libxcomposite-devel') }}   # [linux]
+    - {{ cdt('libxcursor-devel') }}      # [linux]
+    - {{ cdt('libxrandr-devel') }}       # [linux]
+    - {{ cdt('libxi-devel') }}           # [linux]
+    - {{ cdt('pciutils-devel') }}        # [linux]
+    - {{ cdt('libxscrnsaver-devel') }}   # [linux]
+    - {{ cdt('libxtst-devel') }}         # [linux]
+    - {{ cdt('libselinux-devel') }}      # [linux]
+    - {{ cdt('libxdamage') }}            # [linux]
+    - {{ cdt('libxdamage-devel') }}      # [linux]
+    - {{ cdt('libxfixes') }}             # [linux]
+    - {{ cdt('libxfixes-devel') }}       # [linux]
+    - {{ cdt('libxxf86vm') }}            # [linux]
+    - {{ cdt('libxcb') }}                # [linux]
+    - {{ cdt('expat-devel') }}           # [linux and not aarch64]
+    - {{ cdt('pcre') }}                  # [linux and not x86_64]
+    - {{ cdt('libglvnd-glx') }}          # [linux and not x86_64]
+    - make                               # [unix]
+  script: run_webengine_test.sh          # [not win]
+  script: run_webengine_test.bat         # [win]
+  files:
+    - test/webengine/main-qtwebengine.cpp
+    - test/webengine/qml.qrc
+    - test/webengine/qrc_qml.cpp
+    - test/webengine/main.qml
+    - test/webengine/qtwebengine.pro
+
+about:
+  home: http://qt.io
+  license: LGPL-3.0-only
+  license_file: LICENSE.LGPLv3
+  summary: 'Qt is a cross-platform application and UI framework.'
+  description: |
+    Qt helps you create connected devices, UIs & applications that run
+    anywhere on any device, on any operating system at any time.
+  doc_url: http://doc.qt.io/
+  dev_url: https://github.com/qt
+
+extra:
+  recipe-maintainers:
+    - andfoy
+    - ccordoba12
+    - duncanmmacleod
+    - gillins
+    - mingwandroid
+    - msarahan
+    - ocefpaf
+    - stuarteberg
+    - Tobias-Fischer

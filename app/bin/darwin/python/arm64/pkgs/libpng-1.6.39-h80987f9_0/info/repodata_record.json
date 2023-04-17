@@ -1,0 +1,25 @@
+{
+  "arch": "arm64",
+  "build": "h80987f9_0",
+  "build_number": 0,
+  "channel": "https://repo.anaconda.com/pkgs/main/osx-arm64",
+  "constrains": [],
+  "depends": [
+    "zlib >=1.2.13,<1.3.0a0"
+  ],
+  "features": "",
+  "fn": "libpng-1.6.39-h80987f9_0.conda",
+  "legacy_bz2_md5": "54add4e3b9ad35f25d34f3c2955abc7d",
+  "license": "Zlib",
+  "license_family": "Other",
+  "md5": "35219bc0756d7dacad232c483d1518e7",
+  "name": "libpng",
+  "platform": "darwin",
+  "sha256": "37a512c32266c722e3cee45bb4afbfc80c78e7168e3cc75aadfba2e08960f475",
+  "size": 289959,
+  "subdir": "osx-arm64",
+  "timestamp": 1677841799096,
+  "track_features": "",
+  "url": "https://repo.anaconda.com/pkgs/main/osx-arm64/libpng-1.6.39-h80987f9_0.conda",
+  "version": "1.6.39"
+}

@@ -1,0 +1,179 @@
+# This file created by conda-build 3.21.8
+# meta.yaml template originally from:
+# /var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_a782wgv0iw/clone/recipe, last modified Wed Aug 10 04:21:28 2022
+# ------------------------------------------------
+
+package:
+  name: qt-main
+  version: 5.15.2
+source:
+  - folder: qt
+    patches:
+      - patches/qt/0002-qtbase-osx-allow-any-xcrun-in-PATH.patch
+      - patches/qt/0003-qtbase-use-better-clang-optimize-size.patch
+      - patches/qt/0004-qtbase-never-enable-new-dtags.patch
+      - patches/qt/0005-qtbase-link-xcb-shm.patch
+      - patches/qt/0008-Force-host-to-be-the-same-as-the-target.patch
+      - patches/qt/0009-Ensure-no-cross-compilation-checks-are-done.patch
+      - patches/qt/0009-qtbase-fix-hardcoded-sysroot-path.patch
+      - patches/qt/0010-Try-to-set-arm64-explicitly.patch
+      - patches/qt/0011-Prevent-stat64-definition.patch
+      - patches/qt/qt.patch
+    sha256: 3a530d1b243b5dec00bc54937455471aaa3e56849d2593edb8ded07228202240
+    url: http://download.qt.io/official_releases/qt/5.15/5.15.2/single/qt-everywhere-src-5.15.2.tar.xz
+build:
+  detect_binary_files_with_prefix: true
+  ignore_run_exports:
+    - krb5
+    - nspr
+    - nss
+    - openssl
+  missing_dso_whitelist:
+    - /System/Library/Frameworks/CoreLocation.framework/**
+    - /usr/lib/libbsm.0.dylib
+    - /usr/lib/libcups.2.dylib
+    - /usr/lib/libresolv.9.dylib
+    - /usr/lib/libsandbox.1.dylib
+  number: '7'
+  run_exports:
+    - qt-main >=5.15.2,<5.16.0a0
+  string: ha2d02b5_7
+  version: 5.15.2
+requirements:
+  build:
+    - bzip2 1.0.8 h620ffc9_4
+    - ca-certificates 2022.07.19 hca03da5_0
+    - cctools_osx-arm64 949.0.1 h332cad3_24
+    - clang 12.0.0 hca03da5_4
+    - clang-12 12.0.0 default_he099f3d_4
+    - clang_osx-arm64 12.0.0 hcb56dc5_3
+    - clangxx 12.0.0 default_he099f3d_4
+    - clangxx_osx-arm64 12.0.0 h39b79ac_3
+    - compiler-rt 12.0.0 h4ccfd99_3
+    - compiler-rt_osx-arm64 12.0.0 h4fb70ea_3
+    - ld64_osx-arm64 530 h001ce53_24
+    - ldid 2.1.2 h64d1936_2
+    - libclang-cpp12 12.0.0 default_he099f3d_4
+    - libcxx 12.0.0 hf6beb65_1
+    - libffi 3.4.2 hc377ac9_4
+    - libiconv 1.16 h1a28f6b_2
+    - libllvm12 12.0.0 h12f7ac0_4
+    - llvm-tools 12.0.0 h12f7ac0_4
+    - make 4.3 h620ffc9_1
+    - ncurses 6.3 h1a28f6b_3
+    - ninja 1.10.2 hca03da5_5
+    - ninja-base 1.10.2 h525c30c_5
+    - openssl 1.1.1q h1a28f6b_0
+    - patch 2.7.6 h1a28f6b_1001
+    - perl 5.34.0 h1230e6a_0
+    - pkg-config 0.29.2 h1a28f6b_0
+    - python 3.10.4 hbdb9e5c_0
+    - readline 8.1.2 h1a28f6b_1
+    - sqlite 3.39.2 h1058600_0
+    - tapi 1100.0.11 ha21211d_0
+    - tk 8.6.12 hb8d0fd4_0
+    - tzdata 2022a hda174b7_0
+    - xz 5.2.5 h1a28f6b_1
+    - zlib 1.2.12 h5a0b063_2
+  host:
+    - ca-certificates 2022.07.19 hca03da5_0
+    - clang 12.0.0 hca03da5_4
+    - clang-12 12.0.0 default_he099f3d_4
+    - clang-tools 12.0.0 default_he099f3d_4
+    - clangdev 12.0.0 default_he099f3d_4
+    - clangxx 12.0.0 default_he099f3d_4
+    - gettext 0.21.0 h826f4ad_0
+    - glib 2.69.1 h98b2900_1
+    - gst-plugins-base 1.14.1 hf0a386a_0
+    - gstreamer 1.14.1 he09cfb7_0
+    - icu 68.1 hc377ac9_0
+    - jpeg 9e h1a28f6b_0
+    - krb5 1.19.2 h3b8d789_0
+    - libclang 12.0.0 default_hc321e17_4
+    - libclang-cpp 12.0.0 default_he099f3d_4
+    - libclang-cpp12 12.0.0 default_he099f3d_4
+    - libcxx 12.0.0 hf6beb65_1
+    - libedit 3.1.20210910 h1a28f6b_0
+    - libffi 3.4.2 hc377ac9_4
+    - libiconv 1.16 h1a28f6b_2
+    - libllvm12 12.0.0 h12f7ac0_4
+    - libpng 1.6.37 hb8d0fd4_0
+    - libpq 12.9 h65cfe13_3
+    - libxml2 2.9.14 h8c5e841_0
+    - llvm-openmp 12.0.0 haf9daa7_1
+    - llvm-tools 12.0.0 h12f7ac0_4
+    - llvmdev 12.0.0 h12f7ac0_4
+    - lz4-c 1.9.3 hc377ac9_0
+    - ncurses 6.3 h1a28f6b_3
+    - nspr 4.33 hc377ac9_0
+    - nss 3.74 h142855e_0
+    - openssl 1.1.1q h1a28f6b_0
+    - pcre 8.45 hc377ac9_0
+    - postgresql 12.9 h65cfe13_3
+    - readline 8.1.2 h1a28f6b_1
+    - sqlite 3.39.2 h1058600_0
+    - xz 5.2.5 h1a28f6b_1
+    - zlib 1.2.12 h5a0b063_2
+    - zstd 1.5.2 h8574219_0
+  run:
+    - glib >=2.69.1,<3.0a0
+    - gst-plugins-base >=1.14.1,<1.15.0a0
+    - gstreamer >=1.14.1,<1.15.0a0
+    - icu >=68.1,<69.0a0
+    - jpeg >=9e,<10a
+    - libclang >=12.0.0,<13.0a0
+    - libcxx >=12.0.0
+    - libpng >=1.6.37,<1.7.0a0
+    - libpq >=12.9,<13.0a0
+    - nspr >=4.33,<5.0a0
+    - nss >=3.74,<4.0a0
+    - sqlite >=3.39.2,<4.0a0
+    - zlib >=1.2.12,<1.3.0a0
+    - zstd >=1.5.2,<1.6.0a0
+  run_constrained:
+    - qt >=5.15.2,<6
+test:
+  commands:
+    - test -f $PREFIX/plugins/sqldrivers/libqsqlite${SHLIB_EXT}
+  files:
+    - test/qt/hello.pro
+    - test/qt/main-qtwebengine.cpp
+    - test/qt/main.cpp
+    - test/qt/main.qml
+    - test/qt/qml.qrc
+    - test/qt/qrc_qml.cpp
+    - test/qt/qtwebengine.pro
+    - xcodebuild
+    - xcrun
+  requires:
+    - clangxx_osx-arm64 12.*
+    - make
+  script: run_qt_test.sh
+about:
+  description: 'Qt helps you create connected devices, UIs & applications that run
+
+    anywhere on any device, on any operating system at any time.
+
+    '
+  dev_url: https://github.com/qt
+  doc_url: http://doc.qt.io/
+  home: http://qt.io
+  license: LGPL-3.0-only
+  license_file: LICENSE.LGPLv3
+  summary: Qt is a cross-platform application and UI framework.
+extra:
+  copy_test_source_files: true
+  final: true
+  flow_run_id: a7fa945f-58c3-424b-b9b5-034a3f8dde2a
+  recipe-maintainers:
+    - Tobias-Fischer
+    - andfoy
+    - ccordoba12
+    - duncanmmacleod
+    - gillins
+    - mingwandroid
+    - msarahan
+    - ocefpaf
+    - stuarteberg
+  remote_url: git@github.com:AnacondaRecipes/qt-main-feedstock.git
+  sha: f24429a010c6a94c3262d8be6bd0f18cc25009b5

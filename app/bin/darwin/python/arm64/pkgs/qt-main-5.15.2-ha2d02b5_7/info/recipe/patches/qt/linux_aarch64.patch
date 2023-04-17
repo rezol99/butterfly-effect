@@ -1,0 +1,26 @@
+From eb895535ab6a9624cc797ead5a7a951500f2db61 Mon Sep 17 00:00:00 2001
+From: Paul Yim <paul.j.yim@gmail.com>
+Date: Tue, 23 Mar 2021 12:57:01 -0400
+Subject: [PATCH] patch changes
+
+---
+ qtbase/mkspecs/linux-g++/qmake.conf | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/qtbase/mkspecs/linux-g++/qmake.conf b/qtbase/mkspecs/linux-g++/qmake.conf
+index 35bce8f064..a43ed7aa28 100644
+--- a/qtbase/mkspecs/linux-g++/qmake.conf
++++ b/qtbase/mkspecs/linux-g++/qmake.conf
+@@ -6,6 +6,10 @@ MAKEFILE_GENERATOR      = UNIX
+ CONFIG                 += incremental
+ QMAKE_INCREMENTAL_STYLE = sublib
+
++QMAKE_CFLAGS += -fpermissive
++QMAKE_CXXFLAGS += -fpermissive
++QMAKE_LFLAGS            = -L@BUILD_PREFIX@/lib -Wl,-rpath-link,@PREFIX@/lib:@BUILD_PREFIX@/aarch64-conda-linux-gnu/sysroot/usr/lib64
++
+ include(../common/linux.conf)
+ include(../common/gcc-base-unix.conf)
+ include(../common/g++-unix.conf)
+--
+2.24.3 (Apple Git-128)

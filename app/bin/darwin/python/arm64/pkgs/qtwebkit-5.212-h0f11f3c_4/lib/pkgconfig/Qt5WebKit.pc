@@ -1,0 +1,7 @@
+
+Name: Qt5WebKit
+Description: Qt WebKit module
+Version: 5.212.0
+Libs: -L/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_97bx7whf85/croots/recipe/qtwebkit_1658999303434/_h_env_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placeho/lib -lQt5WebKit
+Cflags: -I/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_97bx7whf85/croots/recipe/qtwebkit_1658999303434/_h_env_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placeho/include/qt/QtWebKit 
+Requires: Qt5Core Qt5Gui Qt5Network Qt5Multimedia

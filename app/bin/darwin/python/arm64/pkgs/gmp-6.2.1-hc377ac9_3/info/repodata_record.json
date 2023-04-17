@@ -1,0 +1,24 @@
+{
+  "arch": "arm64",
+  "build": "hc377ac9_3",
+  "build_number": 3,
+  "channel": "https://repo.anaconda.com/pkgs/main/osx-arm64",
+  "constrains": [],
+  "depends": [
+    "libcxx >=12.0.0"
+  ],
+  "features": "",
+  "fn": "gmp-6.2.1-hc377ac9_3.conda",
+  "legacy_bz2_md5": "d875d1f8cda3e280dafdb38350477b15",
+  "license": "GPL-2.0-or-later AND LGPL-3.0-or-later",
+  "md5": "042fd52b5ac66f1f0585a86339530ec8",
+  "name": "gmp",
+  "platform": "darwin",
+  "sha256": "99b3e001fc06ca55b328ace2b352c2c527bb90a624c00af1a746d3ab06488bd1",
+  "size": 447408,
+  "subdir": "osx-arm64",
+  "timestamp": 1653996450241,
+  "track_features": "",
+  "url": "https://repo.anaconda.com/pkgs/main/osx-arm64/gmp-6.2.1-hc377ac9_3.conda",
+  "version": "6.2.1"
+}

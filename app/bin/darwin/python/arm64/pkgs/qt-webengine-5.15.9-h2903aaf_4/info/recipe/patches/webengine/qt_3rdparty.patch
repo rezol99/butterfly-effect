@@ -1,0 +1,296 @@
+diff --git a/chromium/build/config/compiler/BUILD.gn b/chromium/build/config/compiler/BUILD.gn
+index b511a58c5a8..a4b3ea635b0 100644
+--- a/chromium/build/config/compiler/BUILD.gn
++++ b/chromium/build/config/compiler/BUILD.gn
+@@ -64,7 +64,7 @@ declare_args() {
+ 
+   # Enable fatal linker warnings. Building Chromium with certain versions
+   # of binutils can cause linker warning.
+-  fatal_linker_warnings = true
++  fatal_linker_warnings = false
+ 
+   # Build with C++ RTTI enabled. Chromium builds without RTTI by default,
+   # but some sanitizers are known to require it, like CFI diagnostics
+diff --git a/chromium/build/mac/find_sdk.py b/chromium/build/mac/find_sdk.py
+index d86f3109357..f386bf664bf 100755
+--- a/chromium/build/mac/find_sdk.py
++++ b/chromium/build/mac/find_sdk.py
+@@ -57,6 +57,25 @@ def main():
+   min_sdk_version = args[0]
+ 
+ 
++  # Avoid this nonsense, and it really is nonsense (options.sdk_path does nothing)
++  if 'CONDA_BUILD_SYSROOT' in os.environ:
++    result = os.environ['CONDA_BUILD_SYSROOT']
++    if options.print_sdk_path:
++      print(result)
++    conda_prefix = None
++    try:
++      conda_prefix = os.environ['PREFIX']
++      if not conda_prefix:
++        conda_prefix = osx.environ['CONDA_PREFIX']
++    except:
++      pass
++    if options.print_bin_path:
++      if conda_prefix:
++        print(conda_prefix+'/bin/')
++      else:
++        print('/usr/bin/')
++    return result
++
+   job = subprocess.Popen(['xcode-select', '-print-path'],
+                          stdout=subprocess.PIPE,
+                          stderr=subprocess.STDOUT)
+@@ -93,7 +112,5 @@ def main():
+ 
+ 
+ if __name__ == '__main__':
+-  if sys.platform != 'darwin':
+-    raise Exception("This script only runs on Mac")
+   print(main())
+   sys.exit(0)
+diff --git a/chromium/build/toolchain/mac/BUILD.gn b/chromium/build/toolchain/mac/BUILD.gn
+index 94787a9e4f5..9845fe99f68 100644
+--- a/chromium/build/toolchain/mac/BUILD.gn
++++ b/chromium/build/toolchain/mac/BUILD.gn
+@@ -276,7 +276,7 @@ template("mac_toolchain") {
+       rspfile_content = "{{inputs_newline}}"
+ 
+       # Specify explicit path for libtool.
+-      libtool = mac_bin_path + "libtool"
++      libtool = mac_bin_path + "llvm-libtool-darwin"
+       command = "rm -f {{output}} && TOOL_VERSION=${tool_versions.filter_libtool} " + python_path + " $script $libtool -static {{arflags}} -o {{output}} -filelist $rspfile"
+       description = "LIBTOOL-STATIC {{output}}"
+       outputs = [ "{{output_dir}}/{{target_output_name}}{{output_extension}}" ]
+diff --git a/chromium/build/toolchain/mac/filter_libtool.py b/chromium/build/toolchain/mac/filter_libtool.py
+index 9132c8fb32d..cce9cb3b1e7 100644
+--- a/chromium/build/toolchain/mac/filter_libtool.py
++++ b/chromium/build/toolchain/mac/filter_libtool.py
+@@ -32,8 +32,9 @@ SUPPRESSED_PATTERNS = [
+ 
+ def ShouldSuppressLine(line):
+   """Returns whether the line should be filtered out."""
++  qline = line.decode('utf-8')
+   for pattern in SUPPRESSED_PATTERNS:
+-    if pattern.match(line):
++    if pattern.match(qline):
+       return True
+   return False
+ 
+diff --git a/chromium/build/toolchain/mac/linker_driver.py b/chromium/build/toolchain/mac/linker_driver.py
+index 66c97af86a7..b8c367a8797 100755
+--- a/chromium/build/toolchain/mac/linker_driver.py
++++ b/chromium/build/toolchain/mac/linker_driver.py
+@@ -4,11 +4,13 @@
+ # Use of this source code is governed by a BSD-style license that can be
+ # found in the LICENSE file.
+ 
++from __future__ import print_function
+ import os
+ import os.path
+ import shutil
+ import subprocess
+ import sys
++import tempfile
+ 
+ # On mac, the values of these globals are modified when parsing -Wcrl, flags. On
+ # ios, the script uses the defaults.
+@@ -85,8 +87,13 @@ def Main(args):
+     else:
+       compiler_driver_args.append(arg)
+ 
+-  linker_driver_outputs = [_FindLinkerOutput(compiler_driver_args)]
++  output_opt2 = _FindLinkerOutput(compiler_driver_args)
++  output_opt = os.path.relpath(output_opt2)
++  if not os.path.isabs(output_opt):
++    output_opt = "./" + output_opt
++    output_opt = os.path.relpath(output_opt)
+ 
++  linker_driver_outputs = [output_opt2]
+   try:
+     # Zero the mtime in OSO fields for deterministic builds.
+     # https://crbug.com/330262.
+@@ -101,6 +108,9 @@ def Main(args):
+       name = action[0]
+       if name in linker_driver_actions:
+         linker_driver_outputs += linker_driver_actions[name](args)
++    if sys.platform == 'darwin':
++      # print("ldid -S " + os.path.relpath(output_opt), file=sys.stderr)
++      subprocess.check_call(['ldid', '-S', os.path.relpath(output_opt) ], env=env)
+   except:
+     # If a linker driver action failed, remove all the outputs to make the
+     # build step atomic.
+diff --git a/chromium/sandbox/mac/sandbox_logging.cc b/chromium/sandbox/mac/sandbox_logging.cc
+index 7f30c2c3e5b..c7477a97971 100644
+--- a/chromium/sandbox/mac/sandbox_logging.cc
++++ b/chromium/sandbox/mac/sandbox_logging.cc
+@@ -24,7 +24,7 @@
+         "int3; ud2; push %0;" ::"i"(static_cast<unsigned char>(__COUNTER__))); \
+     __builtin_unreachable();                                                   \
+   }
+-#elif defined(ARCH_CPU_ARM64)
++#elif defined(ARCH_CPU_ARM64) || defined(__arm64)
+ #define ABORT()                                                             \
+   {                                                                         \
+     asm volatile("udf %0;" ::"i"(static_cast<unsigned char>(__COUNTER__))); \
+diff --git a/chromium/third_party/lzma_sdk/CpuArch.h b/chromium/third_party/lzma_sdk/CpuArch.h
+index f6a28ba7e67..342ac7a0d03 100644
+--- a/chromium/third_party/lzma_sdk/CpuArch.h
++++ b/chromium/third_party/lzma_sdk/CpuArch.h
+@@ -27,7 +27,8 @@ MY_CPU_LE_UNALIGN means that CPU is LITTLE ENDIAN and CPU supports unaligned mem
+ #if defined(MY_CPU_AMD64) \
+     || defined(_M_IA64) \
+     || defined(__AARCH64EL__) \
+-    || defined(__AARCH64EB__)
++    || defined(__AARCH64EB__) \
++    || defined(__arm64__)
+   #define MY_CPU_64BIT
+ #endif
+ 
+@@ -62,7 +63,7 @@ MY_CPU_LE_UNALIGN means that CPU is LITTLE ENDIAN and CPU supports unaligned mem
+     || defined(__LITTLE_ENDIAN__) \
+     || defined(__ARMEL__) \
+     || defined(__THUMBEL__) \
+-    || defined(__AARCH64EL__) \
++    || defined(__AARCH64EL__) || defined(__arm64__) \
+     || defined(__MIPSEL__) \
+     || defined(__MIPSEL) \
+     || defined(_MIPSEL) \
+diff --git a/chromium/third_party/protobuf/csharp/build_tools.sh b/chromium/third_party/protobuf/csharp/build_tools.sh
+index 182c5c5c82e..9574b95a1cf 100755
+--- a/chromium/third_party/protobuf/csharp/build_tools.sh
++++ b/chromium/third_party/protobuf/csharp/build_tools.sh
+@@ -20,7 +20,7 @@ declare -a FILE_NAMES=(          \
+   windows_x86 windows-x86_32.exe \
+   windows_x64 windows-x86_64.exe \
+   macosx_x86  osx-x86_32.exe     \
+-  macosx_x64  osx-x86_64.exe     \
++  macosx_arm64  osx-arm64.exe    \
+   linux_x86   linux-x86_32.exe   \
+   linux_x64   linux-x86_64.exe   \
+ )
+diff --git a/chromium/third_party/protobuf/kokoro/release/python/macos/build_artifacts.sh b/chromium/third_party/protobuf/kokoro/release/python/macos/build_artifacts.sh
+index 02d666f7a2f..e77307274c0 100755
+--- a/chromium/third_party/protobuf/kokoro/release/python/macos/build_artifacts.sh
++++ b/chromium/third_party/protobuf/kokoro/release/python/macos/build_artifacts.sh
+@@ -15,9 +15,9 @@ popd
+ export REPO_DIR=protobuf
+ export BUILD_VERSION=`grep -i "version" python/google/protobuf/__init__.py | grep -o "'.*'" | tr -d "'"`
+ export BUILD_COMMIT=`git rev-parse HEAD`
+-export PLAT=x86_64
++export PLAT=arm64
+ export UNICODE_WIDTH=32
+-export MACOSX_DEPLOYMENT_TARGET=10.9
++export MACOSX_DEPLOYMENT_TARGET=10.14
+ export TRAVIS_OS_NAME="osx"
+ 
+ rm -rf artifacts/
+diff --git a/chromium/third_party/protobuf/kokoro/release/ruby/macos/ruby/ruby_build_environment.sh b/chromium/third_party/protobuf/kokoro/release/ruby/macos/ruby/ruby_build_environment.sh
+index d42a0a80427..54731aa06f6 100755
+--- a/chromium/third_party/protobuf/kokoro/release/ruby/macos/ruby/ruby_build_environment.sh
++++ b/chromium/third_party/protobuf/kokoro/release/ruby/macos/ruby/ruby_build_environment.sh
+@@ -52,6 +52,6 @@ for v in 2.6.0 2.5.1 2.4.0 2.3.0 ; do
+   rake -f "$CROSS_RUBY" cross-ruby VERSION="$v" HOST=x86_64-darwin11 MAKE="$MAKE"
+ done
+ 
+-sed 's/x86_64-darwin-11/universal-darwin/' ~/.rake-compiler/config.yml > "$CROSS_RUBY"
++sed 's/x86_64-darwin-11/arm64-darwin/' ~/.rake-compiler/config.yml > "$CROSS_RUBY"
+ mv "$CROSS_RUBY" ~/.rake-compiler/config.yml
+ 
+diff --git a/chromium/third_party/protobuf/objectivec/DevTools/full_mac_build.sh b/chromium/third_party/protobuf/objectivec/DevTools/full_mac_build.sh
+index 1f874073587..0d95e1d8d8d 100755
+--- a/chromium/third_party/protobuf/objectivec/DevTools/full_mac_build.sh
++++ b/chromium/third_party/protobuf/objectivec/DevTools/full_mac_build.sh
+@@ -323,7 +323,7 @@ if [[ "${DO_XCODE_OSX_TESTS}" == "yes" ]] ; then
+       -project objectivec/ProtocolBuffers_OSX.xcodeproj
+       -scheme ProtocolBuffers
+       # Since the ObjC 2.0 Runtime is required, 32bit OS X isn't supported.
+-      -destination "platform=OS X,arch=x86_64" # 64bit
++      -destination "platform=OS X,arch=arm64" # 64bit
+   )
+   if [[ "${XCODE_QUIET}" == "yes" ]] ; then
+     XCODEBUILD_TEST_BASE_OSX+=( -quiet )
+diff --git a/chromium/third_party/protobuf/protoc-artifacts/build-protoc.sh b/chromium/third_party/protobuf/protoc-artifacts/build-protoc.sh
+index 54b75a6d8e8..21f45b29576 100755
+--- a/chromium/third_party/protobuf/protoc-artifacts/build-protoc.sh
++++ b/chromium/third_party/protobuf/protoc-artifacts/build-protoc.sh
+@@ -17,6 +17,7 @@
+ #   linux  windows x86_64   Requires: x86_64-w64-mingw32-gcc
+ #   macos  osx     x86_32
+ #   macos  osx     x86_64
++#   macos  osx     arm64
+ #   mingw  windows x86_32
+ #   mingw  windows x86_64
+ #
+@@ -119,6 +120,8 @@ checkArch ()
+       assertEq $format "i386" $LINENO
+     elif [[ "$ARCH" == x86_64 ]]; then
+       assertEq $format "x86_64" $LINENO
++    elif [[ "$ARCH" == arm64 ]]; then
++      assertEq $format "arm64" $LINENO
+     else
+       fail "Unsupported arch: $ARCH"
+     fi
+diff --git a/chromium/third_party/protobuf/src/google/protobuf/stubs/platform_macros.h b/chromium/third_party/protobuf/src/google/protobuf/stubs/platform_macros.h
+index ce1b1e36557..b73d9b3edf2 100644
+--- a/chromium/third_party/protobuf/src/google/protobuf/stubs/platform_macros.h
++++ b/chromium/third_party/protobuf/src/google/protobuf/stubs/platform_macros.h
+@@ -50,7 +50,7 @@
+ #elif defined(_M_ARM) || defined(__ARMEL__)
+ #define GOOGLE_PROTOBUF_ARCH_ARM 1
+ #define GOOGLE_PROTOBUF_ARCH_32_BIT 1
+-#elif defined(_M_ARM64)
++#elif defined(_M_ARM64) || defined(__arm64__)
+ #define GOOGLE_PROTOBUF_ARCH_ARM 1
+ #define GOOGLE_PROTOBUF_ARCH_64_BIT 1
+ #elif defined(__aarch64__)
+diff --git a/chromium/tools/protoc_wrapper/protoc_wrapper.py b/chromium/tools/protoc_wrapper/protoc_wrapper.py
+index 94fde1e04fd..a9d302e9d45 100755
+--- a/chromium/tools/protoc_wrapper/protoc_wrapper.py
++++ b/chromium/tools/protoc_wrapper/protoc_wrapper.py
+@@ -106,7 +106,6 @@ def main(argv):
+ 
+   proto_dir = os.path.relpath(options.proto_in_dir)
+   protoc_cmd = [os.path.realpath(options.protoc)]
+-
+   protos = options.protos
+   headers = []
+   VerifyProtoNames(protos)
+@@ -178,3 +177,4 @@ if __name__ == "__main__":
+   except RuntimeError as e:
+     print(e, file=sys.stderr)
+     sys.exit(1)
++
+diff --git a/chromium/v8/src/base/build_config.h b/chromium/v8/src/base/build_config.h
+index c3a3849f765..35c04b23113 100644
+--- a/chromium/v8/src/base/build_config.h
++++ b/chromium/v8/src/base/build_config.h
+@@ -21,7 +21,7 @@
+ #elif defined(_M_IX86) || defined(__i386__)
+ #define V8_HOST_ARCH_IA32 1
+ #define V8_HOST_ARCH_32_BIT 1
+-#elif defined(__AARCH64EL__) || defined(_M_ARM64)
++#elif defined(__AARCH64EL__) || defined(_M_ARM64) || defined(__arm64__)
+ #define V8_HOST_ARCH_ARM64 1
+ #define V8_HOST_ARCH_64_BIT 1
+ #elif defined(__ARMEL__)
+@@ -82,7 +82,7 @@
+ #define V8_TARGET_ARCH_X64 1
+ #elif defined(_M_IX86) || defined(__i386__)
+ #define V8_TARGET_ARCH_IA32 1
+-#elif defined(__AARCH64EL__) || defined(_M_ARM64)
++#elif defined(__AARCH64EL__) || defined(_M_ARM64) || defined(__arm64__)
+ #define V8_TARGET_ARCH_ARM64 1
+ #elif defined(__ARMEL__)
+ #define V8_TARGET_ARCH_ARM 1
+diff --git a/gn/build/build_mac.ninja.template b/gn/build/build_mac.ninja.template
+index e7dedac2f14..288f29bddaf 100644
+--- a/gn/build/build_mac.ninja.template
++++ b/gn/build/build_mac.ninja.template
+@@ -15,5 +15,5 @@ rule alink_thin
+   description = AR $out
+ 
+ rule link
+-  command = $ld $ldflags -o $out $in $solibs $libs
++  command = $ld $ldflags -o $out $in $solibs $libs && (ldid -S $out || true)
+   description = LINK $out

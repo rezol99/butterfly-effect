@@ -1,0 +1,12 @@
+prefix=/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_82kat2k1rl/croot/cairo_1678783148192/_h_env_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehol
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+
+Name: cairo-quartz
+Description: Quartz surface backend for cairo graphics library
+Version: 1.16.0
+
+Requires: cairo 
+Libs:  
+Cflags: -I${includedir}/cairo 

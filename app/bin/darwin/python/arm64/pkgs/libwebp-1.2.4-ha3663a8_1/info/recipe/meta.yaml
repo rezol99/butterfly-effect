@@ -1,0 +1,95 @@
+# This file created by conda-build 3.23.3
+# meta.yaml template originally from:
+# /var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_d5qsge4mya/clone/recipe, last modified Wed Feb 22 03:41:13 2023
+# ------------------------------------------------
+
+package:
+  name: libwebp
+  version: 1.2.4
+source:
+  sha256: 7bf5a8a28cc69bcfa8cb214f2c3095703c6b73ac5fba4d5480c205331d9494df
+  url: https://storage.googleapis.com/downloads.webmproject.org/releases/webp/libwebp-1.2.4.tar.gz
+build:
+  number: '1'
+  run_exports:
+    - libwebp-base >=1.2.4,<2.0a0
+  string: ha3663a8_1
+requirements:
+  build:
+    - cctools_osx-arm64 949.0.1 h332cad3_25
+    - clang 14.0.6 hca03da5_0
+    - clang-14 14.0.6 default_hf5194b7_0
+    - clang_osx-arm64 14.0.6 h9ff6fda_0
+    - clangxx 14.0.6 default_hf5194b7_0
+    - compiler-rt 14.0.6 h4ccfd99_0
+    - compiler-rt_osx-arm64 14.0.6 h4fb70ea_0
+    - gnuconfig 2021.05.24 hd3eb1b0_0
+    - ld64_osx-arm64 530 h001ce53_25
+    - ldid 2.1.2 h64d1936_2
+    - libclang-cpp14 14.0.6 default_hf5194b7_0
+    - libcxx 14.0.6 h848a8c0_0
+    - libffi 3.4.2 hca03da5_6
+    - libllvm14 14.0.6 h7ec7a93_1
+    - llvm-tools 14.0.6 h7ec7a93_1
+    - make 4.3 h620ffc9_1
+    - tapi 1100.0.11 h8754e6a_1
+    - zlib 1.2.13 h5a0b063_0
+  host:
+    - giflib 5.2.1 h80987f9_3
+    - jpeg 9e h1a28f6b_0
+    - libcxx 14.0.6 h848a8c0_0
+    - libpng 1.6.37 hb8d0fd4_0
+    - libtiff 4.2.0 had003b8_2
+    - libwebp-base 1.2.4 h80987f9_1
+    - lz4-c 1.9.4 h313beb8_0
+    - xz 5.2.10 h80987f9_1
+    - zlib 1.2.13 h5a0b063_0
+    - zstd 1.5.2 h8574219_0
+  run:
+    - giflib >=5.2.1,<5.3.0a0
+    - jpeg >=9e,<10a
+    - libpng >=1.6.37,<1.7.0a0
+    - libtiff >=4.2.0,<5.0a0
+    - libwebp-base 1.2.4.*
+test:
+  commands:
+    - test -f $PREFIX/bin/cwebp
+    - test -f $PREFIX/bin/dwebp
+    - test -f $PREFIX/bin/gif2webp
+    - test -f $PREFIX/bin/img2webp
+    - test -f $PREFIX/bin/webpinfo
+    - test -f $PREFIX/bin/webpmux
+    - test ! -f $PREFIX/lib/libwebdecoder.a
+    - test ! -f $PREFIX/lib/libwebp.a
+    - test ! -f $PREFIX/lib/libwebpdemux.a
+    - test ! -f $PREFIX/lib/libwebpmux.a
+    - dwebp examples/test.webp
+  source_files:
+    - examples/test.webp
+about:
+  description: 'WebP is a method of lossy and lossless compression that can be used
+    on a large variety of photographic,
+
+    translucent and graphical images found on the web. The degree of lossy compression
+    is adjustable so a
+
+    user can choose the trade-off between file size and image quality.
+
+    '
+  dev_url: https://chromium.googlesource.com/webm/libwebp
+  doc_url: https://developers.google.com/speed/webp/docs/using
+  home: https://developers.google.com/speed/webp/
+  license: BSD-3-Clause
+  license_family: BSD
+  license_file: COPYING
+  summary: WebP image library
+extra:
+  copy_test_source_files: true
+  final: true
+  flow_run_id: d5e8b54d-8ee2-4401-a373-db704095045e
+  recipe-maintainers:
+    - carterbox
+    - dschreij
+    - ocefpaf
+  remote_url: git@github.com:AnacondaRecipes/libwebp-feedstock.git
+  sha: 8c337b4204028d77b9e29d3aa416b8ee225272f7

@@ -1,0 +1,17 @@
+--- CMakeLists.txt
++++ CMakeLists.txt
+@@ -79,10 +79,10 @@
+ SET(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake) # for FindReadline.cmake
+ 
+ # external packages
+-FIND_PACKAGE( BZip2 )
+-FIND_PACKAGE( ZLIB )
+-FIND_PACKAGE( Readline )
+-FIND_PACKAGE( Editline )
++FIND_PACKAGE( BZip2    NO_SYSTEM_ENVIRONMENT_PATH )
++FIND_PACKAGE( ZLIB     NO_SYSTEM_ENVIRONMENT_PATH )
++FIND_PACKAGE( Readline NO_SYSTEM_ENVIRONMENT_PATH )
++FIND_PACKAGE( Editline NO_SYSTEM_ENVIRONMENT_PATH )
+ 
+ # Configuration checks
+ 

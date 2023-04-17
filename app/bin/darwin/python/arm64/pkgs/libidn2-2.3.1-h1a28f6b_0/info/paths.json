@@ -1,0 +1,37 @@
+{
+  "paths": [
+    {
+      "_path": "bin/idn2",
+      "path_type": "hardlink",
+      "sha256": "32f59e918e0d3b19ed455e8b67fa69824580f5e6f54b5529ddaf548bcde935d2",
+      "size_in_bytes": 105008
+    },
+    {
+      "_path": "include/idn2.h",
+      "path_type": "hardlink",
+      "sha256": "6f8a6100cdf0c82d09e52b414cb4f76c3364bbca9210f0ff89ad31818b230bbf",
+      "size_in_bytes": 13891
+    },
+    {
+      "_path": "lib/libidn2.0.dylib",
+      "path_type": "hardlink",
+      "sha256": "65cccc7953e681ca3baaf26c90f1708ad5a5c954187e1a4ff0f1d3c00e8566fb",
+      "size_in_bytes": 189856
+    },
+    {
+      "_path": "lib/libidn2.dylib",
+      "path_type": "softlink",
+      "sha256": "65cccc7953e681ca3baaf26c90f1708ad5a5c954187e1a4ff0f1d3c00e8566fb",
+      "size_in_bytes": 189856
+    },
+    {
+      "_path": "lib/pkgconfig/libidn2.pc",
+      "file_mode": "text",
+      "path_type": "hardlink",
+      "prefix_placeholder": "/Users/ktietz/demo/mc3/conda-bld/libidn2_1628878712931/_h_env_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_pla",
+      "sha256": "f84b0bcc10fd8736691fb3fa222156fcf0cd0da8e431ed60a88d9349b33eb6c0",
+      "size_in_bytes": 1029
+    }
+  ],
+  "paths_version": 1
+}

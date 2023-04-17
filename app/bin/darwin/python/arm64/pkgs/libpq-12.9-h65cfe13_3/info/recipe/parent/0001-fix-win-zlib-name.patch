@@ -1,0 +1,25 @@
+From 806a36cb95803bdf72bf000683c20b413c62d5f5 Mon Sep 17 00:00:00 2001
+From: Michael Sarahan <msarahan@gmail.com>
+Date: Fri, 30 Mar 2018 16:44:49 -0500
+Subject: [PATCH] fix win zlib name
+
+---
+ src/tools/msvc/Solution.pm | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/tools/msvc/Solution.pm b/src/tools/msvc/Solution.pm
+index 761e920..6e89637 100644
+--- a/src/tools/msvc/Solution.pm
++++ b/src/tools/msvc/Solution.pm
+@@ -523,7 +523,7 @@ sub AddProject
+ 	if ($self->{options}->{zlib})
+ 	{
+ 		$proj->AddIncludeDir($self->{options}->{zlib} . '\include');
+-		$proj->AddLibrary($self->{options}->{zlib} . '\lib\zdll.lib');
++		$proj->AddLibrary($self->{options}->{zlib} . '\lib\zlib.lib');
+ 	}
+ 	if ($self->{options}->{openssl})
+ 	{
+-- 
+2.11.1
+

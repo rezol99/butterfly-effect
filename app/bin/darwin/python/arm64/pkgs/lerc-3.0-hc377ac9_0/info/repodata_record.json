@@ -1,0 +1,25 @@
+{
+  "arch": "arm64",
+  "build": "hc377ac9_0",
+  "build_number": 0,
+  "channel": "https://repo.anaconda.com/pkgs/main/osx-arm64",
+  "constrains": [],
+  "depends": [
+    "libcxx >=12.0.0"
+  ],
+  "features": "",
+  "fn": "lerc-3.0-hc377ac9_0.conda",
+  "legacy_bz2_md5": "255cac6bbe51bc940f6be144ce03bccf",
+  "license": "Apache-2.0",
+  "license_family": "Apache",
+  "md5": "3d4bcf7842be7b75c791bd0c65714b72",
+  "name": "lerc",
+  "platform": "darwin",
+  "sha256": "5921b294e986317b31c3935ebd43345c9c9c533fa0d52e83b82bd64700e75b24",
+  "size": 117488,
+  "subdir": "osx-arm64",
+  "timestamp": 1635523422442,
+  "track_features": "",
+  "url": "https://repo.anaconda.com/pkgs/main/osx-arm64/lerc-3.0-hc377ac9_0.conda",
+  "version": "3.0"
+}

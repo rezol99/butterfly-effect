@@ -1,0 +1,253 @@
+{% set version = "5.15.2" %}
+
+package:
+  name: qt-main
+  version: {{ version }}
+
+source:
+  - url: http://download.qt.io/official_releases/qt/{{ version.rpartition('.')[0] }}/{{ version }}/single/qt-everywhere-src-{{ version }}.tar.xz
+    sha256: 3a530d1b243b5dec00bc54937455471aaa3e56849d2593edb8ded07228202240
+    folder: qt
+    patches:
+      # qtbase
+      - patches/qt/0002-qtbase-osx-allow-any-xcrun-in-PATH.patch    # [not win]
+      - patches/qt/0003-qtbase-use-better-clang-optimize-size.patch  # [not win]
+      - patches/qt/0004-qtbase-never-enable-new-dtags.patch  # [not win]
+      - patches/qt/0005-qtbase-link-xcb-shm.patch
+      - patches/qt/0009-qtbase-fix-hardcoded-sysroot-path.patch  # [not win]
+
+      # The following patches are required to compile Qt using native arm64
+      # compilers
+      - patches/qt/0008-Force-host-to-be-the-same-as-the-target.patch        # [osx]
+      - patches/qt/0009-Ensure-no-cross-compilation-checks-are-done.patch    # [osx]
+      - patches/qt/0010-Try-to-set-arm64-explicitly.patch                    # [arm64]
+      - patches/qt/0011-Prevent-stat64-definition.patch                      # [arm64]
+      - patches/qt/qt.patch  # [unix]
+      - patches/qt/0011-qtbase-Fix-QMAKE_LIBDIR_X11-and-QMAKE_LIBDIR_OPENGL-.patch # [linux]
+      - patches/qt/linux_x86_64.patch   # [linux and x86_64]
+      - patches/qt/linux_aarch64.patch  # [linux and aarch64]
+
+  - url: http://download.qt.io/development_releases/prebuilt/llvmpipe/windows/opengl32sw-64-mesa_12_0_rc2.7z      # [win64]
+    sha256: 2a0d2f92c60e0962ef5f6039d3793424c6f39e49ba27ac04a5b21ca4ae012e15                                      # [win64]
+    folder: opengl32sw                                                                                            # [win64]
+
+  - url: https://download.qt.io/development_releases/gnuwin32/gnuwin32.zip  # [win]
+    folder: gnuwin32  # [win]
+    sha256: 4a9dc893cc0a1695a16102a42ef47ef2e228652891f4afea67fadd452b63656b  # [win]
+
+build:
+  number: 7
+  version: {{ version }}
+  detect_binary_files_with_prefix: true
+  skip: true   # [ppc64le or s390x]
+  run_exports:
+    - {{ pin_subpackage('qt-main', max_pin='x.x') }}
+  ignore_run_exports:
+    - openssl
+    - krb5
+    - nss
+    - nspr
+  missing_dso_whitelist:  # [osx]
+    - /usr/lib/libbsm.0.dylib  # [osx]
+    - /usr/lib/libcups.2.dylib  # [osx]
+    - /usr/lib/libresolv.9.dylib  # [osx]
+    - /usr/lib/libsandbox.1.dylib  # [osx]
+    - '/System/Library/Frameworks/CoreLocation.framework/**'  # [osx]
+
+requirements:
+  build:
+    - patch  # [unix]
+    - m2-patch  # [win]
+    - {{ compiler('cxx') }}
+    - sysroot_linux-64 2.17              # [linux]
+    - {{ cdt('xorg-x11-proto-devel') }}  # [linux]
+    - {{ cdt('libx11-devel') }}          # [linux]
+    - {{ cdt('libxext') }}               # [linux]
+    - {{ cdt('libxext-devel') }}         # [linux]
+    - {{ cdt('libxrender-devel') }}      # [linux]
+    - {{ cdt('mesa-libgl-devel') }}      # [linux]
+    - {{ cdt('mesa-libegl') }}           # [linux]
+    - {{ cdt('mesa-libgbm') }}           # [linux]
+    - {{ cdt('mesa-libegl-devel') }}     # [linux]
+    - {{ cdt('mesa-dri-drivers') }}      # [linux]
+    - {{ cdt('libxau-devel') }}          # [linux]
+    - {{ cdt('alsa-lib-devel') }}        # [linux]
+    - {{ cdt('gtk2-devel') }}            # [linux]
+    - {{ cdt('gtkmm24-devel') }}         # [linux]
+    - {{ cdt('libdrm-devel') }}          # [linux]
+    - {{ cdt('libxcomposite-devel') }}   # [linux]
+    - {{ cdt('libxcursor-devel') }}      # [linux]
+    - {{ cdt('libxi-devel') }}           # [linux]
+    - {{ cdt('libxrandr-devel') }}       # [linux]
+    - {{ cdt('pciutils-devel') }}        # [linux]
+    - {{ cdt('libxscrnsaver-devel') }}   # [linux]
+    - {{ cdt('libxtst-devel') }}         # [linux]
+    - {{ cdt('libselinux') }}            # [linux]
+    - {{ cdt('libselinux-devel') }}      # [linux]
+    - {{ cdt('libxdamage') }}            # [linux]
+    - {{ cdt('libxdamage-devel') }}      # [linux]
+    - {{ cdt('libxfixes') }}             # [linux]
+    - {{ cdt('libxfixes-devel') }}       # [linux]
+    - {{ cdt('libxxf86vm') }}            # [linux]
+    - {{ cdt('libxxf86vm-devel') }}      # [linux]
+    - {{ cdt('libsm-devel') }}           # [linux]
+    - {{ cdt('libice-devel') }}          # [linux]
+    - {{ cdt('libxcb') }}                # [linux]
+    - {{ cdt('libxcb-devel') }}          # [linux and not (aarch64 or x86_64)]
+    - {{ cdt('expat-devel') }}           # [linux and not aarch64]
+    - {{ cdt('pcre') }}                  # [linux and not x86_64]
+    - {{ cdt('libglvnd-glx') }}          # [linux and not x86_64]
+    - {{ cdt('libglvnd-egl') }}          # [linux and not x86_64]
+    - {{ cdt('libxkbcommon-devel') }}    # [linux and not (aarch64 or x86_64)]
+    - {{ cdt('xcb-util-devel') }}        # [linux]
+    - {{ cdt('xcb-util-image-devel') }}  # [linux]
+    - {{ cdt('xcb-util-keysyms-devel') }}     # [linux]
+    - {{ cdt('xcb-util-renderutil-devel') }}  # [linux]
+    - {{ cdt('xcb-util-wm-devel') }}          # [linux]
+    - {{ cdt('cups-devel') }}            # [linux]
+    - {{ cdt('libcom_err') }}            # [linux]
+    - {{ cdt('gnutls') }}                # [linux]
+    - {{ cdt('avahi-libs') }}            # [linux]
+    - {{ cdt('libgpg-error') }}          # [linux]
+    - {{ cdt('libtasn1') }}              # [linux]
+
+    # For fontconfig + freetype
+    - pkg-config                         # [unix]
+    - make                               # [unix]
+    - ninja
+    - ruby >=2.5                         # [linux]
+    - bison                              # [linux]
+    - flex                               # [linux]
+    - gperf                              # [linux]
+    - m2-gperf                           # [win]
+    - m2-bison                           # [win]
+    - m2-flex                            # [win]
+    - m2-patch                           # [win]
+    - jom                                # [win]
+    - curl                               # [win]
+    - perl 5.*
+    # Add readline here, so that newest readline is used.
+    # Otherwise build and host might end up with two different versions
+    # If they do, merge_build_host will fail.
+    - readline                           # [linux]
+    - binutils                           # [linux]
+
+  host:
+    # For pkg-config gl, fontconfig + freetype
+    - pthread-stubs                      # [linux]
+    - dbus                               # [linux]
+    - fontconfig                         # [linux]
+    - freetype                           # [linux]
+    - glib
+    - gst-plugins-base
+    - gstreamer
+    - pulseaudio                         # [linux and not (aarch64 or x86_64)]
+    - libxml2                            # [linux]
+    - libxkbcommon                       # [linux]
+    - expat                              # [linux]
+    - libevent                           # [linux]
+    - icu
+    # jpeg-turbo currently has some conflicting issues in conda-forge
+    # see: https://github.com/conda-forge/conda-forge.github.io/issues/673
+    - jpeg
+    - libpng
+    - nspr                               # [unix]
+    - nss                                # [unix]
+    - sqlite
+    # - mysql-devel                        # [not win]
+    - mysql                              # [linux]
+    - postgresql                         # [not win]
+    - zlib
+    - libxcb                             # [linux]
+    - openssl
+    # For QDoc
+    # http://doc.qt.io/Qt-5/qdoc-guide-clang.html
+    # Only libclang is needed, but needs the full package for detection.
+    - llvmdev
+    - clangdev
+    - libclang
+    - libcups                            # [linux]
+    - zstd
+    - alsa-lib                           # [linux and not (aarch64 or x86_64)]
+    - krb5
+  run:
+    - {{ pin_compatible("nss") }}        # [unix]
+    - {{ pin_compatible("nspr") }}       # [unix]
+    - libxcb                             # [linux]
+    - {{ pin_compatible("libclang") }}
+  run_constrained:
+    - __osx >={{ MACOSX_DEPLOYMENT_TARGET|default("10.14") }}  # [osx and x86_64]
+    - qt >=5.15.2,<6
+test:
+  requires:
+    - {{ compiler('cxx') }}
+    - {{ cdt('xorg-x11-proto-devel') }}  # [linux]
+    - {{ cdt('libx11-devel') }}          # [linux]
+    - {{ cdt('libxext-devel') }}         # [linux]
+    - {{ cdt('libxrender-devel') }}      # [linux]
+    - {{ cdt('mesa-libgl-devel') }}      # [linux]
+    - {{ cdt('mesa-libegl-devel') }}     # [linux]
+    - {{ cdt('mesa-libgbm') }}           # [linux]
+    - {{ cdt('mesa-dri-drivers') }}      # [linux]
+    - {{ cdt('libxau-devel') }}          # [linux]
+    - {{ cdt('alsa-lib-devel') }}        # [linux]
+    - {{ cdt('gtk2-devel') }}            # [linux]
+    - {{ cdt('gtkmm24-devel') }}         # [linux]
+    - {{ cdt('libdrm-devel') }}          # [linux]
+    - {{ cdt('libxcomposite-devel') }}   # [linux]
+    - {{ cdt('libxcursor-devel') }}      # [linux]
+    - {{ cdt('libxi-devel') }}           # [linux]
+    - {{ cdt('libxrandr-devel') }}       # [linux]
+    - {{ cdt('pciutils-devel') }}        # [linux]
+    - {{ cdt('libxscrnsaver-devel') }}   # [linux]
+    - {{ cdt('libxtst-devel') }}         # [linux]
+    - {{ cdt('libselinux-devel') }}      # [linux]
+    - {{ cdt('libxdamage') }}            # [linux]
+    - {{ cdt('libxdamage-devel') }}      # [linux]
+    - {{ cdt('libxfixes') }}             # [linux]
+    - {{ cdt('libxfixes-devel') }}       # [linux]
+    - {{ cdt('libxxf86vm') }}            # [linux]
+    - {{ cdt('libxcb') }}                # [linux]
+    - {{ cdt('expat-devel') }}           # [linux and not aarch64]
+    - {{ cdt('pcre') }}                  # [linux and not x86_64]
+    - {{ cdt('libglvnd-glx') }}          # [linux and not x86_64]
+    - make                               # [unix]
+  files:
+    - test/qt/hello.pro
+    - test/qt/main-qtwebengine.cpp
+    - test/qt/main.cpp
+    - test/qt/main.qml
+    - test/qt/qml.qrc
+    - test/qt/qrc_qml.cpp
+    - test/qt/qtwebengine.pro
+    - xcodebuild
+    - xcrun
+  script: run_qt_test.sh                 # [not win]
+  script: run_qt_test.bat                # [win]
+  commands:
+    # sql plugin
+    - test -f $PREFIX/plugins/sqldrivers/libqsqlite${SHLIB_EXT}            # [unix]
+    - if not exist %LIBRARY_PREFIX%\plugins\sqldrivers\qsqlite.dll exit 1  # [win]
+
+about:
+  home: http://qt.io
+  license: LGPL-3.0-only
+  license_file: LICENSE.LGPLv3
+  summary: 'Qt is a cross-platform application and UI framework.'
+  description: |
+    Qt helps you create connected devices, UIs & applications that run
+    anywhere on any device, on any operating system at any time.
+  doc_url: http://doc.qt.io/
+  dev_url: https://github.com/qt
+
+extra:
+  recipe-maintainers:
+    - andfoy
+    - ccordoba12
+    - duncanmmacleod
+    - gillins
+    - mingwandroid
+    - msarahan
+    - ocefpaf
+    - stuarteberg
+    - Tobias-Fischer

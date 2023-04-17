@@ -1,0 +1,99 @@
+{% set version = "4.2.2" %}
+
+package:
+  name: ffmpeg
+  version: {{ version }}
+
+source:
+  - url: https://ffmpeg.org/releases/ffmpeg-{{ version }}.tar.gz  # [not win]
+    sha256: 83f9a9aa0acf8036daf47494d99a8c31154a18ebb6841d89878ba47783559bd0  # [not win]
+
+  - url: https://ffmpeg.zeranoe.com/builds/win64/shared/ffmpeg-{{ version }}-win64-shared.zip  # [win]
+    sha256: 5aedf268952b7d9f6541dbfcb47cd86a7e7881a3b7ba482fd3bc4ca33bda7bf5  # [win]
+
+  - url: https://ffmpeg.zeranoe.com/builds/win64/dev/ffmpeg-{{ version }}-win64-dev.zip  # [win]
+    sha256: f4885f859c5b0d6663c2a0a4c1cf035b1c60b146402790b796bd3ad84f4f3ca2  # [win]
+
+build:
+  number: 0
+  # The windows build is repacking binaries rather than building from source
+  run_exports:
+  # seems to be minor version compatibility
+  # https://abi-laboratory.pro/tracker/timeline/ffmpeg/
+    - {{ pin_subpackage('ffmpeg', max_pin='x.x') }}
+  missing_dso_whitelist:  # [osx]
+    - /System/Library/Frameworks/VideoToolbox.framework/Versions/A/VideoToolbox  # [osx]
+
+requirements:
+  build:
+    - {{ compiler("c") }}
+    - {{ compiler("cxx") }}
+    - pkg-config  # [not win]
+    - libtool  # [not win]
+    - nasm  # [(osx and x86_64) or linux32 or linux64]
+    - make  # [not win]
+  host:
+    - bzip2  # [not win]
+    - freetype  # [not win]
+    - gnutls  # [not win]
+    - libiconv  # [not win and not linux]
+    - x264  # [not win]
+    - zlib  # [not win]
+    - openh264  # [not win]
+    - lame  # [not win]
+    - gmp  # [unix]
+    - libvpx  # [not win]
+    - libopus # [not win]
+    - openssl # [not win]
+  run:
+    - lame  # [not win]
+
+test:
+  commands:
+    - ffmpeg --help
+    - ffmpeg -loglevel panic -codecs
+    - ffmpeg -loglevel panic -protocols | grep "https"  # [not win]
+    - ffmpeg -loglevel panic -codecs | grep "libmp3lame"  # [not win]
+    - ffmpeg -loglevel panic -codecs | grep "DEVI.S zlib"  # [unix]
+    - ffmpeg -loglevel panic -codecs | grep "DEV.LS h264"  # [linux64 or osx64]
+    - ffmpeg -loglevel panic -codecs | grep "D.V.LS h264"  # [ppc64le]
+    - ffmpeg -loglevel panic -codecs | grep "libx264"  # [linux64 or osx64]
+    - ffmpeg -loglevel panic -codecs | grep "libopenh264"  # [linux64 or osx64]
+    # Verify dynamic libraries on all systems
+    {% set ffmpeg_libs = [
+        "avcodec",
+        "avdevice",
+        "swresample",
+        "postproc",
+        "avfilter",
+        "swresample",
+        "avcodec",
+        "avformat",
+        "swscale",
+        "avresample"
+    ] %}
+    {% for each_ffmpeg_lib in ffmpeg_libs %}
+    - test -f $PREFIX/lib/lib{{ each_ffmpeg_lib }}.dylib  # [osx]
+    - test -f $PREFIX/lib/lib{{ each_ffmpeg_lib }}.so     # [linux]
+    {% endfor %}
+
+about:
+  home: http://www.ffmpeg.org/
+  license: GPL 3
+  license_file: COPYING.GPLv3  # [unix]
+  summary: Cross-platform solution to record, convert and stream audio and video.
+  dev_url: https://ffmpeg.org/developer.html
+  doc_url: https://ffmpeg.org/documentation.html
+
+extra:
+  recipe-maintainers:
+    - carlodri
+    - caspervdw
+    - danielballan
+    - jakirkham
+    - jjhelmus
+    - 183amir
+    - mingwandroid
+    - ocefpaf
+    - patricksnape
+    - sdvillal

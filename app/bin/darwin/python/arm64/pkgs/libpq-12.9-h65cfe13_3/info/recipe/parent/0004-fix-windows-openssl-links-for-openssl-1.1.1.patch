@@ -1,0 +1,49 @@
+From b41564e27486461b77898a4ad399e0584ad52411 Mon Sep 17 00:00:00 2001
+From: Michael Sarahan <msarahan@gmail.com>
+Date: Wed, 19 Dec 2018 08:32:30 -0600
+Subject: [PATCH] fix windows openssl links for openssl 1.1.1
+
+---
+ src/include/pg_config.h.win32 | 6 +++---
+ src/tools/msvc/Solution.pm    | 4 ++--
+ 2 files changed, 5 insertions(+), 5 deletions(-)
+
+diff --git a/src/include/pg_config.h.win32 b/src/include/pg_config.h.win32
+index abcca83..21e2e51 100644
+--- a/src/include/pg_config.h.win32
++++ b/src/include/pg_config.h.win32
+@@ -73,13 +73,13 @@
+ #endif
+ 
+ /* Define to 1 if you have the `ASN1_STRING_get0_data' function. */
+-/* #undef HAVE_ASN1_STRING_GET0_DATA */
++#define HAVE_ASN1_STRING_GET0_DATA 1
+ 
+ /* Define to 1 if you have the `BIO_get_data' function. */
+-/* #undef HAVE_BIO_GET_DATA */
++#define HAVE_BIO_GET_DATA 1
+ 
+ /* Define to 1 if you have the `BIO_meth_new' function. */
+-/* #undef HAVE_BIO_METH_NEW */
++#define HAVE_BIO_METH_NEW 1
+ 
+ /* Define to 1 if you have the `cbrt' function. */
+ //#define HAVE_CBRT 1
+diff --git a/src/tools/msvc/Solution.pm b/src/tools/msvc/Solution.pm
+index 4dd5237..e3fa77e 100644
+--- a/src/tools/msvc/Solution.pm
++++ b/src/tools/msvc/Solution.pm
+@@ -716,9 +716,9 @@ sub AddProject
+ 				# to be here, so don't ask for it in last
+ 				# parameter.
+ 				$proj->AddLibrary(
+-					$self->{options}->{openssl} . '\lib\ssleay32.lib', 0);
++					$self->{options}->{openssl} . '\lib\libcrypto.lib', 0);
+ 				$proj->AddLibrary(
+-					$self->{options}->{openssl} . '\lib\libeay32.lib', 0);
++					$self->{options}->{openssl} . '\lib\libssl.lib', 0);
+ 			}
+ 		}
+ 	}
+-- 
+2.28.0

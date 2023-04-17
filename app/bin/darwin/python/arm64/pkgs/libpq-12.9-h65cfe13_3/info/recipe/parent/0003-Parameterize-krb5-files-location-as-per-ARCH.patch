@@ -1,0 +1,33 @@
+From e1bba08ddd0dd9a9e5fb258389282b89ad852def Mon Sep 17 00:00:00 2001
+From: Nehal J Wani <nehaljw.kkd1@gmail.com>
+Date: Sun, 29 Jul 2018 02:20:35 -0500
+Subject: [PATCH 3/3] Parameterize krb5 files location as per %ARCH%
+
+---
+ src/tools/msvc/Solution.pm | 10 ++++++----
+ 1 file changed, 6 insertions(+), 4 deletions(-)
+
+diff --git a/src/tools/msvc/Solution.pm b/src/tools/msvc/Solution.pm
+index 0acef1f..1a0a5a3 100644
+--- a/src/tools/msvc/Solution.pm
++++ b/src/tools/msvc/Solution.pm
+@@ -553,10 +553,12 @@ sub AddProject
+ 	}
+ 	if ($self->{options}->{gss})
+ 	{
+-		$proj->AddIncludeDir($self->{options}->{gss} . '\inc\krb5');
+-		$proj->AddLibrary($self->{options}->{gss} . '\lib\i386\krb5_32.lib');
+-		$proj->AddLibrary($self->{options}->{gss} . '\lib\i386\comerr32.lib');
+-		$proj->AddLibrary($self->{options}->{gss} . '\lib\i386\gssapi32.lib');
++		my $conda_arch = substr($ENV{'ARCH'}, -2);
++		print $conda_arch;
++		$proj->AddIncludeDir($self->{options}->{gss} . '\include');
++		$proj->AddLibrary($self->{options}->{gss} . "\\lib\\krb5_$conda_arch.lib");
++		$proj->AddLibrary($self->{options}->{gss} . "\\lib\\comerr$conda_arch.lib");
++		$proj->AddLibrary($self->{options}->{gss} . "\\lib\\gssapi$conda_arch.lib");
+ 	}
+ 	if ($self->{options}->{iconv})
+ 	{
+-- 
+2.17.0
+

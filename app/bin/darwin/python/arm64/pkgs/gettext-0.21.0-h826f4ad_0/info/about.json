@@ -1,0 +1,27 @@
+{
+  "channels": [
+    "https://repo.anaconda.com/pkgs/main"
+  ],
+  "conda_build_version": "3.21.4",
+  "conda_private": false,
+  "conda_version": "4.9.2",
+  "env_vars": {
+    "CIO_TEST": "<not set>"
+  },
+  "extra": {
+    "copy_test_source_files": true,
+    "final": true,
+    "recipe-maintainers": [
+      "scopatz",
+      "ocefpaf"
+    ]
+  },
+  "home": "https://www.gnu.org/software/gettext/",
+  "identifiers": [],
+  "keywords": [],
+  "license": "GPL-2.0",
+  "license_file": "COPYING",
+  "root_pkgs": [],
+  "summary": "Internationalization package",
+  "tags": []
+}

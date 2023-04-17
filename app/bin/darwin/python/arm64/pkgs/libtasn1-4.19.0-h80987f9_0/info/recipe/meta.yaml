@@ -1,0 +1,72 @@
+# This file created by conda-build 3.23.3
+# meta.yaml template originally from:
+# /var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_d8lrf97caj/clone/recipe, last modified Thu Apr  6 16:30:08 2023
+# ------------------------------------------------
+
+package:
+  name: libtasn1
+  version: 4.19.0
+source:
+  sha256: 1613f0ac1cf484d6ec0ce3b8c06d56263cc7242f1c23b30d82d23de345a63f7a
+  url: https://ftp.gnu.org/gnu/libtasn1/libtasn1-4.19.0.tar.gz
+build:
+  number: '0'
+  run_exports:
+    - libtasn1 >=4.19.0,<5.0a0
+  string: h80987f9_0
+requirements:
+  build:
+    - cctools_osx-arm64 949.0.1 h332cad3_25
+    - clang 14.0.6 hca03da5_0
+    - clang-14 14.0.6 default_hf5194b7_0
+    - clang_osx-arm64 14.0.6 h9ff6fda_0
+    - clangxx 14.0.6 default_hf5194b7_0
+    - compiler-rt 14.0.6 h4ccfd99_0
+    - compiler-rt_osx-arm64 14.0.6 h4fb70ea_0
+    - ld64_osx-arm64 530 h001ce53_25
+    - ldid 2.1.2 h64d1936_2
+    - libclang-cpp14 14.0.6 default_hf5194b7_0
+    - libcxx 14.0.6 h848a8c0_0
+    - libffi 3.4.2 hca03da5_6
+    - libllvm14 14.0.6 h7ec7a93_1
+    - libtool 2.4.6 h313beb8_1009
+    - llvm-tools 14.0.6 h7ec7a93_1
+    - make 4.3 h620ffc9_1
+    - tapi 1100.0.11 h8754e6a_1
+    - zlib 1.2.13 h5a0b063_0
+  host: []
+  run: []
+test:
+  commands:
+    - test -f $PREFIX/lib/libtasn1${SHLIB_EXT}
+    - conda inspect linkages -p $PREFIX $PKG_NAME
+    - conda inspect objects -p $PREFIX $PKG_NAME
+  requires:
+    - conda-build
+about:
+  description: 'The Libtasn1 library provides Abstract Syntax Notation One
+
+    (ASN.1, as specified by the X.680 ITU-T recommendation) parsing and structures
+    management,
+
+    and Distinguished Encoding Rules (DER, as per X.690) encoding and decoding functions.
+
+    '
+  dev_url: https://gitlab.com/gnutls/libtasn1/
+  doc_url: https://www.gnu.org/software/libtasn1/manual/libtasn1.html
+  home: https://www.gnu.org/software/libtasn1/
+  license: LGPL-2.1-or-later
+  license_family: LGPL
+  license_file: COPYING
+  summary: Libtasn1 is the ASN.1 library used by GnuTLS, p11-kit and some other packages
+extra:
+  copy_test_source_files: true
+  final: true
+  flow_run_id: d86b950e-7a69-472a-8f04-916b3029294b
+  recipe-maintainers:
+    - ceholden
+    - chenghlee
+    - gillins
+    - ocefpaf
+  remote_url: git@github.com:AnacondaRecipes/libtasn1-feedstock.git
+  sha: c594d19b4e4adde443cbd3142b56c9fe4c5b84b1

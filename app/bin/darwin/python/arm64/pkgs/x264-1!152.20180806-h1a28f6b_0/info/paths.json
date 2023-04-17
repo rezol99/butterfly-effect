@@ -1,0 +1,49 @@
+{
+  "paths": [
+    {
+      "_path": "bin/x264",
+      "path_type": "hardlink",
+      "sha256": "8179c68b7a7f4e1a9049e21764ef73510364ca47ea3fa6df511f20999824f46b",
+      "size_in_bytes": 944112
+    },
+    {
+      "_path": "include/x264.h",
+      "path_type": "hardlink",
+      "sha256": "818ec792d07fa9e4f58fc981e476d4a66d5d57476799e02f4ea896be6ad4360d",
+      "size_in_bytes": 46920
+    },
+    {
+      "_path": "include/x264_config.h",
+      "path_type": "hardlink",
+      "sha256": "3e7e55e4726ea4b299da599de98fe451b383d7811847e1d7b4c1a3d2726349e2",
+      "size_in_bytes": 172
+    },
+    {
+      "_path": "lib/libx264.152.dylib",
+      "path_type": "hardlink",
+      "sha256": "e7ecdca0664aa81100b92fb202d8cf8941c77ee3f49864d05c18d10fcb830a69",
+      "size_in_bytes": 853552
+    },
+    {
+      "_path": "lib/libx264.a",
+      "path_type": "hardlink",
+      "sha256": "0e98c92c90c5c567ce2d210453c883a8829409cac5d71004308b5a72ad5eae64",
+      "size_in_bytes": 1001448
+    },
+    {
+      "_path": "lib/libx264.dylib",
+      "path_type": "softlink",
+      "sha256": "e7ecdca0664aa81100b92fb202d8cf8941c77ee3f49864d05c18d10fcb830a69",
+      "size_in_bytes": 853552
+    },
+    {
+      "_path": "lib/pkgconfig/x264.pc",
+      "file_mode": "text",
+      "path_type": "hardlink",
+      "prefix_placeholder": "/Users/ktietz/demo/mc3/conda-bld/x264_1628875777868/_h_env_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placeh",
+      "sha256": "c21a06fbe567f6eb60450b2af979f766b5993d1c47a3c803006f0e762246fdbf",
+      "size_in_bytes": 512
+    }
+  ],
+  "paths_version": 1
+}

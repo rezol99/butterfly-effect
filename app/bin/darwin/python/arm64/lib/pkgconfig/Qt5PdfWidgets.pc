@@ -1,0 +1,13 @@
+prefix=/Users/ezryow/Git/butterfly-effect/app/bin/darwin/python/arm64
+exec_prefix=${prefix}
+libdir=${prefix}/lib
+includedir=${prefix}/include/qt
+
+
+Name: Qt5 PdfWidgets
+Description: Qt PdfWidgets module
+Version: 5.15.9
+Libs: -L${libdir} -lQt5PdfWidgets 
+Cflags: -DQT_PDFWIDGETS_LIB -I${includedir}/QtPdfWidgets -I${includedir}
+Requires: Qt5Core Qt5Gui Qt5Widgets Qt5Pdf
+

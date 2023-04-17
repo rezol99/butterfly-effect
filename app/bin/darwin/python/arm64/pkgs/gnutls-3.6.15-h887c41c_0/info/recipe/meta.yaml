@@ -1,0 +1,96 @@
+# This file created by conda-build 3.21.4
+# meta.yaml template originally from:
+# /Users/ktietz/demo/src/aggregate/gnutls-feedstock/recipe, last modified Fri Aug 13 20:40:53 2021
+# ------------------------------------------------
+
+package:
+  name: gnutls
+  version: 3.6.15
+source:
+  fn: gnutls-3.6.15.tar.xz
+  patches:
+    - 0003-Fix-libcrypto-test-it-must-always-fail.patch
+  sha256: 0ea8c3283de8d8335d7ae338ef27c53a916f15f382753b174c18b45ffd481558
+  url: https://www.gnupg.org/ftp/gcrypt/gnutls/v3.6/gnutls-3.6.15.tar.xz
+build:
+  number: '0'
+  run_exports:
+    - gnutls >=3.6.15,<3.7.0a0
+  string: h887c41c_0
+requirements:
+  build:
+    - autoconf 2.69 pl5340h1230e6a_1
+    - automake 1.16.1 pl5340hca03da5_1003
+    - cctools_osx-arm64 949.0.1 h332cad3_24
+    - clang 12.0.0 hca03da5_4
+    - clang-12 12.0.0 default_he099f3d_4
+    - clang_osx-arm64 12.0.0 hcb56dc5_3
+    - clangxx 12.0.0 default_he099f3d_4
+    - clangxx_osx-arm64 12.0.0 h39b79ac_3
+    - compiler-rt 12.0.0 h4ccfd99_3
+    - compiler-rt_osx-arm64 12.0.0 h4fb70ea_3
+    - ld64_osx-arm64 530 h001ce53_24
+    - ldid 2.1.2 h7dde238_2
+    - libclang-cpp12 12.0.0 default_he099f3d_4
+    - libcxx 12.0.0 hf6beb65_1
+    - libiconv 1.16 h1230e6a_0
+    - libllvm12 12.0.0 h12f7ac0_4
+    - libtool 2.4.6 h1230e6a_0
+    - llvm-tools 12.0.0 h12f7ac0_4
+    - m4 1.4.18 h1230e6a_1
+    - make 4.3 h620ffc9_1
+    - perl 5.34.0 h1230e6a_0
+    - pkg-config 0.29.2 h1230e6a_0
+    - tapi 1100.0.11 ha21211d_0
+    - zlib 1.2.11 hca03da5_3
+  host:
+    - ca-certificates 2021.4.13 hca03da5_1
+    - gettext 0.21.0 h826f4ad_0
+    - gmp 6.2.1 hc377ac9_0
+    - icu 68.1 hc4ed4cf_0
+    - libcxx 12.0.0 hf6beb65_1
+    - libiconv 1.16 h1230e6a_0
+    - libidn2 2.3.1 h1a28f6b_0
+    - libtasn1 4.16.0 h1a28f6b_0
+    - libunistring 0.9.10 h1a28f6b_0
+    - libxml2 2.9.10 h3d7e406_3
+    - llvm-openmp 12.0.0 haf9daa7_1
+    - nettle 3.7.3 h84b5d62_1
+    - xz 5.2.5 h1a28f6b_0
+    - zlib 1.2.11 hca03da5_3
+  run:
+    - ca-certificates
+    - gettext >=0.19.8.1
+    - gettext >=0.21.0,<1.0a0
+    - gmp >=6.2.1,<7.0a0
+    - libcxx >=12.0.0
+    - libidn2 >=2,<3.0a0
+    - libtasn1 >=4.16.0,<5.0a0
+    - libunistring >=0,<1.0a0
+    - nettle >=3.7.3,<3.8.0a0
+test:
+  commands:
+    - test -f ${PREFIX}/lib/libgnutls${SHLIB_EXT}
+    - test -f ${PREFIX}/lib/libgnutlsxx${SHLIB_EXT}
+    - certtool --version
+    - gnutls-cli --version
+    - ocsptool --version
+    - psktool --version
+    - srptool --version
+about:
+  dev_url: https://gitlab.com/gnutls/gnutls/tree/master
+  doc_url: http://www.gnutls.org/documentation.html
+  home: http://www.gnutls.org/index.html
+  license: LGPL-2.1-or-later
+  license_family: LGPL
+  license_file: LICENSE
+  summary: GnuTLS is a secure communications library implementing the SSL, TLS and
+    DTLS protocols
+extra:
+  copy_test_source_files: true
+  final: true
+  recipe-maintainers:
+    - mingwandroid
+    - sachalau
+    - scopatz
+    - sdvillal

@@ -1,0 +1,87 @@
+# This file created by conda-build 3.21.8
+# meta.yaml template originally from:
+# /var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_17a9cdef-e489-434b-877f-816c70486ce327vaufjy/clone/recipe, last modified Thu Jun  2 08:08:49 2022
+# ------------------------------------------------
+
+package:
+  name: graphite2
+  version: 1.3.14
+source:
+  sha256: f99d1c13aa5fa296898a181dff9b82fb25f6cc0933dbaa7a475d8109bd54209d
+  url: https://github.com/silnrsi/graphite/releases/download/1.3.14/graphite2-1.3.14.tgz
+build:
+  number: '1'
+  run_exports:
+    - graphite2 >=1.3.14,<2.0a0
+  string: hc377ac9_1
+requirements:
+  build:
+    - bzip2 1.0.8 h620ffc9_4
+    - c-ares 1.18.1 h1a28f6b_0
+    - ca-certificates 2022.4.26 hca03da5_0
+    - cctools_osx-arm64 949.0.1 h332cad3_24
+    - clang 12.0.0 hca03da5_4
+    - clang-12 12.0.0 default_he099f3d_4
+    - clang_osx-arm64 12.0.0 hcb56dc5_3
+    - clangxx 12.0.0 default_he099f3d_4
+    - clangxx_osx-arm64 12.0.0 h39b79ac_3
+    - cmake 3.22.1 hae769c0_0
+    - compiler-rt 12.0.0 h4ccfd99_3
+    - compiler-rt_osx-arm64 12.0.0 h4fb70ea_3
+    - expat 2.4.4 hc377ac9_0
+    - krb5 1.19.2 h3b8d789_0
+    - ld64_osx-arm64 530 h001ce53_24
+    - ldid 2.1.2 h64d1936_2
+    - libclang-cpp12 12.0.0 default_he099f3d_4
+    - libcurl 7.82.0 hc6d1d07_0
+    - libcxx 12.0.0 hf6beb65_1
+    - libedit 3.1.20210910 h1a28f6b_0
+    - libev 4.33 h1a28f6b_1
+    - libllvm12 12.0.0 h12f7ac0_4
+    - libnghttp2 1.46.0 h95c9599_0
+    - libssh2 1.10.0 hf27765b_0
+    - libuv 1.39.0 h1a28f6b_0
+    - llvm-tools 12.0.0 h12f7ac0_4
+    - lz4-c 1.9.3 hc377ac9_0
+    - ncurses 6.3 h1a28f6b_2
+    - ninja-base 1.10.2 h525c30c_5
+    - openssl 1.1.1o h1a28f6b_0
+    - rhash 1.4.1 hf27765b_1
+    - tapi 1100.0.11 ha21211d_0
+    - xz 5.2.5 h1a28f6b_1
+    - zlib 1.2.12 h5a0b063_2
+    - zstd 1.5.2 h8574219_0
+  host:
+    - libcxx 12.0.0 hf6beb65_1
+  run:
+    - libcxx >=12.0.0
+test:
+  commands:
+    - test -f $PREFIX/lib/libgraphite2.dylib
+    - test -f $PREFIX/include/graphite2/Segment.h
+    - test -f $PREFIX/include/graphite2/Font.h
+    - test -f $PREFIX/include/graphite2/Types.h
+    - test -f $PREFIX/include/graphite2/Log.h
+about:
+  description: "Graphite is a system that can be used to create \u201Csmart fonts\u201D\
+    \ capable\nof displaying writing systems with various complex behaviors.\nA smart\
+    \ font contains not only letter shapes but also additional\ninstructions indicating\
+    \ how to combine and position the letters in complex ways.\n"
+  dev_url: https://github.com/silnrsi/graphite
+  doc_source_url: https://github.com/silnrsi/graphite/tree/master/doc
+  doc_url: https://graphite.sil.org/
+  home: https://graphite.sil.org/
+  license: LGPL-2.1-or-later
+  license_family: LGPL
+  license_file: COPYING
+  summary: A smart font technology and rendering system.
+extra:
+  copy_test_source_files: true
+  final: true
+  flow_run_id: 17a9cdef-e489-434b-877f-816c70486ce3
+  recipe-maintainers:
+    - mingwandroid
+    - ocefpaf
+    - pkgw
+  remote_url: git@github.com:AnacondaRecipes/graphite2-feedstock.git
+  sha: 1536e2c3a82e1ceb285417f732b50b256f1c82aa

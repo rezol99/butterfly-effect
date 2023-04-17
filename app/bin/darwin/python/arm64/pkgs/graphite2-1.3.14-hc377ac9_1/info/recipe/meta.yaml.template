@@ -1,0 +1,61 @@
+{% set name = "graphite2" %}
+{% set version = "1.3.14" %}
+{% set sha256 = "f99d1c13aa5fa296898a181dff9b82fb25f6cc0933dbaa7a475d8109bd54209d" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/silnrsi/graphite/releases/download/{{ version }}/{{ name }}-{{ version }}.tgz
+  sha256: {{ sha256 }}
+
+build:
+  number: 1
+  run_exports:
+    # Not sure if this is same, but https://abi-laboratory.pro/tracker/timeline/graphite/
+    - {{ pin_subpackage('graphite2') }}
+
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+    - cmake
+    - ninja-base
+
+test:
+  commands:
+    # Libraries/headers.
+    - test -f $PREFIX/lib/libgraphite2.dylib  # [osx]
+    - test -f $PREFIX/lib/libgraphite2.so  # [linux]
+    - if not exist %PREFIX%\Library\bin\graphite2.dll exit 1 # [win]
+    - test -f $PREFIX/include/graphite2/Segment.h  # [not win]
+    - test -f $PREFIX/include/graphite2/Font.h  # [not win]
+    - test -f $PREFIX/include/graphite2/Types.h  # [not win]
+    - test -f $PREFIX/include/graphite2/Log.h  # [not win]
+    - if not exist %PREFIX%\Library\include\graphite2\Segment.h exit 1 # [win]
+    - if not exist %PREFIX%\Library\include\graphite2\Font.h exit 1 # [win]
+    - if not exist %PREFIX%\Library\include\graphite2\Types.h exit 1 # [win]
+    - if not exist %PREFIX%\Library\include\graphite2\Log.h exit 1 # [win]
+
+about:
+  home: https://graphite.sil.org/
+  license: LGPL-2.1-or-later
+  license_file: COPYING
+  license_family: LGPL
+  summary: A smart font technology and rendering system.
+  description: |
+    Graphite is a system that can be used to create “smart fonts” capable 
+    of displaying writing systems with various complex behaviors. 
+    A smart font contains not only letter shapes but also additional 
+    instructions indicating how to combine and position the letters in complex ways.
+  dev_url: https://github.com/silnrsi/graphite
+  doc_url: https://graphite.sil.org/
+  doc_source_url: https://github.com/silnrsi/graphite/tree/master/doc
+
+extra:
+  recipe-maintainers:
+    - pkgw
+    - mingwandroid
+    - ocefpaf

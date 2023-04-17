@@ -1,0 +1,23 @@
+{
+  "arch": "arm64",
+  "build": "h80987f9_0",
+  "build_number": 0,
+  "channel": "https://repo.anaconda.com/pkgs/main/osx-arm64",
+  "constrains": [],
+  "depends": [],
+  "features": "",
+  "fn": "libtasn1-4.19.0-h80987f9_0.conda",
+  "legacy_bz2_md5": "79a907ef7b3678a4368ea7932d8ce518",
+  "license": "LGPL-2.1-or-later",
+  "license_family": "LGPL",
+  "md5": "84d9bb9ff3c7bb886087437d7c614ffa",
+  "name": "libtasn1",
+  "platform": "darwin",
+  "sha256": "d713f2cd60da08cde526421bd2b99c14ff477e7cd073708fa651fa0053f0e37d",
+  "size": 66493,
+  "subdir": "osx-arm64",
+  "timestamp": 1680816695015,
+  "track_features": "",
+  "url": "https://repo.anaconda.com/pkgs/main/osx-arm64/libtasn1-4.19.0-h80987f9_0.conda",
+  "version": "4.19.0"
+}

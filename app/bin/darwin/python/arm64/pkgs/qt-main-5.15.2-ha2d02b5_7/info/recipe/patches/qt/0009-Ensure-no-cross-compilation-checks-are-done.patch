@@ -1,0 +1,47 @@
+From 10167666b45fd1bf5f9e2912c9833e322e888d5f Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Edgar=20Andr=C3=A9s=20Margffoy=20Tuay?= <andfoy@gmail.com>
+Date: Wed, 13 Apr 2022 10:36:27 +0200
+Subject: [PATCH] Ensure no cross-compilation checks are done
+
+---
+ qtbase/configure.pri                     | 4 ++--
+ qtbase/mkspecs/features/qt_configure.prf | 8 ++++----
+ 2 files changed, 6 insertions(+), 6 deletions(-)
+
+diff --git a/qtbase/configure.pri b/qtbase/configure.pri
+index 49755f7abf..a0653abe78 100644
+--- a/qtbase/configure.pri
++++ b/qtbase/configure.pri
+@@ -1060,8 +1060,8 @@ defineTest(qtConfOutput_crossCompile) {
+     !$${2}: return()
+ 
+     # We need to preempt the output here, as subsequent tests rely on it
+-    CONFIG += cross_compile
+-    export(CONFIG)
++    # CONFIG += cross_compile
++    # export(CONFIG)
+ }
+ 
+ defineTest(qtConfOutput_useBFDLinker) {
+diff --git a/qtbase/mkspecs/features/qt_configure.prf b/qtbase/mkspecs/features/qt_configure.prf
+index 6537d98c5d..eb2e53d0be 100644
+--- a/qtbase/mkspecs/features/qt_configure.prf
++++ b/qtbase/mkspecs/features/qt_configure.prf
+@@ -1243,10 +1243,10 @@ defineTest(qtConfTest_compile) {
+     }
+ 
+     # make sure to make this the last override (because of -early)
+-    cross_compile {
+-        # must be done before loading default_pre.prf.
+-        qmake_args += -early "\"CONFIG += cross_compile\""
+-    }
++    # cross_compile {
++    #    # must be done before loading default_pre.prf.
++    #    qmake_args += -early "\"CONFIG += cross_compile\""
++    # }
+ 
+     # Clean up after previous run
+     exists($$test_out_dir/Makefile): \
+-- 
+2.25.1
+

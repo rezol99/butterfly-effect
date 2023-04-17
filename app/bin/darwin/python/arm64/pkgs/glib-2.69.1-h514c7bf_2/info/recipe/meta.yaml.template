@@ -1,0 +1,107 @@
+{% set version = "2.69.1" %}
+{% set major_minor = ".".join(version.split(".")[:2]) %}
+{% set posix = 'm2-' if win else '' %}
+{% set native = 'm2w64-' if win else '' %}
+
+package:
+  name: glib
+  version: {{ version }}
+
+source:
+  url: http://ftp.gnome.org/pub/GNOME/sources/glib/{{ major_minor }}/glib-{{ version }}.tar.xz
+  sha256: f92f34057a091fc8638d91f10cece842cb8618e9a1090b0ddb19cc15a21bf39c
+  patches:
+    # Related to this patch https://bugzilla.gnome.org/show_bug.cgi?id=673135
+    # However, it was rejected by upstream. Homebrew decided to keep their own
+    # copy ( https://raw.githubusercontent.com/Homebrew/patches/59e4d32/glib/hardcoded-paths.diff ).
+    # We are essentially using that copy, but with some tweaks. Info at the link below.
+    #
+    # https://github.com/Homebrew/legacy-homebrew/blob/21ce7a56cb3fc40fe93d731cc654c69268796772/Library/Formula/glib.rb#L33-L39
+    - patches/0001-replace-hardcoded-paths.patch
+    #- patches/0001-Manually-link-with-libiconv-whenever-we-use-libintl.patch  # [win]
+    - patches/0002-skip-some-tests.patch                              # [not osx]
+    - patches/0003-add-install_rpath-to-meson-build-files.patch
+    - patches/0004-Attempt-to-mask-out-qemu-failing-tests.patch       # [ppc64le or aarch64]
+    - patches/0005-Increase-some-test-timeouts.patch                  # [win]
+
+build:
+  number: 2
+  # Python is only ever needed for the build process, so use this next `skip`
+  # statement to avoid redudant builds caused by any cbc.yaml.
+  skip: True  # [py!=38]
+  skip: True  # [win and vc<14]
+  missing_dso_whitelist:          # [osx]
+    - /usr/lib/libresolv.9.dylib  # [osx]
+  run_exports:
+    - {{ pin_subpackage('glib') }}
+  ignore_run_exports:
+    - libffi  # [win]
+
+requirements:
+  build:
+    - meson 0.53.2  # [win]
+    - meson         # [not win]
+    - ninja
+    - {{ native }}pkg-config
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+    - setuptools
+    - python
+    - patch  # [not win]
+    - m2-patch  # [win]
+  host:
+    - python
+    - libffi 3.4  # [not win]
+    # code is incompatible to newer libffi headers
+    - libffi 3.4   # [win]
+    - gettext   # [osx]
+    - zlib
+    - pcre
+    - libiconv  # [osx or win]
+  run:
+    - libffi >=3.4,<3.5
+    - gettext   # [osx]
+    - zlib
+    - pcre
+    - libiconv  # [osx or win]
+
+test:
+  commands:
+    - test -f ${PREFIX}/lib/libglib-2.0{{ SHLIB_EXT }}  # [not win]
+    - test ! -f ${PREFIX}/lib/libgobject-2.0.la  # [not win]
+    # Check that binaries can run -- instigated by Meson Linux rpath issue
+    - gapplication help  # [linux]
+    - gdbus help
+    - gio version
+    - gio-querymodules .
+    - glib-compile-resources --help
+    - glib-compile-schemas --help
+    - gobject-query --help
+    - gresource help
+    - gtester --help  # [not win]
+
+about:
+  home: https://developer.gnome.org/glib/
+  license: LGPL-2.1-or-later
+  license_family: LGPL
+  license_file: COPYING
+  summary: 'Provides core application building blocks for libraries and applications written in C.'
+  description: |
+    GLib provides the core application building blocks for libraries and
+    applications written in C. It provides the core object system used in
+    GNOME, the main loop implementation, and a large set of utility functions
+    functions for strings and common data structures.
+  doc_url: https://developer.gnome.org/glib/unstable/
+  dev_url: https://git.gnome.org/browse/glib/
+  doc_source_url: https://git.gnome.org/browse/glib/tree/docs
+
+
+extra:
+  recipe-maintainers:
+    - ccordoba12
+    - jakirkham
+    - scopatz
+    - ocefpaf
+    - pkgw
+    - isuruf
+    - chenghlee

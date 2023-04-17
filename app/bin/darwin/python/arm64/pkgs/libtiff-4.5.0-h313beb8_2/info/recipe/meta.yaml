@@ -1,0 +1,99 @@
+# This file created by conda-build 3.23.3
+# meta.yaml template originally from:
+# /var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_2000lrkyxm/clone/recipe, last modified Mon Feb 27 03:56:08 2023
+# ------------------------------------------------
+
+package:
+  name: libtiff
+  version: 4.5.0
+source:
+  - folder: .
+    patches:
+      - patches/set_configure_script_version.patch
+    sha256: c7a1d9296649233979fa3eacffef3fa024d73d05d589cb622727b5b08c423464
+    url: https://download.osgeo.org/libtiff/tiff-4.5.0.tar.gz
+build:
+  missing_dso_whitelist:
+    - /opt/X11/lib/libGL.1.dylib
+    - /opt/X11/lib/libglut.3.dylib
+  number: '2'
+  run_exports:
+    - libtiff >=4.5.0,<5.0a0
+  string: h313beb8_2
+requirements:
+  build:
+    - cctools_osx-arm64 949.0.1 h332cad3_25
+    - clang 14.0.6 hca03da5_0
+    - clang-14 14.0.6 default_hf5194b7_0
+    - clang_osx-arm64 14.0.6 h9ff6fda_0
+    - clangxx 14.0.6 default_hf5194b7_0
+    - clangxx_osx-arm64 14.0.6 h72866fe_0
+    - compiler-rt 14.0.6 h4ccfd99_0
+    - compiler-rt_osx-arm64 14.0.6 h4fb70ea_0
+    - ld64_osx-arm64 530 h001ce53_25
+    - ldid 2.1.2 h64d1936_2
+    - libclang-cpp14 14.0.6 default_hf5194b7_0
+    - libcxx 14.0.6 h848a8c0_0
+    - libffi 3.4.2 hca03da5_6
+    - libllvm14 14.0.6 h7ec7a93_1
+    - libtool 2.4.6 h313beb8_1009
+    - llvm-tools 14.0.6 h7ec7a93_1
+    - make 4.3 h620ffc9_1
+    - patch 2.7.6 h1a28f6b_1001
+    - tapi 1100.0.11 h8754e6a_1
+    - zlib 1.2.13 h5a0b063_0
+  host:
+    - jpeg 9e h1a28f6b_0
+    - lerc 3.0 hc377ac9_0
+    - libcxx 14.0.6 h848a8c0_0
+    - libdeflate 1.17 h80987f9_0
+    - libwebp-base 1.2.4 h80987f9_1
+    - lz4-c 1.9.4 h313beb8_0
+    - xz 5.2.10 h80987f9_1
+    - zlib 1.2.13 h5a0b063_0
+    - zstd 1.5.2 h8574219_0
+  run:
+    - jpeg >=9e,<10a
+    - lerc >=3.0,<4.0a0
+    - libcxx >=14.0.6
+    - libdeflate >=1.17,<1.18.0a0
+    - libwebp-base
+    - xz >=5.2.10,<6.0a0
+    - xz >=5.2.4,<6.0a0
+    - zlib >=1.2.13,<1.3.0a0
+    - zstd >=1.5.2,<1.6.0a0
+test:
+  commands:
+    - test -f ${PREFIX}/lib/libtiff.a
+    - test -f ${PREFIX}/lib/libtiffxx.a
+    - test -f ${PREFIX}/lib/libtiff.dylib
+    - test -f ${PREFIX}/lib/libtiffxx.dylib
+  downstreams:
+    - pillow >=8
+    - py-opencv >=4
+about:
+  description: 'This software provides support for the Tag Image File Format (TIFF),
+    a
+
+    widely used format for storing image data.
+
+    '
+  dev_url: https://gitlab.com/libtiff/libtiff
+  doc_url: http://www.simplesystems.org/libtiff/
+  home: http://www.simplesystems.org/libtiff/
+  license: HPND
+  license_family: Other
+  license_file: LICENSE.md
+  summary: Support for the Tag Image File Format (TIFF).
+extra:
+  copy_test_source_files: true
+  final: true
+  flow_run_id: 20d91230-1b53-4365-b33a-4bd0a2632ad6
+  recipe-maintainers:
+    - jakirkham
+    - mingwandroid
+    - msarahan
+    - ocefpaf
+    - stuarteberg
+  remote_url: git@github.com:AnacondaRecipes/libtiff-feedstock.git
+  sha: 20163de94722e2ddb0ac7d81a8286447373a1e08

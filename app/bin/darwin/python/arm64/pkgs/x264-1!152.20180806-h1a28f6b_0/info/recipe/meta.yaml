@@ -1,0 +1,60 @@
+# This file created by conda-build 3.21.4
+# meta.yaml template originally from:
+# /Users/ktietz/demo/src/aggregate/x264-feedstock/recipe, last modified Fri Aug 13 19:27:00 2021
+# ------------------------------------------------
+
+package:
+  name: x264
+  version: 1!152.20180806
+source:
+  fn: x264-snapshot-20180806-2245-stable.tar.bz2
+  sha256: 958e78e7563f0018285ebdbff563fb22db89b0abf3649d7e914abd9d50785fc6
+  url: http://download.videolan.org/pub/videolan/x264/snapshots/x264-snapshot-20180806-2245-stable.tar.bz2
+build:
+  number: '0'
+  run_exports:
+    - x264 >=1!152.20180806,<1!153
+  string: h1a28f6b_0
+requirements:
+  build:
+    - cctools_osx-arm64 949.0.1 h332cad3_24
+    - clang 12.0.0 hca03da5_4
+    - clang-12 12.0.0 default_he099f3d_4
+    - clang_osx-arm64 12.0.0 hcb56dc5_3
+    - clangxx 12.0.0 default_he099f3d_4
+    - compiler-rt 12.0.0 h4ccfd99_3
+    - compiler-rt_osx-arm64 12.0.0 h4fb70ea_3
+    - ld64_osx-arm64 530 h001ce53_24
+    - ldid 2.1.2 h7dde238_2
+    - libclang-cpp12 12.0.0 default_he099f3d_4
+    - libcxx 12.0.0 hf6beb65_1
+    - libllvm12 12.0.0 h12f7ac0_4
+    - libtool 2.4.6 h1230e6a_0
+    - llvm-tools 12.0.0 h12f7ac0_4
+    - make 4.3 h620ffc9_1
+    - perl 5.34.0 h1230e6a_0
+    - tapi 1100.0.11 ha21211d_0
+    - zlib 1.2.11 hca03da5_3
+  host: []
+  run: []
+test:
+  commands:
+    - test -f ${PREFIX}/include/x264.h
+    - test -f ${PREFIX}/lib/libx264.a
+    - test -f ${PREFIX}/lib/libx264.dylib
+    - test -f ${PREFIX}/lib/libx264.152.dylib
+    - x264 --help
+about:
+  home: http://www.videolan.org/developers/x264.html
+  license: GPL-2.0
+  license_file: COPYING
+  summary: A free software library for encoding video streams into the H.264/MPEG-4
+    AVC format.
+extra:
+  copy_test_source_files: true
+  final: true
+  recipe-maintainers:
+    - 183amir
+    - carlodri
+    - jakirkham
+    - sdvillal

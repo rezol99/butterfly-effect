@@ -1,0 +1,57 @@
+{% set version = "6.2.1" %}
+
+package:
+  name: gmp
+  version: {{ version }}
+
+source:
+  url: https://gmplib.org/download/gmp/gmp-{{ version }}.tar.bz2
+  sha256: eae9326beb4158c386e39a356818031bd28f3124cf915f8c5b1dc4c7a36b4d7c
+  patches:
+    - 0000-Avoid-the-x18-register.patch
+
+build:
+  number: 3
+  skip: true  # [win]
+  run_exports:
+    # excellent, even across major ver:
+    #  https://abi-laboratory.pro/tracker/timeline/gmp/
+    - {{ pin_subpackage("gmp") }}
+
+requirements:
+  build:
+    - gnuconfig  # [unix]
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+    - m4
+    - make
+    - patch  # [unix]
+  host:
+
+test:
+  requires:
+    - {{ compiler('c') }}
+  files:
+    - test.c
+
+  commands:
+    - test -f ${PREFIX}/lib/libgmp.a        # [unix]
+    - test -f ${PREFIX}/lib/libgmp.dylib    # [osx]
+    - test -f ${PREFIX}/lib/libgmp.so       # [linux]
+    - test -f ${PREFIX}/lib/libgmpxx.a      # [unix]
+    - test -f ${PREFIX}/lib/libgmpxx.dylib  # [osx]
+    - test -f ${PREFIX}/lib/libgmpxx.so     # [linux]
+
+about:
+  home: https://gmplib.org/
+  license: GPL-2.0-or-later AND LGPL-3.0-or-later
+  license_file: COPYING.LESSERv3
+  summary: The GNU multiprecision library.
+  dev_url: https://gmplib.org/repo/
+  doc_url: https://gmplib.org/manual/
+
+extra:
+  recipe-maintainers:
+    - asmeurer
+    - isuruf
+    - jakirkham

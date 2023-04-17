@@ -1,0 +1,4 @@
+lib/libLLVM-12.dylib
+lib/libLLVM-C.12.dylib
+lib/libLTO.12.dylib
+lib/libRemarks.12.dylib

@@ -1,0 +1,92 @@
+{
+  "build": "h80987f9_0",
+  "build_number": 0,
+  "channel": "https://repo.anaconda.com/pkgs/main/osx-arm64",
+  "constrains": [],
+  "depends": [],
+  "extracted_package_dir": "/Users/ezryow/Git/butterfly-effect/app/bin/darwin/python/arm64/pkgs/libtasn1-4.19.0-h80987f9_0",
+  "features": "",
+  "files": [
+    "bin/asn1Coding",
+    "bin/asn1Decoding",
+    "bin/asn1Parser",
+    "include/libtasn1.h",
+    "lib/libtasn1.6.dylib",
+    "lib/libtasn1.dylib",
+    "lib/pkgconfig/libtasn1.pc"
+  ],
+  "fn": "libtasn1-4.19.0-h80987f9_0.conda",
+  "legacy_bz2_md5": "79a907ef7b3678a4368ea7932d8ce518",
+  "license": "LGPL-2.1-or-later",
+  "license_family": "LGPL",
+  "link": {
+    "source": "/Users/ezryow/Git/butterfly-effect/app/bin/darwin/python/arm64/pkgs/libtasn1-4.19.0-h80987f9_0",
+    "type": 1
+  },
+  "md5": "84d9bb9ff3c7bb886087437d7c614ffa",
+  "name": "libtasn1",
+  "package_tarball_full_path": "/Users/ezryow/Git/butterfly-effect/app/bin/darwin/python/arm64/pkgs/libtasn1-4.19.0-h80987f9_0.conda",
+  "paths_data": {
+    "paths": [
+      {
+        "_path": "bin/asn1Coding",
+        "path_type": "hardlink",
+        "sha256": "1fed82516491f5dff9a222cba5f1158d82342766e14625cd388a65f06ceb09c0",
+        "sha256_in_prefix": "1fed82516491f5dff9a222cba5f1158d82342766e14625cd388a65f06ceb09c0",
+        "size_in_bytes": 70768
+      },
+      {
+        "_path": "bin/asn1Decoding",
+        "path_type": "hardlink",
+        "sha256": "d4ac39cfecfabd95484b196b1fa2dd582770ee6ca3a27169efa508053716fb39",
+        "sha256_in_prefix": "d4ac39cfecfabd95484b196b1fa2dd582770ee6ca3a27169efa508053716fb39",
+        "size_in_bytes": 71664
+      },
+      {
+        "_path": "bin/asn1Parser",
+        "path_type": "hardlink",
+        "sha256": "eb301d35e77621ef86a204a9eec51f5369d78a99d4a13c5d78ce86e45ae9c4a3",
+        "sha256_in_prefix": "eb301d35e77621ef86a204a9eec51f5369d78a99d4a13c5d78ce86e45ae9c4a3",
+        "size_in_bytes": 69856
+      },
+      {
+        "_path": "include/libtasn1.h",
+        "path_type": "hardlink",
+        "sha256": "8493490c766056959470f54241fae531d68f390eafc2316f33a2117a05a24c82",
+        "sha256_in_prefix": "8493490c766056959470f54241fae531d68f390eafc2316f33a2117a05a24c82",
+        "size_in_bytes": 18101
+      },
+      {
+        "_path": "lib/libtasn1.6.dylib",
+        "path_type": "hardlink",
+        "sha256": "903b19e8687089b46c81c90d67acb5c3e9d6b8837de6fa1e5529cbc58ec9e89d",
+        "sha256_in_prefix": "903b19e8687089b46c81c90d67acb5c3e9d6b8837de6fa1e5529cbc58ec9e89d",
+        "size_in_bytes": 123888
+      },
+      {
+        "_path": "lib/libtasn1.dylib",
+        "path_type": "softlink",
+        "sha256": "903b19e8687089b46c81c90d67acb5c3e9d6b8837de6fa1e5529cbc58ec9e89d",
+        "size_in_bytes": 123888
+      },
+      {
+        "_path": "lib/pkgconfig/libtasn1.pc",
+        "file_mode": "text",
+        "path_type": "hardlink",
+        "prefix_placeholder": "/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_d8lrf97caj/croot/libtasn1_1680816617434/_h_env_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_place",
+        "sha256": "44b91a777efe329bb3e77f4f499cd686e0c27ee4d5648708abee42c9f3164ce1",
+        "sha256_in_prefix": "83ff4143d91022d3ad76d00b688795c51e482c94dad05e2c2dc4f6b84348cc5f",
+        "size_in_bytes": 1350
+      }
+    ],
+    "paths_version": 1
+  },
+  "requested_spec": "None",
+  "sha256": "d713f2cd60da08cde526421bd2b99c14ff477e7cd073708fa651fa0053f0e37d",
+  "size": 66493,
+  "subdir": "osx-arm64",
+  "timestamp": 1680816695015,
+  "track_features": "",
+  "url": "https://repo.anaconda.com/pkgs/main/osx-arm64/libtasn1-4.19.0-h80987f9_0.conda",
+  "version": "4.19.0"
+}

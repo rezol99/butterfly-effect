@@ -1,0 +1,91 @@
+diff --git a/gio/tests/meson.build b/gio/tests/meson.build
+index d8ebd56..d5034ce 100644
+--- a/gio/tests/meson.build
++++ b/gio/tests/meson.build
+@@ -39,7 +39,6 @@ gio_tests = {
+   'credentials' : {},
+   'data-input-stream' : {},
+   'data-output-stream' : {},
+-  'defaultvalue' : {'extra_sources' : [giotypefuncs_inc]},
+   'fileattributematcher' : {},
+   'filter-streams' : {},
+   'giomodule' : {},
+@@ -55,7 +54,6 @@ gio_tests = {
+   'memory-monitor' : {},
+   'memory-output-stream' : {},
+   'mount-operation' : {},
+-  'network-address' : {'extra_sources': ['mock-resolver.c']},
+   'network-monitor' : {},
+   'network-monitor-race' : {},
+   'permission' : {},
+@@ -79,7 +77,6 @@ gio_tests = {
+   'tls-interaction' : {'extra_sources' : ['gtesttlsbackend.c']},
+   'tls-database' : {'extra_sources' : ['gtesttlsbackend.c']},
+   'tls-bindings' : {'extra_sources' : ['gtesttlsbackend.c']},
+-  'gdbus-address-get-session' : {},
+   'win32-appinfo' : {},
+ }
+ 
+@@ -135,11 +132,6 @@ endif
+ #  Test programs buildable on UNIX only
+ if host_machine.system() != 'windows'
+   gio_tests += {
+-    'file' : {},
+-    'gdbus-peer' : {
+-      'dependencies' : [libgdbus_example_objectmanager_dep],
+-      'install_rpath' : installed_tests_execdir
+-    },
+     'gdbus-peer-object-manager' : {},
+     'live-g-file' : {},
+     'socket-address' : {},
+@@ -176,16 +168,6 @@ if host_machine.system() != 'windows'
+ 
+   # Uninstalled because of the check-for-executable logic in DesktopAppInfo
+   # unable to find the installed executable
+-  if not glib_have_cocoa
+-    gio_tests += {
+-      'appinfo' : {
+-        'install' : false,
+-      },
+-      'desktop-app-info' : {
+-        'install' : false,
+-      },
+-    }
+-  endif
+ 
+   test_extra_programs += {
+     'basic-application' : {},
+@@ -272,10 +254,6 @@ if host_machine.system() != 'windows'
+     extra_sources = ['gdbus-sessionbus.c', 'gdbus-tests.c']
+ 
+     gio_tests += {
+-      'actions' : {
+-        'extra_sources' : extra_sources,
+-        'suite' : ['slow'],
+-      },
+       'gdbus-auth' : {'extra_sources' : extra_sources},
+       'gdbus-bz627724' : {'extra_sources' : extra_sources},
+       'gdbus-close-pending' : {'extra_sources' : extra_sources},
+@@ -301,10 +279,6 @@ if host_machine.system() != 'windows'
+         'extra_sources' : [extra_sources, gdbus_test_codegen_generated, gdbus_test_codegen_generated_interface_info],
+         'c_args' : ['-DGLIB_VERSION_MIN_REQUIRED=GLIB_VERSION_2_32'],
+       },
+-      'gdbus-threading' : {
+-        'extra_sources' : extra_sources,
+-        'suite' : ['slow'],
+-      },
+       'gmenumodel' : {
+         'extra_sources' : extra_sources,
+         'suite' : ['slow'],
+diff --git a/glib/tests/meson.build b/glib/tests/meson.build
+index 6eb23e8..e9d3abf 100644
+--- a/glib/tests/meson.build
++++ b/glib/tests/meson.build
+@@ -19,7 +19,6 @@ glib_tests = {
+   'dir' : {},
+   'environment' : {},
+   'error' : {},
+-  'fileutils' : {},
+   'gdatetime' : {
+     'suite' : ['slow'],
+   },

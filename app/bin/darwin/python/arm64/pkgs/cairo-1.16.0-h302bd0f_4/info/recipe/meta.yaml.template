@@ -1,0 +1,125 @@
+{% set version = "1.16.0" %}
+
+package:
+  name: cairo
+  version: {{ version }}
+
+source:
+  url: https://cairographics.org/releases/cairo-{{ version }}.tar.xz
+  sha256: 5e7b29b3f113ef870d1e3ecf8adf21f923396401604bda16d44be45e66052331
+  patches: # [osx or win]
+    - windows_enable_cairo_gobject.patch  # [win]
+    - windows_pc_files.patch  # [win]
+    - windows_enable_freetype.patch  # [win]
+    - 0001-Ref-and-destroy-the-cairo-surface-handed-off-to-Core.patch  # [osx]
+build:
+  number: 4
+  run_exports:
+    - {{ pin_subpackage('cairo') }}
+  missing_dso_whitelist:         # [linux and x86_64]
+    - '**/libc.so.6'             # [linux and x86_64]
+    - '**/libpthread.so.0'       # [linux and x86_64]
+    - '**/libdl.so.2'            # [linux and x86_64]
+    - '**/librt.so.1'            # [linux and x86_64]
+    - '**/libm.so.6'             # [linux and x86_64]
+
+requirements:
+  build:
+    - posix   # [win]
+    - pkg-config            # [not win]
+    - libtool               # [not win]
+    - automake              # [not win]
+    - make                  # [not win]
+    - m2-pkg-config         # [win]
+    - m2-libtool            # [win]
+    - m2-automake-wrapper   # [win]
+    - m2-make               # [win]
+    - xz  # [not win]
+    - m2w64-xz  # [win]
+    - pthread-stubs         # [linux]
+    - xcb-proto             # [linux]
+    - {{ compiler('c') }}
+    - {{ cdt('libx11-devel') }}          # [linux]
+    - {{ cdt('libxau-devel') }}          # [linux]
+    - {{ cdt('libxext-devel') }}         # [linux]
+    - {{ cdt('libxrender-devel') }}      # [linux]
+    - {{ cdt('xorg-x11-proto-devel') }}  # [linux]
+    - patch     # [osx]
+    - m2-patch  # [win]
+
+  host:
+    - freetype 2.10
+    - fontconfig 2.14
+    - glib 2
+    - icu 58  # [not (s390x or aarch64 or (osx and arm64))]
+    - icu 68  # [s390x or aarch64 or (osx and arm64)]
+    - libpng 1.6
+    - libxcb 1.15               # [linux]
+    - pixman 0.40
+    - zlib 1.2.*
+
+  run:
+    - freetype
+    - fontconfig
+    - glib
+    - libpng
+    - libxcb                # [linux]
+    - pixman
+    - zlib
+
+test:
+  commands:
+    # Check commands.
+    - cairo-trace --help  # [not win]
+
+    # Verify libraries.
+    {% set cairo_libs = [
+            "libcairo",
+            "libcairo-gobject",
+            "libcairo-script-interpreter",
+    ] %}
+    {% for each_cairo_lib in cairo_libs %}
+    - test -f $PREFIX/lib/{{ each_cairo_lib }}.a          # [not win]
+    - test -f $PREFIX/lib/{{ each_cairo_lib }}.dylib      # [osx]
+    - test -f $PREFIX/lib/{{ each_cairo_lib }}.so         # [linux]
+    {% endfor %}
+    - if not exist %LIBRARY_BIN%\\cairo.dll exit 1          # [win]
+    - if not exist %LIBRARY_LIB%\\cairo.lib exit 1          # [win]
+    - if not exist %LIBRARY_LIB%\\cairo-static.lib exit 1   # [win]
+    - if not exist %LIBRARY_BIN%\\cairo-gobject.dll exit 1  # [win]
+    - if not exist %LIBRARY_LIB%\\cairo-gobject.lib exit 1  # [win]
+
+    # Check pkg-config files.
+    - test -f $PREFIX/lib/pkgconfig/cairo-quartz.pc             # [osx]
+    - test -f $PREFIX/lib/pkgconfig/cairo-xlib.pc               # [linux]   
+    - if not exist %LIBRARY_LIB%\\pkgconfig\\cairo.pc exit 1    # [win]  
+
+    # check include files
+    - test -f $PREFIX/include/cairo/cairo.h               # [unix]    
+    - if not exist %LIBRARY_INC%\\cairo\\cairo.h exit 1   # [win]        
+
+    # check that cairo was built with fontconfig support
+    - grep -q "CAIRO_HAS_FC_FONT 1" $PREFIX/include/cairo/cairo-features.h  # [unix]
+
+about:
+  home: https://cairographics.org/
+  dev_url: https://gitlab.freedesktop.org/cairo/cairo
+  doc_url: https://cairographics.org/documentation/
+  license: LGPL-2.1-or-later or MPL-1.1
+  license_file: 
+    - COPYING
+    - COPYING-LGPL-2.1
+    - COPYING-MPL-1.1
+  license_family: LGPL
+  summary: 'Cairo is a 2D graphics library with support for multiple output devices.'
+  description: |
+    Cairo is a 2D graphics library with support for multiple output devices.
+    It is designed to produce consistent output on all output media while
+    taking advantage of display hardware acceleration when available.
+
+extra:
+  recipe-maintainers:
+    - ccordoba12
+    - jakirkham
+    - ocefpaf
+    - pkgw

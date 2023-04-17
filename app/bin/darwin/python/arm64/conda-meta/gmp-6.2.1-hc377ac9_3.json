@@ -1,0 +1,144 @@
+{
+  "build": "hc377ac9_3",
+  "build_number": 3,
+  "channel": "https://repo.anaconda.com/pkgs/main/osx-arm64",
+  "constrains": [],
+  "depends": [
+    "libcxx >=12.0.0"
+  ],
+  "extracted_package_dir": "/Users/ezryow/Git/butterfly-effect/app/bin/darwin/python/arm64/pkgs/gmp-6.2.1-hc377ac9_3",
+  "features": "",
+  "files": [
+    "include/gmp.h",
+    "include/gmpxx.h",
+    "lib/libgmp.10.dylib",
+    "lib/libgmp.a",
+    "lib/libgmp.dylib",
+    "lib/libgmpxx.4.dylib",
+    "lib/libgmpxx.a",
+    "lib/libgmpxx.dylib",
+    "lib/pkgconfig/gmp.pc",
+    "lib/pkgconfig/gmpxx.pc",
+    "share/info/gmp.info",
+    "share/info/gmp.info-1",
+    "share/info/gmp.info-2"
+  ],
+  "fn": "gmp-6.2.1-hc377ac9_3.conda",
+  "legacy_bz2_md5": "d875d1f8cda3e280dafdb38350477b15",
+  "license": "GPL-2.0-or-later AND LGPL-3.0-or-later",
+  "link": {
+    "source": "/Users/ezryow/Git/butterfly-effect/app/bin/darwin/python/arm64/pkgs/gmp-6.2.1-hc377ac9_3",
+    "type": 1
+  },
+  "md5": "042fd52b5ac66f1f0585a86339530ec8",
+  "name": "gmp",
+  "package_tarball_full_path": "/Users/ezryow/Git/butterfly-effect/app/bin/darwin/python/arm64/pkgs/gmp-6.2.1-hc377ac9_3.conda",
+  "paths_data": {
+    "paths": [
+      {
+        "_path": "include/gmp.h",
+        "file_mode": "text",
+        "path_type": "hardlink",
+        "prefix_placeholder": "/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_e42b7415-5d8a-45db-9aa7-05f3e4e45d89k6qfsvlv/croots/recipe/gmp_1653996263903/_h_env_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehol",
+        "sha256": "71e62ef9b7157f53097d7ec753efe3bf82baa91d8121e540483d825d54e840c3",
+        "sha256_in_prefix": "6ea71980d9e4d1abfb40f928243cf403f322814b36af2894cb54e9401f7893c9",
+        "size_in_bytes": 84755
+      },
+      {
+        "_path": "include/gmpxx.h",
+        "path_type": "hardlink",
+        "sha256": "0011ae411a0bc1030e07d968b32fdc1343f5ac2a17b7d28f493e7976dde2ac82",
+        "sha256_in_prefix": "0011ae411a0bc1030e07d968b32fdc1343f5ac2a17b7d28f493e7976dde2ac82",
+        "size_in_bytes": 129113
+      },
+      {
+        "_path": "lib/libgmp.10.dylib",
+        "path_type": "hardlink",
+        "sha256": "523ff55f9390dd596eb451ec13d33837812765a195c42405588bcc47f1c76912",
+        "sha256_in_prefix": "523ff55f9390dd596eb451ec13d33837812765a195c42405588bcc47f1c76912",
+        "size_in_bytes": 469264
+      },
+      {
+        "_path": "lib/libgmp.a",
+        "path_type": "hardlink",
+        "sha256": "3e92baed7dca2f7fd4ea4157aa7591e8fb015348a4958f2ba60377dd2399f999",
+        "sha256_in_prefix": "3e92baed7dca2f7fd4ea4157aa7591e8fb015348a4958f2ba60377dd2399f999",
+        "size_in_bytes": 843496
+      },
+      {
+        "_path": "lib/libgmp.dylib",
+        "path_type": "softlink",
+        "sha256": "523ff55f9390dd596eb451ec13d33837812765a195c42405588bcc47f1c76912",
+        "size_in_bytes": 469264
+      },
+      {
+        "_path": "lib/libgmpxx.4.dylib",
+        "path_type": "hardlink",
+        "sha256": "e3c8cf968392167b62ad86692a8b2e8411214a6b8af5272903b207a44d103187",
+        "sha256_in_prefix": "e3c8cf968392167b62ad86692a8b2e8411214a6b8af5272903b207a44d103187",
+        "size_in_bytes": 80256
+      },
+      {
+        "_path": "lib/libgmpxx.a",
+        "path_type": "hardlink",
+        "sha256": "a378081457e076d77616ac6b6f1142a5143be5e7a632a91f7e4b5bd3f9db1cad",
+        "sha256_in_prefix": "a378081457e076d77616ac6b6f1142a5143be5e7a632a91f7e4b5bd3f9db1cad",
+        "size_in_bytes": 33960
+      },
+      {
+        "_path": "lib/libgmpxx.dylib",
+        "path_type": "softlink",
+        "sha256": "e3c8cf968392167b62ad86692a8b2e8411214a6b8af5272903b207a44d103187",
+        "size_in_bytes": 80256
+      },
+      {
+        "_path": "lib/pkgconfig/gmp.pc",
+        "file_mode": "text",
+        "path_type": "hardlink",
+        "prefix_placeholder": "/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_e42b7415-5d8a-45db-9aa7-05f3e4e45d89k6qfsvlv/croots/recipe/gmp_1653996263903/_h_env_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehol",
+        "sha256": "d25894a324a33864d48999162153c95917e06f3fdabd77ce4fe0347b93a80ea3",
+        "sha256_in_prefix": "5701f4e79fd676a1178716dc6ec2f258f0b2b540683d085a0ade9c22d8775c5e",
+        "size_in_bytes": 496
+      },
+      {
+        "_path": "lib/pkgconfig/gmpxx.pc",
+        "file_mode": "text",
+        "path_type": "hardlink",
+        "prefix_placeholder": "/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_e42b7415-5d8a-45db-9aa7-05f3e4e45d89k6qfsvlv/croots/recipe/gmp_1653996263903/_h_env_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehol",
+        "sha256": "a2df0f7ec4f68ca9f29be45fb76fc8ce0281e60abce2a469ff2ba2541248cd92",
+        "sha256_in_prefix": "85e09274371360071e9c95ff7e0746b9bd5d6eeebf94ae59002c06c9a96816b8",
+        "size_in_bytes": 531
+      },
+      {
+        "_path": "share/info/gmp.info",
+        "path_type": "hardlink",
+        "sha256": "b5e40cce79506dd1478d0cffd4a7d541df492783094c8d1c01893e6315ea22fb",
+        "sha256_in_prefix": "b5e40cce79506dd1478d0cffd4a7d541df492783094c8d1c01893e6315ea22fb",
+        "size_in_bytes": 5931
+      },
+      {
+        "_path": "share/info/gmp.info-1",
+        "path_type": "hardlink",
+        "sha256": "efa500fb0ae8b4ae2632a238a4d7def02777ae1963646a716b7dda427cfd85a1",
+        "sha256_in_prefix": "efa500fb0ae8b4ae2632a238a4d7def02777ae1963646a716b7dda427cfd85a1",
+        "size_in_bytes": 302874
+      },
+      {
+        "_path": "share/info/gmp.info-2",
+        "path_type": "hardlink",
+        "sha256": "5e7c2f97937488b57b47e896feb2a60a2f9d6654257f5856f4d2ce83700b7f7f",
+        "sha256_in_prefix": "5e7c2f97937488b57b47e896feb2a60a2f9d6654257f5856f4d2ce83700b7f7f",
+        "size_in_bytes": 216314
+      }
+    ],
+    "paths_version": 1
+  },
+  "requested_spec": "None",
+  "sha256": "99b3e001fc06ca55b328ace2b352c2c527bb90a624c00af1a746d3ab06488bd1",
+  "size": 447408,
+  "subdir": "osx-arm64",
+  "timestamp": 1653996450241,
+  "track_features": "",
+  "url": "https://repo.anaconda.com/pkgs/main/osx-arm64/gmp-6.2.1-hc377ac9_3.conda",
+  "version": "6.2.1"
+}

@@ -1,0 +1,38 @@
+From 38c2508343c6aa00b8485b379cb5b0a97281e228 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Edgar=20Andr=C3=A9s=20Margffoy=20Tuay?= <andfoy@gmail.com>
+Date: Wed, 13 Apr 2022 12:18:40 +0200
+Subject: [PATCH] Try to set arm64 explicitly
+
+---
+ qtbase/mkspecs/common/macx.conf              | 2 +-
+ qtbase/mkspecs/features/mac/default_post.prf | 1 +
+ 2 files changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/qtbase/mkspecs/common/macx.conf b/qtbase/mkspecs/common/macx.conf
+index d16b77acb8..0555e8564e 100644
+--- a/qtbase/mkspecs/common/macx.conf
++++ b/qtbase/mkspecs/common/macx.conf
+@@ -6,7 +6,7 @@ QMAKE_PLATFORM         += macos osx macx
+ QMAKE_MAC_SDK           = macosx
+ 
+ QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.13
+-QMAKE_APPLE_DEVICE_ARCHS = x86_64
++QMAKE_APPLE_DEVICE_ARCHS = arm64
+ 
+ # Should be 10.15, but as long as the CI builds with
+ # older SDKs we have to keep this.
+diff --git a/qtbase/mkspecs/features/mac/default_post.prf b/qtbase/mkspecs/features/mac/default_post.prf
+index 92a9112bca..c7f4f540eb 100644
+--- a/qtbase/mkspecs/features/mac/default_post.prf
++++ b/qtbase/mkspecs/features/mac/default_post.prf
+@@ -150,6 +150,7 @@ macx-xcode {
+ 
+     single_arch: VALID_ARCHS = $$first(VALID_ARCHS)
+ 
++    EXPORT_VALID_ARCHS = arm64
+     ACTIVE_ARCHS = $(filter $(EXPORT_VALID_ARCHS), $(ARCHS))
+     ARCH_ARGS = $(foreach arch, $(if $(EXPORT_ACTIVE_ARCHS), $(EXPORT_ACTIVE_ARCHS), $(EXPORT_VALID_ARCHS)), -arch $(arch))
+ 
+-- 
+2.25.1
+
