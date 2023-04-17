@@ -1,0 +1,19 @@
+#
+# Author: Lasse Collin
+#
+# This file has been put into the public domain.
+# You can do whatever you want with this file.
+#
+
+prefix=/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_7bc15zunvk/croot/xz_1674070724865/_h_env_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_p
+exec_prefix=/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_7bc15zunvk/croot/xz_1674070724865/_h_env_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_p
+libdir=/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_7bc15zunvk/croot/xz_1674070724865/_h_env_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_p/lib
+includedir=/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_7bc15zunvk/croot/xz_1674070724865/_h_env_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_p/include
+
+Name: liblzma
+Description: General purpose data compression library
+URL: https://tukaani.org/xz/
+Version: 5.2.10
+Cflags: -I${includedir}
+Libs: -L${libdir} -llzma
+Libs.private: -pthread -lpthread

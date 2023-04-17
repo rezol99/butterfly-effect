@@ -1,0 +1,25 @@
+{
+  "build": "py39hca03da5_0",
+  "build_number": 0,
+  "channel": "https://repo.anaconda.com/pkgs/main/osx-arm64",
+  "constrains": [],
+  "depends": [
+    "certifi >=2016.9.26",
+    "python >=3.9,<3.10.0a0"
+  ],
+  "features": "",
+  "fn": "setuptools-65.6.3-py39hca03da5_0.conda",
+  "legacy_bz2_md5": "93146dc474f3a97627c422dddbc769cb",
+  "legacy_bz2_size": 1507217,
+  "license": "MIT",
+  "license_family": "MIT",
+  "md5": "80b30fd6ee9b9363f0ecba419b9ee13d",
+  "name": "setuptools",
+  "sha256": "a0ad61365aa2fd12501a8410380200c6f539bfee2da495bcbf54b1892942c438",
+  "size": 1236922,
+  "subdir": "osx-arm64",
+  "timestamp": 1673288165894,
+  "track_features": "",
+  "url": "https://repo.anaconda.com/pkgs/main/osx-arm64/setuptools-65.6.3-py39hca03da5_0.conda",
+  "version": "65.6.3"
+}

@@ -1,0 +1,81 @@
+{
+  "build": "py39hca03da5_0",
+  "build_number": 0,
+  "channel": "https://repo.anaconda.com/pkgs/main/osx-arm64",
+  "constrains": [],
+  "depends": [
+    "conda-package-streaming >=0.7.0",
+    "python >=3.9,<3.10.0a0"
+  ],
+  "extracted_package_dir": "/Users/ezryow/Git/butterfly-effect/app/bin/darwin/python/arm64/pkgs/conda-package-handling-2.0.2-py39hca03da5_0",
+  "features": "",
+  "files": [
+    "bin/cph",
+    "lib/python3.9/site-packages/conda_package_handling-2.0.2.dist-info/AUTHORS.md",
+    "lib/python3.9/site-packages/conda_package_handling-2.0.2.dist-info/INSTALLER",
+    "lib/python3.9/site-packages/conda_package_handling-2.0.2.dist-info/LICENSE",
+    "lib/python3.9/site-packages/conda_package_handling-2.0.2.dist-info/METADATA",
+    "lib/python3.9/site-packages/conda_package_handling-2.0.2.dist-info/RECORD",
+    "lib/python3.9/site-packages/conda_package_handling-2.0.2.dist-info/REQUESTED",
+    "lib/python3.9/site-packages/conda_package_handling-2.0.2.dist-info/WHEEL",
+    "lib/python3.9/site-packages/conda_package_handling-2.0.2.dist-info/direct_url.json",
+    "lib/python3.9/site-packages/conda_package_handling-2.0.2.dist-info/entry_points.txt",
+    "lib/python3.9/site-packages/conda_package_handling-2.0.2.dist-info/top_level.txt",
+    "lib/python3.9/site-packages/conda_package_handling/__init__.py",
+    "lib/python3.9/site-packages/conda_package_handling/__main__.py",
+    "lib/python3.9/site-packages/conda_package_handling/__pycache__/__init__.cpython-39.pyc",
+    "lib/python3.9/site-packages/conda_package_handling/__pycache__/__main__.cpython-39.pyc",
+    "lib/python3.9/site-packages/conda_package_handling/__pycache__/api.cpython-39.pyc",
+    "lib/python3.9/site-packages/conda_package_handling/__pycache__/cli.cpython-39.pyc",
+    "lib/python3.9/site-packages/conda_package_handling/__pycache__/conda_fmt.cpython-39.pyc",
+    "lib/python3.9/site-packages/conda_package_handling/__pycache__/exceptions.cpython-39.pyc",
+    "lib/python3.9/site-packages/conda_package_handling/__pycache__/interface.cpython-39.pyc",
+    "lib/python3.9/site-packages/conda_package_handling/__pycache__/streaming.cpython-39.pyc",
+    "lib/python3.9/site-packages/conda_package_handling/__pycache__/tarball.cpython-39.pyc",
+    "lib/python3.9/site-packages/conda_package_handling/__pycache__/utils.cpython-39.pyc",
+    "lib/python3.9/site-packages/conda_package_handling/__pycache__/validate.cpython-39.pyc",
+    "lib/python3.9/site-packages/conda_package_handling/api.py",
+    "lib/python3.9/site-packages/conda_package_handling/cli.py",
+    "lib/python3.9/site-packages/conda_package_handling/conda_fmt.py",
+    "lib/python3.9/site-packages/conda_package_handling/exceptions.py",
+    "lib/python3.9/site-packages/conda_package_handling/interface.py",
+    "lib/python3.9/site-packages/conda_package_handling/streaming.py",
+    "lib/python3.9/site-packages/conda_package_handling/tarball.py",
+    "lib/python3.9/site-packages/conda_package_handling/utils.py",
+    "lib/python3.9/site-packages/conda_package_handling/validate.py"
+  ],
+  "fn": "conda-package-handling-2.0.2-py39hca03da5_0.conda",
+  "legacy_bz2_md5": "51192054a983fc8cab6512e31571215d",
+  "legacy_bz2_size": 275995,
+  "license": "BSD-3-Clause",
+  "license_family": "BSD",
+  "link": {
+    "source": "/Users/ezryow/Git/butterfly-effect/app/bin/darwin/python/arm64/pkgs/conda-package-handling-2.0.2-py39hca03da5_0",
+    "type": 1
+  },
+  "md5": "3a2f89afd5d1b5de48ac774e42056e14",
+  "name": "conda-package-handling",
+  "package_tarball_full_path": "/Users/ezryow/Git/butterfly-effect/app/bin/darwin/python/arm64/pkgs/conda-package-handling-2.0.2-py39hca03da5_0.conda",
+  "paths_data": {
+    "paths": [
+      {
+        "_path": "bin/cph",
+        "file_mode": "text",
+        "path_type": "hardlink",
+        "prefix_placeholder": "/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_5f3f459f9v/croot/conda-package-handling_1672865025324/_h_env_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_p",
+        "sha256": "75bd0de204411a292794aaade0a9a3708f0519c38e0a516b09fab5f359dcf2f1",
+        "sha256_in_prefix": "f29ccbf2cfa638bd46efdbe81973d725fbf558f3a908b01f47f46d19ea0b6dd1",
+        "size_in_bytes": 479
+      }
+    ],
+    "paths_version": 1
+  },
+  "requested_spec": "defaults/osx-arm64::conda-package-handling==2.0.2=py39hca03da5_0[md5=3a2f89afd5d1b5de48ac774e42056e14]",
+  "sha256": "e47758d9c4577c5ca2d2f70a2964d94726e9b801f1fc786397bf8e8f95a4c370",
+  "size": 275001,
+  "subdir": "osx-arm64",
+  "timestamp": 1672865088034,
+  "track_features": "",
+  "url": "https://repo.anaconda.com/pkgs/main/osx-arm64/conda-package-handling-2.0.2-py39hca03da5_0.conda",
+  "version": "2.0.2"
+}

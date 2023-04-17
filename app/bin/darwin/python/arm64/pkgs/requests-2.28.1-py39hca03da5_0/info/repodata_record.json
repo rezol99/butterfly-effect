@@ -1,0 +1,28 @@
+{
+  "build": "py39hca03da5_0",
+  "build_number": 0,
+  "channel": "https://repo.anaconda.com/pkgs/main/osx-arm64",
+  "constrains": [],
+  "depends": [
+    "certifi >=2017.4.17",
+    "charset-normalizer >=2.0.0,<3",
+    "idna >=2.5,<4",
+    "python >=3.9,<3.10.0a0",
+    "urllib3 >=1.21.1,<1.27"
+  ],
+  "features": "",
+  "fn": "requests-2.28.1-py39hca03da5_0.conda",
+  "legacy_bz2_md5": "8715d0ea8394c7cd5d21283ebb60e960",
+  "legacy_bz2_size": 94775,
+  "license": "Apache-2.0",
+  "license_family": "Apache",
+  "md5": "09ec4b0fe493870b2606109ca0abf462",
+  "name": "requests",
+  "sha256": "bec7860ffa15b89ba3b2cb19584a81142c384c19f6fb9cfcf074873dd25d974c",
+  "size": 95188,
+  "subdir": "osx-arm64",
+  "timestamp": 1657734745280,
+  "track_features": "",
+  "url": "https://repo.anaconda.com/pkgs/main/osx-arm64/requests-2.28.1-py39hca03da5_0.conda",
+  "version": "2.28.1"
+}

@@ -1,0 +1,79 @@
+# This file created by conda-build 3.21.8
+# meta.yaml template originally from:
+# /var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_b15e28ca-768e-4951-b4c6-8a7476e43183hrjpnkg9/clone/recipe, last modified Wed Jul 13 12:50:33 2022
+# ------------------------------------------------
+
+package:
+  name: requests
+  version: 2.28.1
+source:
+  sha256: 7c5599b102feddaa661c826c56ab4fee28bfd17f5abca1ebbe3e7f19d7c97983
+  url: https://pypi.io/packages/source/r/requests/requests-2.28.1.tar.gz
+build:
+  number: '0'
+  script: /var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_b15e28ca-768e-4951-b4c6-8a7476e43183hrjpnkg9/croots/recipe/requests_1657734638595/_h_env_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_pla/bin/python
+    -m pip install . -vv
+  string: py39hca03da5_0
+requirements:
+  host:
+    - ca-certificates 2022.4.26 hca03da5_0
+    - certifi 2022.6.15 py39hca03da5_0
+    - libcxx 12.0.0 hf6beb65_1
+    - libffi 3.4.2 hc377ac9_4
+    - ncurses 6.3 h1a28f6b_3
+    - openssl 1.1.1q h1a28f6b_0
+    - pip 22.1.2 py39hca03da5_0
+    - python 3.9.12 hbdb9e5c_1
+    - readline 8.1.2 h1a28f6b_1
+    - setuptools 61.2.0 py39hca03da5_0
+    - sqlite 3.38.5 h1058600_0
+    - tk 8.6.12 hb8d0fd4_0
+    - tzdata 2022a hda174b7_0
+    - wheel 0.37.1 pyhd3eb1b0_0
+    - xz 5.2.5 h1a28f6b_1
+    - zlib 1.2.12 h5a0b063_2
+  run:
+    - certifi >=2017.4.17
+    - charset-normalizer >=2.0.0,<3
+    - idna >=2.5,<4
+    - python >=3.9,<3.10.0a0
+    - urllib3 >=1.21.1,<1.27
+test:
+  commands:
+    - pip check
+    - conda create -v --dry-run -n requests-test numpy
+  imports:
+    - requests
+  requires:
+    - conda
+    - pip
+about:
+  description: 'Requests is the only Non-GMO HTTP library for Python, safe for human
+
+    consumption.
+
+    '
+  dev_url: https://github.com/psf/requests
+  doc_url: https://requests.readthedocs.io/en/latest/
+  home: https://requests.readthedocs.io/en/latest/
+  license: Apache-2.0
+  license_family: Apache
+  license_file: LICENSE
+  summary: "Requests is an elegant and simple HTTP library for Python, built with\
+    \ \u2665."
+extra:
+  copy_test_source_files: true
+  final: true
+  flow_run_id: b15e28ca-768e-4951-b4c6-8a7476e43183
+  recipe-maintainers:
+    - carlodri
+    - jakirkham
+    - kalefranz
+    - mcg1969
+    - mingwandroid
+    - msarahan
+    - ocefpaf
+    - pelson
+    - sigmavirus24
+  remote_url: git@github.com:AnacondaRecipes/requests-feedstock.git
+  sha: fc507dd7cdff17b78acb5e29afb215b9e44b6984

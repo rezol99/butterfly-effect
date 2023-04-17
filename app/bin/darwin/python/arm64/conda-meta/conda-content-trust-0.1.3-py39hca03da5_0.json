@@ -1,0 +1,77 @@
+{
+  "build": "py39hca03da5_0",
+  "build_number": 0,
+  "channel": "https://repo.anaconda.com/pkgs/main/osx-arm64",
+  "constrains": [],
+  "depends": [
+    "cryptography",
+    "python >=3.9,<3.10.0a0",
+    "six"
+  ],
+  "extracted_package_dir": "/Users/ezryow/Git/butterfly-effect/app/bin/darwin/python/arm64/pkgs/conda-content-trust-0.1.3-py39hca03da5_0",
+  "features": "",
+  "files": [
+    "bin/conda-content-trust",
+    "lib/python3.9/site-packages/conda_content_trust-0.1.3.dist-info/INSTALLER",
+    "lib/python3.9/site-packages/conda_content_trust-0.1.3.dist-info/LICENSE",
+    "lib/python3.9/site-packages/conda_content_trust-0.1.3.dist-info/METADATA",
+    "lib/python3.9/site-packages/conda_content_trust-0.1.3.dist-info/RECORD",
+    "lib/python3.9/site-packages/conda_content_trust-0.1.3.dist-info/REQUESTED",
+    "lib/python3.9/site-packages/conda_content_trust-0.1.3.dist-info/WHEEL",
+    "lib/python3.9/site-packages/conda_content_trust-0.1.3.dist-info/direct_url.json",
+    "lib/python3.9/site-packages/conda_content_trust-0.1.3.dist-info/entry_points.txt",
+    "lib/python3.9/site-packages/conda_content_trust-0.1.3.dist-info/top_level.txt",
+    "lib/python3.9/site-packages/conda_content_trust/__init__.py",
+    "lib/python3.9/site-packages/conda_content_trust/__main__.py",
+    "lib/python3.9/site-packages/conda_content_trust/__pycache__/__init__.cpython-39.pyc",
+    "lib/python3.9/site-packages/conda_content_trust/__pycache__/__main__.cpython-39.pyc",
+    "lib/python3.9/site-packages/conda_content_trust/__pycache__/authentication.cpython-39.pyc",
+    "lib/python3.9/site-packages/conda_content_trust/__pycache__/cli.cpython-39.pyc",
+    "lib/python3.9/site-packages/conda_content_trust/__pycache__/common.cpython-39.pyc",
+    "lib/python3.9/site-packages/conda_content_trust/__pycache__/encryption.cpython-39.pyc",
+    "lib/python3.9/site-packages/conda_content_trust/__pycache__/metadata_construction.cpython-39.pyc",
+    "lib/python3.9/site-packages/conda_content_trust/__pycache__/root_signing.cpython-39.pyc",
+    "lib/python3.9/site-packages/conda_content_trust/__pycache__/signing.cpython-39.pyc",
+    "lib/python3.9/site-packages/conda_content_trust/authentication.py",
+    "lib/python3.9/site-packages/conda_content_trust/cli.py",
+    "lib/python3.9/site-packages/conda_content_trust/common.py",
+    "lib/python3.9/site-packages/conda_content_trust/encryption.py",
+    "lib/python3.9/site-packages/conda_content_trust/metadata_construction.py",
+    "lib/python3.9/site-packages/conda_content_trust/root_signing.py",
+    "lib/python3.9/site-packages/conda_content_trust/signing.py"
+  ],
+  "fn": "conda-content-trust-0.1.3-py39hca03da5_0.conda",
+  "legacy_bz2_md5": "9057ae5343a3e4e0882daaa84b406fe5",
+  "legacy_bz2_size": 73861,
+  "license": "BSD-3-Clause",
+  "license_family": "BSD",
+  "link": {
+    "source": "/Users/ezryow/Git/butterfly-effect/app/bin/darwin/python/arm64/pkgs/conda-content-trust-0.1.3-py39hca03da5_0",
+    "type": 1
+  },
+  "md5": "a490b7480556986d52237141c2c3caf7",
+  "name": "conda-content-trust",
+  "package_tarball_full_path": "/Users/ezryow/Git/butterfly-effect/app/bin/darwin/python/arm64/pkgs/conda-content-trust-0.1.3-py39hca03da5_0.conda",
+  "paths_data": {
+    "paths": [
+      {
+        "_path": "bin/conda-content-trust",
+        "file_mode": "text",
+        "path_type": "hardlink",
+        "prefix_placeholder": "/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_11146a2b-93c2-444c-a378-ad4fac363e991s0r1hnp/croots/recipe/conda-content-trust_1658126383571/_h_env_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_pl",
+        "sha256": "c5b9df245269aa93a350389f040025d2b9f2565b8a2d30fa06d9dc552719ad5f",
+        "sha256_in_prefix": "4a61ac018bb7b56b22c5fb81f72d7f60e127474263373f4f314b925d13ab8082",
+        "size_in_bytes": 474
+      }
+    ],
+    "paths_version": 1
+  },
+  "requested_spec": "defaults/osx-arm64::conda-content-trust==0.1.3=py39hca03da5_0[md5=a490b7480556986d52237141c2c3caf7]",
+  "sha256": "69094e8d814596db5efd32a5bd1434419624462a1d1902efed8dde091a0de297",
+  "size": 72926,
+  "subdir": "osx-arm64",
+  "timestamp": 1658126408087,
+  "track_features": "",
+  "url": "https://repo.anaconda.com/pkgs/main/osx-arm64/conda-content-trust-0.1.3-py39hca03da5_0.conda",
+  "version": "0.1.3"
+}

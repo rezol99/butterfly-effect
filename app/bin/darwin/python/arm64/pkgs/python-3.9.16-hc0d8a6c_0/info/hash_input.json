@@ -1,0 +1,16 @@
+{
+  "sqlite": "3",
+  "zlib": "1.2",
+  "channel_targets": "defaults",
+  "cxx_compiler_version": "14",
+  "target_platform": "osx-arm64",
+  "c_compiler": "clang",
+  "openssl": "1.1.1",
+  "c_compiler_version": "14",
+  "bzip2": "1.0",
+  "xz": "5",
+  "readline": "8.1",
+  "tk": "8.6",
+  "CONDA_BUILD_SYSROOT": "/Library/Developer/CommandLineTools/SDKs/MacOSX11.1.sdk",
+  "cxx_compiler": "clangxx"
+}

@@ -1,0 +1,64 @@
+# This file created by conda-build 3.21.8
+# meta.yaml template originally from:
+# /var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_clone-9pe10tw2/recipe, last modified Thu Mar 24 03:07:51 2022
+# ------------------------------------------------
+
+package:
+  name: pluggy
+  version: 1.0.0
+source:
+  fn: pluggy-1.0.0.tar.gz
+  sha256: 4224373bacce55f955a878bf9cfa763c1e360858e330072059e10bad68531159
+  url: https://pypi.io/packages/source/p/pluggy/pluggy-1.0.0.tar.gz
+build:
+  number: '1'
+  script: python -m pip install . --no-deps --ignore-installed
+  string: py39hca03da5_1
+requirements:
+  host:
+    - ca-certificates 2022.3.18 hca03da5_0
+    - certifi 2021.10.8 py39hca03da5_2
+    - expat 2.4.4 hc377ac9_0
+    - libcxx 12.0.0 hf6beb65_1
+    - libffi 3.4.2 hc377ac9_2
+    - libiconv 1.16 h1a28f6b_1
+    - ncurses 6.3 h1a28f6b_2
+    - openssl 1.1.1n h1a28f6b_0
+    - packaging 21.3 pyhd3eb1b0_0
+    - pip 21.2.4 py39hca03da5_0
+    - pyparsing 3.0.4 pyhd3eb1b0_0
+    - python 3.9.7 hc70090a_1
+    - readline 8.1.2 h1a28f6b_1
+    - setuptools 58.0.4 py39hca03da5_1
+    - setuptools-scm 6.3.2 pyhd3eb1b0_0
+    - setuptools_scm 6.3.2 hd3eb1b0_0
+    - sqlite 3.38.0 h1058600_0
+    - tk 8.6.11 hb8d0fd4_0
+    - tomli 1.2.2 pyhd3eb1b0_0
+    - tzdata 2021e hda174b7_0
+    - wheel 0.37.1 pyhd3eb1b0_0
+    - xz 5.2.5 h1a28f6b_0
+    - zlib 1.2.11 h5a0b063_4
+  run:
+    - python >=3.9,<3.10.0a0
+test:
+  command:
+    - pip check
+  imports:
+    - pluggy
+  requires:
+    - pip
+about:
+  dev_url: https://github.com/pytest-dev/pluggy/
+  doc_url: https://pluggy.readthedocs.io/en/latest/
+  home: https://github.com/pytest-dev/pluggy
+  license: MIT
+  license_family: MIT
+  license_file: LICENSE
+  summary: Plugin registration and hook calling for Python
+extra:
+  copy_test_source_files: true
+  final: true
+  recipe-maintainers:
+    - JohnGreeley
+    - nicoddemus
