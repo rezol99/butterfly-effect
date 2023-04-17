@@ -54,7 +54,9 @@ export const getPythonScriptDir = () => {
 
 export const callPython = (scriptPath: string) => {
   const arch = getArchitecture();
-  const pythonPath = isMac ? resolveBinPath(`./darwin/${arch}/python.exe`) : '';
+  const pythonPath = isMac
+    ? resolveBinPath(`./darwin/python/${arch}/python.app/Contents/MacOS/python`)
+    : '';
   const options: Options = { pythonPath };
   return PythonShell.run(scriptPath, options);
 };
