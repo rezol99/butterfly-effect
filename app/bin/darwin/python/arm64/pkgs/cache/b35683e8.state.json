@@ -1,7 +1,9 @@
 {
- "_url": "https://repo.anaconda.com/pkgs/main/noarch",
- "_etag": "W/\"8e91154ddaecab92eacc4212a68a0791\"",
- "_mod": "Fri, 14 Apr 2023 21:32:03 GMT",
- "_cache_control": "public, max-age=30",
- "mtime": 1681737692.291331
+  "url": "https://repo.anaconda.com/pkgs/main/noarch",
+  "etag": "W/\"be726821a96e432b7071fab2a4c13e93\"",
+  "mod": "Tue, 18 Apr 2023 06:48:19 GMT",
+  "cache_control": "public, max-age=30",
+  "mtime_ns": 1682137674351501643,
+  "size": 1127044,
+  "refresh_ns": 1682137674351829000
 }

@@ -1,7 +1,9 @@
 {
- "_url": "https://repo.anaconda.com/pkgs/r/osx-arm64",
- "_etag": "W/\"bd18071599942dd824e1ec40e9d10873\"",
- "_mod": "Fri, 19 Aug 2022 21:27:22 GMT",
- "_cache_control": "public, max-age=30",
- "mtime": 1681737692.1319854
+  "url": "https://repo.anaconda.com/pkgs/r/osx-arm64",
+  "etag": "W/\"bd18071599942dd824e1ec40e9d10873\"",
+  "mod": "Fri, 19 Aug 2022 21:27:22 GMT",
+  "cache_control": "public, max-age=30",
+  "mtime_ns": 1682137674167069746,
+  "size": 130,
+  "refresh_ns": 1682137674169185000
 }

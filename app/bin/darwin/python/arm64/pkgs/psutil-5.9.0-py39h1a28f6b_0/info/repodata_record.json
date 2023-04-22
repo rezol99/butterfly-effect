@@ -1,0 +1,25 @@
+{
+  "arch": "arm64",
+  "build": "py39h1a28f6b_0",
+  "build_number": 0,
+  "channel": "https://repo.anaconda.com/pkgs/main/osx-arm64",
+  "constrains": [],
+  "depends": [
+    "python >=3.9,<3.10.0a0"
+  ],
+  "features": "",
+  "fn": "psutil-5.9.0-py39h1a28f6b_0.conda",
+  "legacy_bz2_md5": "9858166e5ffb624c8b9d281f4000d725",
+  "license": "BSD-3-Clause",
+  "license_family": "BSD",
+  "md5": "e3d73204a364057735127a6a67a8d21a",
+  "name": "psutil",
+  "platform": "darwin",
+  "sha256": "8829c6e54518e731868df38ceacdeafd05a803c0c38dfc977a2c339664f60360",
+  "size": 348471,
+  "subdir": "osx-arm64",
+  "timestamp": 1656431368885,
+  "track_features": "",
+  "url": "https://repo.anaconda.com/pkgs/main/osx-arm64/psutil-5.9.0-py39h1a28f6b_0.conda",
+  "version": "5.9.0"
+}

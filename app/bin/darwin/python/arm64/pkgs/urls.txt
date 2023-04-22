@@ -107,3 +107,9 @@ https://repo.anaconda.com/pkgs/main/osx-arm64/libpq-12.9-h65cfe13_3.conda
 https://repo.anaconda.com/pkgs/main/osx-arm64/glib-2.69.1-h514c7bf_2.conda
 https://repo.anaconda.com/pkgs/main/osx-arm64/ffmpeg-4.2.2-h04105a8_0.conda
 https://repo.anaconda.com/pkgs/main/osx-arm64/qt-webengine-5.15.9-h2903aaf_4.conda
+https://repo.anaconda.com/pkgs/main/noarch/toml-0.10.2-pyhd3eb1b0_0.conda
+https://repo.anaconda.com/pkgs/main/osx-arm64/tomli-2.0.1-py39hca03da5_0.conda
+https://repo.anaconda.com/pkgs/main/osx-arm64/mypy_extensions-0.4.3-py39hca03da5_1.conda
+https://repo.anaconda.com/pkgs/main/osx-arm64/typing_extensions-4.5.0-py39hca03da5_0.conda
+https://repo.anaconda.com/pkgs/main/osx-arm64/psutil-5.9.0-py39h1a28f6b_0.conda
+https://repo.anaconda.com/pkgs/main/osx-arm64/mypy-0.981-py39hca03da5_0.conda

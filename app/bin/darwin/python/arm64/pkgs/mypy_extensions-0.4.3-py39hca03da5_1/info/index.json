@@ -1,0 +1,15 @@
+{
+  "arch": "arm64",
+  "build": "py39hca03da5_1",
+  "build_number": 1,
+  "depends": [
+    "python >=3.9,<3.10.0a0"
+  ],
+  "license": "MIT",
+  "license_family": "MIT",
+  "name": "mypy_extensions",
+  "platform": "osx",
+  "subdir": "osx-arm64",
+  "timestamp": 1640170771407,
+  "version": "0.4.3"
+}

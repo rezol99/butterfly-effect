@@ -1,0 +1,30 @@
+{
+  "arch": "arm64",
+  "build": "py39hca03da5_0",
+  "build_number": 0,
+  "channel": "https://repo.anaconda.com/pkgs/main/osx-arm64",
+  "constrains": [],
+  "depends": [
+    "mypy_extensions >=0.4.3,<2",
+    "psutil >=4.0",
+    "python >=3.9,<3.10.0a0",
+    "toml",
+    "tomli >=1.1.0",
+    "typing_extensions >=3.10"
+  ],
+  "features": "",
+  "fn": "mypy-0.981-py39hca03da5_0.conda",
+  "legacy_bz2_md5": "4c74bec9316edb7063c13c2e7e66ee2b",
+  "license": "MIT",
+  "license_family": "MIT",
+  "md5": "3a0d30d801c582f0e896807aa9dc5394",
+  "name": "mypy",
+  "platform": "darwin",
+  "sha256": "81d20487280389dff360edc916036c4c8e38ffb365e6fc42061e953e1dc1cedc",
+  "size": 2749189,
+  "subdir": "osx-arm64",
+  "timestamp": 1668440260835,
+  "track_features": "",
+  "url": "https://repo.anaconda.com/pkgs/main/osx-arm64/mypy-0.981-py39hca03da5_0.conda",
+  "version": "0.981"
+}

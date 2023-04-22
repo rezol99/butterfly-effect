@@ -1,0 +1,94 @@
+# This file created by conda-build 3.21.8
+# meta.yaml template originally from:
+# /var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_1310b568-21f4-4cb0-b0e3-2f3d31e39728k9coaga5/clone/recipe, last modified Tue Jun 28 10:47:55 2022
+# ------------------------------------------------
+
+package:
+  name: psutil
+  version: 5.9.0
+source:
+  fn: psutil-5.9.0.tar.gz
+  sha256: 869842dbd66bb80c3217158e629d6fceaecc3a3166d3d1faee515b05dd26ca25
+  url: https://pypi.io/packages/source/p/psutil/psutil-5.9.0.tar.gz
+build:
+  number: '0'
+  script: /var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_1310b568-21f4-4cb0-b0e3-2f3d31e39728k9coaga5/croots/recipe/psutil_1656431280844/_h_env_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_place/bin/python
+    -m pip install --ignore-installed --no-deps .
+  string: py39h1a28f6b_0
+requirements:
+  build:
+    - cctools_osx-arm64 949.0.1 h332cad3_24
+    - clang 12.0.0 hca03da5_4
+    - clang-12 12.0.0 default_he099f3d_4
+    - clang_osx-arm64 12.0.0 hcb56dc5_3
+    - clangxx 12.0.0 default_he099f3d_4
+    - compiler-rt 12.0.0 h4ccfd99_3
+    - compiler-rt_osx-arm64 12.0.0 h4fb70ea_3
+    - ld64_osx-arm64 530 h001ce53_24
+    - ldid 2.1.2 h64d1936_2
+    - libclang-cpp12 12.0.0 default_he099f3d_4
+    - libcxx 12.0.0 hf6beb65_1
+    - libllvm12 12.0.0 h12f7ac0_4
+    - llvm-tools 12.0.0 h12f7ac0_4
+    - tapi 1100.0.11 ha21211d_0
+    - zlib 1.2.12 h5a0b063_2
+  host:
+    - ca-certificates 2022.4.26 hca03da5_0
+    - certifi 2022.6.15 py39hca03da5_0
+    - libcxx 12.0.0 hf6beb65_1
+    - libffi 3.4.2 hc377ac9_4
+    - ncurses 6.3 h1a28f6b_2
+    - openssl 1.1.1o h1a28f6b_0
+    - pip 21.2.4 py39hca03da5_0
+    - python 3.9.12 hbdb9e5c_1
+    - readline 8.1.2 h1a28f6b_1
+    - setuptools 61.2.0 py39hca03da5_0
+    - sqlite 3.38.5 h1058600_0
+    - tk 8.6.12 hb8d0fd4_0
+    - tzdata 2022a hda174b7_0
+    - wheel 0.37.1 pyhd3eb1b0_0
+    - xz 5.2.5 h1a28f6b_1
+    - zlib 1.2.12 h5a0b063_2
+  run:
+    - python >=3.9,<3.10.0a0
+test:
+  commands:
+    - pip check
+  imports:
+    - psutil
+    - psutil.tests
+  requires:
+    - pip
+about:
+  description: 'psutil (process and system utilities) is a cross-platform library
+    for
+
+    retrieving information on running processes and system utilization (CPU,
+
+    memory, disks, network) in Python. It is useful mainly for system
+
+    monitoring, profiling and limiting process resources and management of
+
+    running processes.
+
+    '
+  dev_url: https://github.com/giampaolo/psutil
+  doc_source_url: https://github.com/giampaolo/psutil/blob/master/docs/index.rst
+  doc_url: https://psutil.readthedocs.io/en/latest/
+  home: https://github.com/giampaolo/psutil
+  license: BSD-3-Clause
+  license_family: BSD
+  license_file: LICENSE
+  summary: A cross-platform process and system utilities module for Python
+extra:
+  copy_test_source_files: true
+  final: true
+  flow_run_id: 1310b568-21f4-4cb0-b0e3-2f3d31e39728
+  recipe-maintainers:
+    - gqmelo
+    - jakirkham
+    - jjhelmus
+    - nehaljwani
+    - pelson
+  remote_url: git@github.com:AnacondaRecipes/psutil-feedstock.git
+  sha: eab26e6055a98cf653bf50eceef6ce72b3e28d32
