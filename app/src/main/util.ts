@@ -52,11 +52,57 @@ export const getPythonScriptDir = () => {
   return pythonScriptDir;
 };
 
-export const callPython = (scriptPath: string) => {
+export const getPythonBinaryPath = (): string => {
+  const osName = isMac ? 'darwin' : 'win32';
   const arch = getArchitecture();
-  const pythonPath = isMac
-    ? resolveBinPath(`./darwin/python/${arch}/python.app/Contents/MacOS/python`)
-    : '';
+  const pythonBinaryPath = resolveBinPath(
+    `./${osName}/python/${arch}/python.app/Contents/MacOS/python`
+  );
+  return pythonBinaryPath;
+};
+
+export const callPython = async (
+  scriptPath: string,
+  args?: string
+): Promise<{ stdout: string; stderr: string }> => {
+  const pythonPath = getPythonBinaryPath();
   const options: Options = { pythonPath };
-  return PythonShell.run(scriptPath, options);
+  const pythonShell = new PythonShell(scriptPath, options);
+  if (args) pythonShell.send(args);
+  return new Promise((resolve, reject) => {
+    pythonShell.on('message', (stdout) => {
+      console.log(stdout);
+      resolve({ stdout, stderr: '' });
+    });
+    pythonShell.on('stderr', (stderr) => {
+      console.log(stderr);
+      resolve({ stdout: '', stderr });
+    });
+  });
+};
+
+export type Base64 = string;
+
+export type PythonSendData = {
+  command: string;
+  image?: Base64;
+  meta?: any;
+};
+
+const PYTHON_ENTRY_SCRIPT_NAME = 'handler.py' as const;
+
+const getPythonEntryScriptPath = () => {
+  const pythonScriptDir = getPythonScriptDir();
+  const pythonEntryScriptPath = path.join(
+    pythonScriptDir,
+    PYTHON_ENTRY_SCRIPT_NAME
+  );
+  return pythonEntryScriptPath;
+};
+
+export const sendPython = async (data: PythonSendData) => {
+  const sendData = `${JSON.stringify(data)}`;
+  const entryPath = getPythonEntryScriptPath();
+  const { stdout, stderr } = await callPython(entryPath, sendData);
+  return { stdout, stderr };
 };

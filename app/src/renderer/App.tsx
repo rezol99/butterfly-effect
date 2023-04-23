@@ -1,29 +1,38 @@
 import { MemoryRouter as Router, Routes, Route } from 'react-router-dom';
 import icon from '../../assets/icon.svg';
 import './App.css';
-import { getPythonScriptDir, joinPath } from './util/path';
-
-const testPython = async () => {
-  const scriptsDir = await getPythonScriptDir();
-  const fileName = 'hello.py';
-  const helloScriptPath = joinPath([scriptsDir, fileName]);
-  const stdio: string = await window.electron.ipcRenderer.invoke(
-    'python-hello-world',
-    helloScriptPath
-  );
-  return stdio;
-};
+import sendPython from './bridge/python';
+import { useState } from 'react';
 
 function Hello() {
+  const [testImage, setTestImage] = useState<string | null>(null);
+
+  const testOpenCVConvert = async () => {
+    const res = await fetch(
+      'https://i.seadn.io/gae/oOfqndli8Dqq6gL_QdhQV0ljeZGK_gYfh343GHPvt4Mv9W0JBUim_X9G4PS9R3663XTn_VEH8FUOe2JzLDGgDGcUYEUBgazC7pvWWA?auto=format&w=1000'
+    );
+    const reader = new FileReader();
+
+    reader.readAsDataURL(await res.blob());
+    reader.onload = async () => {
+      const base64Data = reader.result?.toString().split(',')[1];
+      const sendData = { command: 'blur', image: base64Data };
+      const { stdout, stderr } = await sendPython(sendData);
+      if (stderr) return;
+      const json = JSON.parse(stdout);
+      const dataURI = `data:image/jpeg;base64,${json.image}`;
+      setTestImage(dataURI);
+    };
+  };
   const handlePythonTest = async () => {
-    const res = await testPython();
-    alert(res);
+    testOpenCVConvert();
   };
 
   return (
     <div>
+      {/* { testImage && <img src={testImage} alt="test"  width={200} /> } */}
       <div className="Hello">
-        <img width="200" alt="icon" src={icon} />
+        <img width="200" alt="icon" src={testImage ?? icon} />
       </div>
       <button type="button" onClick={handlePythonTest}>
         Python Test

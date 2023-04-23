@@ -48,6 +48,9 @@
     "test": "jest"
   },
   "browserslist": [],
+  "browser":{
+    "child_process": false
+  },
   "prettier": {
     "singleQuote": true,
     "overrides": [

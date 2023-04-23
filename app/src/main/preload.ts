@@ -2,7 +2,11 @@
 /* eslint no-unused-vars: off */
 import { contextBridge, ipcRenderer, IpcRendererEvent } from 'electron';
 
-export type Channels = 'ipc-example' | 'python-hello-world' | 'get-python-dir';
+export type Channels =
+  | 'ipc-example'
+  | 'python-hello-world'
+  | 'get-python-dir'
+  | 'send-python';
 
 const electronHandler = {
   ipcRenderer: {
