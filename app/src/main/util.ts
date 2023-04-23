@@ -22,11 +22,13 @@ export const isDev: boolean = process.env.NODE_ENV === 'development';
 export const isWin = process.platform === 'win32';
 export const isMac = process.platform === 'darwin';
 
-export const getAppDirPath = (): string =>
-  isDev ? path.join(__dirname, '../../') : path.join(__dirname, '../../../');
+export const getAssetsDirPath = (): string =>
+  isDev
+    ? path.join(__dirname, '../../assets')
+    : path.join(__dirname, '../../../assets');
 
 export const resolveBinPath = (pathName: string): string => {
-  const appDirPath = getAppDirPath();
+  const appDirPath = getAssetsDirPath();
   const binPath = path.join(appDirPath, 'bin');
   const resolvedPath = path.join(binPath, pathName);
   return resolvedPath;
@@ -47,7 +49,7 @@ export const getArchitecture = () => {
 };
 
 export const getPythonScriptDir = () => {
-  const appDir = getAppDirPath();
+  const appDir = getAssetsDirPath();
   const pythonScriptDir = path.join(appDir, 'scripts');
   return pythonScriptDir;
 };
