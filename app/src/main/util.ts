@@ -63,22 +63,24 @@ export const getPythonBinaryPath = (): string => {
   return pythonBinaryPath;
 };
 
+export type StdResult = { stdout: string | null; stderr: string | null };
+
 export const callPython = async (
   scriptPath: string,
   args?: string
-): Promise<{ stdout: string; stderr: string }> => {
+): Promise<StdResult> => {
   const pythonPath = getPythonBinaryPath();
   const options: Options = { pythonPath };
   const pythonShell = new PythonShell(scriptPath, options);
   if (args) pythonShell.send(args);
   return new Promise((resolve, reject) => {
     pythonShell.on('message', (stdout) => {
-      console.log(stdout);
-      resolve({ stdout, stderr: '' });
+      // console.log(stdout);
+      resolve({ stdout, stderr: null });
     });
     pythonShell.on('stderr', (stderr) => {
-      console.log(stderr);
-      resolve({ stdout: '', stderr });
+      // console.log(stderr);
+      resolve({ stdout: null, stderr });
     });
   });
 };
@@ -102,7 +104,7 @@ const getPythonEntryScriptPath = () => {
   return pythonEntryScriptPath;
 };
 
-export const sendPython = async (data: PythonSendData) => {
+export const sendPython = async (data: PythonSendData): Promise<StdResult> => {
   const sendData = `${JSON.stringify(data)}`;
   const entryPath = getPythonEntryScriptPath();
   const { stdout, stderr } = await callPython(entryPath, sendData);
