@@ -16,18 +16,17 @@ class Frame:
     def __parse_input(self):
         data = self.__read_input()
         command, meta, image = None, None, None
-        if 'command' in data:
+        if "command" in data:
             command = data["command"]
-        if 'meta' in data:
+        if "meta" in data:
             meta = data["meta"]
-        if 'image' in data:
+        if "image" in data:
             image = decode_image_to_ndarray(data["image"])
-
-        return (command, meta, image)
+        return command, meta, image
 
     def send(self):
         data = dict()
-        data['meta'] = self.meta
-        data['image'] = encode_ndarray_to_base64(self.image)
+        data["meta"] = self.meta
+        data["image"] = encode_ndarray_to_base64(self.image)
         sys.stdout.write(json.dumps(data, ensure_ascii=False))
         sys.stdout.flush()
