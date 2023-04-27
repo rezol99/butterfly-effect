@@ -1,6 +1,6 @@
-import { Base64, PythonSendData, StdResult  } from "main/util";
-import  { parseStdResult, sendPython } from "renderer/bridge/python";
-import Frame from "renderer/models/Frame";
+import { Base64, PythonSendData, StdResult } from 'main/util';
+import { parseStdResult, sendPython } from 'renderer/bridge/python';
+import Frame from 'renderer/models/Frame';
 
 // eslint-disable-next-line import/prefer-default-export
 export const blurFrame = async (
