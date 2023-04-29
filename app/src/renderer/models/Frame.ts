@@ -4,15 +4,25 @@ import { Converter } from 'renderer/types/converter';
 class Frame {
   private base64Data!: Base64;
 
+  private converters: Converter[] = [];
+
   constructor(imageData: Base64) {
     this.base64Data = imageData;
   }
 
-  public async convert(converter: Converter): Promise<StdResult> {
-    const { output, result } = await converter(this);
-    if (!output) return result;
-    this.base64Data = output.dumpAsBase64();
-    return result;
+  public addConverter(converter: Converter): void {
+    this.converters.push(converter);
+  }
+
+  public async convert(): Promise<StdResult[]> {
+    const results: StdResult[] = [];
+    // eslint-disable-next-line no-restricted-syntax
+    for (const converter of this.converters) {
+      // eslint-disable-next-line no-await-in-loop
+      const result = await converter(this);
+      results.push(result);
+    }
+    return results;
   }
 
   public dumpAsBase64(): string {
@@ -23,7 +33,7 @@ class Frame {
     return `data:image/jpeg;base64,${this.base64Data}`;
   }
 
-  public setImageData(imageData: Base64): void {
+  public updateImageData(imageData: Base64): void {
     this.base64Data = imageData;
   }
 }

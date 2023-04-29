@@ -14,7 +14,11 @@ function Hello() {
       'https://i.seadn.io/gae/oOfqndli8Dqq6gL_QdhQV0ljeZGK_gYfh343GHPvt4Mv9W0JBUim_X9G4PS9R3663XTn_VEH8FUOe2JzLDGgDGcUYEUBgazC7pvWWA?auto=format&w=1000'
     );
     const dummyFrame = new Frame(dummyData);
-    await dummyFrame.convert(blurFrame);
+    dummyFrame.addConverter(blurFrame);
+    dummyFrame.addConverter(blurFrame);
+    dummyFrame.addConverter(blurFrame);
+    dummyFrame.addConverter(blurFrame);
+    await dummyFrame.convert();
     setTestImage(dummyFrame.dumpAsDataUri());
   };
 
