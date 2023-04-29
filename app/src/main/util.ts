@@ -79,7 +79,7 @@ export const callPython = async (
       resolve({ stdout, stderr: null });
     });
     pythonShell.on('stderr', (stderr) => {
-      // console.log(stderr);
+      // console.error(stderr);
       resolve({ stdout: null, stderr });
     });
   });
@@ -89,7 +89,7 @@ export type Base64 = string;
 
 export type PythonSendData = {
   command: string;
-  image?: Base64;
+  images?: Base64[];
   meta?: any;
 };
 

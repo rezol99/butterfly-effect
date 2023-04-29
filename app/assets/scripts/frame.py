@@ -20,8 +20,8 @@ class Frame:
             command = data["command"]
         if "meta" in data:
             meta = data["meta"]
-        if "image" in data:
-            image = decode_image_to_ndarray(data["image"])
+        if "images" in data:
+            image = decode_image_to_ndarray(data["images"][0])
         return command, meta, image
 
     def send(self):

@@ -19,7 +19,7 @@ class Frame {
     // eslint-disable-next-line no-restricted-syntax
     for (const converter of this.converters) {
       // eslint-disable-next-line no-await-in-loop
-      const result = await converter(this);
+      const result = await converter([this]);
       results.push(result);
     }
     return results;
