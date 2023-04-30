@@ -6,10 +6,10 @@ from frame import Frame
 import processing
 from converter import decode_image_to_ndarray
 
+HANDLE_MAP = {"blur": processing.blur, "compose": processing.compose}
 
 class Handler:
     command = ""
-    map = {"blur": processing.blur, "compose": processing.compose}
     frames: List[Frame]
 
     def __init__(self, command: str, frames: List[Frame]):
@@ -17,23 +17,20 @@ class Handler:
         self.frames = frames
 
     def __is_multi_image_processing(self) -> bool:
-        if len(self.frames) <= 1:
-            return False
-        else:
-            return True
+        return len(self.frames) <= 1
 
     def send(self) -> None:
         self.frames[0].send()  # 出力状態は、self.frames[0]に格納されている
 
     def run(self) -> None:
-        if self.command not in self.map:
+        if self.command not in HANDLE_MAP:
             raise Exception(f"Unknown command: {self.command}")
 
         if self.__is_multi_image_processing():
-            self.map[self.command](self.frames)
+            HANDLE_MAP[self.command](self.frames)
         else:
             frame = self.frames[0]
-            self.map[self.command](frame)
+            HANDLE_MAP[self.command](frame)
 
         self.send()
 
@@ -54,8 +51,8 @@ def __parse_input(data: dict) -> tuple[str, List[Frame]]:
 
 
 if __name__ == "__main__":
-    received_data = __read_input()
-    command, frames = __parse_input(received_data)
+    received = __read_input()
+    command, frames = __parse_input(received)
 
     h = Handler(command, frames)
     h.run()
