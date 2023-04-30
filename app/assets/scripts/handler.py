@@ -17,7 +17,7 @@ class Handler:
         self.frames = frames
 
     def __is_multi_image_processing(self) -> bool:
-        return len(self.frames) <= 1
+        return not len(self.frames) <= 1
 
     def send(self) -> None:
         self.frames[0].send()  # 出力状態は、self.frames[0]に格納されている
