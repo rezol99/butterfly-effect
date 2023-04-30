@@ -10,7 +10,6 @@ class Frame:
         self.image: np.ndarray = image
         self.meta = meta
 
-
     def send(self) -> None:
         data = dict()
         data["meta"] = self.meta

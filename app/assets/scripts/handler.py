@@ -23,7 +23,7 @@ class Handler:
             return True
 
     def send(self) -> None:
-        self.frames[0].send() # 出力状態は、self.frames[0]に格納されている
+        self.frames[0].send()  # 出力状態は、self.frames[0]に格納されている
 
     def run(self) -> None:
         if self.command not in self.map:
