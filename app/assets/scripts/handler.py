@@ -1,7 +1,6 @@
 import json
 import sys
-import numpy as np
-from typing import List
+from typing import List, Any
 
 from frame import Frame
 import processing
@@ -26,7 +25,7 @@ class Handler:
     def send(self) -> None:
         self.frames[0].send() # 出力状態は、self.frames[0]に格納されている
 
-    def run(self):
+    def run(self) -> None:
         if self.command not in self.map:
             raise Exception(f"Unknown command: {self.command}")
 
@@ -39,16 +38,16 @@ class Handler:
         self.send()
 
 
-def __read_input() -> None:
+def __read_input() -> dict:
     return json.loads(sys.stdin.readline())
 
 
-def __parse_input(data) -> tuple[str, List[np.ndarray]]:
+def __parse_input(data: dict) -> tuple[str, List[Frame]]:
     if "command" not in data:
         raise Exception("command is not found")
 
     command = data["command"]
-    meta = data.get("meta")
+    meta: Any = data.get("meta")
     frames = [Frame(decode_image_to_ndarray(image), meta) for image in data["images"]]
 
     return command, frames
