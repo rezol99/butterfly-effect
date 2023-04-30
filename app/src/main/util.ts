@@ -75,11 +75,11 @@ export const callPython = async (
   if (args) pythonShell.send(args);
   return new Promise((resolve, reject) => {
     pythonShell.on('message', (stdout) => {
-      // console.log(stdout);
+      // if (isDev) console.log(stdout);
       resolve({ stdout, stderr: null });
     });
     pythonShell.on('stderr', (stderr) => {
-      // console.error(stderr);
+      if (isDev) console.error(stderr);
       resolve({ stdout: null, stderr });
     });
   });

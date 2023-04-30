@@ -6,7 +6,7 @@ from frame import Frame
 import processing
 from converter import decode_image_to_ndarray
 
-HANDLE_MAP = {"blur": processing.blur, "compose": processing.compose}
+HANDLE_MAP = {"blur": processing.blur, "compose": processing.compose, "add-border": processing.add_border}
 
 class Handler:
     command = ""

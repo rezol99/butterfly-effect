@@ -3,9 +3,10 @@ import { useState } from 'react';
 import icon from '../../assets/icon.svg';
 import './App.css';
 import Frame from './models/Frame';
-import { blurFrame } from './effects/blur';
+import { addBorder, blurFrame } from './effects';
 import { fetchAsBase64 } from './util/network';
 import Layer from './models/Layer';
+import { convertDataUriToBase64 } from './util/converter';
 
 function Hello() {
   const [testImage, setTestImage] = useState<string | null>(null);
@@ -42,13 +43,23 @@ function Hello() {
     setTestImage(dummyLayer.dumpAsDataUrl());
   };
 
+  const handleImageClick = async () => {
+    if (!testImage) return;
+    const base64 = convertDataUriToBase64(testImage);
+
+    const frame = new Frame(base64);
+    frame.addConverter(addBorder);
+    await frame.convert();
+    setTestImage(frame.dumpAsDataUri());
+  };
+
   return (
     <div>
       <div
         className="Hello"
         style={{ display: 'flex', flexDirection: 'column' }}
       >
-        <img width="200" alt="icon" src={testImage ?? icon} />
+        <img onClick={handleImageClick} width="200" alt="icon" src={testImage ?? icon} />
         <div
           style={{
             display: 'flex',
