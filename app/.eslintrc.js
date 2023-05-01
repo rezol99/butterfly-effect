@@ -11,6 +11,7 @@ module.exports = {
     'import/prefer-default-export': 'off',
     'import/named': 'off',
     'import/no-duplicates': 'off',
+    "react/no-unknown-property": ["error", { "ignore": ["css"] }]
   },
   parserOptions: {
     ecmaVersion: 2020,
