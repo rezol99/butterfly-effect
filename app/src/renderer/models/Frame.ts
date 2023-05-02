@@ -1,5 +1,5 @@
 import { Base64, StdResult } from 'main/util';
-import { Converter } from 'renderer/types/converter';
+import Converter from './Converter';
 
 class Frame {
   private base64Data!: Base64;
@@ -19,7 +19,7 @@ class Frame {
     // eslint-disable-next-line no-restricted-syntax
     for (const converter of this.converters) {
       // eslint-disable-next-line no-await-in-loop
-      const result = await converter([this]);
+      const result = await converter.run(this);
       results.push(result);
     }
     return results;

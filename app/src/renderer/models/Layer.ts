@@ -12,7 +12,7 @@ class Layer {
     this.frames = frames;
   }
 
-  addFrame(frame: Frame) {
+  public addFrame(frame: Frame) {
     this.frames.push(frame);
   }
 

@@ -1,11 +1,11 @@
 import { MemoryRouter as Router, Routes, Route } from 'react-router-dom';
 import { useEffect, useState, useRef, MouseEventHandler } from 'react';
 import Frame from './models/Frame';
-import { blurFrame } from './effects';
 import { fetchAsBase64 } from './util/network';
 import Layer from './models/Layer';
 import './normalize.css';
 import './App.css';
+import { createBlurConverter } from './effects';
 
 type Coordinate = {
   x: number;
@@ -37,8 +37,9 @@ function Hello() {
       );
 
       const dummyFrame1 = new Frame(dummyData1);
-      dummyFrame1.addConverter(blurFrame);
-      dummyFrame1.addConverter(blurFrame);
+      const blurConverter = createBlurConverter();
+      dummyFrame1.addConverter(blurConverter);
+      dummyFrame1.addConverter(blurConverter);
       const dummyFrame2 = new Frame(dummyData2);
       const dummyLayer = new Layer([dummyFrame1, dummyFrame2]);
       await dummyLayer.compose();
