@@ -1,12 +1,18 @@
 import json
 import sys
-from typing import List, Any
+from typing import List, Optional
 
 from frame import Frame
 import processing
 from converter import decode_image_to_ndarray
 
-HANDLE_MAP = {"blur": processing.blur, "compose": processing.compose, "add-border": processing.add_border}
+HANDLE_MAP = {
+    "blur": processing.blur,
+    "compose": processing.compose,
+    "add-border": processing.add_border,
+    "draw-point": processing.draw_point,
+}
+
 
 class Handler:
     command = ""
@@ -44,7 +50,10 @@ def __parse_input(data: dict) -> tuple[str, List[Frame]]:
         raise Exception("command is not found")
 
     command = data["command"]
-    meta: Any = data.get("meta")
+    meta: Optional[dict] = data.get("meta")
+    if meta is None:
+        meta = dict()
+
     frames = [Frame(decode_image_to_ndarray(image), meta) for image in data["images"]]
 
     return command, frames

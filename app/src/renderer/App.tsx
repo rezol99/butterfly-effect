@@ -5,25 +5,37 @@ import { fetchAsBase64 } from './util/network';
 import Layer from './models/Layer';
 import './normalize.css';
 import './App.css';
-import { createBlurConverter } from './effects';
-
-type Coordinate = {
-  x: number;
-  y: number;
-};
+import { createBlurConverter, createDrawPointConverter } from './effects';
+import { convertDataUriToBase64 } from './util/converter';
 
 function Hello() {
   const [testImage, setTestImage] = useState<string | null>(null);
+  const imageWrapperRef = useRef<HTMLDivElement>(null);
   const imageRef = useRef<HTMLImageElement>(null);
 
-  const handleClick: MouseEventHandler<HTMLImageElement> = (event) => {
-    if (imageRef.current) {
-      const rect = imageRef.current.getBoundingClientRect();
+  const handleClick: MouseEventHandler<HTMLImageElement> = async (event) => {
+    if (!testImage) return;
+    if (imageWrapperRef.current) {
+      const rect = imageWrapperRef.current.getBoundingClientRect();
+      const { width, height } = rect;
       const x = event.clientX - rect.left;
       const y = event.clientY - rect.top;
 
-      const coordinate: Coordinate = { x, y };
-      console.log(coordinate);
+      const drawPointConverter = createDrawPointConverter({
+        width,
+        height,
+        x,
+        y,
+        radius: 5,
+        color: [0, 0, 255],
+        thickness: -1,
+      });
+      const base64ImageData = convertDataUriToBase64(testImage);
+      const frame = new Frame(base64ImageData);
+      frame.addConverter(drawPointConverter);
+      await frame.convert();
+      const image = frame.dumpAsDataUri();
+      setTestImage(image);
     }
   };
 
@@ -49,6 +61,7 @@ function Hello() {
 
   return (
     <div
+      ref={imageWrapperRef}
       css={{
         position: 'fixed',
         top: 8 * 16,

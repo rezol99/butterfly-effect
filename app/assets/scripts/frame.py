@@ -26,8 +26,8 @@ class Frame:
         left_border_width = int((1080 - new_height) / 2)
         right_border_width = 1080 - new_height - left_border_width
 
-        border_color = (0, 0, 0)  # 黒色で埋める
-        resized_img_with_border = cv2.copyMakeBorder(resized_img, left_border_width, right_border_width, border_width, border_width, cv2.BORDER_CONSTANT, value=border_color)
+        border_color = (0, 0, 0, 0) # アルファチャンネルを含めて透明で埋める
+        resized_img_with_border = cv2.copyMakeBorder(resized_img, 0, 0, border_width, border_width, cv2.BORDER_CONSTANT, value=border_color)
 
         return resized_img_with_border
 

@@ -1,11 +1,35 @@
 import cv2
-from typing import List, Tuple
+from typing import List
 from frame import Frame
 import numpy as np
 
 
 def blur(frame: Frame, intensity: int = 20) -> None:
     out = cv2.blur(frame.image, (intensity, intensity))
+    frame.image = out
+
+
+def draw_point(frame: Frame):
+    meta = frame.meta
+    width = int(meta["width"])
+    height = int(meta["height"])
+    radius = meta["radius"]
+    x = int(meta["x"])
+    y = int(meta["y"])
+
+    ratio_x = frame.image.shape[1] / width
+    ratio_y = frame.image.shape[0] / height
+
+    x *= ratio_x
+    y *= ratio_y
+
+    x = int(x)
+    y = int(y)
+
+    color = tuple(meta["color"])
+    thickness = meta["thickness"]
+
+    out = cv2.circle(frame.image, (x, y), radius, color, thickness)
     frame.image = out
 
 
