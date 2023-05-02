@@ -1,5 +1,5 @@
 import { MemoryRouter as Router, Routes, Route } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef, MouseEventHandler } from 'react';
 import Frame from './models/Frame';
 import { blurFrame } from './effects';
 import { fetchAsBase64 } from './util/network';
@@ -7,8 +7,25 @@ import Layer from './models/Layer';
 import './normalize.css';
 import './App.css';
 
+type Coordinate = {
+  x: number;
+  y: number;
+};
+
 function Hello() {
   const [testImage, setTestImage] = useState<string | null>(null);
+  const imageRef = useRef<HTMLImageElement>(null);
+
+  const handleClick: MouseEventHandler<HTMLImageElement> = (event) => {
+    if (imageRef.current) {
+      const rect = imageRef.current.getBoundingClientRect();
+      const x = event.clientX - rect.left;
+      const y = event.clientY - rect.top;
+
+      const coordinate: Coordinate = { x, y };
+      console.log(coordinate);
+    }
+  };
 
   useEffect(() => {
     (async () => {
@@ -45,12 +62,14 @@ function Hello() {
     >
       {testImage && (
         <img
+          onClick={handleClick}
+          ref={imageRef}
           css={{
             width: '100%',
             height: '100%',
             objectFit: 'contain',
           }}
-          src={testImage ?? undefined}
+          src={testImage}
           alt="preview"
         />
       )}
