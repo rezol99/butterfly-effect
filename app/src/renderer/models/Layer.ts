@@ -1,4 +1,4 @@
-import { parseStdResult, sendPython } from 'renderer/bridge/python';
+import { parseStdResult, sendPythonViaMain } from 'renderer/bridge/python';
 import { Base64, PythonSendData, StdResult } from 'main/util';
 import Frame from './Frame';
 import { convertBase64ToDataUri } from 'renderer/util/converter';
@@ -27,7 +27,7 @@ class Layer {
       images: resolvedConvertedImages,
     };
 
-    const result = await sendPython(sendData);
+    const result = await sendPythonViaMain(sendData);
     const pythonRes = parseStdResult(result);
     if (pythonRes?.image) this.output = pythonRes.image;
     return result;

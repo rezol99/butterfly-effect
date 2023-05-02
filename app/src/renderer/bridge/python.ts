@@ -13,6 +13,6 @@ export const parseStdResult = (result: StdResult): PythonResult | null => {
   }
 };
 
-export const sendPython = (data: PythonSendData): Promise<StdResult> => {
+export const sendPythonViaMain = (data: PythonSendData): Promise<StdResult> => {
   return window.electron.ipcRenderer.invoke('send-python', data);
 };
