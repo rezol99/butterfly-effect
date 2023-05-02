@@ -11,7 +11,22 @@ module.exports = {
     'import/prefer-default-export': 'off',
     'import/named': 'off',
     'import/no-duplicates': 'off',
-    "react/no-unknown-property": ["error", { "ignore": ["css"] }]
+    'react/no-unknown-property': [
+      'error',
+      {
+        ignore: ['css'],
+      },
+    ],
+    'jsx-a11y/click-events-have-key-events': 'off',
+    'jsx-a11y/no-noninteractive-element-interactions': 'off',
+    'import/order': 'off',
+    'import/no-self-import': 'off',
+    'import/no-cycle': 'off',
+    'import/no-useless-path-segments': 'off',
+    'import/no-relative-packages': 'off',
+    'import/no-named-as-default': 'off',
+    'import/no-named-as-default-member': 'off',
+    'import/export': 'warn',
   },
   parserOptions: {
     ecmaVersion: 2020,
