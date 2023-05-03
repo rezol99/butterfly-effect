@@ -27,6 +27,7 @@ module.exports = {
     'import/no-named-as-default': 'off',
     'import/no-named-as-default-member': 'off',
     'import/export': 'warn',
+    'no-underscore-dangle': 'off'
   },
   parserOptions: {
     ecmaVersion: 2020,
