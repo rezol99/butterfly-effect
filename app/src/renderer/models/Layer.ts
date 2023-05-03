@@ -4,20 +4,24 @@ import Frame from './Frame';
 import { convertBase64ToDataUri } from 'renderer/util/converter';
 
 class Layer {
-  private frames!: Frame[];
+  private _frames!: Frame[];
 
   private output: Base64 | null = null;
 
   constructor(frames: Frame[]) {
-    this.frames = frames;
+    this._frames = frames;
+  }
+
+  get frames(): Frame[] {
+    return this._frames;
   }
 
   public addFrame(frame: Frame) {
-    this.frames.push(frame);
+    this._frames.push(frame);
   }
 
   public async compose(): Promise<StdResult> {
-    const convertedImagesData = this.frames.map(async (frame) => {
+    const convertedImagesData = this._frames.map(async (frame) => {
       await frame.convert();
       return frame.dumpAsBase64();
     });

@@ -15,10 +15,8 @@ function Routers() {
 
 export default function App() {
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<Hello />} />
-      </Routes>
-    </Router>
+    <LayerManagerProvider>
+      <Routers />
+    </LayerManagerProvider>
   );
 }
