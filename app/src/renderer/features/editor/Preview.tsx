@@ -3,7 +3,7 @@ import { Content } from '.';
 import { fetchAsBase64 } from 'renderer/util/network';
 import { convertBase64ToDataUri } from 'renderer/util/converter';
 import { css } from '@emotion/react';
-import { BLACK_BACKGROUND_COLOR } from './constants/color';
+import { BLACK_BACKGROUND_COLOR } from '../../constants/color';
 
 export default function Preview() {
   const [image, setImage] = useState<string>();

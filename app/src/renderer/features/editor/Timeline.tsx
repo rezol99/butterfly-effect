@@ -4,7 +4,7 @@ import {
   BORDER_COLOR,
   PRIMARY_BACKGROUND_COLOR,
   SECONDLY_BACKGROUND_COLOR,
-} from './constants/color';
+} from '../../constants/color';
 
 const TIMELINES = 20;
 const TIMELINE_ROW_HEIGHT = 80;
