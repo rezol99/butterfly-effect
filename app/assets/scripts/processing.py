@@ -54,7 +54,15 @@ def _overlay_images(images: List[np.ndarray]) -> np.ndarray:
 def add_border(frame: Frame) -> None:
     thickness = frame.meta["thickness"]
     color = tuple(frame.meta["color"])
-    frame_with_border = cv2.copyMakeBorder(frame.image, thickness, thickness, thickness, thickness, cv2.BORDER_CONSTANT, value=color)
+    frame_with_border = cv2.copyMakeBorder(
+        frame.image,
+        thickness,
+        thickness,
+        thickness,
+        thickness,
+        cv2.BORDER_CONSTANT,
+        value=color,
+    )
     frame.image = frame_with_border
 
 
