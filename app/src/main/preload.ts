@@ -6,7 +6,8 @@ export type Channels =
   | 'ipc-example'
   | 'python-hello-world'
   | 'get-python-dir'
-  | 'send-python';
+  | 'send-python'
+  | 'browse-files';
 
 const electronHandler = {
   ipcRenderer: {

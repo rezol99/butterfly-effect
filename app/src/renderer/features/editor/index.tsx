@@ -2,13 +2,14 @@ import { css } from '@emotion/react';
 import Preview from './Preview';
 import Timeline from './Timeline';
 import { BORDER_COLOR } from '../../constants/color';
+import Assets from './Assets';
 
 const SIDE_WIDTH = 300;
 
 export default function Index() {
   return (
     <div css={Layout}>
-      <div css={Content} />
+      <Assets />
       <Preview />
       <div css={Content} />
       <Timeline />
@@ -25,5 +26,7 @@ const Layout = css`
 `;
 
 export const Content = css`
+  display: flex;
+  position: relative;
   border: 0.3px ${BORDER_COLOR} solid;
 `;
