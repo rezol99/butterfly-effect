@@ -1,13 +1,13 @@
 /* eslint import/prefer-default-export: off */
-import { URL } from 'url';
+import { path as ffmpegPath } from '@ffmpeg-installer/ffmpeg';
+import { exec as childProcessExec, execSync } from 'child_process';
+import ffmpeg from 'fluent-ffmpeg';
+import { createReadStream, readFileSync, unlinkSync } from 'fs';
 import path from 'path';
 import process from 'process';
-import { promisify } from 'util';
-import { exec as childProcessExec, execSync } from 'child_process';
 import { Options, PythonShell } from 'python-shell';
-import ffmpeg from 'fluent-ffmpeg';
-import { path as ffmpegPath } from '@ffmpeg-installer/ffmpeg';
-import { createReadStream, readFileSync, unlinkSync } from 'fs';
+import { URL } from 'url';
+import { promisify } from 'util';
 
 const exec = promisify(childProcessExec);
 

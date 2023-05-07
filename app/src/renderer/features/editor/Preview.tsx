@@ -1,8 +1,8 @@
-import { useEffect, useState } from 'react';
-import { Content } from '.';
-import { fetchAsBase64 } from 'renderer/util/network';
-import { convertBase64ToDataUri } from 'renderer/util/converter';
 import { css } from '@emotion/react';
+import { useEffect, useState } from 'react';
+import { convertBase64ToDataUri } from 'renderer/util/converter';
+import { fetchAsBase64 } from 'renderer/util/network';
+import { Content } from '.';
 import { BLACK_BACKGROUND_COLOR } from '../../constants/color';
 
 export default function Preview() {

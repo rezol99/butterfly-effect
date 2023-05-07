@@ -1,7 +1,7 @@
-import { parseStdResult, sendPythonViaMain } from 'renderer/bridge/python';
 import { Base64, PythonSendData, StdResult } from 'main/util';
-import Frame from './Frame';
+import { parseStdResult, sendPythonViaMain } from 'renderer/bridge/python';
 import { convertBase64ToDataUri } from 'renderer/util/converter';
+import Frame from './Frame';
 
 class Layer {
   private _frames!: Frame[];

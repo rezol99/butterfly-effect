@@ -1,8 +1,8 @@
 import { css } from '@emotion/react';
-import Preview from './Preview';
-import Timeline from './Timeline';
 import { BORDER_COLOR } from '../../constants/color';
 import Assets from './Assets';
+import Preview from './Preview';
+import Timeline from './Timeline';
 
 const SIDE_WIDTH = 300;
 

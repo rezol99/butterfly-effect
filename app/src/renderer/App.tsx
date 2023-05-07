@@ -1,8 +1,8 @@
-import { MemoryRouter as Router, Routes, Route } from 'react-router-dom';
-import './normalize.css';
+import { Route, MemoryRouter as Router, Routes } from 'react-router-dom';
 import './App.css';
 import { LayerManagerProvider } from './contexts/LayerManager';
 import Editor from './features/editor';
+import './normalize.css';
 
 function Routers() {
   return (

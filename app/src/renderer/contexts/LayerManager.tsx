@@ -1,6 +1,6 @@
-import Layer from 'renderer/models/Layer';
 import React, { useContext } from 'react';
 import Frame from 'renderer/models/Frame';
+import Layer from 'renderer/models/Layer';
 
 const defaultValue: Layer = new Layer([]);
 

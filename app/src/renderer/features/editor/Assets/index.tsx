@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
-import { browseFiles, getThumbnailURI } from '../../../util/os';
-import { Content } from '..';
 import { useState } from 'react';
+import { Content } from '..';
+import { browseFiles, getThumbnailURI } from '../../../util/os';
 
 function Assets() {
   const [thumbnails, setThumbnails] = useState<string[]>([]);
