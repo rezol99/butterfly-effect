@@ -93,7 +93,7 @@ export type PythonSendData = {
   meta?: any;
 };
 
-const PYTHON_ENTRY_SCRIPT_NAME = 'handler.py' as const;
+const PYTHON_ENTRY_SCRIPT_NAME = 'main.py' as const;
 
 const getPythonEntryScriptPath = () => {
   const pythonScriptDir = getPythonScriptDir();

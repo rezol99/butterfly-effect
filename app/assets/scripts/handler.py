@@ -1,10 +1,7 @@
-import json
-import sys
-from typing import List, Optional
-
-from frame import Frame
+from typing import List
 import processing
-from converter import decode_image_to_ndarray
+from frame import Frame
+
 
 HANDLE_MAP = {
     "blur": processing.blur,
@@ -15,15 +12,12 @@ HANDLE_MAP = {
 
 
 class Handler:
-    command = ""
-    frames: List[Frame]
-
     def __init__(self, command: str, frames: List[Frame]):
         self.command = command
         self.frames = frames
 
     def __is_multi_image_processing(self) -> bool:
-        return not len(self.frames) <= 1
+        return len(self.frames) >= 2
 
     def send(self) -> None:
         self.frames[0].send()  # 出力状態は、self.frames[0]に格納されている
@@ -39,29 +33,3 @@ class Handler:
             HANDLE_MAP[self.command](frame)
 
         self.send()
-
-
-def __read_input() -> dict:
-    return json.loads(sys.stdin.readline())
-
-
-def __parse_input(data: dict) -> tuple[str, List[Frame]]:
-    if "command" not in data:
-        raise Exception("command is not found")
-
-    command = data["command"]
-    meta: Optional[dict] = data.get("meta")
-    if meta is None:
-        meta = dict()
-
-    frames = [Frame(decode_image_to_ndarray(image), meta) for image in data["images"]]
-
-    return command, frames
-
-
-if __name__ == "__main__":
-    received = __read_input()
-    command, frames = __parse_input(received)
-
-    h = Handler(command, frames)
-    h.run()
