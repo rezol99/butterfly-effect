@@ -3,8 +3,11 @@ import { URL } from 'url';
 import path from 'path';
 import process from 'process';
 import { promisify } from 'util';
-import { exec as childProcessExec } from 'child_process';
+import { exec as childProcessExec, execSync } from 'child_process';
 import { Options, PythonShell } from 'python-shell';
+import ffmpeg from 'fluent-ffmpeg';
+import { path as ffmpegPath } from '@ffmpeg-installer/ffmpeg';
+import { createReadStream, readFileSync, unlinkSync } from 'fs';
 
 const exec = promisify(childProcessExec);
 
@@ -109,4 +112,105 @@ export const sendPython = async (data: PythonSendData): Promise<StdResult> => {
   const entryPath = getPythonEntryScriptPath();
   const { stdout, stderr } = await callPython(entryPath, sendData);
   return { stdout, stderr };
+};
+
+export const isImageFile = (filePath: string): boolean => {
+  return /\.(jpg|jpeg|png|gif|bmp)$/i.test(filePath);
+};
+
+export const isVideoFile = (filePath: string): boolean => {
+  return /\.(mp4|mov|avi|wmv|flv|mkv)$/i.test(filePath);
+};
+
+export const convertFilePathToFileProtocol = (filePath: string): string => {
+  return `file://${filePath}`;
+};
+
+export const getVideoAspectRatio = (
+  inputFilePath: string
+): Promise<number | undefined> => {
+  return new Promise<number | undefined>((resolve, reject) => {
+    ffmpeg.ffprobe(inputFilePath, (err, metadata) => {
+      if (err) {
+        console.error(`FFmpeg error: ${err.message}`);
+        reject(err);
+        return;
+      }
+
+      if (metadata && metadata.streams) {
+        const videoStream = metadata.streams.find(
+          (stream: any) => stream.codec_type === 'video'
+        );
+        if (videoStream && videoStream.display_aspect_ratio) {
+          const aspectRatioArray = videoStream.display_aspect_ratio.split(':');
+          if (aspectRatioArray.length === 2) {
+            const numerator = parseInt(aspectRatioArray[0], 10);
+            const denominator = parseInt(aspectRatioArray[1], 10);
+            const aspectRatio = numerator / denominator;
+            resolve(aspectRatio);
+          }
+          return;
+        }
+      }
+      resolve(undefined);
+    });
+  });
+};
+
+ffmpeg.setFfmpegPath(ffmpegPath);
+
+// TODO: 要リファクタリング
+const getVideoThumbnailAsBase64 = async (
+  videoFilePath: string,
+  outputWidth = 300
+): Promise<string> => {
+  return new Promise((resolve, reject) => {
+    const now = Date.now();
+    const tempOutputPath = path.join('/tmp', `temp_thumbnail_${now}.png`);
+    execSync(`touch ${tempOutputPath}`);
+    const videoFileReadStream = createReadStream(videoFilePath);
+
+    ffmpeg(videoFileReadStream)
+      .on('error', (err) => {
+        reject(err);
+      })
+      .outputOptions([
+        `-vf scale=${outputWidth}:-1`,
+        '-vframes 1',
+        '-q:v 2',
+        '-f image2',
+      ])
+      .save(tempOutputPath)
+      .on('end', () => {
+        const thumbnailBuffer = readFileSync(tempOutputPath);
+        const thumbnailBase64 = thumbnailBuffer.toString('base64');
+        unlinkSync(tempOutputPath); // 一時ファイルを削除
+        resolve(thumbnailBase64);
+      });
+  });
+};
+
+export const getThumbnailURI = async (filePath: string): Promise<string> => {
+  if (isImageFile(filePath)) {
+    const imageFileUri = convertFilePathToFileProtocol(filePath);
+    return imageFileUri;
+  }
+
+  if (isVideoFile(filePath)) {
+    const videoThumbnail = await getVideoThumbnailAsBase64(filePath);
+    if (!videoThumbnail) throw new Error('Failed to get video thumbnail');
+    const dataUri = convertBase64ToDataUri(videoThumbnail);
+    return dataUri;
+  }
+  throw new Error('not supported file type');
+};
+
+export const convertDataUriToBase64 = (dataUri: string): Base64 => {
+  const base64 = dataUri.split(',')[1];
+  return base64;
+};
+
+export const convertBase64ToDataUri = (base64: string): string => {
+  const mimeType = 'image/png';
+  return `data:${mimeType};base64,${base64}`;
 };

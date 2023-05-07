@@ -16,8 +16,10 @@ import MenuBuilder from './menu';
 import {
   PythonSendData,
   getPythonScriptDir,
+  getThumbnailURI,
   resolveHtmlPath,
   sendPython,
+
 } from './util';
 
 class AppUpdater {
@@ -38,6 +40,12 @@ ipcMain.handle('get-python-dir', () => {
   return getPythonScriptDir();
 });
 
+ipcMain.handle('get-file-thumbnail-uri', (event, filePath: string) => {
+  const uri = getThumbnailURI(filePath);
+  return uri;
+});
+
+// eslint-disable-next-line no-unused-vars
 ipcMain.handle('browse-files', (event, arg): Promise<OpenDialogReturnValue> => {
   if (!mainWindow) throw new Error('mainWindow is not defined');
   const files = dialog.showOpenDialog(mainWindow, {

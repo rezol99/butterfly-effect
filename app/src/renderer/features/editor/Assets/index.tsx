@@ -1,11 +1,20 @@
 import { css } from '@emotion/react';
-import { browseFiles } from '../../../util/os';
+import { browseFiles, getThumbnailURI } from '../../../util/os';
 import { Content } from '..';
+import { useState } from 'react';
 
 function Assets() {
+  const [thumbnails, setThumbnails] = useState<string[]>([]);
+
   const handleAddAssets = async () => {
     const files = await browseFiles();
-    console.log(files);
+
+    const { filePaths } = files;
+    const uris = filePaths.map(getThumbnailURI);
+    const resolvedUris = await Promise.all(uris)
+      .then((resolved) => resolved)
+      .catch(() => []);
+    setThumbnails((prev) => [...prev, ...resolvedUris]);
   };
 
   return (
@@ -13,9 +22,17 @@ function Assets() {
       <button onClick={handleAddAssets} type="button" css={ImportButton}>
         アセットを追加
       </button>
+      <div
+        css={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}
+      >
+        {thumbnails.map((uri, idx) => (
+          // eslint-disable-next-line react/no-array-index-key
+          <img key={idx} src={uri} width={300} alt="asset-thumbnail" />
+        ))}
+      </div>
     </div>
   );
-};
+}
 
 export default Assets;
 
@@ -30,4 +47,3 @@ const ImportButton = css`
   border-radius: 8px;
   cursor: pointer;
 `;
-
