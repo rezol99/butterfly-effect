@@ -110,15 +110,12 @@ const createWindow = async () => {
     height: 728,
     icon: getAssetPath('icon.png'),
     webPreferences: {
-      devTools: true,
       webSecurity: false,
       preload: app.isPackaged
         ? path.join(__dirname, 'preload.js')
         : path.join(__dirname, '../../.erb/dll/preload.js'),
     },
   });
-
-  mainWindow.webContents.openDevTools();
 
   mainWindow.loadURL(resolveHtmlPath('index.html'));
 
