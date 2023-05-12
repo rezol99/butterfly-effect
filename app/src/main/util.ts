@@ -1,5 +1,4 @@
 /* eslint import/prefer-default-export: off */
-import { path as ffmpegPath } from '@ffmpeg-installer/ffmpeg';
 import { exec as childProcessExec } from 'child_process';
 import ffmpeg from 'fluent-ffmpeg';
 import { createReadStream, readFileSync, unlinkSync, writeFileSync } from 'fs';
@@ -157,7 +156,7 @@ export const getVideoAspectRatio = (
   });
 };
 
-ffmpeg.setFfmpegPath(ffmpegPath);
+ffmpeg.setFfmpegPath(resolveBinPath('darwin/arm64/ffmpeg'));
 
 const getVideoThumbnailAsBase64 = async (
   videoFilePath: string,
