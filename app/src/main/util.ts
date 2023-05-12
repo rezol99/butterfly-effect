@@ -1,8 +1,8 @@
 /* eslint import/prefer-default-export: off */
 import { path as ffmpegPath } from '@ffmpeg-installer/ffmpeg';
-import { exec as childProcessExec, execSync } from 'child_process';
+import { exec as childProcessExec } from 'child_process';
 import ffmpeg from 'fluent-ffmpeg';
-import { createReadStream, readFileSync, unlinkSync } from 'fs';
+import { createReadStream, readFileSync, unlinkSync, writeFileSync } from 'fs';
 import path from 'path';
 import process from 'process';
 import { Options, PythonShell } from 'python-shell';
@@ -159,15 +159,14 @@ export const getVideoAspectRatio = (
 
 ffmpeg.setFfmpegPath(ffmpegPath);
 
-// TODO: 要リファクタリング
 const getVideoThumbnailAsBase64 = async (
   videoFilePath: string,
   outputWidth = 300
 ): Promise<string> => {
   return new Promise((resolve, reject) => {
-    const now = Date.now();
-    const tempOutputPath = path.join('/tmp', `temp_thumbnail_${now}.png`);
-    execSync(`touch ${tempOutputPath}`);
+    const timestamp = Date.now();
+    const tempOutputPath = path.join('/tmp', `tmp_thumbnail_${timestamp}.png`);
+    writeFileSync(tempOutputPath, '');
     const videoFileReadStream = createReadStream(videoFilePath);
 
     ffmpeg(videoFileReadStream)
