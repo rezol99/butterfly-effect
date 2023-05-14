@@ -3,7 +3,6 @@ import './App.css';
 import { LayerManagerProvider } from './contexts/LayerManager';
 import Editor from './features/editor';
 import './normalize.css';
-import { AssetsProvider } from './contexts/Assets';
 
 function Routers() {
   return (
@@ -18,9 +17,7 @@ function Routers() {
 export default function App() {
   return (
     <LayerManagerProvider>
-      <AssetsProvider>
-        <Routers />
-      </AssetsProvider>
+      <Routers />
     </LayerManagerProvider>
   );
 }

@@ -22,14 +22,11 @@ const Layout = css`
   height: 100vh;
   display: grid;
   grid-template-columns: ${SIDE_WIDTH}px 1fr ${SIDE_WIDTH}px;
-  grid-template-rows: 2.5fr 250px;
-  overflow: hidden;
+  grid-template-rows: 2.5fr 1fr;
 `;
 
 export const Content = css`
   display: flex;
   position: relative;
   border: 0.3px ${BORDER_COLOR} solid;
-  height: 100%;
-  overflow: hidden;
 `;
