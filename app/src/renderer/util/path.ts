@@ -5,3 +5,8 @@ export const getPythonScriptDir = () => {
 export const joinPath = (pathList: string[]) => {
   return pathList.join('/');
 };
+
+export const getFileName = (path: string): string => {
+  const name = path.split('/').pop();
+  return name ?? '';
+};

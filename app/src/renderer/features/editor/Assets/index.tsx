@@ -1,33 +1,46 @@
 import { css } from '@emotion/react';
-import { useState } from 'react';
 import { Content } from '..';
 import { browseFiles, getThumbnailURI } from '../../../util/os';
+import Item from './Item';
+import { useAssets, useAssetDispatch, Asset } from 'renderer/contexts/Assets';
+import { assetsActions } from 'renderer/contexts/Assets';
+import { getFileName } from 'renderer/util/path';
 
 function Assets() {
-  const [thumbnails, setThumbnails] = useState<string[]>([]);
+  const assets = useAssets();
+  const dispatchAssets = useAssetDispatch();
 
   const handleAddAssets = async () => {
     const files = await browseFiles();
 
     const { filePaths } = files;
-    const uris = filePaths.map(getThumbnailURI);
-    const resolvedUris = await Promise.all(uris)
-      .then((resolved) => resolved)
-      .catch(() => []);
-    setThumbnails((prev) => [...prev, ...resolvedUris]);
+    const thumbnails = filePaths.map(getThumbnailURI);
+
+    const assetsFromBrowseFiles: Asset[] = [];
+    try {
+      const resolvedThumbnails = await Promise.all(thumbnails);
+
+      resolvedThumbnails.forEach((_, idx) => {
+        const uri = filePaths[idx];
+        const name = getFileName(uri);
+        const thumbnail = resolvedThumbnails[idx];
+        assetsFromBrowseFiles.push({ uri, name, thumbnail });
+      });
+    } catch (e) {
+      alert(e);
+    }
+    dispatchAssets(assetsActions.addAssets(assetsFromBrowseFiles));
   };
 
   return (
-    <div css={Content}>
+    <div css={Content} style={{ flexDirection: 'column', height: '100%' }}>
       <button onClick={handleAddAssets} type="button" css={ImportButton}>
         アセットを追加
       </button>
-      <div
-        css={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}
-      >
-        {thumbnails.map((uri, idx) => (
+      <div css={AssetsContainer}>
+        {assets.map(({ thumbnail }, idx) => (
           // eslint-disable-next-line react/no-array-index-key
-          <img key={idx} src={uri} width={300} alt="asset-thumbnail" />
+          <Item key={idx} imgSrc={thumbnail} />
         ))}
       </div>
     </div>
@@ -37,13 +50,16 @@ function Assets() {
 export default Assets;
 
 const ImportButton = css`
-  position: absolute;
-  top: 32px;
-  transform: translateX(-50%);
-  left: 50%;
-
   font-size: 14px;
   padding: 4px 16px;
   border-radius: 8px;
   cursor: pointer;
+`;
+
+const AssetsContainer = css`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+  overflow-y: scroll;
 `;

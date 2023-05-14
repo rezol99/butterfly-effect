@@ -99,6 +99,9 @@
     }
   },
   "dependencies": {
+    "@dnd-kit/core": "^6.0.8",
+    "@dnd-kit/sortable": "^7.0.2",
+    "@dnd-kit/utilities": "^3.2.1",
     "@emotion/react": "^11.10.8",
     "@ffmpeg-installer/ffmpeg": "^1.1.0",
     "electron-debug": "^3.2.0",
