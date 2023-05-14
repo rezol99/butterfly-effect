@@ -2,12 +2,25 @@ import { Base64, StdResult } from 'main/util';
 import Converter from './Converter';
 
 class Frame {
-  private base64Data!: Base64;
+  private _uri!: string;
+
+  private _seek!: number;
+
+  private convertedData: Base64 | null = null;
 
   private converters: Converter[] = [];
 
-  constructor(imageData: Base64) {
-    this.base64Data = imageData;
+  constructor(uri: string, seek: number) {
+    this._uri = uri;
+    this._seek = seek;
+  }
+
+  get seek(): number {
+    return this._seek;
+  }
+
+  get uri(): string {
+    return this._uri;
   }
 
   public addConverter(converter: Converter): void {
@@ -25,16 +38,17 @@ class Frame {
     return results;
   }
 
-  public dumpAsBase64(): string {
-    return this.base64Data;
+  public dumpConvertedDataAsBase64(): Base64 | null {
+    return this.convertedData;
   }
 
-  public dumpAsDataUri(): string {
-    return `data:image/jpeg;base64,${this.base64Data}`;
+  public dumpConvertedDataAsDataUri(): string | null {
+    if (!this.convertedData) return null;
+    return `data:image/png;base64,${this.convertedData}`;
   }
 
-  public updateImageData(imageData: Base64): void {
-    this.base64Data = imageData;
+  public moveSeek(seek: number): void {
+    this._seek = seek;
   }
 }
 

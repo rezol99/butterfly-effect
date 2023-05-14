@@ -1,35 +1,32 @@
-from typing import List
-import processing
+from command import Command
 from frame import Frame
+import image_processing
 
+from typing import Optional
 
 HANDLE_MAP = {
-    "blur": processing.blur,
-    "compose": processing.compose,
-    "add-border": processing.add_border,
-    "draw-point": processing.draw_point,
+    "blur": image_processing.blur,
+    "add-border": image_processing.add_border,
+    "draw-point": image_processing.draw_point,
+
+    # 複数の画像から処理するもの、[MULTI]というprefixをつける
+    "[MULTI]compose": image_processing.compose,
 }
 
+def handle(command_name: str, frame: Frame) -> Optional[Frame]:
+    process = HANDLE_MAP[command_name]
+    frame_count = len(frames)
 
-class Handler:
-    def __init__(self, command: str, frames: List[Frame]):
-        self.command = command
-        self.frames = frames
+    # コマンド形式が正しいかassertする
+    assert frame_count == 1 and not command_name.startswith("[MULTI]")
 
-    def __is_multi_image_processing(self) -> bool:
-        return len(self.frames) >= 2
+    out: Optional[Frame] = None
 
-    def send(self) -> None:
-        self.frames[0].send()  # 出力状態は、self.frames[0]に格納されている
+    if frame_count == 1:
+        out = process(frames)
 
-    def run(self) -> None:
-        if self.command not in HANDLE_MAP:
-            raise Exception(f"Unknown command: {self.command}")
+    assert frame_count > 1 and command_name.startswith("[MULTI]")
+    if frame_count > 1:
+        out = process(frames)
 
-        if self.__is_multi_image_processing():
-            HANDLE_MAP[self.command](self.frames)
-        else:
-            frame = self.frames[0]
-            HANDLE_MAP[self.command](frame)
-
-        self.send()
+    return out

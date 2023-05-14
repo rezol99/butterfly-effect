@@ -15,7 +15,7 @@ class Converter {
   public async run(frame: Frame): Promise<StdResult> {
     const data: PythonSendData = {
       command: this.command,
-      images: [frame.dumpAsBase64()],
+      images: [frame.uri],
       meta: this.meta,
     };
     const result = await sendPythonViaMain(data);
