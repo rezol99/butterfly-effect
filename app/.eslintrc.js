@@ -29,6 +29,7 @@ module.exports = {
     'import/export': 'warn',
     'no-underscore-dangle': 'off',
     'no-use-before-define': 'off',
+    'lines-between-class-members': 'off',
   },
   parserOptions: {
     ecmaVersion: 2020,
