@@ -90,9 +90,9 @@ export const callPython = async (
 export type Base64 = string;
 
 export type PythonSendData = {
-  command: string;
-  images?: Base64[];
-  meta?: any;
+  type: string;
+  files: string[];
+  params: { [key: string]: any };
 };
 
 const PYTHON_ENTRY_SCRIPT_NAME = 'main.py' as const;
