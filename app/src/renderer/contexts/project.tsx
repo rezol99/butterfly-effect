@@ -109,9 +109,13 @@ const projectReducer = (state: Project, action: ProjectAction): Project => {
     case RESET_COMPOSITIONS:
       return { ...state, compositions: [] };
 
-    case ADD_ASSET:
+    case ADD_ASSET: {
+      const isAlreadyAdded = state.assets.some(
+        (asset) => asset.path === action.asset.path
+      );
+      if (isAlreadyAdded) return state;
       return { ...state, assets: [...state.assets, action.asset] };
-
+    }
     case REMOVE_ASSET: {
       const removed = state.assets.filter((_, i) => i !== action.index);
       return { ...state, assets: removed };
