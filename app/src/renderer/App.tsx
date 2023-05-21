@@ -1,6 +1,6 @@
 import { Route, MemoryRouter as Router, Routes } from 'react-router-dom';
 import './App.css';
-import Editor from './features/editor';
+import Editor from './components/editor';
 import './normalize.css';
 import { CompositionProvider } from './contexts/composition';
 import { ProjectProvider } from './contexts/project';
