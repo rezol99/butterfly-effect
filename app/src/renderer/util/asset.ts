@@ -1,3 +1,5 @@
+import { AssetType } from 'renderer/types/asset';
+
 export const isVideo = (file: string): boolean => {
   const videoExtensions = ['mp4', 'mov', 'avi', 'mkv', 'webm'];
   const extension = file.split('.').pop();
@@ -23,4 +25,11 @@ export const isImage = (file: string) => {
     return imageExtensions.includes(extension);
   }
   return false;
+};
+
+export const parseFileType = (file: string): AssetType => {
+  if (isImage(file)) return 'image';
+  if (isVideo(file)) return 'video';
+  if (isAudio(file)) return 'audio';
+  return null;
 };
