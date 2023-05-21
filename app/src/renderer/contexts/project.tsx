@@ -1,7 +1,7 @@
 import { createContext, ReactNode, Dispatch, useReducer } from 'react';
 import { Composition } from './composition';
 
-export type ImageResource = {
+export type ImageAsset = {
   type: 'image';
   path: string;
   thumbnail: string;
@@ -9,7 +9,7 @@ export type ImageResource = {
   height: number;
 };
 
-export type VideoResource = {
+export type VideoAsset = {
   type: 'video';
   path: string;
   thumbnail: string;
@@ -18,23 +18,23 @@ export type VideoResource = {
   duration: number;
 };
 
-export type AudioResource = {
+export type AudioAsset = {
   type: 'audio';
   path: string;
   thumbnail: string;
   duration: number;
 };
 
-export type Resource = ImageResource | VideoResource | AudioResource;
+export type Asset = ImageAsset | VideoAsset | AudioAsset;
 
 export type Project = {
   compositions: Composition[];
-  resources: Resource[];
+  assets: Asset[];
 };
 
 const defaultValue: Project = {
   compositions: [],
-  resources: [],
+  assets: [],
 };
 
 export const ProjectContext = createContext<Project>(defaultValue);
@@ -46,9 +46,9 @@ const ADD_COMPOSITION = 'ADD_COMPOSITION' as const;
 const REMOVE_COMPOSITION = 'REMOVE_COMPOSITION' as const;
 const RESET_COMPOSITIONS = 'RESET_COMPOSITIONS' as const;
 
-const ADD_RESOURCE = 'ADD_RESOURCE' as const;
-const REMOVE_RESOURCE = 'REMOVE_RESOURCE' as const;
-const RESET_RESOURCES = 'RESET_RESOURCES' as const;
+const ADD_ASSET = 'ADD_ASSET' as const;
+const REMOVE_ASSET = 'REMOVE_ASSET' as const;
+const RESET_ASSETS = 'RESET_ASSETS' as const;
 
 const RESET_PROJECT = 'RESET_PROJECT' as const;
 
@@ -64,16 +64,16 @@ const resetCompositions = () => {
   return { type: RESET_COMPOSITIONS };
 };
 
-const addResource = (resource: Resource) => {
-  return { type: ADD_RESOURCE, resource };
+const addAsset = (asset: Asset) => {
+  return { type: ADD_ASSET, asset };
 };
 
-const removeResource = (index: number) => {
-  return { type: REMOVE_RESOURCE, index };
+const removeAsset = (index: number) => {
+  return { type: REMOVE_ASSET, index };
 };
 
-const resetResources = () => {
-  return { type: RESET_RESOURCES };
+const resetAssets = () => {
+  return { type: RESET_ASSETS };
 };
 
 const resetProject = () => {
@@ -84,9 +84,9 @@ export const projectActions = {
   addComposition,
   removeComposition,
   resetCompositions,
-  addResource,
-  removeResource,
-  resetResources,
+  addAsset,
+  removeAsset,
+  resetAssets,
   resetProject,
 };
 
@@ -109,19 +109,19 @@ const projectReducer = (state: Project, action: ProjectAction): Project => {
     case RESET_COMPOSITIONS:
       return { ...state, compositions: [] };
 
-    case ADD_RESOURCE:
-      return { ...state, resources: [...state.resources, action.resource] };
+    case ADD_ASSET:
+      return { ...state, assets: [...state.assets, action.asset] };
 
-    case REMOVE_RESOURCE: {
-      const removed = state.resources.filter((_, i) => i !== action.index);
-      return { ...state, resources: removed };
+    case REMOVE_ASSET: {
+      const removed = state.assets.filter((_, i) => i !== action.index);
+      return { ...state, assets: removed };
     }
 
-    case RESET_RESOURCES:
-      return { ...state, resources: [] };
+    case RESET_ASSETS:
+      return { ...state, assets: [] };
 
     case RESET_PROJECT:
-      return { compositions: [], resources: [] };
+      return { compositions: [], assets: [] };
 
     default:
       return state;
