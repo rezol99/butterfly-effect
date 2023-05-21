@@ -1,48 +1,50 @@
-import { Base64, PythonSendData, StdResult } from 'main/util';
-import { parseStdResult, sendPythonViaMain } from 'renderer/bridge/python';
-import { convertBase64ToDataUri } from 'renderer/util/converter';
-import Frame from './Frame';
+import Effect from './effect';
 
 class Layer {
-  private _frames!: Frame[];
+  private _file!: string;
+  private _visibility!: boolean;
+  private _effects!: Effect[];
 
-  private output: Base64 | null = null;
-
-  constructor(frames: Frame[]) {
-    this._frames = frames;
+  constructor(file: string) {
+    this._file = file;
+    this._visibility = true;
+    this._effects = [];
   }
 
-  get frames(): Frame[] {
-    return this._frames;
+  get file(): string {
+    return this._file;
   }
 
-  public addFrame(frame: Frame) {
-    this._frames.push(frame);
+  get visibility(): boolean {
+    return this._visibility;
   }
 
-  public async compose(): Promise<StdResult> {
-    const convertedImagesData = this._frames.map(async (frame) => {
-      await frame.convert();
-      return frame.dumpAsBase64();
-    });
-    const resolvedConvertedImages = await Promise.all(convertedImagesData);
-    const sendData: PythonSendData = {
-      command: 'compose',
-      images: resolvedConvertedImages,
-    };
-
-    const result = await sendPythonViaMain(sendData);
-    const pythonRes = parseStdResult(result);
-    if (pythonRes?.image) this.output = pythonRes.image;
-    return result;
+  get effects(): Effect[] {
+    return this._effects;
   }
 
-  public dumpAsBase64(): Base64 | null {
-    return this.output;
+  public hide(): void {
+    this._visibility = false;
   }
 
-  public dumpAsDataUrl(): string | null {
-    return this.output ? convertBase64ToDataUri(this.output) : null;
+  public show(): void {
+    this._visibility = true;
+  }
+
+  public addEffect(effect: Effect): void {
+    this._effects.push(effect);
+  }
+
+  public removeEffect(index: number): void {
+    this._effects.splice(index, 1);
+  }
+
+  public changeEffectOrder(effect: Effect, newIndex: number): void {
+    const currentIndex = this._effects.indexOf(effect);
+    if (currentIndex !== -1) {
+      this._effects.splice(currentIndex, 1);
+      this._effects.splice(newIndex, 0, effect);
+    }
   }
 }
 
