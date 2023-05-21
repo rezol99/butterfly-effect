@@ -31,6 +31,9 @@ module.exports = {
     'no-use-before-define': 'off',
     'lines-between-class-members': 'off',
     'no-continue': 'off',
+    'react/destructuring-assignment': 'off',
+    'promise/always-return': 'off',
+    'no-plusplus': 'off',
   },
   parserOptions: {
     ecmaVersion: 2020,
