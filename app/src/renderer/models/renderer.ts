@@ -1,6 +1,6 @@
 import { sendPythonViaMain } from 'renderer/bridge/python';
-import Project from './project';
 import { PythonSendData, StdResult } from 'main/util';
+import { Project } from 'renderer/contexts/project';
 
 class Renderer {
   _project!: Project;
@@ -13,21 +13,26 @@ class Renderer {
     this._project = project;
   }
 
-  public render(compositionTargetIndex: number): Promise<StdResult>[] {
+  public async render(compositionTargetIndex: number): Promise<StdResult[]> {
     const composition = this._project.compositions[compositionTargetIndex];
     const { layers } = composition;
-    const results: Promise<StdResult>[] = [];
+    const results: StdResult[] = [];
 
     // eslint-disable-next-line no-restricted-syntax
     for (const layer of layers) {
-      const { file } = layer;
-      const { effects } = layer;
+      const file = layer?.file;
+      const effects = layer?.effects;
+
+      if (file === undefined) continue;
+      if (effects === undefined) continue;
+
       // eslint-disable-next-line no-restricted-syntax
       for (const effect of effects) {
         const { type, params } = effect;
         const files = [file];
         const sendData: PythonSendData = { type, files, params };
-        const res = sendPythonViaMain(sendData);
+        // eslint-disable-next-line no-await-in-loop
+        const res = await sendPythonViaMain(sendData);
         results.push(res);
       }
     }

@@ -1,8 +1,11 @@
 import { Route, MemoryRouter as Router, Routes } from 'react-router-dom';
 import './App.css';
-import { LayerManagerProvider } from './contexts/LayerManager';
 import Editor from './features/editor';
 import './normalize.css';
+import { CompositionProvider } from './contexts/composition';
+import { ProjectProvider } from './contexts/project';
+import RendererProvider from './contexts/renderer';
+import TimelineProvider from './contexts/timeline';
 
 function Routers() {
   return (
@@ -16,8 +19,14 @@ function Routers() {
 
 export default function App() {
   return (
-    <LayerManagerProvider>
-      <Routers />
-    </LayerManagerProvider>
+    <RendererProvider>
+      <ProjectProvider>
+        <TimelineProvider>
+          <CompositionProvider>
+            <Routers />
+          </CompositionProvider>
+        </TimelineProvider>
+      </ProjectProvider>
+    </RendererProvider>
   );
 }
