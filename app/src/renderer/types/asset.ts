@@ -1,1 +1,1 @@
-export type AssetType = 'video' | 'audio' | 'image' | null;
+export type AssetType = 'video' | 'audio' | 'image';

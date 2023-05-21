@@ -27,7 +27,7 @@ export const isImage = (file: string) => {
   return false;
 };
 
-export const parseFileType = (file: string): AssetType => {
+export const parseFileType = (file: string): AssetType | null => {
   if (isImage(file)) return 'image';
   if (isVideo(file)) return 'video';
   if (isAudio(file)) return 'audio';

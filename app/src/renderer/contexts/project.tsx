@@ -4,6 +4,7 @@ import { Composition } from './composition';
 export type ImageAsset = {
   type: 'image';
   path: string;
+  fileName: string;
   thumbnail: string;
   width: number;
   height: number;
@@ -12,6 +13,7 @@ export type ImageAsset = {
 export type VideoAsset = {
   type: 'video';
   path: string;
+  fileName: string;
   thumbnail: string;
   width: number;
   height: number;
@@ -21,6 +23,7 @@ export type VideoAsset = {
 export type AudioAsset = {
   type: 'audio';
   path: string;
+  fileName: string;
   thumbnail: string;
   duration: number;
 };

@@ -8,9 +8,48 @@ import {
   ProjectContext,
   ProjectDispatchContext,
   VideoAsset,
+  projectActions,
 } from 'renderer/contexts/project';
 import { parseFileName } from 'renderer/util/path';
 import { parseFileType } from 'renderer/util/asset';
+
+const makeAsset = async (filePath: string): Promise<Asset | null> => {
+  const fileType = parseFileType(filePath);
+  const fileName = parseFileName(filePath);
+  const thumbnail = await getThumbnailURI(filePath);
+  if (!fileType || !fileName || !thumbnail) return null;
+
+  switch (fileType) {
+    case 'image': {
+      const imageAsset: ImageAsset = {
+        type: 'image',
+        path: filePath,
+        fileName,
+        thumbnail,
+        width: 0, // TODO: get width
+        height: 0, // TODO: get height
+      };
+      return imageAsset as ImageAsset;
+    }
+    case 'video': {
+      const videoAsset: VideoAsset = {
+        type: 'video',
+        path: filePath,
+        fileName,
+        thumbnail,
+        width: 0, // TODO: get width
+        height: 0, // TODO: get height
+        duration: 0, // TODO: get duration
+      };
+      return videoAsset as VideoAsset;
+    }
+    case 'audio':
+      // TODO: implement audio asset
+      return null;
+    default:
+      return null;
+  }
+};
 
 function Assets() {
   const project = useContext(ProjectContext);
@@ -18,50 +57,26 @@ function Assets() {
 
   const handleAddAssets = async () => {
     const files = await browseFiles();
-
     const { filePaths } = files;
-    const thumbnails = filePaths.map(getThumbnailURI);
-    const resolvedThumbnails = await Promise.all(thumbnails);
 
-    // eslint-disable-next-line no-restricted-syntax
-    for (let i = 0; i < filePaths.length; i += 1) {
-      const filePath = filePaths[i];
-      const fileName = parseFileName(filePath);
-      if (!fileName) continue;
-      const fileType = parseFileType(filePath);
-      if (!fileType) continue;
+    const _assets: Promise<Asset | null>[] = [];
 
-      let asset: Asset | null = null;
+    filePaths.forEach((filePath) => {
+      const asset = makeAsset(filePath);
+      _assets.push(asset);
+    });
 
-      if (fileType === 'image') {
-        const imageAsset: ImageAsset = {
-          type: 'image',
-          path: filePath,
-          thumbnail: resolvedThumbnails[i],
-          width: 0, // TODO: get width
-          height: 0, // TODO: get height
-        };
-        asset = imageAsset;
-      } else if (fileType === 'video') {
-        const videoAsset: VideoAsset = {
-          type: 'video',
-          path: filePath,
-          thumbnail: resolvedThumbnails[i],
-          width: 0, // TODO: get width
-          height: 0, // TODO: get height
-          duration: 0, // TODO: get duration
-        };
-        asset = videoAsset;
-      } else if (fileType === 'audio') {
-        // TODO: audio
-      } else {
-        continue;
-      }
-      if (asset) dispatchProject({ type: 'ADD_ASSET', asset });
-    }
+    Promise.all(_assets)
+      .then((assets) => {
+        const filteredAssets: Asset[] = assets.filter(
+          (asset) => asset !== null
+        ) as Asset[];
+        filteredAssets.forEach((asset) => {
+          dispatchProject(projectActions.addAsset(asset));
+        });
+      })
+      .catch(() => {});
   };
-
-  const { assets } = project;
 
   return (
     <div css={Content}>
@@ -71,7 +86,7 @@ function Assets() {
       <div
         css={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}
       >
-        {assets.map((asset) => (
+        {project.assets.map((asset) => (
           <img
             key={asset.path}
             src={asset.thumbnail}
