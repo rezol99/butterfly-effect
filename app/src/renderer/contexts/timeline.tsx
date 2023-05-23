@@ -35,9 +35,9 @@ const timelineReducer = (
   action: TimelineAction
 ): Timeline | null => {
   switch (action.type) {
-    case 'RESET_TIMELINE':
+    case RESET_TIMELINE:
       return null;
-    case 'ADD_KEYFRAME':
+    case ADD_KEYFRAME:
       return state
         ? { ...state, keyframes: [...state.keyframes, action.keyframe] }
         : state;

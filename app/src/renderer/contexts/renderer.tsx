@@ -27,9 +27,9 @@ export type RendererAction = ReturnType<
 
 const rendererReducer = (state: Renderer | null, action: RendererAction) => {
   switch (action.type) {
-    case 'RESET_RENDERER':
+    case RESET_RENDERER:
       return null;
-    case 'SET_RENDERER':
+    case SET_RENDERER:
       return action.renderer;
     default:
       return state;

@@ -108,10 +108,8 @@ const projectReducer = (state: Project, action: ProjectAction): Project => {
       const removed = state.compositions.filter((_, i) => i !== action.index);
       return { ...state, compositions: removed };
     }
-
     case RESET_COMPOSITIONS:
       return { ...state, compositions: [] };
-
     case ADD_ASSET: {
       const isAlreadyAdded = state.assets.some(
         (asset) => asset.path === action.asset.path
@@ -123,19 +121,16 @@ const projectReducer = (state: Project, action: ProjectAction): Project => {
       const removed = state.assets.filter((_, i) => i !== action.index);
       return { ...state, assets: removed };
     }
-
     case RESET_ASSETS:
       return { ...state, assets: [] };
-
     case RESET_PROJECT:
       return { compositions: [], assets: [] };
-
     default:
       return state;
   }
 };
 
-export function ProjectProvider({ children }: { children: ReactNode }) {
+export default function ProjectProvider({ children }: { children: ReactNode }) {
   const [state, dispatch] = useReducer(projectReducer, defaultValue);
   return (
     <ProjectContext.Provider value={state}>

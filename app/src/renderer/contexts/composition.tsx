@@ -68,7 +68,11 @@ const compositionReducer = (
   }
 };
 
-export function CompositionProvider({ children }: { children: ReactNode }) {
+export default function CompositionProvider({
+  children,
+}: {
+  children: ReactNode;
+}) {
   const [state, dispatch] = useReducer(compositionReducer, defaultValue);
   return (
     <CompositionContext.Provider value={state}>
