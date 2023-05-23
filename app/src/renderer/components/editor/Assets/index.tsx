@@ -79,20 +79,29 @@ function Assets() {
   };
 
   return (
-    <div css={Content}>
-      <button onClick={handleAddAssets} type="button" css={ImportButton}>
-        アセットを追加
-      </button>
-      <div
-        css={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}
-      >
+    <div
+      css={Content}
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+      }}
+    >
+      <div css={ImportButtonWrapper}>
+        <button onClick={handleAddAssets} type="button" css={ImportButton}>
+          アセットを追加
+        </button>
+      </div>
+      <div css={AssetsContainer}>
         {project.assets.map((asset) => (
-          <img
-            key={asset.path}
-            src={asset.thumbnail}
-            width={300}
-            alt="asset-thumbnail"
-          />
+          <div css={AssetWrapper}>
+            <img
+              css={AssetThumbnail}
+              key={asset.path}
+              src={asset.thumbnail}
+              alt="asset-thumbnail"
+            />
+          </div>
         ))}
       </div>
     </div>
@@ -102,13 +111,37 @@ function Assets() {
 export default Assets;
 
 const ImportButton = css`
-  position: absolute;
-  top: 32px;
-  transform: translateX(-50%);
-  left: 50%;
-
   font-size: 14px;
   padding: 4px 16px;
   border-radius: 8px;
   cursor: pointer;
+`;
+
+const ImportButtonWrapper = css`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 48px 0px;
+`;
+
+const AssetsContainer = css`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-y: scroll;
+  padding-top: 16px;
+  padding-bottom: 16px;
+  row-gap: 24px;
+`;
+
+const AssetWrapper = css`
+  position: relative;
+  width: calc(100% - 48px);
+  display: flex;
+  flex-direction: column;
+`;
+
+const AssetThumbnail = css`
+  width: 100%;
+  height: auto;
 `;
