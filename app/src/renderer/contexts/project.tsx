@@ -1,5 +1,6 @@
 import { createContext, ReactNode, Dispatch, useReducer } from 'react';
 import { Composition } from './composition';
+import Layer from 'renderer/models/layer';
 
 export type ImageAsset = {
   type: 'image';
@@ -31,12 +32,12 @@ export type AudioAsset = {
 export type Asset = ImageAsset | VideoAsset | AudioAsset;
 
 export type Project = {
-  compositions: Composition[];
+  composition: Composition;
   assets: Asset[];
 };
 
 const defaultValue: Project = {
-  compositions: [],
+  composition: { layers: [] },
   assets: [],
 };
 
@@ -45,9 +46,9 @@ export const ProjectDispatchContext = createContext<Dispatch<ProjectAction>>(
   () => {}
 );
 
-const ADD_COMPOSITION = 'ADD_COMPOSITION' as const;
-const REMOVE_COMPOSITION = 'REMOVE_COMPOSITION' as const;
-const RESET_COMPOSITIONS = 'RESET_COMPOSITIONS' as const;
+const ADD_LAYER = 'ADD_LAYER' as const;
+const REMOVE_LAYER = 'REMOVE_LAYER' as const;
+const RESET_LAYERS = 'RESET_LAYERS' as const;
 
 const ADD_ASSET = 'ADD_ASSET' as const;
 const REMOVE_ASSET = 'REMOVE_ASSET' as const;
@@ -55,16 +56,16 @@ const RESET_ASSETS = 'RESET_ASSETS' as const;
 
 const RESET_PROJECT = 'RESET_PROJECT' as const;
 
-const addComposition = (composition: Composition) => {
-  return { type: ADD_COMPOSITION, composition };
+const addLayer = (layer: Layer) => {
+  return { type: ADD_LAYER, layer };
 };
 
-const removeComposition = (index: number) => {
-  return { type: REMOVE_COMPOSITION, index };
+const removeLayer = (index: number) => {
+  return { type: REMOVE_LAYER, index };
 };
 
-const resetCompositions = () => {
-  return { type: RESET_COMPOSITIONS };
+const resetLayers = () => {
+  return { type: RESET_LAYERS };
 };
 
 const addAsset = (asset: Asset) => {
@@ -84,9 +85,9 @@ const resetProject = () => {
 };
 
 export const projectActions = {
-  addComposition,
-  removeComposition,
-  resetCompositions,
+  addLayer,
+  removeLayer,
+  resetLayers,
   addAsset,
   removeAsset,
   resetAssets,
@@ -99,17 +100,25 @@ export type ProjectAction = ReturnType<
 
 const projectReducer = (state: Project, action: ProjectAction): Project => {
   switch (action.type) {
-    case ADD_COMPOSITION:
+    case ADD_LAYER:
       return {
         ...state,
-        compositions: [...state.compositions, action.composition],
+        composition: {
+          ...state.composition,
+          layers: [...state.composition.layers, action.layer],
+        },
       };
-    case REMOVE_COMPOSITION: {
-      const removed = state.compositions.filter((_, i) => i !== action.index);
-      return { ...state, compositions: removed };
+    case REMOVE_LAYER: {
+      const removed = state.composition.layers.filter(
+        (_, i) => i !== action.index
+      );
+      return {
+        ...state,
+        composition: { ...state.composition, layers: removed },
+      };
     }
-    case RESET_COMPOSITIONS:
-      return { ...state, compositions: [] };
+    case RESET_LAYERS:
+      return { ...state, composition: { ...state.composition, layers: [] } };
     case ADD_ASSET: {
       const isAlreadyAdded = state.assets.some(
         (asset) => asset.path === action.asset.path
@@ -124,7 +133,7 @@ const projectReducer = (state: Project, action: ProjectAction): Project => {
     case RESET_ASSETS:
       return { ...state, assets: [] };
     case RESET_PROJECT:
-      return { compositions: [], assets: [] };
+      return { composition: { layers: [] }, assets: [] };
     default:
       return state;
   }

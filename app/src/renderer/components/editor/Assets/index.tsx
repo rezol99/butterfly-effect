@@ -12,6 +12,8 @@ import {
 } from 'renderer/contexts/project';
 import { parseFileName } from 'renderer/util/path';
 import { parseFileType } from 'renderer/util/asset';
+import AssetContent from './AssetContent';
+import { createLayerByAsset } from 'renderer/models/layer';
 
 const createAssetByFilePath = async (
   filePath: string
@@ -59,6 +61,7 @@ function Assets() {
 
   const handleAddAssets = async () => {
     const files = await browseFiles();
+
     const { filePaths } = files;
     const promiseAssets: Promise<Asset | null>[] = filePaths.map((filePath) =>
       createAssetByFilePath(filePath)
@@ -73,6 +76,11 @@ function Assets() {
         });
       })
       .catch(() => {});
+  };
+
+  const handleAssetClick = (asset: Asset) => {
+    const layer = createLayerByAsset(asset);
+    dispatchProject(projectActions.addLayer(layer));
   };
 
   return (
@@ -91,14 +99,11 @@ function Assets() {
       </div>
       <div css={AssetsContainer}>
         {project.assets.map((asset) => (
-          <div css={AssetWrapper}>
-            <img
-              css={AssetThumbnail}
-              key={asset.path}
-              src={asset.thumbnail}
-              alt="asset-thumbnail"
-            />
-          </div>
+          <AssetContent
+            path={asset.path}
+            thumbnail={asset.thumbnail}
+            onClick={() => handleAssetClick(asset)}
+          />
         ))}
       </div>
     </div>
@@ -129,16 +134,4 @@ const AssetsContainer = css`
   padding-top: 16px;
   padding-bottom: 16px;
   row-gap: 24px;
-`;
-
-const AssetWrapper = css`
-  position: relative;
-  width: calc(100% - 48px);
-  display: flex;
-  flex-direction: column;
-`;
-
-const AssetThumbnail = css`
-  width: 100%;
-  height: auto;
 `;

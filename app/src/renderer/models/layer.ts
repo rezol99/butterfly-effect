@@ -1,18 +1,43 @@
+import { AssetType } from 'renderer/types/asset';
 import Effect from './effect';
+import { Asset } from 'renderer/contexts/project';
+
+export const createLayerByAsset = (asset: Asset) => {
+  const layer = new Layer(asset.path, asset.type, asset.thumbnail);
+  return layer;
+};
 
 class Layer {
   private _file!: string;
+  private _thumbnail!: string | null;
+  private _type!: AssetType;
   private _visibility!: boolean;
   private _effects!: Effect[];
 
-  constructor(file: string) {
+  constructor(
+    file: string,
+    type: AssetType,
+    thumbnail: string | null = null,
+    visibility: boolean = true,
+    effects: Effect[] = []
+  ) {
     this._file = file;
-    this._visibility = true;
-    this._effects = [];
+    this._type = type;
+    this._thumbnail = thumbnail;
+    this._visibility = visibility;
+    this._effects = effects;
+  }
+
+  get thumbnail(): string | null {
+    return this._thumbnail;
   }
 
   get file(): string {
     return this._file;
+  }
+
+  get type(): AssetType {
+    return this._type;
   }
 
   get visibility(): boolean {
