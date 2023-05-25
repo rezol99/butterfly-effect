@@ -13,7 +13,9 @@ import {
 import { parseFileName } from 'renderer/util/path';
 import { parseFileType } from 'renderer/util/asset';
 
-const makeAsset = async (filePath: string): Promise<Asset | null> => {
+const createAssetByFilePath = async (
+  filePath: string
+): Promise<Asset | null> => {
   const fileType = parseFileType(filePath);
   const fileName = parseFileName(filePath);
   const thumbnail = await getThumbnailURI(filePath);
@@ -58,15 +60,10 @@ function Assets() {
   const handleAddAssets = async () => {
     const files = await browseFiles();
     const { filePaths } = files;
-
-    const _assets: Promise<Asset | null>[] = [];
-
-    filePaths.forEach((filePath) => {
-      const asset = makeAsset(filePath);
-      _assets.push(asset);
-    });
-
-    Promise.all(_assets)
+    const promiseAssets: Promise<Asset | null>[] = filePaths.map((filePath) =>
+      createAssetByFilePath(filePath)
+    );
+    Promise.all(promiseAssets)
       .then((assets) => {
         const filteredAssets: Asset[] = assets.filter(
           (asset) => asset !== null
