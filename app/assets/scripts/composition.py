@@ -36,9 +36,6 @@ class Composition:
 
 
 class CompositionDecoder:
-    layers: list[Layer]
-    out: cv2.Mat
-
     @staticmethod
     def decode(params: dict) -> list[Layer]:
         layers: list[Layer] = []
