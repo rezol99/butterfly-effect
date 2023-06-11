@@ -12,13 +12,15 @@ export type EffectSendObject = {
   };
 };
 
+export type EffectType = 'blur';
+
 class Effect {
-  private _type!: string;
+  private _type!: EffectType;
   private _params!: Parameters;
   private _timing!: Timing;
 
   constructor(
-    type: string,
+    type: EffectType,
     options?: { parameters?: Parameters; timing?: Timing }
   ) {
     this._type = type;

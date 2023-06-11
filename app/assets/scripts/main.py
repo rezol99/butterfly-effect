@@ -27,8 +27,8 @@ if __name__ == "__main__":
             effects = []
 
             for _effect in _effects:
-                effect_type = _effect["type"]
-                effect_params = _effect["params"]
+                effect_type: str = _effect["type"]
+                effect_params: dict = _effect["params"]
                 effect_timing = _effect["timing"]
 
                 timing = Timing(effect_timing["start"], effect_timing["end"])
@@ -38,13 +38,19 @@ if __name__ == "__main__":
             layer = Layer(file, asset_type, effects)
             layers.append(layer)
 
-        # 合成処理
         images: list[cv2.Mat] = []
         for layer in layers:
             if layer.type == 'image':
                 img = cv2.imread(layer.file)
+
+                for effect in layer.effects:
+                    if effect.type == 'blur':
+                        intensity = effect.params.get("intensity", 0)
+                        if intensity > 0:
+                            img = cv2.blur(img, (intensity, intensity))
                 images.append(img)
 
+        # 合成処理
         out = overlay_images(images)
         data["image"] = encode_ndarray_to_base64(out)
         sys.stdout.write(json.dumps(data, ensure_ascii=False))

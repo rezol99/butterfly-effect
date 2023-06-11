@@ -48,6 +48,7 @@ export const ProjectDispatchContext = createContext<Dispatch<ProjectAction>>(
 
 const ADD_LAYER = 'ADD_LAYER' as const;
 const REMOVE_LAYER = 'REMOVE_LAYER' as const;
+const UPDATE_LAYER = 'UPDATE_LAYER' as const;
 const RESET_LAYERS = 'RESET_LAYERS' as const;
 
 const ADD_ASSET = 'ADD_ASSET' as const;
@@ -58,6 +59,10 @@ const RESET_PROJECT = 'RESET_PROJECT' as const;
 
 const addLayer = (layer: Layer) => {
   return { type: ADD_LAYER, layer };
+};
+
+const updateLayer = (index: number, layer: Layer) => {
+  return { type: UPDATE_LAYER, index, layer };
 };
 
 const removeLayer = (index: number) => {
@@ -87,6 +92,7 @@ const resetProject = () => {
 export const projectActions = {
   addLayer,
   removeLayer,
+  updateLayer,
   resetLayers,
   addAsset,
   removeAsset,
@@ -115,6 +121,16 @@ const projectReducer = (state: Project, action: ProjectAction): Project => {
       return {
         ...state,
         composition: { ...state.composition, layers: removed },
+      };
+    }
+    case UPDATE_LAYER: {
+      const updated = state.composition.layers.map((layer, i) => {
+        if (i === action.index) return action.layer;
+        return layer;
+      });
+      return {
+        ...state,
+        composition: { ...state.composition, layers: updated },
       };
     }
     case RESET_LAYERS:

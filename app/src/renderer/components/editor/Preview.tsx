@@ -11,7 +11,7 @@ export default function Preview() {
   const project = useContext(ProjectContext);
 
   useEffect(() => {
-    if (project.composition.layers.length == 0) return;
+    if (project.composition.layers.length === 0) return;
     (async () => {
       const renderer = new Renderer(project.composition.layers);
       try {

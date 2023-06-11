@@ -58,8 +58,13 @@ class Layer {
     return this._effects;
   }
 
-  public addEffect(effect: Effect): void {
-    this._effects.push(effect);
+  public updateEffect(index: number, effect: Effect): void {
+    this._effects[index] = effect;
+  }
+
+  public addEffect(effect: Effect, idx?: number): void {
+    if (idx !== undefined) this._effects.push(effect);
+    this._effects.splice(idx as number, 0, effect);
   }
 
   public removeEffect(index: number): void {
