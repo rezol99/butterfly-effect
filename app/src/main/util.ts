@@ -57,11 +57,15 @@ export const getPythonScriptDir = () => {
   return pythonScriptDir;
 };
 
+export const getOSName = (): string => {
+  return isMac ? 'darwin' : 'win32';
+};
+
 export const getPythonBinaryPath = (): string => {
-  const osName = isMac ? 'darwin' : 'win32';
+  const osName = getOSName();
   const arch = getArchitecture();
   const pythonBinaryPath = resolveBinPath(
-    `./${osName}/python/${arch}/python.app/Contents/MacOS/python`
+    `./${osName}/${arch}/python/python.app/Contents/MacOS/python`
   );
   return pythonBinaryPath;
 };
