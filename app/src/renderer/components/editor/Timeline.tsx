@@ -12,8 +12,7 @@ import {
   projectActions,
 } from 'renderer/contexts/project';
 import Layer from 'renderer/models/layer';
-import Effect from 'renderer/models/effect';
-import Parameters from 'renderer/models/parameters';
+import { createBlurEffect } from 'renderer/effects';
 
 const TIMELINES = 20;
 const TIMELINE_ROW_HEIGHT = 80;
@@ -36,8 +35,7 @@ export default function Timeline() {
     idx: number
   ) => {
     const intensity = e.target.checked ? 80 : 0;
-    const params: Parameters = new Parameters({ intensity });
-    const blurEffect = new Effect('blur', { parameters: params });
+    const blurEffect = createBlurEffect(intensity);
     const target = project.composition.layers[idx];
     if (!target) return;
     if (target.effects.length === 0) {
