@@ -1,4 +1,4 @@
-import { PythonSendData, StdResult } from 'main/util';
+import PythonSendData, { StdResult } from 'main/util';
 import { PythonResult } from 'renderer/types/bridge';
 
 export const parseStdResult = (result: StdResult): PythonResult | null => {

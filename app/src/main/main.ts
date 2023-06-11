@@ -20,8 +20,7 @@ import log from 'electron-log';
 import { autoUpdater } from 'electron-updater';
 import path from 'path';
 import MenuBuilder from './menu';
-import {
-  PythonSendData,
+import PythonSendData, {
   getPythonScriptDir,
   getThumbnailURI,
   resolveHtmlPath,

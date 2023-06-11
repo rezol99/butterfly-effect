@@ -1,33 +1,51 @@
 import json
 import sys
-from typing import List, Optional
 
-from converter import decode_image_to_ndarray
-from frame import Frame
-from handler import Handler
+import cv2
+from converter import encode_ndarray_to_base64
+from processing import overlay_images
+from layer import Effect, Timing, Layer
 
 
 def __read_input() -> dict:
     return json.loads(sys.stdin.readline())
 
-
-def __parse_input(data: dict) -> tuple[str, List[Frame]]:
-    if "command" not in data:
-        raise Exception("command is not found")
-
-    command = data["command"]
-    meta: Optional[dict] = data.get("meta")
-    if meta is None:
-        meta = dict()
-
-    frames = [Frame(decode_image_to_ndarray(image), meta) for image in data["images"]]
-
-    return command, frames
-
-
 if __name__ == "__main__":
-    received = __read_input()
-    command, frames = __parse_input(received)
+    data = __read_input()
 
-    h = Handler(command, frames)
-    h.run()
+    type = data["type"]
+    params: dict = data["params"]
+    layers: list[Layer] = []
+
+    if type == 'composition':
+        _layers = params["layers"]
+
+        for layer in _layers:
+            file = layer["file"]
+            asset_type = layer["type"]
+            _effects = layer["effects"]
+            effects = []
+
+            for _effect in _effects:
+                effect_type = _effect["type"]
+                effect_params = _effect["params"]
+                effect_timing = _effect["timing"]
+
+                timing = Timing(effect_timing["start"], effect_timing["end"])
+                effect = Effect(effect_type, effect_params, effect_timing)
+                effects.append(effect)
+
+            layer = Layer(file, asset_type, effects)
+            layers.append(layer)
+
+        # 合成処理
+        images: list[cv2.Mat] = []
+        for layer in layers:
+            if layer.type == 'image':
+                img = cv2.imread(layer.file)
+                images.append(img)
+
+        out = overlay_images(images)
+        data["image"] = encode_ndarray_to_base64(out)
+        sys.stdout.write(json.dumps(data, ensure_ascii=False))
+        sys.stdout.flush()

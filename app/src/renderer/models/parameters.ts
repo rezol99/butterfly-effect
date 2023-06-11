@@ -9,10 +9,6 @@ class Parameters {
     return this._data;
   }
 
-  public toJSONString(): string {
-    return JSON.stringify(this._data);
-  }
-
   public addParameter(name: string, value: any): void {
     this._data[name] = value;
   }

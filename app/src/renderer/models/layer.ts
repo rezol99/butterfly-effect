@@ -1,5 +1,5 @@
 import { AssetType } from 'renderer/types/asset';
-import Effect from './effect';
+import Effect, { EffectSendObject } from './effect';
 import { Asset } from 'renderer/contexts/project';
 
 export const createLayerByAsset = (asset: Asset) => {
@@ -7,15 +7,21 @@ export const createLayerByAsset = (asset: Asset) => {
   return layer;
 };
 
+export type LayerSendObject = {
+  file: string | null;
+  type: AssetType;
+  effects: EffectSendObject[];
+};
+
 class Layer {
-  private _file!: string;
+  private _file!: string | null;
   private _thumbnail!: string | null;
   private _type!: AssetType;
   private _visibility!: boolean;
   private _effects!: Effect[];
 
   constructor(
-    file: string,
+    file: string | null,
     type: AssetType,
     thumbnail: string | null = null,
     visibility: boolean = true,
@@ -32,7 +38,7 @@ class Layer {
     return this._thumbnail;
   }
 
-  get file(): string {
+  get file(): string | null {
     return this._file;
   }
 
@@ -44,16 +50,12 @@ class Layer {
     return this._visibility;
   }
 
+  set visibility(value: boolean) {
+    this._visibility = value;
+  }
+
   get effects(): Effect[] {
     return this._effects;
-  }
-
-  public hide(): void {
-    this._visibility = false;
-  }
-
-  public show(): void {
-    this._visibility = true;
   }
 
   public addEffect(effect: Effect): void {
@@ -70,6 +72,13 @@ class Layer {
       this._effects.splice(currentIndex, 1);
       this._effects.splice(newIndex, 0, effect);
     }
+  }
+
+  public toSendObject(): LayerSendObject {
+    const file = this._file;
+    const type = this._type;
+    const effects = this.effects.map((effect) => effect.toSendObject());
+    return { file, type, effects };
   }
 }
 

@@ -33,7 +33,9 @@ def draw_point(frame: Frame):
     frame.image = out
 
 
-def _overlay_images(images: List[np.ndarray]) -> np.ndarray:
+def overlay_images(images: List[cv2.Mat]) -> cv2.Mat:
+    if len(images) == 0:
+        raise ValueError("images must not be empty")
     max_width = max([img.shape[1] for img in images])
     resized_images = [
         cv2.resize(img, (max_width, int(img.shape[0] * (max_width / img.shape[1]))))
@@ -77,5 +79,5 @@ def compose(frames: list[Frame]) -> None:
         return
 
     np_images = [frame.image for frame in frames]
-    out = _overlay_images(np_images)
-    frames[0].image = out
+    # out = _overlay_images(np_images)
+    # frames[0].image = out

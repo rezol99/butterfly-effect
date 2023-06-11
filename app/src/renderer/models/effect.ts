@@ -1,6 +1,17 @@
 import { Timing } from 'renderer/types/time';
 import Parameters from './parameters';
 
+export type EffectSendObject = {
+  type: string;
+  params: {
+    [key: string]: any;
+  };
+  timing: {
+    start: number;
+    end: number;
+  };
+};
+
 class Effect {
   private _type!: string;
   private _params!: Parameters;
@@ -33,6 +44,14 @@ class Effect {
 
   public setTiming(startTime: number, endTime: number): void {
     this._timing = { start: startTime, end: endTime };
+  }
+
+  public toSendObject(): EffectSendObject {
+    return {
+      type: this._type,
+      params: this._params.get(),
+      timing: { start: this._timing.start, end: this._timing.end },
+    };
   }
 }
 

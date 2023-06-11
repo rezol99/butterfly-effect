@@ -5,6 +5,7 @@ import { createReadStream, readFileSync, unlinkSync, writeFileSync } from 'fs';
 import path from 'path';
 import process from 'process';
 import { Options, PythonShell } from 'python-shell';
+import { LayerSendObject } from 'renderer/models/layer';
 import { URL } from 'url';
 import { promisify } from 'util';
 
@@ -82,18 +83,31 @@ export const callPython = async (
     });
     pythonShell.on('stderr', (stderr) => {
       if (isDev) console.error(stderr);
-      resolve({ stdout: null, stderr });
+      reject(stderr);
     });
   });
 };
 
 export type Base64 = string;
 
-export type PythonSendData = {
-  type: string;
-  files: string[];
-  params: { [key: string]: any };
+export type PythonSendParams = {
+  [key: string]: any;
 };
+
+export type PythonCompositionSendData = {
+  type: 'composition';
+  params: {
+    layers: LayerSendObject[];
+  };
+};
+
+type PythonSendData =
+  | {
+      type: string;
+      params: PythonSendParams;
+    }
+  | PythonCompositionSendData;
+export default PythonSendData;
 
 const PYTHON_ENTRY_SCRIPT_NAME = 'main.py' as const;
 

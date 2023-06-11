@@ -1,22 +1,30 @@
 import { css } from '@emotion/react';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { convertBase64ToDataUri } from 'renderer/util/converter';
-import { fetchAsBase64 } from 'renderer/util/network';
 import { Content } from '.';
 import { BLACK_BACKGROUND_COLOR } from '../../constants/color';
+import { ProjectContext } from 'renderer/contexts/project';
+import Renderer from 'renderer/models/renderer';
 
 export default function Preview() {
   const [image, setImage] = useState<string>();
+  const project = useContext(ProjectContext);
 
   useEffect(() => {
     (async () => {
-      const imageUrl =
-        'https://i.seadn.io/gcs/files/3bbc9b5e32a2f897db248da912e06a51.jpg?auto=format&w=1000';
-      const base64Image = await fetchAsBase64(imageUrl);
-      const dataUri = convertBase64ToDataUri(base64Image);
-      setImage(dataUri);
+      const renderer = new Renderer(project.composition.layers);
+      try {
+        const result = await renderer.render();
+        if (result.stderr) throw new Error(result.stderr);
+        if (!result.stdout) throw new Error('No stdout');
+        const base64Image: string = JSON.parse(result.stdout).image;
+        const dataUriImage = convertBase64ToDataUri(base64Image);
+        setImage(dataUriImage);
+      } catch (error) {
+        console.error('Preview render error', error);
+      }
     })();
-  }, []);
+  }, [project.composition.layers]);
 
   return (
     <div

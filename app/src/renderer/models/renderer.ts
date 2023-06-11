@@ -1,43 +1,51 @@
 import { sendPythonViaMain } from 'renderer/bridge/python';
-import { PythonSendData, StdResult } from 'main/util';
-import { Project } from 'renderer/contexts/project';
+import { PythonCompositionSendData, StdResult } from 'main/util';
+import Layer, { LayerSendObject } from './layer';
 
 class Renderer {
-  _project!: Project;
+  private _layers: (Layer | null)[] = [];
 
-  get project(): Project {
-    return this._project;
+  constructor(layers: (Layer | null)[]) {
+    this._layers = layers;
   }
 
-  constructor(project: Project) {
-    this._project = project;
+  get layers(): (Layer | null)[] {
+    return this._layers;
   }
 
-  public async render(compositionTargetIndex: number): Promise<StdResult[]> {
-    const composition = this._project.compositions[compositionTargetIndex];
-    const { layers } = composition;
-    const results: StdResult[] = [];
+  set layers(layers: (Layer | null)[]) {
+    this._layers = layers;
+  }
 
-    // eslint-disable-next-line no-restricted-syntax
-    for (const layer of layers) {
-      const file = layer?.file;
-      const effects = layer?.effects;
+  // eslint-disable-next-line class-methods-use-this
+  private createCompositionSendData(
+    layers: Layer[]
+  ): PythonCompositionSendData {
+    const type = 'composition' as const;
+    const sendData: PythonCompositionSendData = {
+      type,
+      params: { layers: [] },
+    };
+    layers.forEach((layer) => {
+      if (layer === null) return;
+      const { file, effects } = layer;
+      const effectsSendParams = effects.map((effect) => effect.toSendObject());
+      const layerSendObject: LayerSendObject = {
+        file,
+        type: layer.type,
+        effects: effectsSendParams,
+      };
+      sendData.params.layers.push(layerSendObject);
+    });
+    return sendData;
+  }
 
-      if (file === undefined) continue;
-      if (effects === undefined) continue;
-
-      // eslint-disable-next-line no-restricted-syntax
-      for (const effect of effects) {
-        const { type, params } = effect;
-        const files = [file];
-        const sendData: PythonSendData = { type, files, params };
-        // eslint-disable-next-line no-await-in-loop
-        const res = await sendPythonViaMain(sendData);
-        results.push(res);
-      }
-    }
-
-    return results;
+  public async render(): Promise<StdResult> {
+    const nonNullLayers = this.layers.filter(
+      (layer) => layer !== null
+    ) as Layer[];
+    const sendData = this.createCompositionSendData(nonNullLayers);
+    return sendPythonViaMain(sendData);
   }
 }
 
