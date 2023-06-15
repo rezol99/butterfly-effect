@@ -12,7 +12,7 @@ export type EffectSendObject = {
   };
 };
 
-export type EffectType = 'blur';
+export type EffectType = 'blur' | 'rotate';
 
 class Effect {
   private _type!: EffectType;

@@ -13,6 +13,7 @@ import {
 } from 'renderer/contexts/project';
 import Layer from 'renderer/models/layer';
 import { createBlurEffect } from 'renderer/effects';
+import IconEQ from 'renderer/assets/images/icon_equalizer.svg';
 
 const TIMELINES = 20;
 const TIMELINE_ROW_HEIGHT = 80;
@@ -69,17 +70,13 @@ export default function Timeline() {
             >
               <div css={TimeLineOperations}>
                 {layer && (
-                  <form css={TimeLineOperation}>
-                    {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
-                    <label htmlFor={`blur-${idx}`} css={TimeLineOperationLabel}>
-                      ぼかす
-                    </label>
-                    <input
-                      onChange={(e) => handleBlurCheckboxChange(e, idx)}
-                      id={`blur-${idx}`}
-                      type="checkbox"
-                    />
-                  </form>
+                  <button
+                    type="button"
+                    css={OpenOperationButton}
+                    onClick={() => {}}
+                  >
+                    <img src={IconEQ} alt="icon_eq" />
+                  </button>
                 )}
               </div>
               <div
@@ -122,24 +119,28 @@ const TimeLineOperations = css`
   height: 100%;
   background-color: black;
   display: flex;
+  justify-content: flex-start;
   align-items: center;
-  padding-left: 16px;
+  padding-left: 24px;
   box-sizing: border-box;
 `;
 
-const TimeLineOperation = css`
-  display: grid;
-  align-items: center;
-  justify-content: center;
-  grid-template-columns: 1fr 1fr;
-  width: 40%;
-  height: 100%;
-`;
+const OpenOperationButton = css`
+  height: 25%;
+  aspect-ratio: 1;
+  background-color: transparent;
+  border: none;
+  padding: 0px;
+  cursor: pointer;
+  opacity: 0.7;
 
-const TimeLineOperationLabel = css`
-  text-align: center;
-  color: white;
-  user-select: none;
+  &:hover {
+    opacity: 0.85;
+  }
+
+  &:active {
+    opacity: 1;
+  }
 `;
 
 const TimeLineAsset = css`

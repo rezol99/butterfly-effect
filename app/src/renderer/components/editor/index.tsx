@@ -3,17 +3,24 @@ import { BORDER_COLOR } from '../../constants/color';
 import Assets from './Assets';
 import Preview from './Preview';
 import Timeline from './Timeline';
+import { useState } from 'react';
+import EditEffectsModal from '../modal/EditEffectsModal';
 
 const SIDE_WIDTH = 300;
 
 export default function Index() {
+  const [isOpenEditModal, setIsOpenEditModal] = useState(true);
+
   return (
-    <div css={Layout}>
-      <Assets />
-      <Preview />
-      <div css={Content} />
-      <Timeline />
-    </div>
+    <>
+      <div css={Layout}>
+        <Assets />
+        <Preview />
+        <div css={Content} />
+        <Timeline />
+      </div>
+      <EditEffectsModal isOpen={isOpenEditModal} />
+    </>
   );
 }
 
