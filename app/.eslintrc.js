@@ -34,6 +34,7 @@ module.exports = {
     'react/destructuring-assignment': 'off',
     'promise/always-return': 'off',
     'no-plusplus': 'off',
+    'react-hooks/exhaustive-deps': 'off',
   },
   parserOptions: {
     ecmaVersion: 2020,
