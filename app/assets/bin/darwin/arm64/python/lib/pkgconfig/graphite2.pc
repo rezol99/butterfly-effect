@@ -1,7 +1,0 @@
-
-Name: Graphite2
-Description: Font rendering engine for Complex Scripts
-Version: 3.0.1
-Libs: -L/Users/ezryow/Git/butterfly-effect/app/bin/darwin/python/arm64/lib -lgraphite2
-Cflags: -I/Users/ezryow/Git/butterfly-effect/app/bin/darwin/python/arm64/include
-

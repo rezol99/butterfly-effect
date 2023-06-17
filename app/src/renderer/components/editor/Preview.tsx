@@ -1,6 +1,5 @@
 import { css } from '@emotion/react';
 import { useContext, useEffect, useState } from 'react';
-import { convertBase64ToDataUri } from 'renderer/util/converter';
 import { Content } from '.';
 import { BLACK_BACKGROUND_COLOR } from '../../constants/color';
 import { ProjectContext } from 'renderer/contexts/project';
@@ -18,9 +17,10 @@ export default function Preview() {
         const result = await renderer.render();
         if (result.stderr) throw new Error(result.stderr);
         if (!result.stdout) throw new Error('No stdout');
-        const base64Image: string = JSON.parse(result.stdout).image;
-        const dataUriImage = convertBase64ToDataUri(base64Image);
-        setImage(dataUriImage);
+        console.log('Preview render result', result);
+        const imagePath: string = JSON.parse(result.stdout).image;
+        const imagePathAsFileProtocol = `file://${imagePath}`;
+        setImage(imagePathAsFileProtocol);
       } catch (error) {
         console.error('Preview render error', error);
       }

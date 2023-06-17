@@ -1,7 +1,0 @@
-bin/asn1Coding
-bin/asn1Decoding
-bin/asn1Parser
-include/libtasn1.h
-lib/libtasn1.6.dylib
-lib/libtasn1.dylib
-lib/pkgconfig/libtasn1.pc

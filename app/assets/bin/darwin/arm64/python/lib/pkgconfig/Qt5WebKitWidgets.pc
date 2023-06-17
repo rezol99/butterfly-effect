@@ -1,7 +1,0 @@
-
-Name: Qt5WebKitWidgets
-Description: Qt WebKitWidgets module
-Version: 5.212.0
-Libs: -L/Users/ezryow/Git/butterfly-effect/app/bin/darwin/python/arm64/lib -lQt5WebKitWidgets
-Cflags: -I/Users/ezryow/Git/butterfly-effect/app/bin/darwin/python/arm64/include/qt/QtWebKitWidgets 
-Requires: Qt5Core Qt5Gui Qt5Network Qt5Multimedia Qt5Widgets Qt5WebKit Qt5MultimediaWidgets

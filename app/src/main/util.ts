@@ -65,7 +65,7 @@ export const getPythonBinaryPath = (): string => {
   const osName = getOSName();
   const arch = getArchitecture();
   const pythonBinaryPath = resolveBinPath(
-    `./${osName}/${arch}/python/python.app/Contents/MacOS/python`
+    `./${osName}/${arch}/Anaconda3/bin/python`
   );
   return pythonBinaryPath;
 };

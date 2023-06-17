@@ -1,9 +1,0 @@
-Name: libecpg
-Description: PostgreSQL libecpg library
-Url: http://www.postgresql.org/
-Version: 12.9
-Requires: 
-Requires.private: libpq libpgtypes
-Cflags: -I/Users/ezryow/Git/butterfly-effect/app/bin/darwin/python/arm64/include
-Libs: -L/Users/ezryow/Git/butterfly-effect/app/bin/darwin/python/arm64/lib -lecpg
-Libs.private: -L/Users/ezryow/Git/butterfly-effect/app/bin/darwin/python/arm64/lib -lpgcommon -lpgport -lm

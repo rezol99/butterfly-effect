@@ -1,9 +1,0 @@
-Name: libpgtypes
-Description: PostgreSQL libpgtypes library
-Url: http://www.postgresql.org/
-Version: 12.9
-Requires: 
-Requires.private: 
-Cflags: -I/Users/ezryow/Git/butterfly-effect/app/bin/darwin/python/arm64/include
-Libs: -L/Users/ezryow/Git/butterfly-effect/app/bin/darwin/python/arm64/lib -lpgtypes
-Libs.private: -L/Users/ezryow/Git/butterfly-effect/app/bin/darwin/python/arm64/lib -lpgcommon -lpgport -lm
