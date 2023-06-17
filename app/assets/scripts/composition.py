@@ -1,6 +1,7 @@
 import cv2
 import sys
 import json
+import time
 
 from effects import EFFECTS_MAP, overlay_images
 from models.layer import Layer
@@ -30,7 +31,10 @@ class Composition:
 
     def send_renderer(self):
         data = dict()
-        data["image"] = encode_ndarray_to_base64(self.out)
+        now = int(time.time())
+        output_path = f"/tmp/output_{now}.png"
+        cv2.imwrite(output_path, self.out)
+        data["image"] = output_path
         sys.stdout.write(json.dumps(data, ensure_ascii=False))
         sys.stdout.flush()
 

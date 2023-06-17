@@ -14,12 +14,9 @@ export default function Preview() {
     (async () => {
       const renderer = new Renderer(project.composition.layers);
       try {
-        const result = await renderer.render();
-        if (result.stderr) throw new Error(result.stderr);
-        if (!result.stdout) throw new Error('No stdout');
-        console.log('Preview render result', result);
-        const imagePath: string = JSON.parse(result.stdout).image;
-        const imagePathAsFileProtocol = `file://${imagePath}`;
+        const res = await renderer.render();
+        const { image } = res;
+        const imagePathAsFileProtocol = `file://${image}`;
         setImage(imagePathAsFileProtocol);
       } catch (error) {
         console.error('Preview render error', error);

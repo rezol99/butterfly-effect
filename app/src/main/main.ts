@@ -25,6 +25,7 @@ import PythonSendData, {
   getThumbnailURI,
   resolveHtmlPath,
   sendPython,
+  startPythonWebSocketServer,
 } from './util';
 
 class AppUpdater {
@@ -37,7 +38,7 @@ class AppUpdater {
 
 let mainWindow: BrowserWindow | null = null;
 
-ipcMain.handle('send-python', (_, data: PythonSendData) => {
+ipcMain.handle('send-python', (_, data?: PythonSendData) => {
   return sendPython(data);
 });
 
@@ -161,8 +162,9 @@ app.on('window-all-closed', () => {
 
 app
   .whenReady()
-  .then(() => {
+  .then(async () => {
     createWindow();
+    await startPythonWebSocketServer();
     app.on('activate', () => {
       // On macOS it's common to re-create a window in the app when the
       // dock icon is clicked and there are no other windows open.

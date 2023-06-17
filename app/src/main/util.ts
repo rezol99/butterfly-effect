@@ -124,7 +124,12 @@ const getPythonEntryScriptPath = () => {
   return pythonEntryScriptPath;
 };
 
-export const sendPython = async (data: PythonSendData): Promise<StdResult> => {
+export const startPythonWebSocketServer = async (): Promise<StdResult> => {
+  const entryPath = getPythonEntryScriptPath();
+  return callPython(entryPath);
+};
+
+export const sendPython = async (data?: PythonSendData): Promise<StdResult> => {
   const sendData = `${JSON.stringify(data)}`;
   const entryPath = getPythonEntryScriptPath();
   const { stdout, stderr } = await callPython(entryPath, sendData);
