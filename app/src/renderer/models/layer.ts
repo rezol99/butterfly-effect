@@ -1,6 +1,6 @@
+import { Asset } from 'renderer/contexts/project';
 import { AssetType } from 'renderer/types/asset';
 import Effect, { EffectSendObject } from './effect';
-import { Asset } from 'renderer/contexts/project';
 
 export const createLayerByAsset = (asset: Asset) => {
   const layer = new Layer(asset.path, asset.type, asset.thumbnail);

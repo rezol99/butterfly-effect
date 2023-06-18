@@ -1,6 +1,4 @@
 import { css } from '@emotion/react';
-import { Content } from '..';
-import { browseFiles, getThumbnailURI } from '../../../util/os';
 import { useContext } from 'react';
 import {
   Asset,
@@ -10,10 +8,12 @@ import {
   VideoAsset,
   projectActions,
 } from 'renderer/contexts/project';
-import { parseFileName } from 'renderer/util/path';
-import { parseFileType } from 'renderer/util/asset';
-import AssetContent from './AssetContent';
 import { createLayerByAsset } from 'renderer/models/layer';
+import { parseFileType } from 'renderer/util/asset';
+import { parseFileName } from 'renderer/util/path';
+import { Content } from '..';
+import { browseFiles, getThumbnailURI } from '../../../util/os';
+import AssetContent from './AssetContent';
 
 const createAssetByFilePath = async (
   filePath: string

@@ -1,13 +1,13 @@
-import { ChangeEvent, useContext, useEffect, useState } from 'react';
 import { css } from '@emotion/react';
+import { ChangeEvent, useContext, useEffect, useState } from 'react';
 import { Rnd } from 'react-rnd';
+import { useDebounce } from 'react-use';
 import {
   ProjectContext,
   ProjectDispatchContext,
   projectActions,
 } from 'renderer/contexts/project';
 import { createRotateEffect } from 'renderer/effects';
-import { useDebounce } from 'react-use';
 
 type Props = {
   isOpen: boolean;

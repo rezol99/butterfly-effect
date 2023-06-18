@@ -23,7 +23,6 @@ export default function AssetContent({ path, thumbnail, onClick }: Props) {
   );
 }
 
-
 const AssetWrapper = css`
   position: relative;
   width: calc(100% - 48px);

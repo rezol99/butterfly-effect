@@ -2,8 +2,8 @@ import { Route, MemoryRouter as Router, Routes } from 'react-router-dom';
 import { IoProvider } from 'socket.io-react-hook';
 import './App.css';
 import Editor from './components/editor';
-import './normalize.css';
 import ProjectProvider from './contexts/project';
+import './normalize.css';
 
 function Routers() {
   return (

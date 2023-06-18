@@ -1,10 +1,10 @@
 import { css } from '@emotion/react';
+import { useState } from 'react';
 import { BORDER_COLOR } from '../../constants/color';
+import EditEffectsModal from '../modal/EditEffectsModal';
 import Assets from './Assets';
 import Preview from './Preview';
 import Timeline from './Timeline';
-import { useState } from 'react';
-import EditEffectsModal from '../modal/EditEffectsModal';
 
 const SIDE_WIDTH = 300;
 

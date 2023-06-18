@@ -1,19 +1,19 @@
 import { css } from '@emotion/react';
+import { ChangeEvent, useContext, useEffect, useState } from 'react';
+import IconEQ from 'renderer/assets/images/icon_equalizer.svg';
+import {
+  ProjectContext,
+  ProjectDispatchContext,
+  projectActions,
+} from 'renderer/contexts/project';
+import { createBlurEffect } from 'renderer/effects';
+import Layer from 'renderer/models/layer';
 import { Content } from '.';
 import {
   BORDER_COLOR,
   PRIMARY_BACKGROUND_COLOR,
   SECONDLY_BACKGROUND_COLOR,
 } from '../../constants/color';
-import { ChangeEvent, useContext, useEffect, useState } from 'react';
-import {
-  ProjectContext,
-  ProjectDispatchContext,
-  projectActions,
-} from 'renderer/contexts/project';
-import Layer from 'renderer/models/layer';
-import { createBlurEffect } from 'renderer/effects';
-import IconEQ from 'renderer/assets/images/icon_equalizer.svg';
 
 const TIMELINES = 20;
 const TIMELINE_ROW_HEIGHT = 80;

@@ -1,6 +1,6 @@
-import { createContext, ReactNode, Dispatch, useReducer } from 'react';
-import { Composition } from './composition';
+import { Dispatch, ReactNode, createContext, useReducer } from 'react';
 import Layer from 'renderer/models/layer';
+import { Composition } from './composition';
 
 export type ImageAsset = {
   type: 'image';

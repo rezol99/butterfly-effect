@@ -49,7 +49,6 @@ class Renderer {
     // } catch (error) {
     //   console.error(error);
     // }
-
     // return new Promise((resolve, reject) => {
     //   client.on('composition', (message: string) => {
     //     const { image } = JSON.parse(message);

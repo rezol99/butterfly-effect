@@ -15,9 +15,10 @@ socketio = SocketIO(app, cors_allowed_origins="*")
 
 logging.basicConfig(level=logging.DEBUG)
 
+
 # ログ
 def debug_log(message):
-    print('DEBUG', message, file=sys.stderr)
+    print("DEBUG:", message, file=sys.stderr)
 
 
 @socketio.on("composition")
