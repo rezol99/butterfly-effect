@@ -1,6 +1,5 @@
 import { css } from '@emotion/react';
 import { useContext, useEffect, useState } from 'react';
-import { useDebounce } from 'react-use';
 import { ProjectContext } from 'renderer/contexts/project';
 import { useCompositionWebSocket } from 'renderer/hooks/websocket';
 import Renderer from 'renderer/models/renderer';
@@ -18,19 +17,14 @@ export default function Preview() {
     setImage(imageAsFileProtocol);
   }, [compositionImage]);
 
-  // TODO: Refactor
-  useDebounce(
-    async () => {
-      if (project.composition.layers.length === 0) return;
-      const renderer = new Renderer(project.composition.layers);
-      const sendData = renderer.createCompositionSendData(
-        project.composition.layers
-      );
-      await sendMessage(sendData);
-    },
-    100,
-    [project.composition.layers]
-  );
+  useEffect(() => {
+    if (project.composition.layers.length === 0) return;
+    const renderer = new Renderer(
+      project.composition.layers,
+      sendCompositionMessage
+    );
+    renderer.render();
+  }, [project.composition.layers]);
 
   return (
     <div
