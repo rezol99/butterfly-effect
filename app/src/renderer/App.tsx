@@ -1,4 +1,5 @@
 import { Route, MemoryRouter as Router, Routes } from 'react-router-dom';
+import { IoProvider } from 'socket.io-react-hook';
 import './App.css';
 import Editor from './components/editor';
 import './normalize.css';
@@ -16,8 +17,10 @@ function Routers() {
 
 export default function App() {
   return (
-    <ProjectProvider>
-      <Routers />
-    </ProjectProvider>
+    <IoProvider>
+      <ProjectProvider>
+        <Routers />
+      </ProjectProvider>
+    </IoProvider>
   );
 }

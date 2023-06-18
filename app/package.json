@@ -110,7 +110,8 @@
     "react-rnd": "^10.4.1",
     "react-router-dom": "^6.8.1",
     "react-use": "^17.4.0",
-    "socket.io-client": "^4.6.2"
+    "socket.io-client": "^4.6.2",
+    "socket.io-react-hook": "^2.4.1"
   },
   "devDependencies": {
     "@electron/notarize": "^1.2.3",
