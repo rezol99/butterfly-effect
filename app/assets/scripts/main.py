@@ -1,5 +1,7 @@
 import json
 import time
+import sys
+import logging
 
 from flask import Flask
 from flask_socketio import SocketIO, send, emit
@@ -10,6 +12,12 @@ from models.layer import Layer
 
 app = Flask(__name__)
 socketio = SocketIO(app, cors_allowed_origins="*")
+
+logging.basicConfig(level=logging.DEBUG)
+
+# ログ
+def debug_log(message):
+    print('DEBUG', message, file=sys.stderr)
 
 
 @socketio.on("composition")
