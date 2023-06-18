@@ -9,7 +9,8 @@ import { BLACK_BACKGROUND_COLOR } from '../../constants/color';
 export default function Preview() {
   const [image, setImage] = useState<string>();
   const project = useContext(ProjectContext);
-  const { compositionImage, sendMessage } = useCompositionWebSocket();
+  const { compositionImage, sendCompositionMessage } =
+    useCompositionWebSocket();
 
   useEffect(() => {
     if (!compositionImage) return;

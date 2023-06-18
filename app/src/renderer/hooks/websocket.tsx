@@ -9,9 +9,13 @@ const useAppWebSocket = () => {
 
 export const useCompositionWebSocket = () => {
   const { socket, error } = useAppWebSocket();
-  const { lastMessage, sendMessage } = useSocketEvent(socket, 'composition');
-  if (!lastMessage) return { compositionImage: undefined, sendMessage, error };
+  const { lastMessage, sendMessage: sendCompositionMessage } = useSocketEvent(
+    socket,
+    'composition'
+  );
+  if (!lastMessage)
+    return { compositionImage: undefined, sendCompositionMessage, error };
   const parsed = JSON.parse(lastMessage);
   const compositionImage = parsed?.image as string;
-  return { compositionImage, sendMessage, error };
+  return { compositionImage, sendCompositionMessage, error };
 };

@@ -3,9 +3,14 @@ import Layer, { LayerSendObject } from './layer';
 
 class Renderer {
   private _layers: (Layer | null)[] = [];
+  private _sendMessage: (message: Object) => void;
 
-  constructor(layers: (Layer | null)[]) {
+  constructor(
+    layers: (Layer | null)[],
+    sendMessage: (message: Object) => void
+  ) {
     this._layers = layers;
+    this._sendMessage = sendMessage;
   }
 
   get layers(): (Layer | null)[] {
@@ -18,9 +23,7 @@ class Renderer {
 
   // eslint-disable-next-line class-methods-use-this
   public createCompositionSendData(layers: Layer[]): PythonCompositionSendData {
-    const type = 'composition' as const;
     const sendData: PythonCompositionSendData = {
-      type,
       params: { layers: [] },
     };
     layers.forEach((layer) => {
@@ -37,24 +40,12 @@ class Renderer {
     return sendData;
   }
 
-  public async render(): Promise<{ image: string }> {
-    // const nonNullLayers = this.layers.filter(
-    //   (layer) => layer !== null
-    // ) as Layer[];
-    // const sendData = this.createCompositionSendData(nonNullLayers);
-    // const client = new WebSocketClient();
-    // try {
-    //   await client.connect();
-    //   client.send('composition', sendData);
-    // } catch (error) {
-    //   console.error(error);
-    // }
-    // return new Promise((resolve, reject) => {
-    //   client.on('composition', (message: string) => {
-    //     const { image } = JSON.parse(message);
-    //     resolve({ image });
-    //   });
-    // });
+  public async render(): Promise<void> {
+    const nonNullLayers = this.layers.filter(
+      (layer) => layer !== null
+    ) as Layer[];
+    const sendData = this.createCompositionSendData(nonNullLayers);
+    this._sendMessage(sendData);
   }
 }
 

@@ -99,7 +99,6 @@ export type PythonSendParams = {
 };
 
 export type PythonCompositionSendData = {
-  type: 'composition';
   params: {
     layers: LayerSendObject[];
   };
@@ -107,7 +106,6 @@ export type PythonCompositionSendData = {
 
 type PythonSendData =
   | {
-      type: string;
       params: PythonSendParams;
     }
   | PythonCompositionSendData;
