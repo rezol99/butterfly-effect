@@ -1,11 +1,9 @@
 import cv2
-from typing import List
 import numpy as np
-import numpy.linalg as LA
 from scipy.spatial.transform import Rotation
 
 
-def blur(image: cv2.Mat, params: dict) -> cv2.Mat:
+def blur(image: np.ndarray, params: dict) -> np.ndarray:
     intensity = params.get("intensity", 0)
     if intensity > 0:
         out = cv2.blur(image, (intensity, intensity))
@@ -13,7 +11,7 @@ def blur(image: cv2.Mat, params: dict) -> cv2.Mat:
     return image
 
 
-def rotate(image: cv2.Mat, params: dict):
+def rotate(image: np.ndarray, params: dict) -> np.ndarray:
     angle_x = params.get("x", 0)
     angle_y = params.get("y", 0)
     angle_z = params.get("z", 0)
@@ -57,27 +55,26 @@ def rotate(image: cv2.Mat, params: dict):
     return rotated_image
 
 
-EFFECTS_MAP = {
-    "blur": blur,
-    "rotate": rotate,
-}
-
-
-def overlay_images(images: List[cv2.Mat]) -> cv2.Mat:
-    if len(images) == 0:
-        raise ValueError("images must not be empty")
+def overlay_images(images: list[np.ndarray]) -> np.ndarray:
+    assert len(images) > 0
     max_width = max([img.shape[1] for img in images])
-    resized_images = [
-        cv2.resize(img, (max_width, int(img.shape[0] * (max_width / img.shape[1]))))
-        for img in images
-    ]
+
+    resized_images = []
+    for img in images:
+        h, w = img.shape[:2]
+        resized = cv2.resize(img, (max_width, int(h * (max_width / w))))
+        resized_images.append(resized)
+
     overlayed_image = np.zeros_like(resized_images[0])
+    overlayed_height = overlayed_image.shape[0]
 
     for img in resized_images:
-        x_offset = (max_width - img.shape[1]) // 2
-        y_offset = (overlayed_image.shape[0] - img.shape[0]) // 2
+        h, w = img.shape[:2]
+        x_offset = (max_width - w) // 2
+        y_offset = (overlayed_height - h) // 2
         overlayed_image[
-            y_offset : y_offset + img.shape[0], x_offset : x_offset + img.shape[1]
+            y_offset : y_offset + h,
+            x_offset : x_offset + w,
         ] = img
 
     return overlayed_image

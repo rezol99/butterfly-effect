@@ -1,42 +1,49 @@
 import cv2
-import sys
-import json
-import time
+import numpy as np
 
-from effects import EFFECTS_MAP, overlay_images
+import time
+import json
+from typing import Callable
+
+from effects import overlay_images, blur, rotate
 from models.layer import Layer
 from models.effect import Effect
 from models.timing import Timing
-from utils.opencv_helper import encode_ndarray_to_base64
 
+
+EFFECTS_MAP = {
+    "blur": blur,
+    "rotate": rotate,
+}
 
 class Composition:
     layers: list[Layer]
     out: cv2.Mat
+    emitter: Callable[[str], None]
 
-    def __init__(self, layers: list[Layer]):
+    def __init__(self, layers: list[Layer], emitter: Callable[[str], None]):
         self.layers = layers
+        self.emitter = emitter
 
     def execute(self) -> None:
         images: list[cv2.Mat] = []
 
         for layer in self.layers:
             if layer.type == "image":
-                img = cv2.imread(layer.file)
+                img: np.ndarray = cv2.imread(layer.file)
                 for effect in layer.effects:
                     img = EFFECTS_MAP[effect.type](img, effect.params)
                 images.append(img)
-        # 合成処理
+
         self.out = overlay_images(images)
 
-    def send_renderer(self):
+    def send_to_renderer(self):
         data = dict()
         now = int(time.time())
         output_path = f"/tmp/output_{now}.png"
         cv2.imwrite(output_path, self.out)
         data["image"] = output_path
-        sys.stdout.write(json.dumps(data, ensure_ascii=False))
-        sys.stdout.flush()
+        self.emitter(json.dumps(data, ensure_ascii=False))
 
 
 class CompositionDecoder:

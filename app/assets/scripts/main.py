@@ -1,42 +1,27 @@
 import json
-import time
-import sys
 import logging
 
 from flask import Flask
-from flask_socketio import SocketIO, send, emit
-import cv2
+from flask_socketio import SocketIO, emit
 
 from composition import CompositionDecoder, Composition
 from models.layer import Layer
 
 app = Flask(__name__)
 socketio = SocketIO(app, cors_allowed_origins="*")
-
 logging.basicConfig(level=logging.DEBUG)
 
 
-# ログ
-def debug_log(message):
-    print("DEBUG:", message, file=sys.stderr)
-
-
 @socketio.on("composition")
-def handle_websocket(message):
+def handle_composition(message):
     type = message["type"]
     params = message["params"]
-
+    emitter = lambda data: emit("composition", data, broadcast=True)
     if type == "composition":
         layers: list[Layer] = CompositionDecoder.decode(params)
-        composition = Composition(layers)
+        composition = Composition(layers, emitter=emitter)
         composition.execute()
-        # TODO: Refactor
-        unix_time = int(time.time())
-        output_path = f"/tmp/output_{unix_time}.png"
-        cv2.imwrite(output_path, composition.out)
-        data = dict()
-        data["image"] = output_path
-        emit("composition", json.dumps(data, ensure_ascii=False))
+        composition.send_to_renderer()
 
 
 @app.route("/")
