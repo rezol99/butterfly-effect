@@ -23,6 +23,7 @@ import MenuBuilder from './menu';
 import PythonSendData, {
   getPythonScriptDir,
   getThumbnailURI,
+  _readSharedMemoryAsBase64,
   resolveHtmlPath,
   sendPython,
   startPythonWebSocketServer,
@@ -49,6 +50,11 @@ ipcMain.handle('get-python-dir', () => {
 ipcMain.handle('get-file-thumbnail-uri', (event, filePath: string) => {
   const uri = getThumbnailURI(filePath);
   return uri;
+});
+
+ipcMain.handle('read-shared-memory', (event, sharedMemoryName: string) => {
+  const base64 = _readSharedMemoryAsBase64(sharedMemoryName);
+  return base64;
 });
 
 // eslint-disable-next-line no-unused-vars

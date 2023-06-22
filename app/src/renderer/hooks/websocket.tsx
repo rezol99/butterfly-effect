@@ -14,8 +14,12 @@ export const useCompositionWebSocket = () => {
     'composition'
   );
   if (!lastMessage)
-    return { compositionImage: undefined, sendCompositionMessage, error };
+    return {
+      compositionImageSharedMemoryName: undefined,
+      sendCompositionMessage,
+      error,
+    };
   const parsed = JSON.parse(lastMessage);
-  const compositionImage = parsed?.image as string;
-  return { compositionImage, sendCompositionMessage, error };
+  const compositionImageSharedMemoryName = parsed?.image as string;
+  return { compositionImageSharedMemoryName, sendCompositionMessage, error };
 };

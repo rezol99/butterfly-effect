@@ -3,12 +3,14 @@ import numpy as np
 
 import time
 import json
+import multiprocessing.shared_memory as shm
 from typing import Callable
 
 from effects import overlay_images, blur, rotate
 from models.layer import Layer
 from models.effect import Effect
 from models.timing import Timing
+from utils.debug import print_debug
 
 
 EFFECTS_MAP = {
@@ -38,11 +40,13 @@ class Composition:
         self.out = overlay_images(images)
 
     def send_to_renderer(self):
+        shared_image = shm.SharedMemory(create=True, size=self.out.nbytes)
+        shared_image_np = np.ndarray(self.out.shape, dtype=self.out.dtype, buffer=shared_image.buf)
+        np.copyto(shared_image_np, self.out)
+        shared_memory_name = shared_image.name
         data = dict()
-        now = int(time.time())
-        output_path = f"/tmp/output_{now}.png"
-        cv2.imwrite(output_path, self.out)
-        data["image"] = output_path
+        data['image'] = shared_memory_name
+        print_debug('shared_memory_name: ' + shared_memory_name)
         self.emitter(json.dumps(data, ensure_ascii=False))
 
 
@@ -62,7 +66,7 @@ class CompositionDecoder:
                 effect_timing = _effect["timing"]
                 # TODO: timing処理を後で実装する
                 timing = Timing(effect_timing["start"], effect_timing["end"])
-                effect = Effect(effect_type, effect_params, effect_timing)
+                effect = Effect(effect_type, effect_params, timing)
                 effects.append(effect)
             layer = Layer(file, asset_type, effects)
             layers.append(layer)

@@ -5,18 +5,20 @@ import { useCompositionWebSocket } from 'renderer/hooks/websocket';
 import Renderer from 'renderer/models/renderer';
 import { Content } from '.';
 import { BLACK_BACKGROUND_COLOR } from '../../constants/color';
+import { readSharedMemoryAsBase64 } from 'renderer/util/os';
 
 export default function Preview() {
   const [image, setImage] = useState<string>();
   const project = useContext(ProjectContext);
-  const { compositionImage, sendCompositionMessage } =
+  const { compositionImageSharedMemoryName, sendCompositionMessage } =
     useCompositionWebSocket();
 
   useEffect(() => {
-    if (!compositionImage) return;
-    const imageAsFileProtocol = `file://${compositionImage}`;
+    if (!compositionImageSharedMemoryName) return;
+    const base64 = readSharedMemoryAsBase64(compositionImageSharedMemoryName);
+    const imageAsFileProtocol = `data:image/png;base64,${base64}`;
     setImage(imageAsFileProtocol);
-  }, [compositionImage]);
+  }, [compositionImageSharedMemoryName]);
 
   useEffect(() => {
     if (project.composition.layers.length === 0) return;

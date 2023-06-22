@@ -233,3 +233,10 @@ export const convertBase64ToDataUri = (base64: string): string => {
   const mimeType = 'image/png';
   return `data:${mimeType};base64,${base64}`;
 };
+
+export const _readSharedMemoryAsBase64 = (sharedMemoryName: string): Base64 => {
+  const sharedMemoryPath = path.join('/dev/shm', sharedMemoryName);
+  const sharedMemory = readFileSync(sharedMemoryPath);
+  const base64 = sharedMemory.toString('base64');
+  return base64;
+};
