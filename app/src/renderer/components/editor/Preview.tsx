@@ -15,9 +15,13 @@ export default function Preview() {
 
   useEffect(() => {
     if (!compositionImageSharedMemoryName) return;
-    const base64 = readSharedMemoryAsBase64(compositionImageSharedMemoryName);
-    const imageAsFileProtocol = `data:image/png;base64,${base64}`;
-    setImage(imageAsFileProtocol);
+    (async () => {
+      const base64 = await readSharedMemoryAsBase64(
+        compositionImageSharedMemoryName
+      );
+      const imageAsFileProtocol = `data:image/png;base64,${base64}`;
+      setImage(imageAsFileProtocol);
+    })();
   }, [compositionImageSharedMemoryName]);
 
   useEffect(() => {

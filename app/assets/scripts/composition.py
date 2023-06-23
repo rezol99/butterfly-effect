@@ -40,14 +40,24 @@ class Composition:
         self.out = overlay_images(images)
 
     def send_to_renderer(self):
-        shared_image = shm.SharedMemory(create=True, size=self.out.nbytes)
-        shared_image_np = np.ndarray(self.out.shape, dtype=self.out.dtype, buffer=shared_image.buf)
-        np.copyto(shared_image_np, self.out)
-        shared_memory_name = shared_image.name
+        save_name = 'ndarray_image.npy'
+        np.save(save_name, self.out)
         data = dict()
-        data['image'] = shared_memory_name
-        print_debug('shared_memory_name: ' + shared_memory_name)
+        data['image'] = save_name
         self.emitter(json.dumps(data, ensure_ascii=False))
+
+
+
+
+
+        # shared_image = shm.SharedMemory(create=True, size=self.out.nbytes)
+        # shared_image_np = np.ndarray(self.out.shape, dtype=self.out.dtype, buffer=shared_image.buf)
+        # np.copyto(shared_image_np, self.out)
+        # shared_memory_name = shared_image.name
+        # data = dict()
+        # data['image'] = shared_memory_name
+        # print_debug('shared_memory_name: ' + shared_memory_name)
+        # self.emitter(json.dumps(data, ensure_ascii=False))
 
 
 class CompositionDecoder:

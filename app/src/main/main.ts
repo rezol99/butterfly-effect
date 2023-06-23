@@ -53,8 +53,7 @@ ipcMain.handle('get-file-thumbnail-uri', (event, filePath: string) => {
 });
 
 ipcMain.handle('read-shared-memory', (event, sharedMemoryName: string) => {
-  const base64 = _readSharedMemoryAsBase64(sharedMemoryName);
-  return base64;
+  return _readSharedMemoryAsBase64(sharedMemoryName);
 });
 
 // eslint-disable-next-line no-unused-vars

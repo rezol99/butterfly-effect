@@ -1,13 +1,14 @@
 /* eslint import/prefer-default-export: off */
 import { exec as childProcessExec } from 'child_process';
 import ffmpeg from 'fluent-ffmpeg';
-import { createReadStream, readFileSync, unlinkSync, writeFileSync } from 'fs';
+import { createReadStream, readFile, readFileSync, unlinkSync, writeFileSync } from 'fs';
 import path from 'path';
 import process from 'process';
 import { Options, PythonShell } from 'python-shell';
 import { LayerSendObject } from 'renderer/models/layer';
 import { URL } from 'url';
 import { promisify } from 'util';
+import * as npy from 'npy-js';
 
 const exec = promisify(childProcessExec);
 
@@ -234,9 +235,26 @@ export const convertBase64ToDataUri = (base64: string): string => {
   return `data:${mimeType};base64,${base64}`;
 };
 
-export const _readSharedMemoryAsBase64 = (sharedMemoryName: string): Base64 => {
-  const sharedMemoryPath = path.join('/dev/shm', sharedMemoryName);
-  const sharedMemory = readFileSync(sharedMemoryPath);
-  const base64 = sharedMemory.toString('base64');
+function readFileAsArrayBuffer(filepath: string): Promise<ArrayBuffer> {
+  return new Promise((resolve, reject) => {
+    readFile(filepath, (error, data) => {
+      if (error) {
+        reject(error);
+      }
+      resolve(data.buffer);
+    });
+  });
+}
+
+function ndarrayToBase64(array: npy.TypedArray): string {
+  const buffer = Buffer.from(array.buffer);
+  return buffer.toString('base64');
+};
+
+export const _readSharedMemoryAsBase64 = async (sharedMemoryName: string): Base64 => {
+  const saveName = 'ndarray_image.npy';
+  const arrayBuffer = await readFileAsArrayBuffer(saveName);
+  const ndarray = npy.parse(arrayBuffer);
+  const base64 = ndarrayToBase64(ndarray.data);
   return base64;
 };
