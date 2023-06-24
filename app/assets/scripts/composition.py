@@ -32,7 +32,7 @@ class Composition:
 
         for layer in self.layers:
             if layer.type == "image":
-                img: np.ndarray = cv2.imread(layer.file)
+                img: np.ndarray = cv2.imread(layer.file, -1)
                 for effect in layer.effects:
                     img = EFFECTS_MAP[effect.type](img, effect.params)
                 images.append(img)
