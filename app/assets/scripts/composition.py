@@ -9,6 +9,8 @@ from effects import overlay_images, blur, rotate
 from models.layer import Layer
 from models.effect import Effect
 from models.timing import Timing
+from utils.debug import print_debug
+from utils.opencv_helper import encode_ndarray_to_base64
 
 
 EFFECTS_MAP = {
@@ -39,10 +41,8 @@ class Composition:
 
     def send_to_renderer(self):
         data = dict()
-        now = int(time.time())
-        output_path = f"/tmp/output_{now}.png"
-        cv2.imwrite(output_path, self.out)
-        data["image"] = output_path
+        base64 = encode_ndarray_to_base64(self.out)
+        data["image"] = base64
         self.emitter(json.dumps(data, ensure_ascii=False))
 
 

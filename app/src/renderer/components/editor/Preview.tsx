@@ -14,8 +14,8 @@ export default function Preview() {
 
   useEffect(() => {
     if (!compositionImage) return;
-    const imageAsFileProtocol = `file://${compositionImage}`;
-    setImage(imageAsFileProtocol);
+    const imageAsDataUrl = `data:image/png;base64,${compositionImage}`;
+    setImage(imageAsDataUrl);
   }, [compositionImage]);
 
   useEffect(() => {
