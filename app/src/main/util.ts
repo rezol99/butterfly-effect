@@ -252,9 +252,5 @@ function ndarrayToBase64(array: npy.TypedArray): string {
 };
 
 export const _readSharedMemoryAsBase64 = async (sharedMemoryName: string): Base64 => {
-  const saveName = 'ndarray_image.npy';
-  const arrayBuffer = await readFileAsArrayBuffer(saveName);
-  const ndarray = npy.parse(arrayBuffer);
-  const base64 = ndarrayToBase64(ndarray.data);
-  return base64;
+  console.log('readSharedMemoryAsBase64', sharedMemoryName);
 };

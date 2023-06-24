@@ -1,7 +1,7 @@
+from io import BytesIO
 import cv2
 import numpy as np
 
-import time
 import json
 import multiprocessing.shared_memory as shm
 from typing import Callable
@@ -10,7 +10,7 @@ from effects import overlay_images, blur, rotate
 from models.layer import Layer
 from models.effect import Effect
 from models.timing import Timing
-from utils.debug import print_debug
+from utils.opencv_helper import encode_ndarray_to_base64
 
 
 EFFECTS_MAP = {
@@ -40,10 +40,10 @@ class Composition:
         self.out = overlay_images(images)
 
     def send_to_renderer(self):
-        save_name = 'ndarray_image.npy'
-        np.save(save_name, self.out)
-        data = dict()
-        data['image'] = save_name
+
+
+
+
         self.emitter(json.dumps(data, ensure_ascii=False))
 
 
