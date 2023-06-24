@@ -1,7 +1,6 @@
 import { css } from '@emotion/react';
 import { ChangeEvent, useContext, useEffect, useState } from 'react';
 import { Rnd } from 'react-rnd';
-import { useDebounce } from 'react-use';
 import {
   ProjectContext,
   ProjectDispatchContext,
@@ -40,23 +39,19 @@ export default function EditEffectsModal({ isOpen: _isOpen }: Props) {
   const project = useContext(ProjectContext);
   const dispatchProject = useContext(ProjectDispatchContext);
 
-  useDebounce(
-    () => {
-      const { rotate } = editEffectParams;
-      const rotateEffect = createRotateEffect(rotate.x, rotate.y, rotate.z);
-      const target = project.composition.layers[0];
-      if (!target) return;
-      if (target.effects.length === 0) {
-        target.addEffect(rotateEffect);
-      } else {
-        // TODO: 0番目のエフェクトを更新するのは暫定的な実装
-        target.updateEffect(0, rotateEffect);
-      }
-      dispatchProject(projectActions.updateLayer(0, target));
-    },
-    500,
-    [editEffectParams.rotate]
-  );
+  useEffect(() => {
+    const { rotate } = editEffectParams;
+    const rotateEffect = createRotateEffect(rotate.x, rotate.y, rotate.z);
+    const target = project.composition.layers[0];
+    if (!target) return;
+    if (target.effects.length === 0) {
+      target.addEffect(rotateEffect);
+    } else {
+      // TODO: 0番目のエフェクトを更新するのは暫定的な実装
+      target.updateEffect(0, rotateEffect);
+    }
+    dispatchProject(projectActions.updateLayer(0, target));
+  }, [editEffectParams.rotate]);
 
   useEffect(() => {
     setIsShow(_isOpen);
