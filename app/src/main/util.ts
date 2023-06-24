@@ -53,7 +53,7 @@ export const getArchitecture = () => {
 
 export const getPythonScriptDir = () => {
   const appDir = getAssetsDirPath();
-  const pythonScriptDir = path.join(appDir, 'scripts');
+  const pythonScriptDir = path.join(appDir, 'python');
   return pythonScriptDir;
 };
 
