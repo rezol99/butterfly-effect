@@ -1,6 +1,5 @@
 import cv2
 import numpy as np
-from scipy.spatial.transform import Rotation
 
 
 def blur(image: np.ndarray, params: dict) -> np.ndarray:
@@ -11,48 +10,50 @@ def blur(image: np.ndarray, params: dict) -> np.ndarray:
     return image
 
 
+def _rotate_x(mat: np.ndarray, angle: float) -> np.ndarray:
+    rotation_vector = np.array([angle, 0, 0])
+    R, _ = cv2.Rodrigues(rotation_vector)
+    return np.dot(mat, R)
+
+
+def _rotate_y(mat: np.ndarray, angle: float) -> np.ndarray:
+    rotation_vector = np.array([0, angle, 0])
+    R, _ = cv2.Rodrigues(rotation_vector)
+    return np.dot(mat, R)
+
+
+def _rotate_z(mat: np.ndarray, angle: float) -> np.ndarray:
+    rotation_vector = np.array([0, 0, angle])
+    R, _ = cv2.Rodrigues(rotation_vector)
+    return np.dot(mat, R)
+
+
 def rotate(image: np.ndarray, params: dict) -> np.ndarray:
     angle_x = params.get("x", 0)
     angle_y = params.get("y", 0)
     angle_z = params.get("z", 0)
 
-    h, w = image.shape[:2]
-    center_x, center_y = w // 2, h // 2
-    center = np.array([center_x, center_y, 0])
+    # ラジアンに変換
+    angle_x = np.deg2rad(angle_x)
+    angle_y = np.deg2rad(angle_y)
+    angle_z = np.deg2rad(angle_z)
 
     # 回転行列を計算
-    r = Rotation.from_euler("xyz", [angle_x, angle_y, angle_z], degrees=True)
-    rot_mat = r.as_matrix()
+    mat = np.eye(3)
+    mat = _rotate_x(mat, angle_x)
+    mat = _rotate_y(mat, angle_y)
+    mat = _rotate_z(mat, angle_z)
 
-    # 画像の頂点を取得
-    corners = np.array([[0, 0, 0], [w, 0, 0], [w, h, 0], [0, h, 0]])
+    height, width = image.shape[:2]
+    center_x = width / 2
+    center_y = height / 2
 
-    # 頂点を回転
-    rotated_corners = np.dot(corners - center, rot_mat) + center
-    rotated_corners = rotated_corners[:, :2].astype(int)
+    mat[0, 2] = center_x - center_x * mat[0, 0] - center_y * mat[0, 1]
+    mat[1, 2] = center_y - center_x * mat[1, 0] - center_y * mat[1, 1]
+    mat = mat[:2, :]
 
-    # 変換後の座標で矩形を算出
-    min_x, min_y = np.min(rotated_corners, axis=0)
-    max_x, max_y = np.max(rotated_corners, axis=0)
-
-    # 変換後の画像サイズ
-    new_w, new_h = max_x - min_x, max_y - min_y
-
-    # 平行移動行列
-    transl_mat = np.eye(3, dtype=np.float32)
-    transl_mat[:2, 2] = -center[:2]
-    transl_mat[0, 2] += new_w // 2
-    transl_mat[1, 2] += new_h // 2
-
-    # 回転行列を OpenCV 平面用に変換
-    rot_mat_cv = np.eye(3, dtype=np.float32)
-    rot_mat_cv[:2, :2] = r.as_matrix()[:2, :2]
-
-    # 平行移動および回転を適用
-    transform_mat = np.dot(transl_mat, rot_mat_cv)
-    rotated_image = cv2.warpPerspective(image, transform_mat, (new_w, new_h))
-
-    return rotated_image
+    out = cv2.warpAffine(image, mat, image.shape[:2][::-1])
+    return out
 
 
 def overlay_images(images: list[np.ndarray]) -> np.ndarray:
