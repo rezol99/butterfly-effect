@@ -1,4 +1,4 @@
-from .timing import Timing
+from laplacians.models.timing import Timing
 
 
 class Effect:

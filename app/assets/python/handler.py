@@ -4,8 +4,8 @@ import logging
 from flask import Flask
 from flask_socketio import SocketIO, emit
 
-from composition import CompositionDecoder, Composition
-from models.layer import Layer
+from laplacians.composition import CompositionDecoder, Composition
+from laplacians.models.layer import Layer
 
 app = Flask(__name__)
 socketio = SocketIO(app, cors_allowed_origins="*")
