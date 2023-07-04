@@ -8,6 +8,7 @@ import {
 } from 'renderer/contexts/project';
 import { SelectedLayerContext } from 'renderer/contexts/selectedLayer';
 import { createRotateEffect } from 'renderer/effects';
+import { parseFileName } from 'renderer/util/path';
 
 type Props = {
   isOpen: boolean;
@@ -121,7 +122,7 @@ export default function EditEffectsModal({ isOpen: _isOpen }: Props) {
       cancel=".react-resizable-handle"
     >
       <div css={Contents}>
-        <p css={Title}>{selectedLayer?.layer?.file}</p>
+        <p css={Title}>{parseFileName(selectedLayer?.layer?.file ?? '')}</p>
         <div css={EffectRow}>
           <p css={EffectName}>ローテーション</p>
           <div css={EffectItem}>

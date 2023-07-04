@@ -152,7 +152,8 @@ const TimeLineAsset = css`
 const TimeLineText = css`
   position: absolute;
   z-index: 20;
-  color: black;
+  color: white;
+  -webkit-text-strokes: 1px black;
   font-size: 14px;
   margin-left: 8px;
 `;
