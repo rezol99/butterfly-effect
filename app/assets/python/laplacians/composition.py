@@ -18,6 +18,7 @@ EFFECTS_MAP = {
     "rotate": rotate,
 }
 
+
 class Composition:
     layers: list[Layer]
     out: cv2.Mat

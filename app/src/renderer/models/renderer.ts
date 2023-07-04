@@ -22,7 +22,9 @@ class Renderer {
   }
 
   // eslint-disable-next-line class-methods-use-this
-  private createCompositionSendData(layers: Layer[]): PythonCompositionSendData {
+  private createCompositionSendData(
+    layers: Layer[]
+  ): PythonCompositionSendData {
     const sendData: PythonCompositionSendData = {
       params: { layers: [] },
     };
