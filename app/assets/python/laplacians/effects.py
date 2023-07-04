@@ -52,30 +52,43 @@ def rotate(image: np.ndarray, params: dict) -> np.ndarray:
     mat[1, 2] = center_y - center_x * mat[1, 0] - center_y * mat[1, 1]
     mat = mat[:2, :]
 
-    out = cv2.warpAffine(image, mat, image.shape[:2][::-1])
-    return out
+    if image.shape[2] < 4: # RGB画像の場合
+        out_img = cv2.warpAffine(image, mat, (width,height))
+    else: # アルファチャンネルを含む画像の場合
+        img = image
+        alpha_channel = img[:,:,3]
+        rgb_channels = img[:,:,:3]
+
+        # RGBチャンネルだけで変換を計算
+        planar_img = cv2.merge([rgb_channels[:,:,0], rgb_channels[:,:,1], rgb_channels[:,:,2]])
+        rotated_img = cv2.warpAffine(planar_img, mat, (width, height))
+
+        # アルファチャンネルだけで変換を計算
+        alpha_img = cv2.merge([alpha_channel, alpha_channel, alpha_channel])
+        rotated_alpha = cv2.warpAffine(alpha_img, mat, (width, height))
+
+        # RGBチャンネルとアルファチャネルをマージ
+        out_img = cv2.merge([rotated_img[:,:,0], rotated_img[:,:,1], rotated_img[:,:,2], rotated_alpha[:,:,0]])
+
+    return out_img
 
 
 def overlay_images(images: list[np.ndarray]) -> np.ndarray:
-    assert len(images) > 0
-    max_width = max([img.shape[1] for img in images])
+    max_height = max(image.shape[0] for image in images)
 
+    #画像の高さを一番大きなものに揃える
     resized_images = []
-    for img in images:
-        h, w = img.shape[:2]
-        resized = cv2.resize(img, (max_width, int(h * (max_width / w))))
+    for image in images:
+        scale = max_height / image.shape[0]
+        width = int(image.shape[1] * scale)
+        dim = (width, max_height)
+        resized = cv2.resize(image, dim, interpolation = cv2.INTER_AREA)
         resized_images.append(resized)
 
-    overlayed_image = np.zeros_like(resized_images[0])
-    overlayed_height = overlayed_image.shape[0]
+    #画像をアルファブレンドする
+    alpha = 1.0 / len(resized_images)
+    blended = np.zeros_like(resized_images[0])
+    for image in resized_images:
+        cv2.addWeighted(image, alpha, blended, 1.0, 0, blended)
 
-    for img in resized_images:
-        h, w = img.shape[:2]
-        x_offset = (max_width - w) // 2
-        y_offset = (overlayed_height - h) // 2
-        overlayed_image[
-            y_offset : y_offset + h,
-            x_offset : x_offset + w,
-        ] = img
-
-    return overlayed_image
+    return blended

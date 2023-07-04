@@ -1,27 +1,28 @@
 import { css } from '@emotion/react';
-import { ChangeEvent, useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import IconEQ from 'renderer/assets/images/icon_equalizer.svg';
-import {
-  ProjectContext,
-  ProjectDispatchContext,
-  projectActions,
-} from 'renderer/contexts/project';
-import { createBlurEffect } from 'renderer/effects';
+import { ProjectContext } from 'renderer/contexts/project';
 import Layer from 'renderer/models/layer';
 import { Content } from '.';
 import {
   BORDER_COLOR,
   PRIMARY_BACKGROUND_COLOR,
   SECONDLY_BACKGROUND_COLOR,
+  SELECTED_BORDER_COLOR,
 } from '../../constants/color';
+import {
+  SelectedLayerContext,
+  SelectedLayerDispatchContext,
+} from 'renderer/contexts/selectedLayer';
 
 const TIMELINES = 20;
 const TIMELINE_ROW_HEIGHT = 80;
 
 export default function Timeline() {
   const project = useContext(ProjectContext);
-  const dispatchProject = useContext(ProjectDispatchContext);
   const [timelines, setTimelines] = useState<(Layer | null)[]>([]);
+  const selectedLayer = useContext(SelectedLayerContext);
+  const setSelectedLayer = useContext(SelectedLayerDispatchContext);
 
   useEffect(() => {
     const { layers } = project.composition;
@@ -31,21 +32,8 @@ export default function Timeline() {
     setTimelines(_timelines);
   }, [project.composition, project.composition.layers]);
 
-  const handleBlurCheckboxChange = (
-    e: ChangeEvent<HTMLInputElement>,
-    idx: number
-  ) => {
-    const intensity = e.target.checked ? 80 : 0;
-    const blurEffect = createBlurEffect(intensity);
-    const target = project.composition.layers[idx];
-    if (!target) return;
-    if (target.effects.length === 0) {
-      target.addEffect(blurEffect);
-    } else {
-      // TODO: 0番目のエフェクトを更新するのは暫定的な実装
-      target.updateEffect(0, blurEffect);
-    }
-    dispatchProject(projectActions.updateLayer(idx, target));
+  const handleTimeLineClick = (layer: Layer | null, index: number) => {
+    setSelectedLayer({ layer, index });
   };
 
   return (
@@ -61,11 +49,18 @@ export default function Timeline() {
       <div css={TimeLinesWrapper}>
         {timelines.map((layer, idx) => {
           return (
-            <div
+            <button
+              type="button"
+              onClick={() => handleTimeLineClick(layer, idx)}
               css={TimeLineRow}
               style={{
                 backgroundColor:
                   idx % 2 === 0 ? 'inherit' : SECONDLY_BACKGROUND_COLOR,
+                border:
+                  selectedLayer?.index === idx
+                    ? `1px solid ${SELECTED_BORDER_COLOR}`
+                    : '1px solid transparent',
+                boxSizing: 'border-box',
               }}
             >
               <div css={TimeLineOperations}>
@@ -91,7 +86,7 @@ export default function Timeline() {
               >
                 <p css={TimeLineText}>{layer?.file}</p>
               </div>
-            </div>
+            </button>
           );
         })}
       </div>

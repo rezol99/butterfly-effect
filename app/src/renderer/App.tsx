@@ -4,6 +4,7 @@ import './App.css';
 import Editor from './components/editor';
 import ProjectProvider from './contexts/project';
 import './normalize.css';
+import { SelectedLayerProvider } from './contexts/selectedLayer';
 
 function Routers() {
   return (
@@ -19,7 +20,9 @@ export default function App() {
   return (
     <IoProvider>
       <ProjectProvider>
-        <Routers />
+        <SelectedLayerProvider>
+          <Routers />
+        </SelectedLayerProvider>
       </ProjectProvider>
     </IoProvider>
   );

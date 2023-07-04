@@ -1,6 +1,5 @@
 import { Dispatch, ReactNode, createContext, useReducer } from 'react';
 import Layer from 'renderer/models/layer';
-import { Composition } from './composition';
 
 export type ImageAsset = {
   type: 'image';
@@ -32,7 +31,7 @@ export type AudioAsset = {
 export type Asset = ImageAsset | VideoAsset | AudioAsset;
 
 export type Project = {
-  composition: Composition;
+  composition: { layers: Layer[] };
   assets: Asset[];
 };
 

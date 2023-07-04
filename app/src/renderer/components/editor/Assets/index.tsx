@@ -14,6 +14,7 @@ import { parseFileName } from 'renderer/util/path';
 import { Content } from '..';
 import { browseFiles, getThumbnailURI } from '../../../util/os';
 import AssetContent from './AssetContent';
+import { SelectedLayerContext, SelectedLayerDispatchContext } from 'renderer/contexts/selectedLayer';
 
 const createAssetByFilePath = async (
   filePath: string
@@ -58,6 +59,7 @@ const createAssetByFilePath = async (
 function Assets() {
   const project = useContext(ProjectContext);
   const dispatchProject = useContext(ProjectDispatchContext);
+  const setSelectedLayer = useContext(SelectedLayerDispatchContext)
 
   const handleAddAssets = async () => {
     const files = await browseFiles();
@@ -81,6 +83,7 @@ function Assets() {
   const handleAssetClick = (asset: Asset) => {
     const layer = createLayerByAsset(asset);
     dispatchProject(projectActions.addLayer(layer));
+    setSelectedLayer({ layer, index: project.composition.layers.length });
   };
 
   return (

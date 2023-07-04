@@ -6,6 +6,7 @@ import {
   ProjectDispatchContext,
   projectActions,
 } from 'renderer/contexts/project';
+import { SelectedLayerContext } from 'renderer/contexts/selectedLayer';
 import { createRotateEffect } from 'renderer/effects';
 
 type Props = {
@@ -35,37 +36,31 @@ export default function EditEffectsModal({ isOpen: _isOpen }: Props) {
   const [isShow, setIsShow] = useState(_isOpen);
   const [editEffectParams, setEditEffectParams] =
     useState<EditEffectParams>(editParamsDefault);
-
   const project = useContext(ProjectContext);
   const dispatchProject = useContext(ProjectDispatchContext);
+  const selectedLayer = useContext(SelectedLayerContext);
 
   useEffect(() => {
     const { rotate } = editEffectParams;
     const rotateEffect = createRotateEffect(rotate.x, rotate.y, rotate.z);
-    const target = project.composition.layers[0];
-    if (!target) return;
-    if (target.effects.length === 0) {
-      target.addEffect(rotateEffect);
-    } else {
-      // TODO: 0番目のエフェクトを更新するのは暫定的な実装
-      target.updateEffect(0, rotateEffect);
-    }
-    dispatchProject(projectActions.updateLayer(0, target));
+    const effectTargetLayerIndex = selectedLayer?.index ?? null;
+    if (effectTargetLayerIndex === null) return;
+    // TODO: 0番目のエフェクトを更新しているのは、まだ、複数エフェクトを設定できないため
+    project.composition.layers[effectTargetLayerIndex].updateEffect(
+      0,
+      rotateEffect
+    );
+    dispatchProject(
+      projectActions.updateLayer(
+        effectTargetLayerIndex,
+        project.composition.layers[effectTargetLayerIndex]
+      )
+    );
   }, [editEffectParams.rotate]);
 
   useEffect(() => {
     setIsShow(_isOpen);
   }, [_isOpen]);
-
-  const rndStyle = {
-    zIndex: 1000,
-    left: 'auto',
-    right: 32,
-    bottom: 32,
-    top: 'auto',
-  } as const;
-
-  if (!isShow) return null;
 
   const handleRotateX = (e: ChangeEvent<HTMLInputElement>) => {
     const value = parseFloat(e.target.value);
@@ -103,6 +98,16 @@ export default function EditEffectsModal({ isOpen: _isOpen }: Props) {
     }));
   };
 
+  const rndStyle = {
+    zIndex: 1000,
+    left: 'auto',
+    right: 32,
+    bottom: 32,
+    top: 'auto',
+  } as const;
+
+  if (!isShow) return null;
+
   return (
     <Rnd
       default={{
@@ -115,7 +120,8 @@ export default function EditEffectsModal({ isOpen: _isOpen }: Props) {
       css={Modal}
       cancel=".react-resizable-handle"
     >
-      <div css={Effects}>
+      <div css={Contents}>
+        <p css={Title}>{selectedLayer?.layer?.file}</p>
         <div css={EffectRow}>
           <p css={EffectName}>ローテーション</p>
           <div css={EffectItem}>
@@ -183,13 +189,26 @@ const Modal = css`
   position: relative;
 `;
 
-const Effects = css`
+const Title = css`
+  width: 100%;
+  text-align: start;
+  color: #ffffffdd;
+  font-size: 16px;
+  margin-top: 8px;
+  margin-bottom: 32px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+`;
+
+const Contents = css`
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 75%;
-  height: 75%;
+  width: 80%;
+  height: 85%;
+  padding-right: 64px;
+  box-sizing: border-box;
   background-color: #22262e;
   display: flex;
   justify-content: start;
@@ -213,7 +232,7 @@ const EffectName = css`
   align-items: center;
   width: 100%;
   height: 100%;
-  color: white;
+  color: #ffffffdd;
 `;
 
 const EffectItem = css`
