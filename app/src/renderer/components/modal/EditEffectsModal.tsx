@@ -118,6 +118,7 @@ export default function EditEffectsModal({ isOpen: _isOpen }: Props) {
         y: window.innerHeight - HEIGHT - 32,
       }}
       style={rndStyle}
+      enableResizing={{ top: false, bottom: false, left: false, right: false }}
       css={Modal}
       cancel=".react-resizable-handle"
     >
