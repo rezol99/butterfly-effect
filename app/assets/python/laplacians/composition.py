@@ -5,7 +5,7 @@ import json
 from typing import Callable
 
 
-from laplacians.effects import overlay_images, blur, rotate
+from laplacians.effects import overlay_images, blur, rotate, rotate_as_3d_images
 from laplacians.models.layer import Layer
 from laplacians.models.effect import Effect
 from laplacians.models.timing import Timing
@@ -15,7 +15,7 @@ from laplacians.utils.opencv_helper import encode_ndarray_to_base64
 
 EFFECTS_MAP = {
     "blur": blur,
-    "rotate": rotate,
+    # "rotate": rotate,
 }
 
 
@@ -35,10 +35,24 @@ class Composition:
             if layer.type == "image":
                 img: np.ndarray = cv2.imread(layer.file, -1)
                 for effect in layer.effects:
-                    img = EFFECTS_MAP[effect.type](img, effect.params)
+                    try:
+                        img = EFFECTS_MAP[effect.type](img, effect.params)
+                    except KeyError:
+                        pass
                 images.append(img)
 
-        self.out = overlay_images(images)
+        # self.out = overlay_images(images)
+        rotate_params = []
+        for layer in self.layers:
+            for effect in layer.effects:
+                if effect.type == "rotate":
+                    rotate_params.append(effect.params)
+                else:
+                    rotate_params.append({"x": 0, "y": 0, "z": 0})
+        print_debug(rotate_params)
+        out = rotate_as_3d_images(images, rotate_params)
+        self.out = out
+
 
     def send_to_renderer(self):
         data = dict()

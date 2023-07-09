@@ -101,3 +101,76 @@ def overlay_images(images: list[np.ndarray]) -> np.ndarray:
         cv2.addWeighted(image, alpha, blended, 1.0, 0, blended)
 
     return blended
+
+
+def rotate_as_3d_images(images, params_list):
+    rotated_images = []
+
+    for image, params in zip(images, params_list):
+        # データ型を uint8 に変換
+        image = image.astype(np.uint8)
+
+        # 画像のサイズを取得
+        height, width = image.shape[:2]
+
+        # 画像の中心座標を計算
+        center_x = width // 2
+        center_y = height // 2
+
+        # パラメータを取得
+        angle_x = params.get("x", 0)
+        angle_y = params.get("y", 0)
+        angle_z = params.get("z", 0)
+
+        # ラジアンに変換
+        angle_x = np.deg2rad(angle_x)
+        angle_y = np.deg2rad(angle_y)
+        angle_z = np.deg2rad(angle_z)
+
+        # 回転行列を計算
+        rotation_x = np.array(
+            [
+                [1, 0, 0],
+                [0, np.cos(angle_x), -np.sin(angle_x)],
+                [0, np.sin(angle_x), np.cos(angle_x)],
+            ]
+        )
+        rotation_y = np.array(
+            [
+                [np.cos(angle_y), 0, np.sin(angle_y)],
+                [0, 1, 0],
+                [-np.sin(angle_y), 0, np.cos(angle_y)],
+            ]
+        )
+        rotation_z = np.array(
+            [
+                [np.cos(angle_z), -np.sin(angle_z), 0],
+                [np.sin(angle_z), np.cos(angle_z), 0],
+                [0, 0, 1],
+            ]
+        )
+
+        # カメラ座標系での回転行列を計算
+        rotation_matrix = np.dot(rotation_z, np.dot(rotation_y, rotation_x))
+
+        # 画像座標系での回転行列を計算
+        image_rotation_matrix = np.array(
+            [
+                [rotation_matrix[0, 0], rotation_matrix[0, 1], 0],
+                [rotation_matrix[1, 0], rotation_matrix[1, 1], 0],
+                [0, 0, 1],
+            ]
+        )
+
+        # 画像の回転
+        rotated_image = cv2.warpAffine(
+            image, image_rotation_matrix[:2, :], (width, height)
+        )
+
+        # 回転後の画像をリストに追加
+        rotated_images.append(rotated_image)
+
+    # 回転後の画像のリストをNumPy配列に変換
+    rotated_images = np.array(rotated_images)
+
+    return rotated_images
