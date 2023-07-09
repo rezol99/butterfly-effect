@@ -104,81 +104,79 @@ def overlay_images(images: list[np.ndarray]) -> np.ndarray:
 
 
 def rotate_as_3d_images(images, params_list):
-    rotated_images = []
+    # 3D空間の各画像の位置と奥行きを計算する
+    positions = []
+    depths = []
+    for params in params_list:
+        angle_x = np.deg2rad(params.get("x", 0))
+        angle_y = np.deg2rad(params.get("y", 0))
+        angle_z = np.deg2rad(params.get("z", 0))
+        position = np.array(
+            [
+                np.sin(angle_y),
+                -np.sin(angle_x) * np.cos(angle_y),
+                np.cos(angle_x) * np.cos(angle_y),
+            ]
+        )
+        depth = np.cos(angle_x) * np.cos(angle_y)
+        positions.append(position)
+        depths.append(depth)
 
-    for image, params in zip(images, params_list):
-        # データ型を uint8 に変換
-        image = image.astype(np.uint8)
+    # 奥行きを基準に位置と画像をソートする
+    sorted_images = [
+        image
+        for _, image in sorted(zip(depths, images), key=lambda x: x[0], reverse=True)
+    ]
+    sorted_positions = [
+        pos
+        for _, pos in sorted(zip(depths, positions), key=lambda x: x[0], reverse=True)
+    ]
 
-        # 画像のサイズを取得
-        height, width = image.shape[:2]
-
+    # 各画像を投影して合成する
+    merged_image = np.zeros_like(sorted_images[0], dtype=np.float32)
+    for image, position in zip(sorted_images, sorted_positions):
         # 画像の中心座標を計算
-        center_x = width // 2
-        center_y = height // 2
-
-        # パラメータを取得
-        angle_x = params.get("x", 0)
-        angle_y = params.get("y", 0)
-        angle_z = params.get("z", 0)
-
-        # ラジアンに変換
-        angle_x = np.deg2rad(angle_x)
-        angle_y = np.deg2rad(angle_y)
-        angle_z = np.deg2rad(angle_z)
+        center_x = image.shape[1] // 2
+        center_y = image.shape[0] // 2
 
         # 回転行列を計算
-        rotation_x = np.array(
-            [
-                [1, 0, 0],
-                [0, np.cos(angle_x), -np.sin(angle_x)],
-                [0, np.sin(angle_x), np.cos(angle_x)],
-            ]
-        )
-        rotation_y = np.array(
-            [
-                [np.cos(angle_y), 0, np.sin(angle_y)],
-                [0, 1, 0],
-                [-np.sin(angle_y), 0, np.cos(angle_y)],
-            ]
-        )
-        rotation_z = np.array(
-            [
-                [np.cos(angle_z), -np.sin(angle_z), 0],
-                [np.sin(angle_z), np.cos(angle_z), 0],
-                [0, 0, 1],
-            ]
-        )
-
-        # カメラ座標系での回転行列を計算
-        rotation_matrix = np.dot(rotation_z, np.dot(rotation_y, rotation_x))
-
-        # 画像座標系での回転行列を計算
-        image_rotation_matrix = np.array(
-            [
-                [rotation_matrix[0, 0], rotation_matrix[0, 1], 0],
-                [rotation_matrix[1, 0], rotation_matrix[1, 1], 0],
-                [0, 0, 1],
-            ]
-        )
+        rotation_matrix = calculate_rotation_matrix(position)
 
         # 画像の回転
         rotated_image = cv2.warpAffine(
-            image, image_rotation_matrix[:2, :], (width, height)
+            image, rotation_matrix[:2, :], (image.shape[1], image.shape[0])
         )
 
-        # 回転後の画像をリストに追加
-        rotated_images.append(rotated_image)
-
-    # 複数の画像を合成する
-    merged_image = np.zeros_like(rotated_images[0], dtype=np.float32)
-    for image in rotated_images:
-        alpha = image[:, :, 3] / 255.0
+        # 合成
+        alpha = rotated_image[:, :, 3] / 255.0
         merged_image[:, :, :3] = (
             merged_image[:, :, :3] * (1 - alpha[:, :, np.newaxis])
-            + image[:, :, :3] * alpha[:, :, np.newaxis]
+            + rotated_image[:, :, :3] * alpha[:, :, np.newaxis]
         )
-        merged_image[:, :, 3] = np.maximum(merged_image[:, :, 3], image[:, :, 3])
+        merged_image[:, :, 3] = np.maximum(
+            merged_image[:, :, 3], rotated_image[:, :, 3]
+        )
 
     merged_image = merged_image.astype(np.uint8)
+
     return merged_image
+
+
+def calculate_rotation_matrix(position):
+    # 3D空間の回転行列を計算
+    x, y, z = position
+
+    rotation_x = np.array(
+        [[1, 0, 0], [0, np.cos(x), -np.sin(x)], [0, np.sin(x), np.cos(x)]]
+    )
+
+    rotation_y = np.array(
+        [[np.cos(y), 0, np.sin(y)], [0, 1, 0], [-np.sin(y), 0, np.cos(y)]]
+    )
+
+    rotation_z = np.array(
+        [[np.cos(z), -np.sin(z), 0], [np.sin(z), np.cos(z), 0], [0, 0, 1]]
+    )
+
+    rotation_matrix = np.dot(rotation_z, np.dot(rotation_y, rotation_x))
+    return rotation_matrix

@@ -32,7 +32,7 @@ export default function Preview() {
       css={Content}
       style={{
         backgroundColor: BLACK_BACKGROUND_COLOR,
-        display: 'grid',
+        display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
       }}
