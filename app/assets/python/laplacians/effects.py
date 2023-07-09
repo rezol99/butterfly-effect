@@ -170,7 +170,15 @@ def rotate_as_3d_images(images, params_list):
         # 回転後の画像をリストに追加
         rotated_images.append(rotated_image)
 
-    # 回転後の画像のリストをNumPy配列に変換
-    rotated_images = np.array(rotated_images)
+    # 複数の画像を合成する
+    merged_image = np.zeros_like(rotated_images[0], dtype=np.float32)
+    for image in rotated_images:
+        alpha = image[:, :, 3] / 255.0
+        merged_image[:, :, :3] = (
+            merged_image[:, :, :3] * (1 - alpha[:, :, np.newaxis])
+            + image[:, :, :3] * alpha[:, :, np.newaxis]
+        )
+        merged_image[:, :, 3] = np.maximum(merged_image[:, :, 3], image[:, :, 3])
 
-    return rotated_images
+    merged_image = merged_image.astype(np.uint8)
+    return merged_image
